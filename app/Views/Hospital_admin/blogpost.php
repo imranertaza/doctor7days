@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin</title>
+  <title>Blog Post</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -712,12 +712,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Admin</h1>
+            <h1>Blog Post</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Admin</li>
+              <li class="breadcrumb-item active">Blog Post</li>
             </ol>
           </div>
         </div>
@@ -732,7 +732,7 @@
             <div class="card-header">
               <div class="row">
 			  	<div class="col-md-8 mt-2">
-				  <h3 class="card-title">Admin</h3>
+				  <h3 class="card-title">Blog Post</h3>
 			  	</div>
 				<div class="col-md-4">
 				  <button type="button" class="btn btn-block btn-success" onclick="add()" title="Add"> <i class="fa fa-plus"></i> Add</button>
@@ -744,20 +744,18 @@
               <table id="data_table" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-					<th>User id</th>
-					<th>Email</th>
-					<th>Password</th>
-					<th>Name</th>
-					<th>Mobile</th>
-					<th>Address</th>
-					<th>Pic</th>
-					<th>Country</th>
-					<th>ComName</th>
-					<th>Role id</th>
-					<th>CreatedBy</th>
+					<th>Post id</th>
+					<th>Title</th>
+					<th>Description</th>
+					<th>Image</th>
+					<th>Featured image</th>
+					<th>Tags</th>
 					<th>CreatedDtm</th>
-					<th>UpdatedBy</th>
+					<th>CreatedBy</th>
 					<th>UpdatedDtm</th>
+					<th>UpdatedBy</th>
+					<th>Deleted</th>
+					<th>DeletedRole</th>
 
 					<th></th>
                 </tr>
@@ -783,65 +781,45 @@
 				<div class="modal-body">
 					<form id="add-form" class="pl-3 pr-3">								
                         <div class="row">
- 							<input type="hidden" id="userId" name="userId" class="form-control" placeholder="User id" maxlength="11" required>
+ 							<input type="hidden" id="postId" name="postId" class="form-control" placeholder="Post id" maxlength="11" required>
 						</div>
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="email"> Email: <span class="text-danger">*</span> </label>
-									<input type="text" id="email" name="email" class="form-control" placeholder="Email" maxlength="30" required>
+									<label for="title"> Title: <span class="text-danger">*</span> </label>
+									<textarea cols="40" rows="5" id="title" name="title" class="form-control" placeholder="Title" required></textarea>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="password"> Password: <span class="text-danger">*</span> </label>
-									<input type="password" id="password" name="password" class="form-control" placeholder="Password" maxlength="155" required>
+									<label for="description"> Description: <span class="text-danger">*</span> </label>
+									<textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" required></textarea>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="name"> Name: <span class="text-danger">*</span> </label>
-									<input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="40" required>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="mobile"> Mobile: <span class="text-danger">*</span> </label>
-									<input type="number" id="mobile" name="mobile" class="form-control" placeholder="Mobile" maxlength="11" number="true" required>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="address"> Address: </label>
-									<textarea cols="40" rows="5" id="address" name="address" class="form-control" placeholder="Address" ></textarea>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="pic"> Pic: </label>
-									<input type="text" id="pic" name="pic" class="form-control" placeholder="Pic" maxlength="100" >
+									<label for="image"> Image: <span class="text-danger">*</span> </label>
+									<input type="text" id="image" name="image" class="form-control" placeholder="Image" maxlength="155" required>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="country"> Country: </label>
-									<input type="text" id="country" name="country" class="form-control" placeholder="Country" maxlength="155" >
+									<label for="featuredImage"> Featured image: <span class="text-danger">*</span> </label>
+									<input type="text" id="featuredImage" name="featuredImage" class="form-control" placeholder="Featured image" maxlength="155" required>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="comName"> ComName: </label>
-									<input type="text" id="comName" name="comName" class="form-control" placeholder="ComName" maxlength="155" >
+									<label for="tags"> Tags: <span class="text-danger">*</span> </label>
+									<textarea cols="40" rows="5" id="tags" name="tags" class="form-control" placeholder="Tags" required></textarea>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="roleId"> Role id: <span class="text-danger">*</span> </label>
-									<input type="number" id="roleId" name="roleId" class="form-control" placeholder="Role id" maxlength="11" number="true" required>
+									<label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
+									<input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
 								</div>
 							</div>
 						</div>
@@ -854,8 +832,8 @@
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-									<input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
+									<label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
+									<input type="text" id="updatedDtm" name="updatedDtm" class="form-control" placeholder="UpdatedDtm" required>
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -868,8 +846,14 @@
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-									<input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
+									<label for="deleted"> Deleted: </label>
+									<input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="deletedRole"> DeletedRole: </label>
+									<input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
 								</div>
 							</div>
 						</div>
@@ -897,65 +881,45 @@
 				<div class="modal-body">
 					<form id="edit-form" class="pl-3 pr-3">
                         <div class="row">
- 							<input type="hidden" id="userId" name="userId" class="form-control" placeholder="User id" maxlength="11" required>
+ 							<input type="hidden" id="postId" name="postId" class="form-control" placeholder="Post id" maxlength="11" required>
 						</div>
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="email"> Email: <span class="text-danger">*</span> </label>
-									<input type="text" id="email" name="email" class="form-control" placeholder="Email" maxlength="30" required>
+									<label for="title"> Title: <span class="text-danger">*</span> </label>
+									<textarea cols="40" rows="5" id="title" name="title" class="form-control" placeholder="Title" required></textarea>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="password"> Password: <span class="text-danger">*</span> </label>
-									<input type="password" id="password" name="password" class="form-control" placeholder="Password" maxlength="155" required>
+									<label for="description"> Description: <span class="text-danger">*</span> </label>
+									<textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" required></textarea>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="name"> Name: <span class="text-danger">*</span> </label>
-									<input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="40" required>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="mobile"> Mobile: <span class="text-danger">*</span> </label>
-									<input type="number" id="mobile" name="mobile" class="form-control" placeholder="Mobile" maxlength="11" number="true" required>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="address"> Address: </label>
-									<textarea cols="40" rows="5" id="address" name="address" class="form-control" placeholder="Address" ></textarea>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="pic"> Pic: </label>
-									<input type="text" id="pic" name="pic" class="form-control" placeholder="Pic" maxlength="100" >
+									<label for="image"> Image: <span class="text-danger">*</span> </label>
+									<input type="text" id="image" name="image" class="form-control" placeholder="Image" maxlength="155" required>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="country"> Country: </label>
-									<input type="text" id="country" name="country" class="form-control" placeholder="Country" maxlength="155" >
+									<label for="featuredImage"> Featured image: <span class="text-danger">*</span> </label>
+									<input type="text" id="featuredImage" name="featuredImage" class="form-control" placeholder="Featured image" maxlength="155" required>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="comName"> ComName: </label>
-									<input type="text" id="comName" name="comName" class="form-control" placeholder="ComName" maxlength="155" >
+									<label for="tags"> Tags: <span class="text-danger">*</span> </label>
+									<textarea cols="40" rows="5" id="tags" name="tags" class="form-control" placeholder="Tags" required></textarea>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="roleId"> Role id: <span class="text-danger">*</span> </label>
-									<input type="number" id="roleId" name="roleId" class="form-control" placeholder="Role id" maxlength="11" number="true" required>
+									<label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
+									<input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
 								</div>
 							</div>
 						</div>
@@ -968,8 +932,8 @@
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-									<input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
+									<label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
+									<input type="text" id="updatedDtm" name="updatedDtm" class="form-control" placeholder="UpdatedDtm" required>
 								</div>
 							</div>
 							<div class="col-md-4">
@@ -982,8 +946,14 @@
 						<div class="row">
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-									<input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
+									<label for="deleted"> Deleted: </label>
+									<input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="deletedRole"> DeletedRole: </label>
+									<input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
 								</div>
 							</div>
 						</div>
@@ -1091,8 +1061,8 @@ function add() {
 			var form = $('#add-form');
 			// remove the text-danger
 			$(".text-danger").remove();
-			$.ajax({
 
+			$.ajax({
 				url: '<?php echo base_url($controller.'/add') ?>',						
 				type: 'post',
 				data: form.serialize(), // /converting the form data into array and sending it to server
@@ -1150,12 +1120,12 @@ function add() {
 	$('#add-form').validate();
 }
 
-function edit(user_id) {
+function edit(post_id) {
 	$.ajax({
 		url: '<?php echo base_url($controller.'/getOne') ?>',
 		type: 'post',
 		data: {
-			user_id: user_id
+			post_id: post_id
 		},
 		dataType: 'json',
 		success: function(response) {
@@ -1164,20 +1134,18 @@ function edit(user_id) {
 			$(".form-control").removeClass('is-invalid').removeClass('is-valid');				
 			$('#edit-modal').modal('show');	
 
-			$("#edit-form #userId").val(response.user_id);
-			$("#edit-form #email").val(response.email);
-			$("#edit-form #password").val(response.password);
-			$("#edit-form #name").val(response.name);
-			$("#edit-form #mobile").val(response.mobile);
-			$("#edit-form #address").val(response.address);
-			$("#edit-form #pic").val(response.pic);
-			$("#edit-form #country").val(response.country);
-			$("#edit-form #comName").val(response.ComName);
-			$("#edit-form #roleId").val(response.role_id);
-			$("#edit-form #createdBy").val(response.createdBy);
+			$("#edit-form #postId").val(response.post_id);
+			$("#edit-form #title").val(response.title);
+			$("#edit-form #description").val(response.description);
+			$("#edit-form #image").val(response.image);
+			$("#edit-form #featuredImage").val(response.featured_image);
+			$("#edit-form #tags").val(response.tags);
 			$("#edit-form #createdDtm").val(response.createdDtm);
-			$("#edit-form #updatedBy").val(response.updatedBy);
+			$("#edit-form #createdBy").val(response.createdBy);
 			$("#edit-form #updatedDtm").val(response.updatedDtm);
+			$("#edit-form #updatedBy").val(response.updatedBy);
+			$("#edit-form #deleted").val(response.deleted);
+			$("#edit-form #deletedRole").val(response.deletedRole);
 
 			// submit the edit from 
 			$.validator.setDefaults({
@@ -1268,7 +1236,7 @@ function edit(user_id) {
 	});
 }	
 
-function remove(user_id) {	
+function remove(post_id) {	
 	Swal.fire({
 	  title: 'Are you sure of the deleting process?',
 	  text: "You cannot back after confirmation",
@@ -1285,7 +1253,7 @@ function remove(user_id) {
 			url: '<?php echo base_url($controller.'/remove') ?>',
 			type: 'post',
 			data: {
-				user_id: user_id
+				post_id: post_id
 			},
 			dataType: 'json',
 			success: function(response) {
