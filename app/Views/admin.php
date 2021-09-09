@@ -12,7 +12,7 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- SweetAlert2 -->
-  <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">  
+  <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="https://adminlte.io/themes/v3/dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="<?php echo base_url()?>/assets/fontawesome/css/all.css" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -1049,19 +1050,19 @@ $(function () {
 		"autoWidth": false,
 		"responsive": true,
 		"ajax": {
-			"url": '<?php echo base_url($controller.'/getAll') ?>',			
+			"url": '<?php echo base_url($controller.'/getAll') ?>',
 			"type": "POST",
 			"dataType": "json",
 			async: "true"
-		}	  
+		}
 	});
 });
 function add() {
-	// reset the form 
+	// reset the form
 	$("#add-form")[0].reset();
-	$(".form-control").removeClass('is-invalid').removeClass('is-valid');		
+	$(".form-control").removeClass('is-invalid').removeClass('is-valid');
 	$('#add-modal').modal('show');
-	// submit the add from 
+	// submit the add from
 	$.validator.setDefaults({
 		highlight: function(element) {
 			$(element).addClass('is-invalid').removeClass('is-valid');
@@ -1087,19 +1088,19 @@ function add() {
 		},
 
 		submitHandler: function(form) {
-			
+
 			var form = $('#add-form');
 			// remove the text-danger
 			$(".text-danger").remove();
 			$.ajax({
 
-				url: '<?php echo base_url($controller.'/add') ?>',						
+				url: '<?php echo base_url($controller.'/add') ?>',
 				type: 'post',
 				data: form.serialize(), // /converting the form data into array and sending it to server
 				dataType: 'json',
 				beforeSend: function() {
 					$('#add-form-btn').html('<i class="fa fa-spinner fa-spin"></i>');
-				},					
+				},
 				success: function(response) {
 
 					if (response.success === true) {
@@ -1159,10 +1160,10 @@ function edit(user_id) {
 		},
 		dataType: 'json',
 		success: function(response) {
-			// reset the form 
+			// reset the form
 			$("#edit-form")[0].reset();
-			$(".form-control").removeClass('is-invalid').removeClass('is-valid');				
-			$('#edit-modal').modal('show');	
+			$(".form-control").removeClass('is-invalid').removeClass('is-valid');
+			$('#edit-modal').modal('show');
 
 			$("#edit-form #userId").val(response.user_id);
 			$("#edit-form #email").val(response.email);
@@ -1179,7 +1180,7 @@ function edit(user_id) {
 			$("#edit-form #updatedBy").val(response.updatedBy);
 			$("#edit-form #updatedDtm").val(response.updatedDtm);
 
-			// submit the edit from 
+			// submit the edit from
 			$.validator.setDefaults({
 				highlight: function(element) {
 					$(element).addClass('is-invalid').removeClass('is-valid');
@@ -1208,13 +1209,13 @@ function edit(user_id) {
 					var form = $('#edit-form');
 					$(".text-danger").remove();
 					$.ajax({
-						url: '<?php echo base_url($controller.'/edit') ?>' ,						
+						url: '<?php echo base_url($controller.'/edit') ?>' ,
 						type: 'post',
-						data: form.serialize(), 
+						data: form.serialize(),
 						dataType: 'json',
 						beforeSend: function() {
 							$('#edit-form-btn').html('<i class="fa fa-spinner fa-spin"></i>');
-						},								
+						},
 						success: function(response) {
 
 							if (response.success === true) {
@@ -1229,7 +1230,7 @@ function edit(user_id) {
 									$('#data_table').DataTable().ajax.reload(null, false).draw(false);
 									$('#edit-modal').modal('hide');
 								})
-								
+
 							} else {
 
 								if (response.messages instanceof Object) {
@@ -1266,9 +1267,9 @@ function edit(user_id) {
 
 		}
 	});
-}	
+}
 
-function remove(user_id) {	
+function remove(user_id) {
 	Swal.fire({
 	  title: 'Are you sure of the deleting process?',
 	  text: "You cannot back after confirmation",
@@ -1277,8 +1278,8 @@ function remove(user_id) {
 	  confirmButtonColor: '#3085d6',
 	  cancelButtonColor: '#d33',
 	  confirmButtonText: 'Confirm',
-	  cancelButtonText: 'Cancel'		  
-	}).then((result) => {		
+	  cancelButtonText: 'Cancel'
+	}).then((result) => {
 
 	  if (result.value) {
 		$.ajax({
@@ -1298,7 +1299,7 @@ function remove(user_id) {
 						showConfirmButton: false,
 						timer: 1500
 					}).then(function() {
-						$('#data_table').DataTable().ajax.reload(null, false).draw(false);								
+						$('#data_table').DataTable().ajax.reload(null, false).draw(false);
 					})
 				} else {
 					Swal.fire({
@@ -1309,13 +1310,13 @@ function remove(user_id) {
 						timer: 1500
 					})
 
-					
+
 				}
 			}
 		});
 	  }
-	})		
-}  
+	})
+}
 </script>
 </body>
 </html>

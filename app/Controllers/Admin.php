@@ -27,9 +27,13 @@ class Admin extends BaseController
                 'controller'    	=> 'admin',
                 'title'     		=> 'Admin'				
 			];
-		
-		return view('admin', $data);
-			
+        echo view('header');
+        echo view('sidebar');
+        echo view('adminindex', $data);
+        echo view('footer');
+		//return view('admin', $data);
+
+
 	}
 
 	public function getAll()
