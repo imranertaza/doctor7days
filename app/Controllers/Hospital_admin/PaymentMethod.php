@@ -1,11 +1,11 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Controllers;
+namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
 
-use App\Models\PaymentMethodModel;
+use App\Models\Hospital_admin\PaymentMethodModel;
 
 class PaymentMethod extends BaseController
 {
@@ -24,11 +24,14 @@ class PaymentMethod extends BaseController
 	{
 
 	    $data = [
-                'controller'    	=> 'paymentMethod',
+                'controller'    	=> 'Hospital_admin/paymentMethod',
                 'title'     		=> 'Payment Methods'				
 			];
-		
-		return view('paymentMethod', $data);
+
+        echo view('Hospital_admin/header');
+        echo view('Hospital_admin/sidebar');
+		echo view('Hospital_admin/PaymentMethod/paymentMethod', $data);
+        echo view('Hospital_admin/footer');
 			
 	}
 

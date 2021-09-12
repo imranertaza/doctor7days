@@ -1,11 +1,11 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Controllers;
+namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
 
-use App\Models\DocavailabledayModel;
+use App\Models\Hospital_admin\DocavailabledayModel;
 
 class Docavailableday extends BaseController
 {
@@ -24,11 +24,14 @@ class Docavailableday extends BaseController
 	{
 
 	    $data = [
-                'controller'    	=> 'docavailableday',
+                'controller'    	=> 'Hospital_admin/docavailableday',
                 'title'     		=> 'Doctor&#39;s Available Day'				
 			];
-		
-		return view('docavailableday', $data);
+
+        echo view('Hospital_admin/header');
+        echo view('Hospital_admin/sidebar');
+		echo view('Hospital_admin/Docavailableday/docavailableday', $data);
+        echo view('Hospital_admin/footer');
 			
 	}
 

@@ -24,11 +24,15 @@ class Admin extends BaseController
 	{
 
 	    $data = [
-                'controller'    	=> 'admin',
+                'controller'    	=> 'Hospital_admin/admin',
                 'title'     		=> 'Admin'				
 			];
-		
-		return view('Hospital_admin/admin', $data);
+
+	    echo view('hospital_admin/header');
+	    echo view('hospital_admin/sidebar');
+	    echo view('hospital_admin/Admin/index', $data);
+	    echo view('hospital_admin/footer');
+		//return view('hospital_admin/admin', $data);
 			
 	}
 

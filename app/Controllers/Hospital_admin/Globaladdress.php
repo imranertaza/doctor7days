@@ -1,11 +1,11 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Controllers;
+namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
 
-use App\Models\GlobaladdressModel;
+use App\Models\Hospital_admin\GlobaladdressModel;
 
 class Globaladdress extends BaseController
 {
@@ -24,11 +24,14 @@ class Globaladdress extends BaseController
 	{
 
 	    $data = [
-                'controller'    	=> 'globaladdress',
+                'controller'    	=> 'Hospital_admin/globaladdress',
                 'title'     		=> 'Global Address'				
 			];
-		
-		return view('globaladdress', $data);
+
+        echo view('Hospital_admin/header');
+        echo view('Hospital_admin/sidebar');
+		echo view('Hospital_admin/Globaladdress/globaladdress', $data);
+        echo view('Hospital_admin/footer');
 			
 	}
 

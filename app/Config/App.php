@@ -23,7 +23,8 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $baseURL = 'http://doctor7days.dn/';
+	public $baseURL = 'http://localhost/doctor7days/public_html/';
+//	public $baseURL = 'http://doctor7days.dn/';
 
 	/**
 	 * --------------------------------------------------------------------------

@@ -1,11 +1,11 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Controllers;
+namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
 
-use App\Models\SpecialistModel;
+use App\Models\Hospital_admin\SpecialistModel;
 
 class Specialist extends BaseController
 {
@@ -24,11 +24,14 @@ class Specialist extends BaseController
 	{
 
 	    $data = [
-                'controller'    	=> 'specialist',
+                'controller'    	=> 'Hospital_admin/specialist',
                 'title'     		=> 'Specialist'				
 			];
-		
-		return view('specialist', $data);
+
+        echo view('Hospital_admin/header');
+        echo view('Hospital_admin/sidebar');
+		echo view('Hospital_admin/Specialist/specialist', $data);
+        echo view('Hospital_admin/footer');
 			
 	}
 
