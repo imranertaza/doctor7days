@@ -30,6 +30,12 @@
 <script src="<?php echo base_url()?>/assets/js/sweetalert2.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url()?>/assets/js/adminlte.min.js"></script>
+
+<!--all custome js-->
+
+
+<?php  require_once(APPPATH.'../public_html/assets/js/ajaxJs.php'); ?>
+
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url()?>/assets/js/demo.js"></script>
 <!-- page script -->

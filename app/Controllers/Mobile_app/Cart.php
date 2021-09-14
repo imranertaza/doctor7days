@@ -6,7 +6,7 @@ namespace App\Controllers\Mobile_app;
 use App\Controllers\BaseController;
 
 
-class Home extends BaseController
+class Cart extends BaseController
 {
 
 
@@ -17,9 +17,15 @@ class Home extends BaseController
     {
 
         echo view('Mobile_app/header');
-        echo view('Mobile_app/Home/home');
+        echo view('Mobile_app/Cart/cart');
         echo view('Mobile_app/footer');
 
+    }
+
+    public function payment(){
+        echo view('Mobile_app/header');
+        echo view('Mobile_app/Cart/payment');
+        echo view('Mobile_app/footer');
     }
 
 

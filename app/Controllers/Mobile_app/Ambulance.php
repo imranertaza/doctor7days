@@ -6,7 +6,7 @@ namespace App\Controllers\Mobile_app;
 use App\Controllers\BaseController;
 
 
-class Home extends BaseController
+class Ambulance extends BaseController
 {
 
 
@@ -17,9 +17,15 @@ class Home extends BaseController
     {
 
         echo view('Mobile_app/header');
-        echo view('Mobile_app/Home/home');
+        echo view('Mobile_app/Ambulance/ambulance');
         echo view('Mobile_app/footer');
 
+    }
+
+    public function ambulance_select(){
+        echo view('Mobile_app/header');
+        echo view('Mobile_app/Ambulance/ambulance_select');
+        echo view('Mobile_app/footer');
     }
 
 

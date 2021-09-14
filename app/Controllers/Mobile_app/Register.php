@@ -6,7 +6,7 @@ namespace App\Controllers\Mobile_app;
 use App\Controllers\BaseController;
 
 
-class Home extends BaseController
+class Register extends BaseController
 {
 
 
@@ -17,8 +17,8 @@ class Home extends BaseController
     {
 
         echo view('Mobile_app/header');
-        echo view('Mobile_app/Home/home');
-        echo view('Mobile_app/footer');
+        echo view('Mobile_app/Register/register');
+        //echo view('Mobile_app/footer');
 
     }
 

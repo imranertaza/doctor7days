@@ -6,15 +6,18 @@ namespace App\Controllers\Hospital_admin;
 use App\Controllers\BaseController;
 
 use App\Models\Hospital_admin\GlobaladdressModel;
+//use App\Helpers\Global_helper;
 
 class Globaladdress extends BaseController
 {
 	
     protected $globaladdressModel;
     protected $validation;
-	
+   // protected $globalHelper;
+
 	public function __construct()
 	{
+       // $this->globalHelper = new Global_helper();
 	    $this->globaladdressModel = new GlobaladdressModel();
        	$this->validation =  \Config\Services::validation();
 		
@@ -52,17 +55,17 @@ class Globaladdress extends BaseController
 			
 			$data['data'][$key] = array(
 				$value->global_address_id,
-				$value->division,
-				$value->zila,
-				$value->upazila,
-				$value->pourashava,
-				$value->ward,
-				$value->createdDtm,
-				$value->createdBy,
-				$value->updatedDtm,
-				$value->updatedBy,
-				$value->deleted,
-				$value->deletedRole,
+                divisionname($value->division),
+                districtname($value->zila),
+                upazilaname($value->upazila),
+//				$value->pourashava,
+//				$value->ward,
+//				$value->createdDtm,
+//				$value->createdBy,
+//				$value->updatedDtm,
+//				$value->updatedBy,
+//				$value->deleted,
+//				$value->deletedRole,
 
 				$ops,
 			);
@@ -70,6 +73,58 @@ class Globaladdress extends BaseController
 
 		return $this->response->setJSON($data);		
 	}
+
+	public function getUpdateData(){
+        //$response = array();
+        $vew = '';
+        $id = $this->request->getPost('global_address_id');
+
+        if ($this->validation->check($id, 'required|numeric')) {
+
+            $data = $this->globaladdressModel->where('global_address_id' ,$id)->first();
+
+            $vew .='<div class="row">
+                       <input type="hidden" id="globalAddressId" name="globalAddressId" class="form-control" placeholder="Global address id" value="'.$data->global_address_id.'" required>
+                    </div>';
+            $vew .='<div class="row" >
+                        <div class="col-md-12">
+                             <div class="form-group">
+                                 <label for="division"> Division: </label>
+                                  <select class="form-control" id="division" name="division" onchange="viewdistrict(this.value)" required >
+                                      <option value="">Please Select</option>
+                                      '.divisionView($data->division).'
+                                  </select>
+                             </div>
+                        </div>
+                         <div class="col-md-12">
+                              <div class="form-group">
+                                    <label for="zila"> District: </label>
+                                    <select class="form-control" name="zila" onchange="viewupazila(this.value)" id="zila" required>
+                                        <option value="">Please Select</option>
+                                        '.districtselect($data->zila,$data->division).'
+                                    </select>
+                              </div>
+                         </div>
+                         <div class="col-md-12">
+                              <div class="form-group">
+                                    <label for="upazila"> Upazila: </label>
+                                    <select class="form-control" name="upazila" id="upazila" onchange="checkCity(this.value)"  required>
+                                        <option value="">Please Select</option>
+                                        '.upazilaselect($data->upazila,$data->zila).'
+                                    </select>
+                              </div>
+                         </div>
+                    </div>';
+
+            return $vew;
+           // return $this->response->setJSON($data);
+
+        } else {
+
+            throw new \CodeIgniter\Exceptions\PageNotFoundException();
+
+        }
+    }
 	
 	public function getOne()
 	{
@@ -96,32 +151,17 @@ class Globaladdress extends BaseController
 
         $response = array();
 
-        $fields['global_address_id'] = $this->request->getPost('globalAddressId');
+
         $fields['division'] = $this->request->getPost('division');
         $fields['zila'] = $this->request->getPost('zila');
         $fields['upazila'] = $this->request->getPost('upazila');
-        $fields['pourashava'] = $this->request->getPost('pourashava');
-        $fields['ward'] = $this->request->getPost('ward');
-        $fields['createdDtm'] = $this->request->getPost('createdDtm');
-        $fields['createdBy'] = $this->request->getPost('createdBy');
-        $fields['updatedDtm'] = $this->request->getPost('updatedDtm');
-        $fields['updatedBy'] = $this->request->getPost('updatedBy');
-        $fields['deleted'] = $this->request->getPost('deleted');
-        $fields['deletedRole'] = $this->request->getPost('deletedRole');
+        $fields['createdBy'] = '1';
 
 
         $this->validation->setRules([
             'division' => ['label' => 'Division', 'rules' => 'permit_empty|numeric|max_length[11]'],
             'zila' => ['label' => 'Zila', 'rules' => 'permit_empty|numeric|max_length[11]'],
             'upazila' => ['label' => 'Upazila', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'pourashava' => ['label' => 'Pourashava', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'ward' => ['label' => 'Ward', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required|valid_date'],
-            'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'updatedDtm' => ['label' => 'UpdatedDtm', 'rules' => 'required|valid_date'],
-            'updatedBy' => ['label' => 'UpdatedBy', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
 
         ]);
 
@@ -171,14 +211,6 @@ class Globaladdress extends BaseController
             'division' => ['label' => 'Division', 'rules' => 'permit_empty|numeric|max_length[11]'],
             'zila' => ['label' => 'Zila', 'rules' => 'permit_empty|numeric|max_length[11]'],
             'upazila' => ['label' => 'Upazila', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'pourashava' => ['label' => 'Pourashava', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'ward' => ['label' => 'Ward', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required|valid_date'],
-            'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'updatedDtm' => ['label' => 'UpdatedDtm', 'rules' => 'required|valid_date'],
-            'updatedBy' => ['label' => 'UpdatedBy', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
 
         ]);
 
