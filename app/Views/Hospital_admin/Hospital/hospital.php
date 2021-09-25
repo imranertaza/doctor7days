@@ -39,22 +39,9 @@
                             <tr>
                                 <th>H id</th>
                                 <th>Name</th>
-                                <th>Description</th>
                                 <th>Email</th>
-                                <th>Global address id</th>
                                 <th>Mobile</th>
-                                <th>Comment</th>
-                                <th>Logo</th>
-                                <th>Image</th>
-                                <th>Banner</th>
-                                <th>Is default</th>
-                                <th>Hospital cat id</th>
                                 <th>Status</th>
-                                <th>CreatedDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>UpdatedDtm</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
 
                                 <th></th>
                             </tr>
@@ -72,130 +59,54 @@
     <!-- Add modal content -->
     <div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
                 </div>
                 <div class="modal-body">
                     <form id="add-form" class="pl-3 pr-3">
+
                         <div class="row">
-                            <input type="hidden" id="hId" name="hId" class="form-control" placeholder="H id" maxlength="11" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="name"> Name: <span class="text-danger">*</span> </label>
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="description"> Description: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="email"> Email: </label>
-                                    <input type="text" id="email" name="email" class="form-control" placeholder="Email" maxlength="30" >
+                                    <label for="email"> Email: <span class="text-danger">*</span></label>
+                                    <input type="text" id="email" name="email" class="form-control" placeholder="Email" maxlength="30" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="globalAddressId"> Global address id: </label>
-                                    <input type="number" id="globalAddressId" name="globalAddressId" class="form-control" placeholder="Global address id" maxlength="11" number="true" >
+                                    <label for="mobile"> Mobile: <span class="text-danger">*</span></label>
+                                    <input type="number" id="mobile" name="mobile" class="form-control" placeholder="Mobile" maxlength="11" number="true" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="mobile"> Mobile: </label>
-                                    <input type="number" id="mobile" name="mobile" class="form-control" placeholder="Mobile" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="comment"> Comment: </label>
-                                    <textarea cols="40" rows="5" id="comment" name="comment" class="form-control" placeholder="Comment" ></textarea>
-                                </div>
-                            </div>
+
+
                         </div>
+
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="logo"> Logo: </label>
-                                    <input type="text" id="logo" name="logo" class="form-control" placeholder="Logo" maxlength="155" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="image"> Image: </label>
-                                    <input type="text" id="image" name="image" class="form-control" placeholder="Image" maxlength="155" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="banner"> Banner: </label>
-                                    <input type="text" id="banner" name="banner" class="form-control" placeholder="Banner" maxlength="155" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="isDefault"> Is default: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="isDefault" name="isDefault" class="form-control" placeholder="Is default" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="hospitalCatId"> Hospital cat id: </label>
-                                    <input type="number" id="hospitalCatId" name="hospitalCatId" class="form-control" placeholder="Hospital cat id" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="status"> Status: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="status" name="status" class="form-control" placeholder="Status" required>
+                                    <select id="status" name="status" class="form-control" required>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+
+
 
                         <div class="form-group text-center">
                             <div class="btn-group">
@@ -481,22 +392,9 @@
 
                 $("#edit-form #hId").val(response.h_id);
                 $("#edit-form #name").val(response.name);
-                $("#edit-form #description").val(response.description);
                 $("#edit-form #email").val(response.email);
-                $("#edit-form #globalAddressId").val(response.global_address_id);
                 $("#edit-form #mobile").val(response.mobile);
-                $("#edit-form #comment").val(response.comment);
-                $("#edit-form #logo").val(response.logo);
-                $("#edit-form #image").val(response.image);
-                $("#edit-form #banner").val(response.banner);
-                $("#edit-form #isDefault").val(response.is_default);
-                $("#edit-form #hospitalCatId").val(response.hospital_cat_id);
                 $("#edit-form #status").val(response.status);
-                $("#edit-form #createdDtm").val(response.createdDtm);
-                $("#edit-form #updatedBy").val(response.updatedBy);
-                $("#edit-form #updatedDtm").val(response.updatedDtm);
-                $("#edit-form #deleted").val(response.deleted);
-                $("#edit-form #deletedRole").val(response.deletedRole);
 
                 // submit the edit from
                 $.validator.setDefaults({

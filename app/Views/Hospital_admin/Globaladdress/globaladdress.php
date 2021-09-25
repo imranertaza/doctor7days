@@ -41,16 +41,7 @@
                                 <th>Division</th>
                                 <th>Zila</th>
                                 <th>Upazila</th>
-                                <th>Pourashava</th>
-                                <th>Ward</th>
-                                <th>CreatedDtm</th>
-                                <th>CreatedBy</th>
-                                <th>UpdatedDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
-
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>
@@ -66,7 +57,7 @@
     <!-- Add modal content -->
     <div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
@@ -77,76 +68,31 @@
                             <input type="hidden" id="globalAddressId" name="globalAddressId" class="form-control" placeholder="Global address id" maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="division"> Division: </label>
-                                    <input type="number" id="division" name="division" class="form-control" placeholder="Division" maxlength="11" number="true" >
+                                    <select class="form-control" name="division" onchange="viewdistrict(this.value)" required >
+                                        <option value="">Please Select</option>
+                                        <?php echo divisionView() ; ?>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="zila"> Zila: </label>
-                                    <input type="number" id="zila" name="zila" class="form-control" placeholder="Zila" maxlength="11" number="true" >
+                                    <select class="form-control" name="zila" onchange="viewupazila(this.value)" id="district" required>
+                                        <option value="">Please Select</option>
+                                        <?php echo districtselect($zila) ; ?>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="upazila"> Upazila: </label>
-                                    <input type="number" id="upazila" name="upazila" class="form-control" placeholder="Upazila" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="pourashava"> Pourashava: </label>
-                                    <input type="number" id="pourashava" name="pourashava" class="form-control" placeholder="Pourashava" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="ward"> Ward: </label>
-                                    <input type="number" id="ward" name="ward" class="form-control" placeholder="Ward" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
+                                    <select class="form-control" name="upazila" id="subdistrict" onchange="checkCity(this.value)"  required>
+                                        <option value="">Please Select</option>
+                                        <?php echo upazilaselect($upazila) ; ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -166,90 +112,14 @@
     <!-- Add modal content -->
     <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Update</h4>
                 </div>
                 <div class="modal-body">
                     <form id="edit-form" class="pl-3 pr-3">
-                        <div class="row">
-                            <input type="hidden" id="globalAddressId" name="globalAddressId" class="form-control" placeholder="Global address id" maxlength="11" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="division"> Division: </label>
-                                    <input type="number" id="division" name="division" class="form-control" placeholder="Division" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="zila"> Zila: </label>
-                                    <input type="number" id="zila" name="zila" class="form-control" placeholder="Zila" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="upazila"> Upazila: </label>
-                                    <input type="number" id="upazila" name="upazila" class="form-control" placeholder="Upazila" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="pourashava"> Pourashava: </label>
-                                    <input type="number" id="pourashava" name="pourashava" class="form-control" placeholder="Pourashava" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="ward"> Ward: </label>
-                                    <input type="number" id="ward" name="ward" class="form-control" placeholder="Ward" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+                        <div id="upData"></div>
 
                         <div class="form-group text-center">
                             <div class="btn-group">
@@ -380,30 +250,31 @@
 
     function edit(global_address_id) {
         $.ajax({
-            url: '<?php echo base_url($controller.'/getOne') ?>',
+            url: '<?php echo base_url($controller.'/getUpdateData') ?>',
             type: 'post',
             data: {
                 global_address_id: global_address_id
             },
-            dataType: 'json',
+            //dataType: 'json',
             success: function(response) {
                 // reset the form
                 $("#edit-form")[0].reset();
                 $(".form-control").removeClass('is-invalid').removeClass('is-valid');
                 $('#edit-modal').modal('show');
 
-                $("#edit-form #globalAddressId").val(response.global_address_id);
-                $("#edit-form #division").val(response.division);
-                $("#edit-form #zila").val(response.zila);
-                $("#edit-form #upazila").val(response.upazila);
-                $("#edit-form #pourashava").val(response.pourashava);
-                $("#edit-form #ward").val(response.ward);
-                $("#edit-form #createdDtm").val(response.createdDtm);
-                $("#edit-form #createdBy").val(response.createdBy);
-                $("#edit-form #updatedDtm").val(response.updatedDtm);
-                $("#edit-form #updatedBy").val(response.updatedBy);
-                $("#edit-form #deleted").val(response.deleted);
-                $("#edit-form #deletedRole").val(response.deletedRole);
+                $("#edit-form #upData").html(response);
+                // $("#edit-form #globalAddressId").val(response.global_address_id);
+                // $("#edit-form #division").val(response.division);
+                // $("#edit-form #zila").val(response.zila);
+                // $("#edit-form #upazila").val(response.upazila);
+                // $("#edit-form #pourashava").val(response.pourashava);
+                // $("#edit-form #ward").val(response.ward);
+                // $("#edit-form #createdDtm").val(response.createdDtm);
+                // $("#edit-form #createdBy").val(response.createdBy);
+                // $("#edit-form #updatedDtm").val(response.updatedDtm);
+                // $("#edit-form #updatedBy").val(response.updatedBy);
+                // $("#edit-form #deleted").val(response.deleted);
+                // $("#edit-form #deletedRole").val(response.deletedRole);
 
                 // submit the edit from
                 $.validator.setDefaults({
@@ -542,4 +413,8 @@
             }
         })
     }
+
+    // function viewdistrict(id) {
+    //     alert(id);
+    // }
 </script>

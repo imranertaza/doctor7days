@@ -55,16 +55,9 @@ class Job extends BaseController
 				$value->title,
 				$value->description,
 				$value->salary,
-				$value->location,
-				$value->daily_time,
+                divisionname($value->location),
+				$value->daily_time .' Hours',
 				$value->total_applied,
-				$value->h_id,
-				$value->createdDtm,
-				$value->createdBy,
-				$value->updatedDtm,
-				$value->updatedBy,
-				$value->deleted,
-				$value->deletedRole,
 
 				$ops,
 			);
@@ -98,20 +91,14 @@ class Job extends BaseController
 
         $response = array();
 
-        $fields['job_id'] = $this->request->getPost('jobId');
+
         $fields['title'] = $this->request->getPost('title');
         $fields['description'] = $this->request->getPost('description');
         $fields['salary'] = $this->request->getPost('salary');
         $fields['location'] = $this->request->getPost('location');
         $fields['daily_time'] = $this->request->getPost('dailyTime');
-        $fields['total_applied'] = $this->request->getPost('totalApplied');
-        $fields['h_id'] = $this->request->getPost('hId');
-        $fields['createdDtm'] = $this->request->getPost('createdDtm');
-        $fields['createdBy'] = $this->request->getPost('createdBy');
-        $fields['updatedDtm'] = $this->request->getPost('updatedDtm');
-        $fields['updatedBy'] = $this->request->getPost('updatedBy');
-        $fields['deleted'] = $this->request->getPost('deleted');
-        $fields['deletedRole'] = $this->request->getPost('deletedRole');
+        $fields['h_id'] = '1';
+        $fields['createdBy'] = '1';
 
 
         $this->validation->setRules([
@@ -120,14 +107,7 @@ class Job extends BaseController
             'salary' => ['label' => 'Salary', 'rules' => 'required|numeric|max_length[15]'],
             'location' => ['label' => 'Location', 'rules' => 'required|max_length[155]'],
             'daily_time' => ['label' => 'Daily time', 'rules' => 'required|max_length[155]'],
-            'total_applied' => ['label' => 'Total applied', 'rules' => 'required|max_length[155]'],
-            'h_id' => ['label' => 'H id', 'rules' => 'required|numeric|max_length[11]'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required'],
             'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'updatedDtm' => ['label' => 'UpdatedDtm', 'rules' => 'required'],
-            'updatedBy' => ['label' => 'UpdatedBy', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
 
         ]);
 
@@ -165,14 +145,7 @@ class Job extends BaseController
         $fields['salary'] = $this->request->getPost('salary');
         $fields['location'] = $this->request->getPost('location');
         $fields['daily_time'] = $this->request->getPost('dailyTime');
-        $fields['total_applied'] = $this->request->getPost('totalApplied');
-        $fields['h_id'] = $this->request->getPost('hId');
-        $fields['createdDtm'] = $this->request->getPost('createdDtm');
-        $fields['createdBy'] = $this->request->getPost('createdBy');
-        $fields['updatedDtm'] = $this->request->getPost('updatedDtm');
-        $fields['updatedBy'] = $this->request->getPost('updatedBy');
-        $fields['deleted'] = $this->request->getPost('deleted');
-        $fields['deletedRole'] = $this->request->getPost('deletedRole');
+        $fields['updatedBy'] = '1';
 
 
         $this->validation->setRules([
@@ -181,14 +154,6 @@ class Job extends BaseController
             'salary' => ['label' => 'Salary', 'rules' => 'required|numeric|max_length[15]'],
             'location' => ['label' => 'Location', 'rules' => 'required|max_length[155]'],
             'daily_time' => ['label' => 'Daily time', 'rules' => 'required|max_length[155]'],
-            'total_applied' => ['label' => 'Total applied', 'rules' => 'required|max_length[155]'],
-            'h_id' => ['label' => 'H id', 'rules' => 'required|numeric|max_length[11]'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required'],
-            'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'updatedDtm' => ['label' => 'UpdatedDtm', 'rules' => 'required'],
-            'updatedBy' => ['label' => 'UpdatedBy', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
 
         ]);
 

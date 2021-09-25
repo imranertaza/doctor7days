@@ -53,13 +53,13 @@ class Hospitalcategory extends BaseController
 			$data['data'][$key] = array(
 				$value->hospital_cat_id,
 				$value->name,
-				$value->parent_cat_id,
-				$value->createdBy,
-				$value->createdDtm,
-				$value->updatedBy,
-				$value->updatedDtm,
-				$value->deleted,
-				$value->deletedRole,
+                get_data_by_id('name','hospital_category','hospital_cat_id', $value->parent_cat_id),
+//				$value->createdBy,
+//				$value->createdDtm,
+//				$value->updatedBy,
+//				$value->updatedDtm,
+//				$value->deleted,
+//				$value->deletedRole,
 
 				$ops,
 			);
@@ -67,6 +67,45 @@ class Hospitalcategory extends BaseController
 
 		return $this->response->setJSON($data);		
 	}
+
+	public function getUpdateData(){
+        $response = array();
+        $view = '';
+        $id = $this->request->getPost('hospital_cat_id');
+
+        if ($this->validation->check($id, 'required|numeric')) {
+
+            $data = $this->hospitalcategoryModel->where('hospital_cat_id' ,$id)->first();
+
+                  $view .='<div class="row">
+                            <input type="hidden" id="hospitalCatId" name="hospitalCatId" class="form-control" placeholder="Hospital cat id" value="'.$data->hospital_cat_id.'" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="name"> Name: <span class="text-danger">*</span> </label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Name" value="'.$data->name.'" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="parentCatId"> Parent cat id: </label>
+                                    <select id="parentCatId" name="parentCatId" class="form-control">
+                                        <option value="0">Please select</option>
+                                        '.getCatListInOptionsuper($data->parent_cat_id,"hospital_cat_id","name","hospital_category").'
+                                    </select>
+                                </div>
+                            </div>
+                        </div>';
+            return $view;
+            //return $this->response->setJSON($data);
+
+        } else {
+
+            throw new \CodeIgniter\Exceptions\PageNotFoundException();
+
+        }
+    }
 	
 	public function getOne()
 	{
@@ -93,27 +132,13 @@ class Hospitalcategory extends BaseController
 
         $response = array();
 
-        $fields['hospital_cat_id'] = $this->request->getPost('hospitalCatId');
         $fields['name'] = $this->request->getPost('name');
         $fields['parent_cat_id'] = $this->request->getPost('parentCatId');
-        $fields['createdBy'] = $this->request->getPost('createdBy');
-        $fields['createdDtm'] = $this->request->getPost('createdDtm');
-        $fields['updatedBy'] = $this->request->getPost('updatedBy');
-        $fields['updatedDtm'] = $this->request->getPost('updatedDtm');
-        $fields['deleted'] = $this->request->getPost('deleted');
-        $fields['deletedRole'] = $this->request->getPost('deletedRole');
+        $fields['createdBy'] = '1';
 
 
         $this->validation->setRules([
             'name' => ['label' => 'Name', 'rules' => 'required|max_length[255]'],
-            'parent_cat_id' => ['label' => 'Parent cat id', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required|valid_date'],
-            'updatedBy' => ['label' => 'UpdatedBy', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'updatedDtm' => ['label' => 'UpdatedDtm', 'rules' => 'required|valid_date'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
-
         ]);
 
         if ($this->validation->run($fields) == FALSE) {
@@ -147,23 +172,10 @@ class Hospitalcategory extends BaseController
         $fields['hospital_cat_id'] = $this->request->getPost('hospitalCatId');
         $fields['name'] = $this->request->getPost('name');
         $fields['parent_cat_id'] = $this->request->getPost('parentCatId');
-        $fields['createdBy'] = $this->request->getPost('createdBy');
-        $fields['createdDtm'] = $this->request->getPost('createdDtm');
-        $fields['updatedBy'] = $this->request->getPost('updatedBy');
-        $fields['updatedDtm'] = $this->request->getPost('updatedDtm');
-        $fields['deleted'] = $this->request->getPost('deleted');
-        $fields['deletedRole'] = $this->request->getPost('deletedRole');
-
+        $fields['updatedBy'] = '1';
 
         $this->validation->setRules([
             'name' => ['label' => 'Name', 'rules' => 'required|max_length[255]'],
-            'parent_cat_id' => ['label' => 'Parent cat id', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required|valid_date'],
-            'updatedBy' => ['label' => 'UpdatedBy', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'updatedDtm' => ['label' => 'UpdatedDtm', 'rules' => 'required|valid_date'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
 
         ]);
 

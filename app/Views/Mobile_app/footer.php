@@ -1,0 +1,23 @@
+<section class="footer">
+    <div class="row fixed-bottom  foot pt-3">
+        <div class="col-4">
+            <a class="nav-link" href="#"><i class="flaticon-menu iconfoot"></i></a>
+        </div>
+        <div class="col-4 text-center">
+            <div class="f-home mt-1 mb-1">
+                <a class="nav-link" href="<?php echo base_url('Mobile_app/home')  ?>"><i class="flaticon-home iconhome"></i></a>
+            </div>
+        </div>
+        <div class="col-4 text-right">
+            <a class="nav-link" href="#"><i class="flaticon-user iconfoot"></i></a>
+        </div>
+    </div>
+</section>
+</div>
+
+
+<!--all custome js-->
+<?php  require_once(APPPATH.'../public_html/assets/js/ajaxJs.php'); ?>
+
+</body>
+</html>

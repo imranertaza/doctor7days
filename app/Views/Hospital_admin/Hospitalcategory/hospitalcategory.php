@@ -40,14 +40,8 @@
                                 <th>Hospital cat id</th>
                                 <th>Name</th>
                                 <th>Parent cat id</th>
-                                <th>CreatedBy</th>
-                                <th>CreatedDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>UpdatedDtm</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
 
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>
@@ -63,7 +57,7 @@
     <!-- Add modal content -->
     <div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
@@ -74,58 +68,23 @@
                             <input type="hidden" id="hospitalCatId" name="hospitalCatId" class="form-control" placeholder="Hospital cat id" maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="name"> Name: <span class="text-danger">*</span> </label>
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="255" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="parentCatId"> Parent cat id: </label>
-                                    <input type="number" id="parentCatId" name="parentCatId" class="form-control" placeholder="Parent cat id" maxlength="11" number="true" >
+                                    <select id="parentCatId" name="parentCatId" class="form-control">
+                                        <option value="0">Please select</option>
+                                        <?php echo getCatListInOptionsuper('0','hospital_cat_id','name','hospital_category')?>
+                                    </select>
+
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="form-group text-center">
@@ -143,70 +102,15 @@
     <!-- Add modal content -->
     <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Update</h4>
                 </div>
                 <div class="modal-body">
                     <form id="edit-form" class="pl-3 pr-3">
-                        <div class="row">
-                            <input type="hidden" id="hospitalCatId" name="hospitalCatId" class="form-control" placeholder="Hospital cat id" maxlength="11" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="name"> Name: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="255" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="parentCatId"> Parent cat id: </label>
-                                    <input type="number" id="parentCatId" name="parentCatId" class="form-control" placeholder="Parent cat id" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+
+                        <div id="upData"></div>
 
                         <div class="form-group text-center">
                             <div class="btn-group">
@@ -337,27 +241,22 @@
 
     function edit(hospital_cat_id) {
         $.ajax({
-            url: '<?php echo base_url($controller.'/getOne') ?>',
+            url: '<?php echo base_url($controller.'/getUpdateData') ?>',
             type: 'post',
             data: {
                 hospital_cat_id: hospital_cat_id
             },
-            dataType: 'json',
+            //dataType: 'json',
             success: function(response) {
                 // reset the form
                 $("#edit-form")[0].reset();
                 $(".form-control").removeClass('is-invalid').removeClass('is-valid');
                 $('#edit-modal').modal('show');
 
-                $("#edit-form #hospitalCatId").val(response.hospital_cat_id);
-                $("#edit-form #name").val(response.name);
-                $("#edit-form #parentCatId").val(response.parent_cat_id);
-                $("#edit-form #createdBy").val(response.createdBy);
-                $("#edit-form #createdDtm").val(response.createdDtm);
-                $("#edit-form #updatedBy").val(response.updatedBy);
-                $("#edit-form #updatedDtm").val(response.updatedDtm);
-                $("#edit-form #deleted").val(response.deleted);
-                $("#edit-form #deletedRole").val(response.deletedRole);
+                $("#edit-form #upData").html(response);
+                // $("#edit-form #hospitalCatId").val(response.hospital_cat_id);
+                // $("#edit-form #name").val(response.name);
+                // $("#edit-form #parentCatId").val(response.parent_cat_id);
 
                 // submit the edit from
                 $.validator.setDefaults({
