@@ -1,7 +1,7 @@
 <section class="back" >
     <div class="row">
         <div class="col-12 p-2 pl-3 pt-3">
-            <a href="#" ><i class="flaticon-left-arrow back-icon"></i></a>
+            <a href="<?php echo base_url('Mobile_app/appionment')?>" ><i class="flaticon-left-arrow back-icon"></i></a>
         </div>
     </div>
 </section>
@@ -20,54 +20,21 @@
         </div>
         <div class="col-12 p-3 dr-row ">
             <table class="" style="width: 100%;">
+                <?php foreach($specialties as $sp ){
+                    $title = get_data_by_id('specialist_type_name','specialist','specialist_id ',$sp->specialist_id) ;
+                    ?>
                 <tr>
                     <td >
-                        <small class="dr-n">Dr.Irfan</small><br>
-                        <small class="dr-t">Cardiologist</small>
+                        <small class="dr-n"><?php echo $sp->name;?></small><br>
+                        <small class="dr-t"><?php echo $title;?></small>
                     </td>
                     <td style="font-size: 10px">
-                        <i class="flaticon-right-arrow"></i>
+                        <a href="<?php echo base_url('Mobile_app/appionment/appionment_booking_form/'.$sp->doc_id )?>"><i class="flaticon-right-arrow"></i></a>
                     </td>
                 </tr>
+                <?php }?>
 
-                <tr>
-                    <td >
-                        <small class="dr-n">Dr.Rizvi</small><br>
-                        <small class="dr-t">Cardiologist</small>
-                    </td>
-                    <td style="font-size: 10px">
-                        <i class="flaticon-right-arrow"></i>
-                    </td>
-                </tr>
 
-                <tr>
-                    <td >
-                        <small class="dr-n">Dr.Irfan</small><br>
-                        <small class="dr-t">Cardiologist</small>
-                    </td>
-                    <td style="font-size: 10px">
-                        <i class="flaticon-right-arrow"></i>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td >
-                        <small class="dr-n">Dr.Rizvi</small><br>
-                        <small class="dr-t">Cardiologist</small>
-                    </td>
-                    <td style="font-size: 10px">
-                        <i class="flaticon-right-arrow"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <td >
-                        <small class="dr-n">Dr.Irfan</small><br>
-                        <small class="dr-t">Cardiologist</small>
-                    </td>
-                    <td style="font-size: 10px">
-                        <i class="flaticon-right-arrow"></i>
-                    </td>
-                </tr>
             </table>
         </div>
         <div class="col-12 p-3 ">

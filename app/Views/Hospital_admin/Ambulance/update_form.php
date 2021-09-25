@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Hospital Update</h1>
+                    <h1>Ambulance Update</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Hospital Update</li>
+                        <li class="breadcrumb-item active">Ambulance Update</li>
                     </ol>
                 </div>
             </div>
@@ -35,61 +35,59 @@
                                         <a class="nav-link" data-toggle="tab" href="#basic">Basic</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#image">Images</a>
+                                        <a class="nav-link" data-toggle="tab" href="#address">Address</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#address">Address</a>
+                                        <a class="nav-link" data-toggle="tab" href="#image">Images</a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-12">
                                 <div class="tab-content">
                                     <div class="tab-pane active container" id="registered">
-                                        <form id="updaue-reg" class="pl-3 pr-3">
+                                        <form id="update-reg" class="pl-3 pr-3">
                                             <div class="row pt-4">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="name"> Name: <span class="text-danger">*</span>
-                                                        </label>
-                                                        <input type="text" class="form-control" id="name" name="name"
-                                                               value="<?php echo $hospital->name; ?>" required>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="email"> Email: <span class="text-danger">*</span>
-                                                        </label>
-                                                        <input type="email" id="email" name="email" class="form-control"
-                                                               value="<?php echo $hospital->email; ?>" required>
-                                                    </div>
-                                                </div>
-
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="phone"> Phone: <span class="text-danger">*</span>
                                                         </label>
-                                                        <input type="text" id="phone" name="phone" class="form-control"
-                                                               value="<?php echo $hospital->mobile; ?>" required>
+                                                        <input type="text" id="mobile" name="mobile" class="form-control"
+                                                               value="<?php print $ambulance->mobile; ?>" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="status"> Status: <span class="text-danger">*</span>
+                                                        <label for="name"> Name: <span class="text-danger">*</span>
                                                         </label>
-                                                        <select id="status" name="status" class="form-control" required>
-                                                            <?php echo globalStatus($hospital->status)?>
-                                                        </select>
+                                                        <input type="text" class="form-control" id="contactName" name="contactName"
+                                                               value="<?php echo $ambulance->contact_name; ?>" required>
                                                     </div>
                                                 </div>
 
 
 
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="password"> Password: <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="password" id="password" name="password"
+                                                               class="form-control" placeholder="Password" required>
+                                                    </div>
+                                                </div>
 
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="ConfirmPassword">Confirm Password: <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="password" id="con_password" name="con_password"
+                                                               class="form-control" placeholder="Confirm Password"
+                                                               required>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-12">
-                                                    <input type="hidden" id="h_id" name="h_id"
-                                                           value="<?php echo $hospital->h_id; ?>" required>
+                                                    <input type="hidden" id="amb_id" name="amb_id"
+                                                           value="<?php echo $ambulance->amb_id; ?>" required>
                                                     <button type="submit" onclick="updateReg()" class="btn btn-success"
                                                             id="add-form-btn"
                                                             style="float: right;">Update
@@ -107,32 +105,44 @@
                                             <div class="row pt-4">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="description"> Description: </label>
-                                                        <textarea cols="40" rows="5" id="description" name="description"
-                                                                  class="form-control" placeholder="Description" ><?php echo $hospital->description; ?></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="comment"> Comment: </label>
-                                                        <textarea cols="40" rows="5" id="comment" name="comment"
-                                                                  class="form-control"
-                                                                  placeholder="Comment"><?php echo $hospital->comment; ?></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="is_default">Is Default: </label>
-                                                        <select id="is_default" name="is_default" class="form-control">
-                                                            <?php echo globalStatus($hospital->is_default)?>
+                                                        <label for="is_default">Oxygen: </label>
+                                                        <select id="oxygen" name="oxygen" class="form-control">
+                                                            <option value="">Please select</option>
+                                                            <option value="yes" <?php if ($ambulance->oxygen == 'yes'){ echo 'selected';}?>>Yes</option>
+                                                            <option value="no" <?php if ($ambulance->oxygen == 'no'){ echo 'selected';}?>>No</option>
                                                         </select>
                                                     </div>
                                                 </div>
 
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="is_default">Ac: </label>
+                                                        <select id="ac" name="ac" class="form-control">
+                                                            <option value="">Please select</option>
+                                                            <option value="yes" <?php if ($ambulance->ac == 'yes'){ echo 'selected';}?>>Yes</option>
+                                                            <option value="no" <?php if ($ambulance->ac == 'no'){ echo 'selected';}?>>No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="is_default">Car Model Name: </label>
+                                                        <input type="text" class="form-control" name="car_model_name" id="car_model_name" value="<?php echo $ambulance->car_model_name; ?>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="description"> Description: </label>
+                                                        <textarea cols="40" rows="5" id="description" name="description"
+                                                                  class="form-control" placeholder="Description" ><?php echo $ambulance->description; ?></textarea>
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-md-6 text-center">
-                                                    <input type="hidden" id="h_id" name="h_id"
-                                                           value="<?php echo $hospital->h_id; ?>" required>
+                                                    <input type="hidden" id="amb_id" name="amb_id"
+                                                           value="<?php echo $ambulance->amb_id; ?>" required>
                                                     <button type="submit" onclick="updateBasic()" class="btn btn-success"
                                                             id="up-basic-btn" style="margin-top: 30px;" >Update
                                                     </button>
@@ -143,40 +153,14 @@
                                         </form>
                                     </div>
 
-
-                                    <div class="tab-pane container" id="image">
-<!--    id="update-image"   action="<?php //echo base_url($controller . '/updateImage') ?>" method="Post"-->
-                                        <form id="update-image" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
-                                            <div class="row pt-4">
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="logo"> Logo: </label>
-                                                        <input type="file" id="logo" name="logo" class="form-control" placeholder="Logo"  >
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-md-6 text-center">
-                                                    <input type="hidden" id="h_id" name="h_id"
-                                                           value="<?php echo $hospital->h_id; ?>" required>
-                                                    <button type="submit" onclick="updateimage()" class="btn btn-success"
-                                                            id="up-image-btn" style="margin-top: 30px;">Update
-                                                    </button>
-
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
                                     <div class="tab-pane container" id="address">
-                                        <form id="update-address" class="pl-3 pr-3">
+                                        <form id="update-address"  class="pl-3 pr-3">
                                             <div class="row pt-4">
                                                 <div class="col-md-6">
                                                     <?php
-                                                    $division = get_data_by_id('division','global_address','global_address_id',$hospital->global_address_id);
-                                                    $zila = get_data_by_id('zila','global_address','global_address_id',$hospital->global_address_id);
-                                                    $upazila = get_data_by_id('upazila','global_address','global_address_id',$hospital->global_address_id);
+                                                    $division = get_data_by_id('division','global_address','global_address_id',$ambulance->global_address_id);
+                                                    $zila = get_data_by_id('zila','global_address','global_address_id',$ambulance->global_address_id);
+                                                    $upazila = get_data_by_id('upazila','global_address','global_address_id',$ambulance->global_address_id);
                                                     ?>
                                                     <div class="form-group">
                                                         <label for="division"> Division:<?php echo $hospital->global_address_id; ?> </label>
@@ -206,11 +190,41 @@
                                                 </div>
 
                                                 <div class="col-md-6 text-center">
+                                                    <input type="hidden" id="amb_id" name="amb_id"
+                                                           value="<?php echo $ambulance->amb_id; ?>" required>
+                                                    <button type="submit" onclick="updateAddress()" class="btn btn-success"
+                                                            id="up-address-btn" style="margin-top: 30px;" >Update
+                                                    </button>
 
-                                                    <input type="hidden" id="h_id" name="h_id"
-                                                           value="<?php echo $hospital->h_id; ?>" required>
-                                                    <button type="submit" onclick="updateaddress()" class="btn btn-success"
-                                                            id="up-address-btn" style="margin-top: 30px;">Update
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+
+
+                                    <div class="tab-pane container" id="image">
+                                        <!--    id="update-image"   action="<?php //echo base_url($controller . '/updateImage') ?>" method="Post"-->
+                                        <form id="update-image"  method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
+                                            <div class="row pt-4">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="logo"> Image: </label>
+                                                        <input type="file" id="image" name="image" class="form-control" placeholder="image"  >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 text-center">
+                                                    <?php $img = (!empty($ambulance->image))?$ambulance->image:'noimage.jpg';?>
+                                                    <img src="<?php echo base_url()?>/assets/uplode/ambulance/<?php echo $img;?>" width="150">
+                                                </div>
+
+                                                <div class="col-md-12 ">
+                                                    <input type="hidden" id="amb_id" name="amb_id"
+                                                           value="<?php echo $ambulance->amb_id; ?>" required>
+                                                    <button type="submit" onclick="updateimage()" class="btn btn-success"
+                                                            id="up-image-btn" style="margin-top: 30px;">Update
                                                     </button>
 
                                                 </div>
@@ -263,7 +277,7 @@
 
             submitHandler: function (form) {
 
-                var form = $('#updaue-reg');
+                var form = $('#update-reg');
                 // remove the text-danger
                 $(".text-danger").remove();
 
@@ -285,9 +299,6 @@
                                 title: response.messages,
                                 showConfirmButton: false,
                                 timer: 1500
-                            }).then(function () {
-                                $('#data_table').DataTable().ajax.reload(null, false).draw(false);
-                                //$('#add-modal').modal('hide');
                             })
 
                         } else {
@@ -322,7 +333,7 @@
                 return false;
             }
         });
-        $('#updaue-reg').validate();
+        $('#update-reg').validate();
     }
 
 
@@ -414,7 +425,7 @@
         $('#update-basic').validate();
     }
 
-    function updateaddress() {
+    function updateAddress() {
         // reset the form
         $(".form-control").removeClass('is-invalid').removeClass('is-valid');
 
@@ -465,7 +476,7 @@
                                 title: response.messages,
                                 showConfirmButton: false,
                                 timer: 1500
-                            });
+                            })
 
                         } else {
 
@@ -492,7 +503,7 @@
 
                             }
                         }
-                        $('#up-address-btn').html('Update');
+                        $('#up-address-btn').html('Add');
                     }
                 });
 
@@ -502,7 +513,9 @@
         $('#update-address').validate();
     }
 
+
     function updateimage() {
+
         // reset the form
         $(".form-control").removeClass('is-invalid').removeClass('is-valid');
 

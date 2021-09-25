@@ -39,15 +39,8 @@
                             <tr>
                                 <th>Specialist id</th>
                                 <th>Specialist type name</th>
-                                <th>H id</th>
-                                <th>CreatedDtm</th>
-                                <th>CreatedBy</th>
-                                <th>UpdateDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
 
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>
@@ -63,7 +56,7 @@
     <!-- Add modal content -->
     <div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
@@ -74,59 +67,16 @@
                             <input type="hidden" id="specialistId" name="specialistId" class="form-control" placeholder="Specialist id" maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="specialistTypeName"> Specialist type name: <span class="text-danger">*</span> </label>
                                     <input type="text" id="specialistTypeName" name="specialistTypeName" class="form-control" placeholder="Specialist type name" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="hId"> H id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="hId" name="hId" class="form-control" placeholder="H id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" >
-                                </div>
-                            </div>
+
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updateDtm"> UpdateDtm: </label>
-                                    <input type="text" id="updateDtm" name="updateDtm" class="form-control" placeholder="UpdateDtm" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
+
+
 
                         <div class="form-group text-center">
                             <div class="btn-group">
@@ -143,7 +93,7 @@
     <!-- Add modal content -->
     <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Update</h4>
@@ -154,56 +104,10 @@
                             <input type="hidden" id="specialistId" name="specialistId" class="form-control" placeholder="Specialist id" maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="specialistTypeName"> Specialist type name: <span class="text-danger">*</span> </label>
                                     <input type="text" id="specialistTypeName" name="specialistTypeName" class="form-control" placeholder="Specialist type name" maxlength="155" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="hId"> H id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="hId" name="hId" class="form-control" placeholder="H id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updateDtm"> UpdateDtm: </label>
-                                    <input type="text" id="updateDtm" name="updateDtm" class="form-control" placeholder="UpdateDtm" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" required>
                                 </div>
                             </div>
                         </div>

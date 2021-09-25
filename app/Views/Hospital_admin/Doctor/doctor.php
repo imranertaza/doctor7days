@@ -41,20 +41,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Mobile</th>
-                                <th>Password</th>
-                                <th>Pic</th>
-                                <th>Specialist id</th>
-                                <th>Role id</th>
-                                <th>Nid</th>
-                                <th>H id</th>
-                                <th>Description</th>
-                                <th>CreatedDtm</th>
-                                <th>CreatedBy</th>
-                                <th>UpdatedDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
-
+                                <th>Specialist</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -71,30 +58,37 @@
     <!-- Add modal content -->
     <div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
                 </div>
                 <div class="modal-body">
                     <form id="add-form" class="pl-3 pr-3">
+
                         <div class="row">
-                            <input type="hidden" id="docId" name="docId" class="form-control" placeholder="Doc id" maxlength="11" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="name"> Name: <span class="text-danger">*</span> </label>
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="specialistId"> Specialist: <span class="text-danger">*</span> </label>
+                                    <select id="specialistId" name="specialistId" class="form-control" placeholder="Specialist" required>
+                                        <option value="">Please select</option>
+                                        <?php echo getListInOption('0','specialist_id','specialist_type_name','specialist')?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="email"> Email: <span class="text-danger">*</span> </label>
                                     <input type="text" id="email" name="email" class="form-control" placeholder="Email" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="mobile"> Mobile: <span class="text-danger">*</span> </label>
                                     <input type="number" id="mobile" name="mobile" class="form-control" placeholder="Mobile" maxlength="11" number="true" required>
@@ -102,93 +96,22 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="password"> Password: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="password" name="password" class="form-control" placeholder="Password" required></textarea>
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="pic"> Pic: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="pic" name="pic" class="form-control" placeholder="Pic" maxlength="155" required>
+                                    <label for="con_password"> Confirm Password: <span class="text-danger">*</span> </label>
+                                    <input type="password" id="con_password" name="con_password" class="form-control" placeholder="Confirm Password" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="specialistId"> Specialist id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="specialistId" name="specialistId" class="form-control" placeholder="Specialist id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
+
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="roleId"> Role id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="roleId" name="roleId" class="form-control" placeholder="Role id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="nid"> Nid: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="nid" name="nid" class="form-control" placeholder="Nid" maxlength="155" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="hId"> H id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="hId" name="hId" class="form-control" placeholder="H id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="description"> Description: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updatedDtm" name="updatedDtm" class="form-control" placeholder="UpdatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group text-center">
                             <div class="btn-group">
@@ -202,141 +125,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <!-- Add modal content -->
-    <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog"
-         aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="text-center bg-info p-3">
-                    <h4 class="modal-title text-white" id="info-header-modalLabel">Update</h4>
-                </div>
-                <div class="modal-body">
-                    <form id="edit-form" class="pl-3 pr-3">
-                        <div class="row">
-                            <input type="hidden" id="docId" name="docId" class="form-control" placeholder="Doc id" maxlength="11" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="name"> Name: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="155" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="email"> Email: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="email" name="email" class="form-control" placeholder="Email" maxlength="155" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="mobile"> Mobile: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="mobile" name="mobile" class="form-control" placeholder="Mobile" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="password"> Password: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="password" name="password" class="form-control" placeholder="Password" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="pic"> Pic: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="pic" name="pic" class="form-control" placeholder="Pic" maxlength="155" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="specialistId"> Specialist id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="specialistId" name="specialistId" class="form-control" placeholder="Specialist id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="roleId"> Role id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="roleId" name="roleId" class="form-control" placeholder="Role id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="nid"> Nid: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="nid" name="nid" class="form-control" placeholder="Nid" maxlength="155" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="hId"> H id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="hId" name="hId" class="form-control" placeholder="H id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="description"> Description: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updatedDtm" name="updatedDtm" class="form-control" placeholder="UpdatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="form-group text-center">
-                            <div class="btn-group">
-                                <button type="submit" class="btn btn-success" id="edit-form-btn">Update</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
-                    </form>
-
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 

@@ -1,7 +1,7 @@
 <section class="back" >
     <div class="row">
         <div class="col-12 p-2 pl-3 pt-3">
-            <a href="#" ><i class="flaticon-left-arrow back-icon"></i></a>
+            <a href="<?php echo base_url('Mobile_app/appionment')?>" ><i class="flaticon-left-arrow back-icon"></i></a>
         </div>
     </div>
 </section>
@@ -16,11 +16,14 @@
     <div class="row">
         <div class="col-12 p-3 row">
             <div class="col-6">
-                <img src="<?php echo base_url()?>/assets/mobile/image/img.png" width="100%">
+                <?php
+                    $img = (!empty($specialties->pic))?$specialties->pic:'noimage.jpg';;
+                ?>
+                <img src="<?php echo base_url()?>/assets/uplode/doctor/<?php echo $img?>" width="100%">
             </div>
             <div class="col-6">
-                <p class="tit">Dr.Irfan</p>
-                <p class="sub-tit">MBBS-BDS-MPH</p>
+                <p class="tit"><?php echo $specialties->name;?></p>
+                <p class="sub-tit"><?php echo get_data_by_id('specialist_type_name','specialist','specialist_id ',$specialties->specialist_id);?></p>
             </div>
         </div>
         <div class="col-12 p-3 dr-row in-fil">

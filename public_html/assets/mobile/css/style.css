@@ -22,9 +22,9 @@ body{
     border: 1px solid rgba(0,174,214,1);
     border-radius: 50px;
     background-color: rgba(0,174,214,1);
-    padding: 20px 38px 14px 41px;
-    margin-top: 90px;
-    margin-left: 10px;
+    padding: 18px 24px 14px 38px;
+    margin-top: 80px;
+    margin-left: 0px;
 }
 .st{
     padding-left: 0px !important;

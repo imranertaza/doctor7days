@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Hospital Update</h1>
+                    <h1>Doctor Update</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Hospital Update</li>
+                        <li class="breadcrumb-item active">Doctor Update</li>
                     </ol>
                 </div>
             </div>
@@ -37,9 +37,6 @@
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#image">Images</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#address">Address</a>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="col-12">
@@ -52,7 +49,7 @@
                                                         <label for="name"> Name: <span class="text-danger">*</span>
                                                         </label>
                                                         <input type="text" class="form-control" id="name" name="name"
-                                                               value="<?php echo $hospital->name; ?>" required>
+                                                               value="<?php echo $doctor->name; ?>" required>
                                                     </div>
                                                 </div>
 
@@ -61,7 +58,7 @@
                                                         <label for="email"> Email: <span class="text-danger">*</span>
                                                         </label>
                                                         <input type="email" id="email" name="email" class="form-control"
-                                                               value="<?php echo $hospital->email; ?>" required>
+                                                               value="<?php echo $doctor->email; ?>" required>
                                                     </div>
                                                 </div>
 
@@ -69,27 +66,43 @@
                                                     <div class="form-group">
                                                         <label for="phone"> Phone: <span class="text-danger">*</span>
                                                         </label>
-                                                        <input type="text" id="phone" name="phone" class="form-control"
-                                                               value="<?php echo $hospital->mobile; ?>" required>
+                                                        <input type="text" id="mobile" name="mobile" class="form-control"
+                                                               value="<?php echo $doctor->mobile; ?>" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="status"> Status: <span class="text-danger">*</span>
+                                                        <label for="status"> Specialist: <span class="text-danger">*</span>
                                                         </label>
-                                                        <select id="status" name="status" class="form-control" required>
-                                                            <?php echo globalStatus($hospital->status)?>
+                                                        <select id="specialistId" name="specialistId" class="form-control" placeholder="Specialist" required>
+                                                            <option value="">Please select</option>
+                                                            <?php echo getListInOption($doctor->specialist_id ,'specialist_id','specialist_type_name','specialist')?>
                                                         </select>
                                                     </div>
                                                 </div>
 
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="password"> Password: <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="password" id="password" name="password"
+                                                               class="form-control" placeholder="Password" required>
+                                                    </div>
+                                                </div>
 
-
-
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="ConfirmPassword">Confirm Password: <span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="password" id="con_password" name="con_password"
+                                                               class="form-control" placeholder="Confirm Password"
+                                                               required>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-12">
-                                                    <input type="hidden" id="h_id" name="h_id"
-                                                           value="<?php echo $hospital->h_id; ?>" required>
+                                                    <input type="hidden" id="doc_id" name="doc_id"
+                                                           value="<?php echo $doctor->doc_id ; ?>" required>
                                                     <button type="submit" onclick="updateReg()" class="btn btn-success"
                                                             id="add-form-btn"
                                                             style="float: right;">Update
@@ -107,32 +120,26 @@
                                             <div class="row pt-4">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+                                                        <label for="comment"> NID: </label>
+                                                        <input type="text" id="nid" name="nid"
+                                                               class="form-control" placeholder="NID number" value="<?php echo $doctor->nid;?>">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
                                                         <label for="description"> Description: </label>
                                                         <textarea cols="40" rows="5" id="description" name="description"
-                                                                  class="form-control" placeholder="Description" ><?php echo $hospital->description; ?></textarea>
+                                                                  class="form-control" placeholder="Description" ><?php echo $doctor->description; ?></textarea>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="comment"> Comment: </label>
-                                                        <textarea cols="40" rows="5" id="comment" name="comment"
-                                                                  class="form-control"
-                                                                  placeholder="Comment"><?php echo $hospital->comment; ?></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="is_default">Is Default: </label>
-                                                        <select id="is_default" name="is_default" class="form-control">
-                                                            <?php echo globalStatus($hospital->is_default)?>
-                                                        </select>
-                                                    </div>
-                                                </div>
+
+
 
                                                 <div class="col-md-6 text-center">
-                                                    <input type="hidden" id="h_id" name="h_id"
-                                                           value="<?php echo $hospital->h_id; ?>" required>
+                                                    <input type="hidden" id="doc_id" name="doc_id"
+                                                           value="<?php echo $doctor->doc_id; ?>" required>
                                                     <button type="submit" onclick="updateBasic()" class="btn btn-success"
                                                             id="up-basic-btn" style="margin-top: 30px;" >Update
                                                     </button>
@@ -145,72 +152,26 @@
 
 
                                     <div class="tab-pane container" id="image">
-<!--    id="update-image"   action="<?php //echo base_url($controller . '/updateImage') ?>" method="Post"-->
-                                        <form id="update-image" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
+                                        <!--    id="update-image"   action="<?php //echo base_url($controller . '/updateImage') ?>" method="Post"-->
+                                        <form action="<?php echo base_url($controller . '/updateImage') ?>" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
                                             <div class="row pt-4">
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="logo"> Logo: </label>
-                                                        <input type="file" id="logo" name="logo" class="form-control" placeholder="Logo"  >
+                                                        <label for="logo"> Profile Image: </label>
+                                                        <input type="file" id="pic" name="pic" class="form-control" placeholder="Logo"  >
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <?php $img = (!empty($doctor->pic))?$doctor->pic:'noimage.jpg';?>
+                                                    <img src="<?php echo base_url()?>/assets/uplode/doctor/<?php echo $img ?>"  style="max-width: 200px;" >
+                                                </div>
 
-
-                                                <div class="col-md-6 text-center">
-                                                    <input type="hidden" id="h_id" name="h_id"
-                                                           value="<?php echo $hospital->h_id; ?>" required>
+                                                <div class="col-md-6 text-right">
+                                                    <input type="hidden" id="doc_id" name="doc_id"
+                                                           value="<?php echo $doctor->doc_id; ?>" required>
                                                     <button type="submit" onclick="updateimage()" class="btn btn-success"
                                                             id="up-image-btn" style="margin-top: 30px;">Update
-                                                    </button>
-
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="tab-pane container" id="address">
-                                        <form id="update-address" class="pl-3 pr-3">
-                                            <div class="row pt-4">
-                                                <div class="col-md-6">
-                                                    <?php
-                                                    $division = get_data_by_id('division','global_address','global_address_id',$hospital->global_address_id);
-                                                    $zila = get_data_by_id('zila','global_address','global_address_id',$hospital->global_address_id);
-                                                    $upazila = get_data_by_id('upazila','global_address','global_address_id',$hospital->global_address_id);
-                                                    ?>
-                                                    <div class="form-group">
-                                                        <label for="division"> Division:<?php echo $hospital->global_address_id; ?> </label>
-                                                        <select class="form-control" name="division" onchange="viewdistrict(this.value)" required >
-                                                            <option value="">Please Select</option>
-                                                            <?php echo divisionView($division) ; ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="zila"> Zila: </label>
-                                                        <select class="form-control" name="zila" onchange="viewupazila(this.value)" id="district" required>
-                                                            <option value="">Please Select</option>
-                                                            <?php echo districtselect($zila,$division) ; ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="upazila"> Upazila: </label>
-                                                        <select class="form-control" name="upazila" id="subdistrict"  required>
-                                                            <option value="">Please Select</option>
-                                                            <?php echo upazilaselect($upazila,$zila) ; ?>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 text-center">
-
-                                                    <input type="hidden" id="h_id" name="h_id"
-                                                           value="<?php echo $hospital->h_id; ?>" required>
-                                                    <button type="submit" onclick="updateaddress()" class="btn btn-success"
-                                                            id="up-address-btn" style="margin-top: 30px;">Update
                                                     </button>
 
                                                 </div>

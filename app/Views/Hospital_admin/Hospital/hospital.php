@@ -90,23 +90,11 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="password"> Password: <span class="text-danger">*</span></label>
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password"  required>
-                                </div>
-                            </div>
-
 
                         </div>
 
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="ConfirmPassword">Confirm Password: <span class="text-danger">*</span></label>
-                                    <input type="password" id="con_password" name="con_password" class="form-control" placeholder="Confirm Password" >
-                                </div>
-                            </div>
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="status"> Status: <span class="text-danger">*</span> </label>

@@ -5,17 +5,20 @@ namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
 
+use App\Models\Hospital_admin\GlobaladdressModel;
 use App\Models\Hospital_admin\HospitalModel;
 
 class Hospital extends BaseController
 {
 	
     protected $hospitalModel;
+    protected $globaladdressModel;
     protected $validation;
 	
 	public function __construct()
 	{
 	    $this->hospitalModel = new HospitalModel();
+        $this->globaladdressModel = new GlobaladdressModel();
        	$this->validation =  \Config\Services::validation();
 		
 	}
@@ -46,7 +49,7 @@ class Hospital extends BaseController
 		foreach ($result as $key => $value) {
 							
 			$ops = '<div class="btn-group">';
-			$ops .= '	<a href="hospital/updateForm/'. $value->h_id .'" class="btn btn-sm btn-info" ><i class="fa fa-edit"></i></a>';
+			$ops .= '<a href="'.base_url().'/hospital_admin/hospital/updateForm/'. $value->h_id .'" class="btn btn-sm btn-info" ><i class="fa fa-edit"></i></a>';
 			$ops .= '	<button type="button" class="btn btn-sm btn-danger" onclick="remove('. $value->h_id .')"><i class="fa fa-trash"></i></button>';
 			$ops .= '</div>';
 			
@@ -88,8 +91,6 @@ class Hospital extends BaseController
         $fields['name'] = $this->request->getPost('name');
         $fields['email'] = $this->request->getPost('email');
         $fields['mobile'] = $this->request->getPost('phone');
-        $fields['password'] = SHA1($this->request->getPost('password'));
-        $fields['con_password'] = SHA1($this->request->getPost('con_password'));
         $fields['status'] = $this->request->getPost('status');
 
 
@@ -97,8 +98,6 @@ class Hospital extends BaseController
             'name' => ['label' => 'Name', 'rules' => 'required|max_length[155]'],
             'email' => ['label' => 'Email', 'rules' => 'permit_empty|required|max_length[30]'],
             'mobile' => ['label' => 'Mobile', 'rules' => 'permit_empty|required|numeric|max_length[11]'],
-            'password' => ['label' => 'Password', 'rules' => 'required|min_length[6]'],
-            'con_password' => ['label' => 'ConfirmPassword', 'rules' => 'required|matches[password]'],
 
         ]);
 
@@ -122,6 +121,95 @@ class Hospital extends BaseController
             }
         }
 
+        return $this->response->setJSON($response);
+    }
+
+    public function updateBasic(){
+        $response = array();
+
+        $fields['h_id'] = $this->request->getPost('h_id');
+        $fields['description'] = $this->request->getPost('description');
+        $fields['comment'] = $this->request->getPost('comment');
+        $fields['is_default'] = $this->request->getPost('is_default');
+
+
+        if ($this->hospitalModel->update($fields['h_id'], $fields)) {
+            $response['success'] = true;
+            $response['messages'] = 'Data has been Update successfully';
+        } else {
+            $response['success'] = false;
+            $response['messages'] = 'Insertion error!';
+        }
+
+        return $this->response->setJSON($response);
+    }
+
+    public function updateAddress(){
+
+        $response = array();
+
+        $fields['h_id'] = $this->request->getPost('h_id');
+        $division = $this->request->getPost('division');
+        $zila = $this->request->getPost('zila');
+        $upazila = $this->request->getPost('upazila');
+        $where = array(
+            'division' => $division,
+            'zila' => $zila,
+            'upazila' => $upazila
+        );
+        $gloadd = $this->globaladdressModel->where($where);
+
+        if ($gloadd->countAllResults() != 0){
+            $fields['global_address_id'] = $gloadd->first()->global_address_id;
+            if ($this->hospitalModel->update($fields['h_id'], $fields)) {
+                $response['success'] = true;
+                $response['messages'] = 'Data has been Update successfully';
+            } else {
+                $response['success'] = false;
+                $response['messages'] = 'Insertion error!';
+            }
+        }else{
+            $response['success'] = false;
+            $response['messages'] = 'your address not found!';
+        }
+
+
+        return $this->response->setJSON($response);
+    }
+
+    public function updateImage(){
+        helper(['form', 'url']);
+        $response = array();
+
+        $fields['h_id'] = $this->request->getPost('h_id');
+        $logo = $this->request->getFile('logo');
+//        $image = $this->request->getFile('image');
+//        $banner = $this->request->getFile('banner');
+
+
+//        if (!empty($_FILES['logo']['name'])){
+            $logo->move(FCPATH.'\assets\uplode\hospital');
+            $fields['logo'] = $logo->getClientName();
+            if ($this->hospitalModel->update($fields['h_id'], $fields)) {
+                $response['success'] = true;
+                $response['messages'] = 'Data has been Update successfully';
+            } else {
+                $response['success'] = false;
+                $response['messages'] = 'Insertion error!';
+            }
+//        }
+
+
+
+//        if ($this->hospitalModel->update($fields['h_id'], $fields)) {
+//            $response['success'] = true;
+//            $response['messages'] = 'Data has been Update successfully';
+//        } else {
+//            $response['success'] = false;
+//            $response['messages'] = 'Insertion error!';
+//        }
+//
+//
         return $this->response->setJSON($response);
     }
 	
@@ -154,8 +242,6 @@ class Hospital extends BaseController
         $fields['name'] = $this->request->getPost('name');
         $fields['email'] = $this->request->getPost('email');
         $fields['mobile'] = $this->request->getPost('mobile');
-        $fields['password'] = SHA1($this->request->getPost('password'));
-        $fields['con_password'] = SHA1($this->request->getPost('con_password'));
         $fields['status'] = $this->request->getPost('status');
 
 
@@ -163,8 +249,6 @@ class Hospital extends BaseController
             'name' => ['label' => 'Name', 'rules' => 'required|max_length[155]'],
             'email' => ['label' => 'Email', 'rules' => 'permit_empty|required|max_length[30]'],
             'mobile' => ['label' => 'Mobile', 'rules' => 'permit_empty|required|numeric|max_length[11]'],
-            'password' => ['label' => 'Password', 'rules' => 'required|min_length[6]'],
-            'con_password' => ['label' => 'ConfirmPassword', 'rules' => 'required|matches[password]'],
 
         ]);
 

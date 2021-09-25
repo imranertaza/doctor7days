@@ -31,33 +31,9 @@
             <h4>New In</h4>
         </div>
         <div class="col-12 p-3 row" style="padding-right: 0px !important;">
-            <?php foreach ($ambulance as $item) {
+            <?php foreach ($ambulanceData as $item) {
                 $img = (!empty($item->image))?$item->image:'noimage.jpg';?>
-            <div class="col-6 " style="padding: 10px;">
-                <div class="product ">
-                    <div class="col-12 pad-0">
-                        <img src="<?php echo base_url()?>/assets/uplode/ambulance/<?php echo $img;?>" width="100%">
-                    </div>
-                    <div class="col-12 mt-4" style="line-height: 5px;">
-                        <p class="proName"><?php echo $item->contact_name;?></p>
-                        <p class="pro_nm"><?php echo substr($item->description, 0, 20); ?>..</p>
-                        <p class="pro_pho"><?php echo $item->mobile; ?></p>
-                    </div>
-                </div>
-            </div>
-            <?php } ?>
-            <div class="col-12 pl-4">
-                <b><?= $pager->links() ?></b>
-            </div>
-        </div>
-
-        <div class="col-12 p-3">
-            <h4>Most Popular</h4>
-        </div>
-        <div class="col-12 p-3 row" style="padding-right: 0px !important;">
-            <?php foreach ($ambulance as $item) {
-                $img = (!empty($item->image))?$item->image:'noimage.jpg';?>
-                    <div class="col-6 " style="padding: 10px;">
+                <div class="col-6 " style="padding: 10px;">
                     <div class="product ">
                         <div class="col-12 pad-0">
                             <img src="<?php echo base_url()?>/assets/uplode/ambulance/<?php echo $img;?>" width="100%">
@@ -70,6 +46,9 @@
                     </div>
                 </div>
             <?php } ?>
+
         </div>
+
+
     </div>
 </section>

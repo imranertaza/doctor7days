@@ -44,15 +44,8 @@
                                 <th>Location</th>
                                 <th>Daily time</th>
                                 <th>Total applied</th>
-                                <th>H id</th>
-                                <th>CreatedDtm</th>
-                                <th>CreatedBy</th>
-                                <th>UpdatedDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
 
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>
@@ -68,30 +61,23 @@
     <!-- Add modal content -->
     <div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
                 </div>
                 <div class="modal-body">
                     <form id="add-form" class="pl-3 pr-3">
+
                         <div class="row">
-                            <input type="hidden" id="jobId" name="jobId" class="form-control" placeholder="Job id" maxlength="11" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="title"> Title: <span class="text-danger">*</span> </label>
                                     <input type="text" id="title" name="title" class="form-control" placeholder="Title" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="description"> Description: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="salary"> Salary: <span class="text-danger">*</span> </label>
                                     <input type="number" id="salary" name="salary" class="form-control" placeholder="Salary" maxlength="15" number="true" required>
@@ -99,73 +85,32 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="location"> Location: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="location" name="location" class="form-control" placeholder="Location" maxlength="155" required>
+
+                                    <select class="form-control" name="location" onchange="viewdistrict(this.value)" required >
+                                        <option value="">Please Select</option>
+                                        <?php echo divisionView() ; ?>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="dailyTime"> Daily time: <span class="text-danger">*</span> </label>
                                     <input type="text" id="dailyTime" name="dailyTime" class="form-control" placeholder="Daily time" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="totalApplied"> Total applied: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="totalApplied" name="totalApplied" class="form-control" placeholder="Total applied" maxlength="155" required>
+                                    <label for="description"> Description: <span class="text-danger">*</span> </label>
+                                    <textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" required></textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="hId"> H id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="hId" name="hId" class="form-control" placeholder="H id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updatedDtm" name="updatedDtm" class="form-control" placeholder="UpdatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+
+
+
 
                         <div class="form-group text-center">
                             <div class="btn-group">
@@ -182,7 +127,7 @@
     <!-- Add modal content -->
     <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Update</h4>
@@ -193,19 +138,14 @@
                             <input type="hidden" id="jobId" name="jobId" class="form-control" placeholder="Job id" maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="title"> Title: <span class="text-danger">*</span> </label>
                                     <input type="text" id="title" name="title" class="form-control" placeholder="Title" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="description"> Description: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="salary"> Salary: <span class="text-danger">*</span> </label>
                                     <input type="number" id="salary" name="salary" class="form-control" placeholder="Salary" maxlength="15" number="true" required>
@@ -213,73 +153,30 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="location"> Location: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="location" name="location" class="form-control" placeholder="Location" maxlength="155" required>
+
+                                    <select class="form-control" id="location" name="location" onchange="viewdistrict(this.value)" required >
+                                        <option value="">Please Select</option>
+                                        <?php echo divisionView() ; ?>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="dailyTime"> Daily time: <span class="text-danger">*</span> </label>
                                     <input type="text" id="dailyTime" name="dailyTime" class="form-control" placeholder="Daily time" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="totalApplied"> Total applied: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="totalApplied" name="totalApplied" class="form-control" placeholder="Total applied" maxlength="155" required>
+                                    <label for="description"> Description: <span class="text-danger">*</span> </label>
+                                    <textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" required></textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="hId"> H id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="hId" name="hId" class="form-control" placeholder="H id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updatedDtm" name="updatedDtm" class="form-control" placeholder="UpdatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group text-center">
                             <div class="btn-group">

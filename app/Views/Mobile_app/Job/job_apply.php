@@ -1,7 +1,7 @@
 <section class="back" >
     <div class="row">
         <div class="col-12 p-2 pl-3 pt-3">
-            <a href="#" ><i class="flaticon-left-arrow back-icon"></i></a>
+            <a href="<?php echo base_url('Mobile_app/job')  ?>" ><i class="flaticon-left-arrow back-icon"></i></a>
         </div>
     </div>
 </section>
@@ -23,12 +23,11 @@
     <div class="row">
         <div class="col-12 p-3 ">
             <p class="job-pb">Publisher</p>
-            <p class="job-tit" >Need a Diploma Nurse</p>
+            <p class="job-tit" ><?php echo $job->title;?></p>
 
         </div>
         <div class="col-12 p-3 ">
-            <p class="bl-text">Wikipedia is the best thing ever. Anyone in the world can</p>
-            <p class="bl-text">Wikipedia is the best thing ever. Anyone in the world can</p>
+            <p class="bl-text"><?php echo $job->description;?></p>
         </div>
         <div class="col-12 p-3 ">
             <a class="btn-apply">Apply</a>

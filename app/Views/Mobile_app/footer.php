@@ -5,7 +5,7 @@
         </div>
         <div class="col-4 text-center">
             <div class="f-home mt-1 mb-1">
-                <a class="nav-link" href="#"><i class="flaticon-home iconhome"></i></a>
+                <a class="nav-link" href="<?php echo base_url('Mobile_app/home')  ?>"><i class="flaticon-home iconhome"></i></a>
             </div>
         </div>
         <div class="col-4 text-right">
@@ -17,7 +17,7 @@
 
 
 <!--all custome js-->
-<script src="<?php echo base_url()?>/assets/js/ajaxJs.php"></script>
+<?php  require_once(APPPATH.'../public_html/assets/js/ajaxJs.php'); ?>
 
 </body>
 </html>

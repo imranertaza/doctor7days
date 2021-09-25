@@ -76,10 +76,12 @@ function htmlRadio($name = 'input_radio', $selected = '', $array = ['Male' => 'M
 
 function getListInOption($selected, $tblId, $needCol, $table)
         {
-        	$CI =& get_instance();
-        	$query = $CI->db->query("SELECT * FROM `".$table."`");
+            $db = \Config\Database::connect();
+            $tabledta = $db->table($table);
+            $query = $tabledta->get();
+        	//$query = $CI->db->query("SELECT * FROM `".$table."`");
 			$options = '';
-        	foreach ($query->result() as $value) {
+        	foreach ($query->getResult() as $value) {
             $options .= '<option value="' . $value->$tblId . '" ';
             $options .= ($value->$tblId == $selected ) ? ' selected="selected"' : '';
             $options .= '>' . $value->$needCol. '</option>';
@@ -600,9 +602,8 @@ function get_data_by_id($needCol, $table, $whereCol, $whereInfo)
             $db = \Config\Database::connect();
             $tabledta = $db->table($table);
 
-        	$query = $tabledta->select($needCol)->where($whereCol,$whereInfo);
-            $findResult = $query->countAllResults();
-            $result = $query->get()->getRow();
+            $findResult = $tabledta->select($needCol)->where($whereCol,$whereInfo)->countAllResults();
+            $result = $tabledta->select($needCol)->where($whereCol,$whereInfo)->get()->getRow();
             if ($findResult > 0) {
                 $col = ($result->$needCol == NULL) ? NULL: $result->$needCol;
             }else {
