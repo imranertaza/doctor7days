@@ -34,7 +34,7 @@ class Database extends Config
 		'DSN'      => '',
 		'hostname' => 'localhost',
 		'username' => 'root',
-		'password' => '',
+		'password' => 'password',
 		'database' => 'doctor7days',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',

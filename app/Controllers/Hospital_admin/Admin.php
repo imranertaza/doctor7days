@@ -28,10 +28,10 @@ class Admin extends BaseController
                 'title'     		=> 'Admin'				
 			];
 
-	    echo view('hospital_admin/header');
-	    echo view('hospital_admin/sidebar');
-	    echo view('hospital_admin/Admin/index', $data);
-	    echo view('hospital_admin/footer');
+	    echo view('Hospital_admin/header');
+	    echo view('Hospital_admin/sidebar');
+	    echo view('Hospital_admin/Admin/index', $data);
+	    echo view('Hospital_admin/footer');
 		//return view('hospital_admin/admin', $data);
 			
 	}

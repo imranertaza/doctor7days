@@ -53,6 +53,8 @@
             </div>
         </form>
 
+        <a href="<?php print site_url("hospital_admin/login/logout"); ?>">Logout</a>
+
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <!-- Messages Dropdown Menu -->
