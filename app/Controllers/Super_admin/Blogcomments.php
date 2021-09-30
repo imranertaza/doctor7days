@@ -1,11 +1,11 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Controllers\Hospital_admin;
+namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
 
-use App\Models\Hospital_admin\BlogcommentsModel;
+use App\Models\Super_admin\BlogcommentsModel;
 
 class Blogcomments extends BaseController
 {
@@ -24,14 +24,14 @@ class Blogcomments extends BaseController
 	{
 
 	    $data = [
-                'controller'    	=> 'Hospital_admin/blogcomments',
+                'controller'    	=> 'Super_admin/blogcomments',
                 'title'     		=> 'Blog Comments'				
 			];
 
-        echo view('hospital_admin/header');
-        echo view('hospital_admin/sidebar');
-		echo view('Hospital_admin/blogcomments/blogcomments', $data);
-        echo view('hospital_admin/footer');
+        echo view('Super_admin/header');
+        echo view('Super_admin/sidebar');
+		echo view('Super_admin/blogcomments/blogcomments', $data);
+        echo view('Super_admin/footer');
 			
 	}
 
@@ -55,12 +55,6 @@ class Blogcomments extends BaseController
 				$value->post_id,
 				$value->comment,
 				$value->patient_id,
-				$value->createdDtm,
-				$value->createdBy,
-				$value->updatedDtm,
-				$value->updatedBy,
-				$value->deleted,
-				$value->deletedRole,
 
 				$ops,
 			);

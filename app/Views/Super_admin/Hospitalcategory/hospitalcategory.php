@@ -39,7 +39,6 @@
                             <tr>
                                 <th>Hospital cat id</th>
                                 <th>Name</th>
-                                <th>Parent cat id</th>
 
                                 <th>Action</th>
                             </tr>
@@ -74,16 +73,16 @@
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="255" required>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="parentCatId"> Parent cat id: </label>
-                                    <select id="parentCatId" name="parentCatId" class="form-control">
-                                        <option value="0">Please select</option>
-                                        <?php echo getCatListInOptionsuper('0','hospital_cat_id','name','hospital_category')?>
-                                    </select>
-
-                                </div>
-                            </div>
+<!--                            <div class="col-md-12">-->
+<!--                                <div class="form-group">-->
+<!--                                    <label for="parentCatId"> Parent cat id: </label>-->
+<!--                                    <select id="parentCatId" name="parentCatId" class="form-control">-->
+<!--                                        <option value="0">Please select</option>-->
+<!--                                        --><?php //echo getCatListInOptionsuper('0','hospital_cat_id','name','hospital_category')?>
+<!--                                    </select>-->
+<!---->
+<!--                                </div>-->
+<!--                            </div>-->
 
                         </div>
 

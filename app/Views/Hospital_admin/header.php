@@ -36,9 +36,7 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="https://adminlte.io/themes/v3/index3.html" class="nav-link">Home</a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
+
         </ul>
 
         <!-- SEARCH FORM -->
@@ -53,7 +51,7 @@
             </div>
         </form>
 
-        <a href="<?php print site_url("hospital_admin/login/logout"); ?>">Logout</a>
+
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
@@ -143,9 +141,10 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                    <i class="fas fa-th-large"></i>
-                </a>
+<!--                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">-->
+<!--                    <i class="fas fa-th-large"></i>-->
+<!--                </a>-->
+                <a href="<?php print site_url("hospital_admin/login/logout"); ?>" class="nav-link">Logout</a>
             </li>
         </ul>
     </nav>

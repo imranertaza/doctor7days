@@ -9,12 +9,13 @@ use App\Models\Hospital_admin\DocavailabledayModel;
 
 class Docavailableday extends BaseController
 {
-	
+    protected $session;
     protected $docavailabledayModel;
     protected $validation;
 	
 	public function __construct()
 	{
+        $this->session = \Config\Services::session();
 	    $this->docavailabledayModel = new DocavailabledayModel();
        	$this->validation =  \Config\Services::validation();
 		
@@ -22,16 +23,24 @@ class Docavailableday extends BaseController
 	
 	public function index()
 	{
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
 
-	    $data = [
-                'controller'    	=> 'Hospital_admin/docavailableday',
-                'title'     		=> 'Doctor&#39;s Available Day'				
-			];
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Docavailableday/docavailableday', $data);
-        echo view('Hospital_admin/footer');
+            $data = [
+                'controller' => 'Hospital_admin/docavailableday',
+                'title' => 'Doctor&#39;s Available Day'
+            ];
+
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            echo view('Hospital_admin/Docavailableday/docavailableday', $data);
+            echo view('Hospital_admin/footer');
+        }
 			
 	}
 

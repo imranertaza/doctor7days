@@ -9,12 +9,13 @@ use App\Models\Hospital_admin\InvoiceModel;
 
 class Invoice extends BaseController
 {
-	
+    protected $session;
     protected $invoiceModel;
     protected $validation;
 	
 	public function __construct()
 	{
+        $this->session = \Config\Services::session();
 	    $this->invoiceModel = new InvoiceModel();
        	$this->validation =  \Config\Services::validation();
 		
@@ -22,16 +23,24 @@ class Invoice extends BaseController
 	
 	public function index()
 	{
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
 
-	    $data = [
-                'controller'    	=> 'Hospital_admin/invoice',
-                'title'     		=> 'Invoice'				
-			];
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Invoice/invoice', $data);
-        echo view('Hospital_admin/footer');
+            $data = [
+                'controller' => 'Hospital_admin/invoice',
+                'title' => 'Invoice'
+            ];
+
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            echo view('Hospital_admin/Invoice/invoice', $data);
+            echo view('Hospital_admin/footer');
+        }
 			
 	}
 

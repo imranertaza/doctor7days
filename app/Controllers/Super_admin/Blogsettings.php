@@ -1,11 +1,11 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Controllers\Hospital_admin;
+namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
 
-use App\Models\Hospital_admin\BlogsettingsModel;
+use App\Models\Super_admin\BlogsettingsModel;
 
 class Blogsettings extends BaseController
 {
@@ -24,14 +24,14 @@ class Blogsettings extends BaseController
 	{
 
 	    $data = [
-                'controller'    	=> 'Hospital_admin/blogsettings',
+                'controller'    	=> 'Super_admin/blogsettings',
                 'title'     		=> 'Blog Settings'				
 			];
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Blogsettings/blogsettings', $data);
-        echo view('Hospital_admin/footer');
+        echo view('Super_admin/header');
+        echo view('Super_admin/sidebar');
+		echo view('Super_admin/Blogsettings/blogsettings', $data);
+        echo view('Super_admin/footer');
 			
 	}
 
@@ -54,12 +54,6 @@ class Blogsettings extends BaseController
 				$value->blog_settings_id,
 				$value->blog_title,
 				$value->blog_logo,
-				$value->createdDtm,
-				$value->createdBy,
-				$value->updatedDtm,
-				$value->updatedBy,
-				$value->deleted,
-				$value->deletedRole,
 
 				$ops,
 			);

@@ -1,7 +1,7 @@
 <section class="back" >
     <div class="row">
         <div class="col-12 p-2 pl-3 pt-3">
-            <a href="#" ><i class="flaticon-left-arrow back-icon"></i></a>
+            <a href="<?php echo base_url('Mobile_app/blog')?>" ><i class="flaticon-left-arrow back-icon"></i></a>
         </div>
     </div>
 </section>
@@ -23,14 +23,13 @@
     <div class="row pad-r-0">
         <div class="col-12 p-3 pad-r-0">
             <p class="bl-sub">TRENDING NOW</p>
-            <p class="bl-title">Well, well, well, how the turntables</p>
+            <p class="bl-title"><?php echo $post->title;?></p>
         </div>
         <div class="col-12 p-3 pad-r-0">
-            <img src="<?php echo base_url()?>/assets/mobile/image/tops.png" width="100%">
+            <img src="<?php echo base_url()?>/assets/uplode/blog/<?php echo $post->image;?>" width="100%">
         </div>
         <div class="col-12 p-3 pad-r-0">
-            <p class="bl-text">Wikipedia is the best thing ever. Anyone in the world can</p>
-            <p class="bl-text">Wikipedia is the best thing ever. Anyone in the world can</p>
+            <?php echo $post->description;?>
         </div>
     </div>
 </section>

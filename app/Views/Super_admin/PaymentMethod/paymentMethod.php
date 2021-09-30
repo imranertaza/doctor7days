@@ -40,14 +40,8 @@
                                 <th>Pymnt method id</th>
                                 <th>H id</th>
                                 <th>Type name</th>
-                                <th>CreatedBy</th>
-                                <th>CreatedDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>UpdatedDtm</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
 
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>

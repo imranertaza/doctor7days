@@ -33,6 +33,9 @@
 
 <!--all custome js-->
 
+<!-- Summernote -->
+<script src="<?php echo base_url()?>/assets/plugins/summernote/summernote-bs4.min.js"></script>
+
 
 <?php  require_once(APPPATH.'../public_html/assets/js/ajaxJs.php'); ?>
 

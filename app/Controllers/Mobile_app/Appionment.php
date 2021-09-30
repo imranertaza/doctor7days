@@ -4,9 +4,9 @@
 namespace App\Controllers\Mobile_app;
 
 use App\Controllers\BaseController;
-use App\Models\Hospital_admin\GlobaladdressModel;
-use App\Models\Hospital_admin\HospitalModel;
-use App\Models\Hospital_admin\DoctorModel;
+use App\Models\Mobile_app\GlobaladdressModel;
+use App\Models\Mobile_app\HospitalModel;
+use App\Models\Mobile_app\DoctorModel;
 
 class Appionment extends BaseController
 {
@@ -44,6 +44,8 @@ class Appionment extends BaseController
         if ($gloadd->countAllResults() != 0) {
             $add = $gloadd->first()->global_address_id;
             $hospital = $this->hospitalModel->where('global_address_id',$add)->findAll();
+
+
         }else{
             $hospital = array();
             $this->session->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Hospital not found this Address! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

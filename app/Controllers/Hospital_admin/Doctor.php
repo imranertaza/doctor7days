@@ -9,12 +9,13 @@ use App\Models\Hospital_admin\DoctorModel;
 
 class Doctor extends BaseController
 {
-
+    protected $session;
     protected $doctorModel;
     protected $validation;
 
     public function __construct()
     {
+        $this->session = \Config\Services::session();
         $this->doctorModel = new DoctorModel();
         $this->validation = \Config\Services::validation();
 
@@ -22,16 +23,24 @@ class Doctor extends BaseController
 
     public function index()
     {
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
 
-        $data = [
-            'controller' => 'Hospital_admin/doctor',
-            'title' => 'Doctor'
-        ];
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-        echo view('Hospital_admin/Doctor/doctor', $data);
-        echo view('Hospital_admin/footer');
+            $data = [
+                'controller' => 'Hospital_admin/doctor',
+                'title' => 'Doctor'
+            ];
+
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            echo view('Hospital_admin/Doctor/doctor', $data);
+            echo view('Hospital_admin/footer');
+        }
 
     }
 
@@ -41,7 +50,7 @@ class Doctor extends BaseController
 
         $data['data'] = array();
 
-        $result = $this->doctorModel->select('doc_id, name, email, mobile, password, pic, specialist_id, role_id, nid, h_id, description, createdDtm, createdBy, updatedDtm, updatedBy, deleted, deletedRole')->findAll();
+        $result = $this->doctorModel->select('doc_id, name, email, mobile, password, pic, specialist_id, role_id, nid, h_id, description, createdDtm, createdBy, updatedDtm, updatedBy, deleted, deletedRole')->where('h_id',$this->session->h_Id)->findAll();
 
         foreach ($result as $key => $value) {
 
@@ -65,15 +74,23 @@ class Doctor extends BaseController
 
     public function update($id)
     {
-        $result = $this->doctorModel->where('doc_id', $id)->first();
-        $data = [
-            'controller' => 'Hospital_admin/doctor',
-            'doctor' => $result,
-        ];
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-        echo view('Hospital_admin/Doctor/update_form', $data);
-        echo view('Hospital_admin/footer');
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
+
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
+            $result = $this->doctorModel->where('doc_id', $id)->first();
+            $data = [
+                'controller' => 'Hospital_admin/doctor',
+                'doctor' => $result,
+            ];
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            echo view('Hospital_admin/Doctor/update_form', $data);
+            echo view('Hospital_admin/footer');
+        }
     }
 
     public function updateReg()
@@ -203,7 +220,7 @@ class Doctor extends BaseController
         $fields['con_password'] = SHA1($this->request->getPost('con_password'));
         $fields['specialist_id'] = $this->request->getPost('specialistId');
         $fields['role_id'] = '1';
-        $fields['h_id'] = '1';
+        $fields['h_id'] = $this->session->h_Id;
 
         $this->validation->setRules([
             'name' => ['label' => 'Name', 'rules' => 'required|max_length[155]'],

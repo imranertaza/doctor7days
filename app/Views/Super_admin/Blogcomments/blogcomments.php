@@ -42,14 +42,8 @@
 					<th>Post id</th>
 					<th>Comment</th>
 					<th>Patient id</th>
-					<th>CreatedDtm</th>
-					<th>CreatedBy</th>
-					<th>UpdatedDtm</th>
-					<th>UpdatedBy</th>
-					<th>Deleted</th>
-					<th>DeletedRole</th>
 
-					<th></th>
+					<th>Action</th>
                 </tr>
                 </thead>
               </table>

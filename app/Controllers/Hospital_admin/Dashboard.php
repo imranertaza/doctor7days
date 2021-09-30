@@ -10,12 +10,12 @@ use App\Models\Hospital_admin\DashboardModel;
 class Dashboard extends BaseController
 {
 	
-    protected $dashboardModel;
+    protected $session;
     protected $validation;
 	
 	public function __construct()
 	{
-	    // $this->dashboardModel = new DashboardModel();
+        $this->session = \Config\Services::session();
        	$this->validation =  \Config\Services::validation();
 		
 	}
@@ -23,15 +23,26 @@ class Dashboard extends BaseController
 	public function index()
 	{
 
-	    $data = [
-                'controller'    	=> 'Hospital_admin/dashboard',
-                'title'     		=> 'Dashboard'				
-			];
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Doctor/doctor', $data);
-        echo view('Hospital_admin/footer');
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
+
+            $this->session->h_Id;
+
+            $data = [
+                'controller' => 'Hospital_admin/dashboard',
+                'title' => 'Dashboard'
+            ];
+
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            echo view('Hospital_admin/Dashboard/dashboard', $data);
+            echo view('Hospital_admin/footer');
+        }
 			
 	}
 

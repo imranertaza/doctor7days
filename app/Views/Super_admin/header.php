@@ -23,6 +23,13 @@
     <link href="<?php echo base_url()?>/assets/fontawesome/css/all.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="<?php echo base_url()?>/assets/js/jquery.min.js"></script>
+    <!-- summernote -->
+    <link rel="stylesheet" href="<?php echo base_url()?>/assets/plugins/summernote/summernote-bs4.min.css">
+    <style>
+        .note-editing-area{
+            height: 250px !important;
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -34,11 +41,16 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="https://adminlte.io/themes/v3/index3.html" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Contact</a>
             </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="<?php print site_url("hospital_admin/login/logout"); ?>" class="nav-link">Logout</a>
+            </li>
+
+
         </ul>
 
         <!-- SEARCH FORM -->
@@ -53,7 +65,7 @@
             </div>
         </form>
 
-        <a href="<?php print site_url("hospital_admin/login/logout"); ?>">Logout</a>
+
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">

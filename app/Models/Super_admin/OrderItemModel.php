@@ -1,7 +1,7 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Models\Hospital_admin;
+namespace App\Models\Super_admin;
 use CodeIgniter\Model;
 
 class OrderItemModel extends Model {

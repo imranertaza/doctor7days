@@ -42,14 +42,8 @@
                                 <th>Quantity</th>
                                 <th>Unit</th>
                                 <th>Purchase date</th>
-                                <th>CreatedDtm</th>
-                                <th>CreatedBy</th>
-                                <th>UpdateDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
 
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>
