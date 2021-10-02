@@ -20,9 +20,8 @@ class LoginModel extends Model
         $builder = $db->table('users');
         $builder->select('BaseTbl.email, BaseTbl.password, BaseTbl.name, BaseTbl.h_id, BaseTbl.role_id');
         $builder->from('users as BaseTbl');
-        //$this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
         $builder->where('BaseTbl.email', $email);
-        $builder->where('BaseTbl.status', 1);
+        $builder->where('BaseTbl.status', '1');
         $query = $builder->get();
         
         $user = $query->getRow();

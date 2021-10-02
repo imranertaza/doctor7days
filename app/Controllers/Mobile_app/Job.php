@@ -4,7 +4,7 @@
 namespace App\Controllers\Mobile_app;
 
 use App\Controllers\BaseController;
-use App\Models\Hospital_admin\JobModel;
+use App\Models\Mobile_app\JobModel;
 
 
 class Job extends BaseController

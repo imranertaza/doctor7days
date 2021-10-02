@@ -12,9 +12,11 @@ class Patient extends BaseController
 	
     protected $patientModel;
     protected $validation;
+    protected $session;
 	
 	public function __construct()
 	{
+        $this->session = \Config\Services::session();
 	    $this->patientModel = new PatientModel();
        	$this->validation =  \Config\Services::validation();
 		
@@ -22,16 +24,24 @@ class Patient extends BaseController
 	
 	public function index()
 	{
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
 
-	    $data = [
-                'controller'    	=> 'Hospital_admin/patient',
-                'title'     		=> 'Patients'				
-			];
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Patient/patient', $data);
-        echo view('Hospital_admin/footer');
+            $data = [
+                'controller' => 'Hospital_admin/patient',
+                'title' => 'Patients'
+            ];
+
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            echo view('Hospital_admin/Patient/patient', $data);
+            echo view('Hospital_admin/footer');
+        }
 			
 	}
 

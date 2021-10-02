@@ -12,26 +12,36 @@ class Specialist extends BaseController
 	
     protected $specialistModel;
     protected $validation;
+    protected $session;
 	
 	public function __construct()
 	{
 	    $this->specialistModel = new SpecialistModel();
        	$this->validation =  \Config\Services::validation();
+        $this->session = \Config\Services::session();
 		
 	}
 	
 	public function index()
 	{
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
 
-	    $data = [
-                'controller'    	=> 'Hospital_admin/specialist',
-                'title'     		=> 'Specialist'				
-			];
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Specialist/specialist', $data);
-        echo view('Hospital_admin/footer');
+            $data = [
+                'controller' => 'Hospital_admin/specialist',
+                'title' => 'Specialist'
+            ];
+
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            echo view('Hospital_admin/Specialist/specialist', $data);
+            echo view('Hospital_admin/footer');
+        }
 			
 	}
 

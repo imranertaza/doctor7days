@@ -4,7 +4,7 @@
 namespace App\Controllers\Mobile_app;
 
 use App\Controllers\BaseController;
-use App\Models\Hospital_admin\HospitalModel;
+use App\Models\Mobile_app\HospitalModel;
 
 
 class Diagnostic extends BaseController

@@ -1,11 +1,11 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Controllers\Hospital_admin;
+namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
 
-use App\Models\Hospital_admin\HospitalcategoryModel;
+use App\Models\Super_admin\HospitalcategoryModel;
 
 class Hospitalcategory extends BaseController
 {
@@ -24,14 +24,14 @@ class Hospitalcategory extends BaseController
 	{
 
 	    $data = [
-                'controller'    	=> 'Hospital_admin/hospitalcategory',
+                'controller'    	=> 'Super_admin/hospitalcategory',
                 'title'     		=> 'Hospital Category'				
 			];
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Hospitalcategory/hospitalcategory', $data);
-        echo view('Hospital_admin/footer');
+        echo view('Super_admin/header');
+        echo view('Super_admin/sidebar');
+		echo view('Super_admin/Hospitalcategory/hospitalcategory', $data);
+        echo view('Super_admin/footer');
 			
 	}
 
@@ -53,13 +53,8 @@ class Hospitalcategory extends BaseController
 			$data['data'][$key] = array(
 				$value->hospital_cat_id,
 				$value->name,
-                get_data_by_id('name','hospital_category','hospital_cat_id', $value->parent_cat_id),
-//				$value->createdBy,
-//				$value->createdDtm,
-//				$value->updatedBy,
-//				$value->updatedDtm,
-//				$value->deleted,
-//				$value->deletedRole,
+//                get_data_by_id('name','hospital_category','hospital_cat_id', $value->parent_cat_id),
+
 
 				$ops,
 			);
@@ -69,7 +64,7 @@ class Hospitalcategory extends BaseController
 	}
 
 	public function getUpdateData(){
-        $response = array();
+
         $view = '';
         $id = $this->request->getPost('hospital_cat_id');
 
@@ -87,18 +82,9 @@ class Hospitalcategory extends BaseController
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Name" value="'.$data->name.'" required>
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="parentCatId"> Parent cat id: </label>
-                                    <select id="parentCatId" name="parentCatId" class="form-control">
-                                        <option value="0">Please select</option>
-                                        '.getCatListInOptionsuper($data->parent_cat_id,"hospital_cat_id","name","hospital_category").'
-                                    </select>
-                                </div>
-                            </div>
+                            
                         </div>';
             return $view;
-            //return $this->response->setJSON($data);
 
         } else {
 
@@ -133,7 +119,6 @@ class Hospitalcategory extends BaseController
         $response = array();
 
         $fields['name'] = $this->request->getPost('name');
-        $fields['parent_cat_id'] = $this->request->getPost('parentCatId');
         $fields['createdBy'] = '1';
 
 
@@ -171,7 +156,7 @@ class Hospitalcategory extends BaseController
 		
         $fields['hospital_cat_id'] = $this->request->getPost('hospitalCatId');
         $fields['name'] = $this->request->getPost('name');
-        $fields['parent_cat_id'] = $this->request->getPost('parentCatId');
+//        $fields['parent_cat_id'] = $this->request->getPost('parentCatId');
         $fields['updatedBy'] = '1';
 
         $this->validation->setRules([

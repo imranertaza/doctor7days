@@ -1,12 +1,12 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Controllers\Hospital_admin;
+namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
 
-use App\Models\Hospital_admin\AmbulanceModel;
-use App\Models\Hospital_admin\GlobaladdressModel;
+use App\Models\Super_admin\AmbulanceModel;
+use App\Models\Super_admin\GlobaladdressModel;
 
 class Ambulance extends BaseController
 {
@@ -27,14 +27,14 @@ class Ambulance extends BaseController
     {
 
         $data = [
-            'controller' => 'Hospital_admin/ambulance',
+            'controller' => 'Super_admin/ambulance',
             'title' => 'Ambulance'
         ];
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-        echo view('Hospital_admin/Ambulance/ambulance', $data);
-        echo view('Hospital_admin/footer');
+        echo view('Super_admin/header');
+        echo view('Super_admin/sidebar');
+        echo view('Super_admin/Ambulance/ambulance', $data);
+        echo view('Super_admin/footer');
 
     }
 
@@ -49,7 +49,7 @@ class Ambulance extends BaseController
         foreach ($result as $key => $value) {
 
             $ops = '<div class="btn-group">';
-            $ops .= '	<a href="' . base_url() . '/Hospital_admin/ambulance/update/' . $value->amb_id . '" class="btn btn-sm btn-info" ><i class="fa fa-edit"></i></a>';
+            $ops .= '	<a href="' . base_url() . '/Super_admin/ambulance/update/' . $value->amb_id . '" class="btn btn-sm btn-info" ><i class="fa fa-edit"></i></a>';
             $ops .= '	<button type="button" class="btn btn-sm btn-danger" onclick="remove(' . $value->amb_id . ')"><i class="fa fa-trash"></i></button>';
             $ops .= '</div>';
 
@@ -73,13 +73,13 @@ class Ambulance extends BaseController
         $amb = $this->ambulanceModel->where('amb_id', $id)->first();
 
 
-        $data['controller'] = 'Hospital_admin/ambulance';
+        $data['controller'] = 'Super_admin/ambulance';
         $data['ambulance'] = $amb;
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-        echo view('Hospital_admin/Ambulance/update_form', $data);
-        echo view('Hospital_admin/footer');
+        echo view('Super_admin/header');
+        echo view('Super_admin/sidebar');
+        echo view('Super_admin/Ambulance/update_form', $data);
+        echo view('Super_admin/footer');
     }
 
     public function updateReg()

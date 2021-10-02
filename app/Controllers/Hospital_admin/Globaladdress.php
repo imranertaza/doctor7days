@@ -14,10 +14,10 @@ class Globaladdress extends BaseController
     protected $globaladdressModel;
     protected $validation;
    // protected $globalHelper;
-
+    protected $session;
 	public function __construct()
 	{
-       // $this->globalHelper = new Global_helper();
+        $this->session = \Config\Services::session();
 	    $this->globaladdressModel = new GlobaladdressModel();
        	$this->validation =  \Config\Services::validation();
 		
@@ -25,16 +25,24 @@ class Globaladdress extends BaseController
 	
 	public function index()
 	{
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
 
-	    $data = [
-                'controller'    	=> 'Hospital_admin/globaladdress',
-                'title'     		=> 'Global Address'				
-			];
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Globaladdress/globaladdress', $data);
-        echo view('Hospital_admin/footer');
+            $data = [
+                'controller' => 'Hospital_admin/globaladdress',
+                'title' => 'Global Address'
+            ];
+
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            echo view('Hospital_admin/Globaladdress/globaladdress', $data);
+            echo view('Hospital_admin/footer');
+        }
 			
 	}
 

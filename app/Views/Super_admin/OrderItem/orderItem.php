@@ -46,14 +46,8 @@
                                 <th>Total price</th>
                                 <th>Discount</th>
                                 <th>Final price</th>
-                                <th>CreatedDtm</th>
-                                <th>CreatedBy</th>
-                                <th>UpdatedBy</th>
-                                <th>UpdatedDtm</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
 
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>

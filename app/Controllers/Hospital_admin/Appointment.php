@@ -12,9 +12,11 @@ class Appointment extends BaseController
 	
     protected $appointmentModel;
     protected $validation;
-	
+    protected $session;
+
 	public function __construct()
 	{
+        $this->session = \Config\Services::session();
 	    $this->appointmentModel = new AppointmentModel();
        	$this->validation =  \Config\Services::validation();
 		
@@ -22,16 +24,24 @@ class Appointment extends BaseController
 	
 	public function index()
 	{
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
 
-	    $data = [
-                'controller'    	=> 'Hospital_admin/appointment',
-                'title'     		=> 'Appointment'				
-			];
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
 
-        echo view('hospital_admin/header');
-        echo view('hospital_admin/sidebar');
-		echo view('Hospital_admin/appointment/appointment', $data);
-        echo view('hospital_admin/footer');
+            $data = [
+                'controller' => 'Hospital_admin/appointment',
+                'title' => 'Appointment'
+            ];
+
+            echo view('hospital_admin/header');
+            echo view('hospital_admin/sidebar');
+            echo view('Hospital_admin/appointment/appointment', $data);
+            echo view('hospital_admin/footer');
+        }
 			
 	}
 

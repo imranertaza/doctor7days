@@ -42,14 +42,8 @@
                                 <th>Product category</th>
                                 <th>Image</th>
                                 <th>Status</th>
-                                <th>CreatedDtm</th>
-                                <th>CreatedBy</th>
-                                <th>UpdatedDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
 
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>

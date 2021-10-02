@@ -1,24 +1,30 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Controllers\Hospital_admin;
+namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
 
-use App\Models\Hospital_admin\GlobaladdressModel;
-use App\Models\Hospital_admin\HospitalModel;
+use App\Models\Super_admin\RolesModel;
+use App\Models\Super_admin\GlobaladdressModel;
+use App\Models\Super_admin\HospitalModel;
+use App\Models\Super_admin\UsersModel;
 
 class Hospital extends BaseController
 {
 	
     protected $hospitalModel;
     protected $globaladdressModel;
+    protected $rolesModel;
+    protected $usersModel;
     protected $validation;
 	
 	public function __construct()
 	{
 	    $this->hospitalModel = new HospitalModel();
         $this->globaladdressModel = new GlobaladdressModel();
+        $this->rolesModel = new RolesModel();
+        $this->usersModel = new UsersModel();
        	$this->validation =  \Config\Services::validation();
 		
 	}
@@ -27,32 +33,32 @@ class Hospital extends BaseController
 	{
 
 	    $data = [
-                'controller'    	=> 'Hospital_admin/hospital',
-                'title'     		=> 'Hospital'				
+                'controller'    	=> 'Super_admin/hospital',
+                'title'     		=> 'Hospital'
 			];
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Hospital/hospital', $data);
-        echo view('Hospital_admin/footer');
+        echo view('Super_admin/header');
+        echo view('Super_admin/sidebar');
+		echo view('Super_admin/Hospital/hospital', $data);
+        echo view('Super_admin/footer');
 			
 	}
 
 	public function getAll()
 	{
- 		$response = array();		
-		
+ 		$response = array();
+
 	    $data['data'] = array();
- 
+
 		$result = $this->hospitalModel->select('h_id, name, description, email, global_address_id, mobile, comment, logo, image, banner, is_default, hospital_cat_id, status, createdDtm, updatedBy, updatedDtm, deleted, deletedRole')->findAll();
-		
+
 		foreach ($result as $key => $value) {
-							
+
 			$ops = '<div class="btn-group">';
-			$ops .= '<a href="'.base_url().'/hospital_admin/hospital/updateForm/'. $value->h_id .'" class="btn btn-sm btn-info" ><i class="fa fa-edit"></i></a>';
+			$ops .= '<a href="'.base_url().'/Super_admin/hospital/updateForm/'. $value->h_id .'" class="btn btn-sm btn-info" ><i class="fa fa-edit"></i></a>';
 			$ops .= '	<button type="button" class="btn btn-sm btn-danger" onclick="remove('. $value->h_id .')"><i class="fa fa-trash"></i></button>';
 			$ops .= '</div>';
-			
+
 			$data['data'][$key] = array(
 				$value->h_id,
 				$value->name,
@@ -62,23 +68,23 @@ class Hospital extends BaseController
 
 				$ops,
 			);
-		} 
+		}
 
-		return $this->response->setJSON($data);		
+		return $this->response->setJSON($data);
 	}
 
 	public function updateForm($id){
 
         $result = $this->hospitalModel->where('h_id' ,$id)->first();
         $data = [
-            'controller' => 'Hospital_admin/hospital',
+            'controller' => 'Super_admin/hospital',
             'hospital' => $result,
         ];
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-        echo view('Hospital_admin/Hospital/update_form',$data);
-        echo view('Hospital_admin/footer');
+        echo view('Super_admin/header');
+        echo view('Super_admin/sidebar');
+        echo view('Super_admin/Hospital/update_form',$data);
+        echo view('Super_admin/footer');
 
 
     }
@@ -243,13 +249,16 @@ class Hospital extends BaseController
         $fields['email'] = $this->request->getPost('email');
         $fields['mobile'] = $this->request->getPost('mobile');
         $fields['status'] = $this->request->getPost('status');
+        $fields['password'] = SHA1($this->request->getPost('password'));
+        $fields['con_password'] = SHA1($this->request->getPost('con_password'));
 
 
         $this->validation->setRules([
             'name' => ['label' => 'Name', 'rules' => 'required|max_length[155]'],
             'email' => ['label' => 'Email', 'rules' => 'permit_empty|required|max_length[30]'],
             'mobile' => ['label' => 'Mobile', 'rules' => 'permit_empty|required|numeric|max_length[11]'],
-
+            'password' => ['label' => 'Password', 'rules' => 'required'],
+            'con_password' => ['label' => 'Confirm Password', 'rules' => 'required|matches[password]'],
         ]);
 
         if ($this->validation->run($fields) == FALSE) {
@@ -260,7 +269,27 @@ class Hospital extends BaseController
         } else {
 
             if ($this->hospitalModel->insert($fields)) {
-												
+                $h_id = $this->hospitalModel->getInsertID();
+
+                //Roles add
+                $roles['h_id'] = $h_id;
+                $roles['role'] = 'hospital_admin';
+                $roles['is_default'] = '1';
+                $roles['createdBy'] = '1';
+                $this->rolesModel->insert($roles);
+                $role_id = $this->rolesModel->getInsertID();
+
+                //user create
+                $users['h_id'] = $h_id;
+                $users['email'] = $this->request->getPost('email');
+                $users['name'] = $this->request->getPost('name');
+                $users['mobile'] = $this->request->getPost('mobile');
+                $users['password'] = SHA1($this->request->getPost('password'));
+                $users['role_id'] = $role_id;
+                $users['status'] = '1';
+                $users['is_default'] = '1';
+                $this->usersModel->insert($users);
+
                 $response['success'] = true;
                 $response['messages'] = 'Data has been inserted successfully';	
 				

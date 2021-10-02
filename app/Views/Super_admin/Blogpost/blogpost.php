@@ -28,7 +28,9 @@
                                 <h3 class="card-title">Blog Post</h3>
                             </div>
                             <div class="col-md-4">
-                                <button type="button" class="btn btn-block btn-success" onclick="add()" title="Add"> <i class="fa fa-plus"></i> Add</button>
+                                <button type="button" class="btn btn-block btn-success" onclick="add()" title="Add"><i
+                                            class="fa fa-plus"></i> Add
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -37,20 +39,14 @@
                         <table id="data_table" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Post id</th>
+                                <th width="10">Id</th>
                                 <th>Title</th>
-                                <th>Description</th>
-                                <th>Image</th>
-                                <th>Featured image</th>
-                                <th>Tags</th>
-                                <th>CreatedDtm</th>
-                                <th>CreatedBy</th>
-                                <th>UpdatedDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
+                                <th width="350">Description</th>
+                                <th width="30">Image</th>
+                                <th width="110">Featured image</th>
+                                <th width="30">Tags</th>
 
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>
@@ -72,84 +68,54 @@
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="add-form" class="pl-3 pr-3">
+                    <form id="add-form" class="pl-3 pr-3" method="post" enctype="multipart/form-data">
+
                         <div class="row">
-                            <input type="hidden" id="postId" name="postId" class="form-control" placeholder="Post id" maxlength="11" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="title"> Title: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="title" name="title" class="form-control" placeholder="Title" required></textarea>
+                                    <input id="title" name="title" class="form-control" placeholder="Title" required>
+
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="description"> Description: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="image"> Image: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="image" name="image" class="form-control" placeholder="Image" maxlength="155" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="featuredImage"> Featured image: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="featuredImage" name="featuredImage" class="form-control" placeholder="Featured image" maxlength="155" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="tags"> Tags: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="tags" name="tags" class="form-control" placeholder="Tags" required></textarea>
+                                    <input id="tags" name="tags" class="form-control" placeholder="Tags" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
+                                    <label for="image"> Image: <span class="text-danger">*</span> </label>
+                                    <input type="file" id="image" name="image" class="form-control" placeholder="Image"
+                                           maxlength="155" required>
                                 </div>
                             </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="featuredImage"> Featured image: <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="file" id="featuredImage" name="featuredImage" class="form-control"
+                                           placeholder="Featured image" maxlength="155" required>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+
+
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updatedDtm" name="updatedDtm" class="form-control" placeholder="UpdatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
+                                    <label for="description"> Description: <span class="text-danger">*</span> </label>
+                                    <textarea id="description" name="description" class="form-control"
+                                              placeholder="Description" required style="height: 300px;"></textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group text-center">
                             <div class="btn-group">
@@ -174,79 +140,51 @@
                 <div class="modal-body">
                     <form id="edit-form" class="pl-3 pr-3">
                         <div class="row">
-                            <input type="hidden" id="postId" name="postId" class="form-control" placeholder="Post id" maxlength="11" required>
+                            <input type="hidden" id="postId" name="postId" class="form-control" placeholder="Post id"
+                                   maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="title"> Title: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="title" name="title" class="form-control" placeholder="Title" required></textarea>
+                                    <input id="title" name="title" class="form-control" placeholder="Title" required>
+
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="description"> Description: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="image"> Image: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="image" name="image" class="form-control" placeholder="Image" maxlength="155" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="featuredImage"> Featured image: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="featuredImage" name="featuredImage" class="form-control" placeholder="Featured image" maxlength="155" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="tags"> Tags: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="tags" name="tags" class="form-control" placeholder="Tags" required></textarea>
+                                    <input id="tags" name="tags" class="form-control" placeholder="Tags" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
+                                    <label for="image"> Image: <span class="text-danger">*</span> </label>
+                                    <input type="file" id="image" name="image" class="form-control" placeholder="Image"
+                                           maxlength="155" >
                                 </div>
                             </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="featuredImage"> Featured image: <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="file" id="featuredImage" name="featuredImage" class="form-control"
+                                           placeholder="Featured image" maxlength="155" >
+                                </div>
+                            </div>
+
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+
+
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updatedDtm" name="updatedDtm" class="form-control" placeholder="UpdatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
+                                    <label for="description"> Description: <span class="text-danger">*</span> </label>
+                                    <textarea id="description" name="description" class="form-control"
+                                              placeholder="Description" required style="height: 300px;"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -278,116 +216,94 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": '<?php echo base_url($controller.'/getAll') ?>',
+                "url": '<?php echo base_url($controller . '/getAll') ?>',
                 "type": "POST",
                 "dataType": "json",
                 async: "true"
             }
         });
     });
+
     function add() {
         // reset the form
         $("#add-form")[0].reset();
         $(".form-control").removeClass('is-invalid').removeClass('is-valid');
         $('#add-modal').modal('show');
         // submit the add from
-        $.validator.setDefaults({
-            highlight: function(element) {
-                $(element).addClass('is-invalid').removeClass('is-valid');
-            },
-            unhighlight: function(element) {
-                $(element).removeClass('is-invalid').addClass('is-valid');
-            },
-            errorElement: 'div ',
-            errorClass: 'invalid-feedback',
-            errorPlacement: function(error, element) {
-                if (element.parent('.input-group').length) {
-                    error.insertAfter(element.parent());
-                } else if ($(element).is('.select')) {
-                    element.next().after(error);
-                } else if (element.hasClass('select2')) {
-                    //error.insertAfter(element);
-                    error.insertAfter(element.next());
-                } else if (element.hasClass('selectpicker')) {
-                    error.insertAfter(element.next());
-                } else {
-                    error.insertAfter(element);
-                }
-            },
 
-            submitHandler: function(form) {
 
-                var form = $('#add-form');
-                // remove the text-danger
-                $(".text-danger").remove();
+                $('#add-form').on('submit', function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        url: '<?php echo base_url($controller . '/add') ?>',
+                        type: 'post',
+                        data: new FormData(this), // /converting the form data into array and sending it to server
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        dataType: 'json',
+                        beforeSend: function () {
+                            $('#add-form-btn').html('<i class="fa fa-spinner fa-spin"></i>');
+                        },
+                        success: function (response) {
 
-                $.ajax({
-                    url: '<?php echo base_url($controller.'/add') ?>',
-                    type: 'post',
-                    data: form.serialize(), // /converting the form data into array and sending it to server
-                    dataType: 'json',
-                    beforeSend: function() {
-                        $('#add-form-btn').html('<i class="fa fa-spinner fa-spin"></i>');
-                    },
-                    success: function(response) {
+                            if (response.success === true) {
 
-                        if (response.success === true) {
-
-                            Swal.fire({
-                                position: 'bottom-end',
-                                icon: 'success',
-                                title: response.messages,
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(function() {
-                                $('#data_table').DataTable().ajax.reload(null, false).draw(false);
-                                $('#add-modal').modal('hide');
-                            })
-
-                        } else {
-
-                            if (response.messages instanceof Object) {
-                                $.each(response.messages, function(index, value) {
-                                    var id = $("#" + index);
-
-                                    id.closest('.form-control')
-                                        .removeClass('is-invalid')
-                                        .removeClass('is-valid')
-                                        .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
-
-                                    id.after(value);
-
-                                });
-                            } else {
                                 Swal.fire({
                                     position: 'bottom-end',
-                                    icon: 'error',
+                                    icon: 'success',
                                     title: response.messages,
                                     showConfirmButton: false,
                                     timer: 1500
+                                }).then(function () {
+                                    $('#data_table').DataTable().ajax.reload(null, false).draw(false);
+                                    $('#add-modal').modal('hide');
                                 })
 
+                            } else {
+
+                                if (response.messages instanceof Object) {
+                                    $.each(response.messages, function (index, value) {
+                                        var id = $("#" + index);
+
+                                        id.closest('.form-control')
+                                            .removeClass('is-invalid')
+                                            .removeClass('is-valid')
+                                            .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+
+                                        id.after(value);
+
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        position: 'bottom-end',
+                                        icon: 'error',
+                                        title: response.messages,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+
+                                }
                             }
+                            $('#add-form-btn').html('Add');
                         }
-                        $('#add-form-btn').html('Add');
-                    }
+                    });
+
                 });
 
-                return false;
-            }
-        });
-        $('#add-form').validate();
+
+
     }
 
     function edit(post_id) {
         $.ajax({
-            url: '<?php echo base_url($controller.'/getOne') ?>',
+            url: '<?php echo base_url($controller . '/getOne') ?>',
             type: 'post',
             data: {
                 post_id: post_id
             },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 // reset the form
                 $("#edit-form")[0].reset();
                 $(".form-control").removeClass('is-invalid').removeClass('is-valid');
@@ -399,24 +315,18 @@
                 $("#edit-form #image").val(response.image);
                 $("#edit-form #featuredImage").val(response.featured_image);
                 $("#edit-form #tags").val(response.tags);
-                $("#edit-form #createdDtm").val(response.createdDtm);
-                $("#edit-form #createdBy").val(response.createdBy);
-                $("#edit-form #updatedDtm").val(response.updatedDtm);
-                $("#edit-form #updatedBy").val(response.updatedBy);
-                $("#edit-form #deleted").val(response.deleted);
-                $("#edit-form #deletedRole").val(response.deletedRole);
 
                 // submit the edit from
                 $.validator.setDefaults({
-                    highlight: function(element) {
+                    highlight: function (element) {
                         $(element).addClass('is-invalid').removeClass('is-valid');
                     },
-                    unhighlight: function(element) {
+                    unhighlight: function (element) {
                         $(element).removeClass('is-invalid').addClass('is-valid');
                     },
                     errorElement: 'div ',
                     errorClass: 'invalid-feedback',
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         if (element.parent('.input-group').length) {
                             error.insertAfter(element.parent());
                         } else if ($(element).is('.select')) {
@@ -431,18 +341,18 @@
                         }
                     },
 
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         var form = $('#edit-form');
                         $(".text-danger").remove();
                         $.ajax({
-                            url: '<?php echo base_url($controller.'/edit') ?>' ,
+                            url: '<?php echo base_url($controller . '/edit') ?>',
                             type: 'post',
                             data: form.serialize(),
                             dataType: 'json',
-                            beforeSend: function() {
+                            beforeSend: function () {
                                 $('#edit-form-btn').html('<i class="fa fa-spinner fa-spin"></i>');
                             },
-                            success: function(response) {
+                            success: function (response) {
 
                                 if (response.success === true) {
 
@@ -452,7 +362,7 @@
                                         title: response.messages,
                                         showConfirmButton: false,
                                         timer: 1500
-                                    }).then(function() {
+                                    }).then(function () {
                                         $('#data_table').DataTable().ajax.reload(null, false).draw(false);
                                         $('#edit-modal').modal('hide');
                                     })
@@ -460,7 +370,7 @@
                                 } else {
 
                                     if (response.messages instanceof Object) {
-                                        $.each(response.messages, function(index, value) {
+                                        $.each(response.messages, function (index, value) {
                                             var id = $("#" + index);
 
                                             id.closest('.form-control')
@@ -509,13 +419,13 @@
 
             if (result.value) {
                 $.ajax({
-                    url: '<?php echo base_url($controller.'/remove') ?>',
+                    url: '<?php echo base_url($controller . '/remove') ?>',
                     type: 'post',
                     data: {
                         post_id: post_id
                     },
                     dataType: 'json',
-                    success: function(response) {
+                    success: function (response) {
 
                         if (response.success === true) {
                             Swal.fire({
@@ -524,7 +434,7 @@
                                 title: response.messages,
                                 showConfirmButton: false,
                                 timer: 1500
-                            }).then(function() {
+                            }).then(function () {
                                 $('#data_table').DataTable().ajax.reload(null, false).draw(false);
                             })
                         } else {
@@ -543,4 +453,9 @@
             }
         })
     }
+
+    $(function () {
+        // Summernote
+        $('#description').summernote()
+    })
 </script>

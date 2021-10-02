@@ -2,8 +2,8 @@
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
 namespace App\Controllers\Mobile_app;
-use App\Models\Hospital_admin\AmbulanceModel;
-use App\Models\Hospital_admin\GlobaladdressModel;
+use App\Models\Mobile_app\AmbulanceModel;
+use App\Models\Mobile_app\GlobaladdressModel;
 use App\Controllers\BaseController;
 
 

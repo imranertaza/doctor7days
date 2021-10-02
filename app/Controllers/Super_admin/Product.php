@@ -1,11 +1,11 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Controllers\Hospital_admin;
+namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
 
-use App\Models\Hospital_admin\ProductModel;
+use App\Models\Super_admin\ProductModel;
 
 class Product extends BaseController
 {
@@ -24,14 +24,14 @@ class Product extends BaseController
 	{
 
 	    $data = [
-                'controller'    	=> 'Hospital_admin/product',
+                'controller'    	=> 'Super_admin/product',
                 'title'     		=> 'Products'				
 			];
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Product/product', $data);
-        echo view('Hospital_admin/footer');
+        echo view('Super_admin/header');
+        echo view('Super_admin/sidebar');
+		echo view('Super_admin/Product/product', $data);
+        echo view('Super_admin/footer');
 			
 	}
 
@@ -62,12 +62,6 @@ class Product extends BaseController
 				$value->product_type,
 				$value->description,
 				$value->status,
-				$value->createdDtm,
-				$value->createdBy,
-				$value->updateDtm,
-				$value->updatedBy,
-				$value->deleted,
-				$value->deletedRole,
 
 				$ops,
 			);

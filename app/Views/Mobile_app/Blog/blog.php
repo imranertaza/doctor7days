@@ -1,7 +1,7 @@
 <section class="back" >
     <div class="row">
         <div class="col-12 p-2 pl-3 pt-3">
-            <a href="#" ><i class="flaticon-left-arrow back-icon"></i></a>
+            <a href="<?php echo base_url('Mobile_app')?>" ><i class="flaticon-left-arrow back-icon"></i></a>
         </div>
     </div>
 </section>
@@ -22,60 +22,23 @@
 <section class="banner" >
     <div class="row pad-r-0">
         <div class="col-12 p-3 pad-r-0">
-            <div class="col-12 row pad-r-0">
-                <div class="col-4 pad-0">
-                    <img src="<?php echo base_url()?>/assets/mobile/image/tops.png" width="100%">
-                </div>
-                <div class="col-8 pad-0 pl-2">
-                    <p class="b-st">Cardiologi</p>
-                    <p class="b-tf">Well, well, well, how the turn</p>
-                    <p class="b-sd">Nov 4 - Author</p>
-                </div>
-            </div>
 
+            <?php foreach ($post as $item) { ?>
+            <a href="<?php echo base_url()?>/Mobile_app/blog/blog_detail/<?php echo $item->post_id ;?>">
             <div class="col-12 row pad-r-0 pt-4">
-                <div class="col-4 pad-0">
-                    <img src="<?php echo base_url()?>/assets/mobile/image/tops.png" width="100%">
-                </div>
-                <div class="col-8 pad-0 pl-2">
-                    <p class="b-st">Cardiologi</p>
-                    <p class="b-tf">Well, well, well, how the turn</p>
-                    <p class="b-sd">Nov 4 - Author</p>
-                </div>
-            </div>
 
-            <div class="col-12 row pad-r-0 pt-4">
                 <div class="col-4 pad-0">
-                    <img src="<?php echo base_url()?>/assets/mobile/image/tops.png" width="100%">
+                    <img src="<?php echo base_url()?>/assets/uplode/blog/<?php echo $item->featured_image;?>" width="100%">
                 </div>
                 <div class="col-8 pad-0 pl-2">
                     <p class="b-st">Cardiologi</p>
-                    <p class="b-tf">Well, well, well, how the turn</p>
-                    <p class="b-sd">Nov 4 - Author</p>
+                    <p class="b-tf"><?php echo $item->title;?></p>
+                    <p class="b-sd"><?php echo $item->createdDtm;?></p>
                 </div>
-            </div>
+            </div></a>
+            <?php } ?>
 
-            <div class="col-12 row pad-r-0 pt-4">
-                <div class="col-4 pad-0">
-                    <img src="<?php echo base_url()?>/assets/mobile/image/tops.png" width="100%">
-                </div>
-                <div class="col-8 pad-0 pl-2">
-                    <p class="b-st">Cardiologi</p>
-                    <p class="b-tf">Well, well, well, how the turn</p>
-                    <p class="b-sd">Nov 4 - Author</p>
-                </div>
-            </div>
 
-            <div class="col-12 row pad-r-0 pt-4">
-                <div class="col-4 pad-0">
-                    <img src="<?php echo base_url()?>/assets/mobile/image/tops.png" width="100%">
-                </div>
-                <div class="col-8 pad-0 pl-2">
-                    <p class="b-st">Cardiologi</p>
-                    <p class="b-tf">Well, well, well, how the turn</p>
-                    <p class="b-sd">Nov 4 - Author</p>
-                </div>
-            </div>
         </div>
     </div>
 </section>

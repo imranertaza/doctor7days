@@ -12,26 +12,35 @@ class Roles extends BaseController
 	
     protected $rolesModel;
     protected $validation;
+    protected $session;
 	
 	public function __construct()
 	{
 	    $this->rolesModel = new RolesModel();
        	$this->validation =  \Config\Services::validation();
-		
+        $this->session = \Config\Services::session();
 	}
 	
 	public function index()
 	{
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
 
-	    $data = [
-                'controller'    	=> 'Hospital_admin/roles',
-                'title'     		=> 'User Roles'				
-			];
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Roles/roles', $data);
-        echo view('Hospital_admin/footer');
+            $data = [
+                'controller' => 'Hospital_admin/roles',
+                'title' => 'User Roles'
+            ];
+
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            echo view('Hospital_admin/Roles/roles', $data);
+            echo view('Hospital_admin/footer');
+        }
 			
 	}
 

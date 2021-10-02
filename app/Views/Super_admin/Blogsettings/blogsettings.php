@@ -40,14 +40,8 @@
                                 <th>Blog settings id</th>
                                 <th>Blog title</th>
                                 <th>Blog logo</th>
-                                <th>CreatedDtm</th>
-                                <th>CreatedBy</th>
-                                <th>UpdatedDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
 
-                                <th></th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                         </table>

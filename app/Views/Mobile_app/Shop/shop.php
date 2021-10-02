@@ -1,7 +1,7 @@
 <section class="back" >
     <div class="row">
         <div class="col-12 p-2 pl-3 pt-3">
-            <a href="#" ><i class="flaticon-left-arrow back-icon"></i></a>
+            <a href="<?php echo base_url('Mobile_app')?>" ><i class="flaticon-left-arrow back-icon"></i></a>
         </div>
     </div>
 </section>

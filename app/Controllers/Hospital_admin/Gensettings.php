@@ -9,12 +9,13 @@ use App\Models\Hospital_admin\GensettingsModel;
 
 class Gensettings extends BaseController
 {
-	
+    protected $session;
     protected $gensettingsModel;
     protected $validation;
 	
 	public function __construct()
 	{
+        $this->session = \Config\Services::session();
 	    $this->gensettingsModel = new GensettingsModel();
        	$this->validation =  \Config\Services::validation();
 		
@@ -22,16 +23,23 @@ class Gensettings extends BaseController
 	
 	public function index()
 	{
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
 
-	    $data = [
-                'controller'    	=> 'Hospital_admin/gensettings',
-                'title'     		=> 'General Settings'				
-			];
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
+            $data = [
+                'controller' => 'Hospital_admin/gensettings',
+                'title' => 'General Settings'
+            ];
 
-        echo view('Hospital_admin/header');
-        echo view('Hospital_admin/sidebar');
-		echo view('Hospital_admin/Gensettings/gensettings', $data);
-        echo view('Hospital_admin/footer');
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            echo view('Hospital_admin/Gensettings/gensettings', $data);
+            echo view('Hospital_admin/footer');
+        }
 			
 	}
 
