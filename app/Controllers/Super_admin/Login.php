@@ -26,7 +26,7 @@ class Login extends BaseController
     /**
      * Index Page for this controller.
      */
-    public function index()
+    public function index2()
     {
         $this->isLoggedIn();
     }
@@ -34,11 +34,11 @@ class Login extends BaseController
     /**
      * This function used to check the user is logged in or not
      */
-    function isLoggedIn()
+    function index()
     {
-        $isLoggedInHospital = $this->session->isLoggedInHospital;
+        $isLoggedIAdmin = $this->session->isLoggedIAdmin;
         
-        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        if(!isset($isLoggedIAdmin) || $isLoggedIAdmin != TRUE)
         {
             echo view('Super_admin/Login/login');
         }
@@ -64,7 +64,7 @@ class Login extends BaseController
         
         if($this->validation->withRequest($this->request)->run() == FALSE)
         {
-            $this->index();
+            return redirect()->to(site_url("/super_admin/login"));
         }
         else
         {
@@ -80,60 +80,32 @@ class Login extends BaseController
                 // Remember me (Remembering the user email and password) Start
                 if (!empty($this->request->getPost("remember"))) { 
 
-                    setcookie('login_email',$email,time()+ (86400 * 30), "/");
-                    setcookie('login_password',$password,time() + (86400 * 30), "/");
+                    setcookie('admin_login_email',$email,time()+ (86400 * 30), "/");
+                    setcookie('admin_login_password',$password,time() + (86400 * 30), "/");
                     
                 }else{
-                    if (isset($_COOKIE['login_email'])) {
-                        setcookie('login_email','', 0, "/");
+                    if (isset($_COOKIE['admin_login_email'])) {
+                        setcookie('admin_login_email','', 0, "/");
                     }
-                    if (isset($_COOKIE['login_password'])) {
-                        setcookie('login_password','', 0, "/");
+                    if (isset($_COOKIE['admin_login_password'])) {
+                        setcookie('admin_login_password','', 0, "/");
                     }
                 }
                 // Remember me (Remembering the user email and password) End
 
 
-
-                $license = $this->loginModel->licenseCheck($result->h_id);
+                $sessionArray = array(   
+                                    'admin_id'=>$result->admin_id,
+                                    'AdminName'=>$result->name,
+                                    'AdminRole'=>$result->role_id,
+                                    'isLoggedIAdmin' => TRUE
+                            );
                 
-                if ($license == true ) {
-                    $sessionArray = array(   
-                                        'h_Id'=>$result->h_id,                  
-                                        'hospitalName'=>$result->name,
-                                        'hospitalAdminRole'=> $result->role_id,
-                                        'isLoggedInHospital' => TRUE
-                                );
-                    
-                    $session->set($sessionArray);
-                    
-                    return redirect()->to(site_url("/super_admin/dashboard"));
-                }else{
-                    // License check and update Hospital status (start)
-                    $hospitalData = array(
-                        'status' => '0', 
-                    );
-                    $builder = $db->table('hospital');
-                    $builder->where('h_id', $result->h_id);
-                    $builder->update($hospitalData);
-                    // License check and update Hospital status (end)
+                $session->set($sessionArray);
 
-
-                    // License check and update users status (start)
-                    $userData = array(
-                        'status' => '0', 
-                        'updatedDtm' => date('Y-m-d h:i:s')
-                    );
-                    $builder = $db->table('users');
-                    $builder->where('h_id', $result->h_id);
-                    $builder->update($userData);
-                    // License check and update users status (start)
-
-                    $session->setFlashdata('error', 'Your License Is Expired');
-                    
-                    return redirect()->to(site_url("/super_admin/login"));
-                }
                 return redirect()->to(site_url("/super_admin/dashboard"));
+
+
             }
             else
             {
@@ -256,10 +228,10 @@ class Login extends BaseController
 	 {
         $session = \Config\Services::session();
 
-        unset($_SESSION['h_Id']);
-        unset($_SESSION['hospitalName']);
-        unset($_SESSION['isLoggedInHospital']);
-        unset($_SESSION['hospitalAdminRole']);
+        unset($_SESSION['admin_id']);
+        unset($_SESSION['AdminName']);
+        unset($_SESSION['isLoggedInAdmin']);
+        unset($_SESSION['AdminRole']);
 
         $session->destroy();
         return redirect()->to('/super_admin/login');

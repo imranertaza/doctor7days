@@ -12,26 +12,32 @@ class Dashboard extends BaseController
 	
     protected $admanageModel;
     protected $validation;
+    protected $session;
 	
 	public function __construct()
 	{
 	    $this->admanageModel = new AdmanageModel();
        	$this->validation =  \Config\Services::validation();
+       	$this->session = \Config\Services::session();
 		
 	}
 	
 	public function index()
 	{
+		$isLoggedIAdmin = $this->session->isLoggedIAdmin;
+		if (isset($isLoggedIAdmin)) {
+		    $data = [
+	                'controller'    	=> 'Super_admin/dashboard',
+	                'title'     		=> 'Dashboard'				
+				];
 
-	    $data = [
-                'controller'    	=> 'Super_admin/admanage',
-                'title'     		=> 'Ad Manage'				
-			];
-
-        echo view('Super_admin/header');
-        echo view('Super_admin/sidebar');
-		echo view('Super_admin/Dashboard/dashboard', $data);
-        echo view('Super_admin/footer');
+	        echo view('Super_admin/header');
+	        echo view('Super_admin/sidebar');
+			echo view('Super_admin/Dashboard/dashboard', $data);
+	        echo view('Super_admin/footer');
+    	}else {
+    		return redirect()->to(site_url("/super_admin/login"));
+    	}
 			
 	}
 

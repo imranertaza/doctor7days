@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Log in (v2)</title>
+  <title>System Admin | Log in (v2)</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -19,7 +19,7 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="<?php echo base_url(); ?>/hospital_admin/login" class="h1"><b>Doctor</b>7<b>Days</b></a>
+      <a href="<?php echo base_url(); ?>/super_admin/login" class="h1"><b>Doctor</b>7<b>Days</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
@@ -33,9 +33,9 @@
                 <?php echo $error; ?>                    
             </div>
         <?php } ?>
-      <form action="<?php echo base_url(); ?>/hospital_admin/login/loginMe" method="post">
+      <form action="<?php echo base_url(); ?>/super_admin/login/loginMe" method="post">
         <div class="input-group mb-3">
-          <input type="email" name="email" class="form-control" placeholder="Email" value="<?php if(isset($_COOKIE['login_email'])){ echo $_COOKIE['login_email'];} ?>">
+          <input type="email" name="email" class="form-control" placeholder="Email" value="<?php if(isset($_COOKIE['admin_login_email'])){ echo $_COOKIE['admin_login_email'];} ?>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password" value="<?php if(isset($_COOKIE['login_password'])){ echo $_COOKIE['login_password'];} ?>">
+          <input type="password" name="password" class="form-control" placeholder="Password" value="<?php if(isset($_COOKIE['admin_login_password'])){ echo $_COOKIE['admin_login_password'];} ?>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

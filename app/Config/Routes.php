@@ -34,6 +34,10 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+$routes->add('/system_admin', 'Super_admin/Login::index');
+// $routes->add('/system_admin/dashboard', 'Super_admin/Dashboard::index');
+// $routes->add('/system_admin/loginMe', 'Super_admin/Login::loginMe');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

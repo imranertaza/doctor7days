@@ -1,7 +1,7 @@
 <?php
 // ADEL CODEIGNITER 4 CRUD GENERATOR
 
-namespace App\Models\Hospital_admin;
+namespace App\Models\Super_admin;
 use CodeIgniter\Model;
 
 class LoginModel extends Model
@@ -17,15 +17,15 @@ class LoginModel extends Model
     {
 
         $db = \Config\Database::connect();
-        $builder = $db->table('users');
-        $builder->select('BaseTbl.email, BaseTbl.password, BaseTbl.name, BaseTbl.h_id, BaseTbl.role_id');
-        $builder->from('users as BaseTbl');
-        //$this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
+        $builder = $db->table('admin as BaseTbl');
+        $builder->select('BaseTbl.email, BaseTbl.password, BaseTbl.name, BaseTbl.admin_id, BaseTbl.role_id');
         $builder->where('BaseTbl.email', $email);
-        $builder->where('BaseTbl.status', 1);
+        $builder->where('BaseTbl.status', '1');
         $query = $builder->get();
         
         $user = $query->getRow();
+        print $db->getLastQuery();
+        
         
         if(!empty($user)){
             if(SHA1($password) == $user->password){
@@ -38,21 +38,7 @@ class LoginModel extends Model
         }
     }
 
-    function licenseCheck($h_Id){
-        $db = \Config\Database::connect();
-        $builder = $db->table('license');
-        $query = $builder->select('end_date')->where('h_id',$h_Id)->get();
-        
-        $today = date('Y-m-d');
-        if ($query->getRow()->end_date > $today) {
-            $data = true;
-        }else{
-            $data = false;
-        }
-        return $data;
-    }
-    
-    
+
    //  private function confirmRole($roleId){
             // if ($roleId == 2) { $usrTable = 'users'; $usrId = 'sch_id'; }
    //   if ($roleId == 4) { $usrTable = 'teacher'; $usrId = 'teacher_id'; }

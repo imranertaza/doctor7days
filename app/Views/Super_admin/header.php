@@ -46,9 +46,11 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link">Contact</a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="<?php print site_url("hospital_admin/login/logout"); ?>" class="nav-link">Logout</a>
-            </li>
+            <?php if ($_SESSION['isLoggedIAdmin']) { ?>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="<?php print site_url("super_admin/login/logout"); ?>" class="nav-link">Logout</a>
+                </li>
+            <?php } ?>
 
 
         </ul>

@@ -26,7 +26,7 @@ class Login extends BaseController
     /**
      * Index Page for this controller.
      */
-    public function index()
+    public function index2()
     {
         $this->isLoggedIn();
     }
@@ -34,7 +34,7 @@ class Login extends BaseController
     /**
      * This function used to check the user is logged in or not
      */
-    function isLoggedIn()
+    function index()
     {
         $isLoggedInHospital = $this->session->isLoggedInHospital;
         
@@ -64,7 +64,7 @@ class Login extends BaseController
         
         if($this->validation->withRequest($this->request)->run() == FALSE)
         {
-            $this->index();
+            return redirect()->to(site_url("/hospital_admin/login"));
         }
         else
         {
