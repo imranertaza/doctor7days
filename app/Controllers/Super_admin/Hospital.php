@@ -9,6 +9,7 @@ use App\Models\Super_admin\RolesModel;
 use App\Models\Super_admin\GlobaladdressModel;
 use App\Models\Super_admin\HospitalModel;
 use App\Models\Super_admin\UsersModel;
+use App\Libraries\Permission;
 
 class Hospital extends BaseController
 {
@@ -18,6 +19,9 @@ class Hospital extends BaseController
     protected $rolesModel;
     protected $usersModel;
     protected $validation;
+    protected $session;
+    protected $permission;
+    private $module_name = 'Hospital';
 	
 	public function __construct()
 	{
@@ -26,21 +30,39 @@ class Hospital extends BaseController
         $this->rolesModel = new RolesModel();
         $this->usersModel = new UsersModel();
        	$this->validation =  \Config\Services::validation();
+        $this->session = \Config\Services::session();
+        $this->permission = new Permission();
 		
 	}
 	
 	public function index()
 	{
+        $isLoggedIAdmin = $this->session->isLoggedIAdmin;
+        $role_id = $this->session->AdminRole;
 
+        if (isset($isLoggedIAdmin)) {
 	    $data = [
                 'controller'    	=> 'Super_admin/hospital',
                 'title'     		=> 'Hospital'
 			];
+        $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+            }
 
         echo view('Super_admin/header');
         echo view('Super_admin/sidebar');
-		echo view('Super_admin/Hospital/hospital', $data);
+        if ($data['mod_access'] == 1) {
+                echo view('Super_admin/Hospital/hospital', $data);
+            }else {
+                echo view('Super_admin/No_permission', $data);
+            }
+		
         echo view('Super_admin/footer');
+
+        }else {
+            return redirect()->to(site_url("/super_admin/login"));
+        }
 			
 	}
 
@@ -74,6 +96,10 @@ class Hospital extends BaseController
 	}
 
 	public function updateForm($id){
+        $isLoggedIAdmin = $this->session->isLoggedIAdmin;
+        $role_id = $this->session->AdminRole;
+
+        if (isset($isLoggedIAdmin)) {
 
         $result = $this->hospitalModel->where('h_id' ,$id)->first();
         $data = [
@@ -81,11 +107,23 @@ class Hospital extends BaseController
             'hospital' => $result,
         ];
 
+        $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+            }
         echo view('Super_admin/header');
         echo view('Super_admin/sidebar');
-        echo view('Super_admin/Hospital/update_form',$data);
-        echo view('Super_admin/footer');
+        if ($data['mod_access'] == 1) {
+                echo view('Super_admin/Hospital/update_form',$data);
+            }else {
+                echo view('Super_admin/No_permission', $data);
+            }
 
+        
+        echo view('Super_admin/footer');
+        }else {
+            return redirect()->to(site_url("/super_admin/login"));
+        }
 
     }
 

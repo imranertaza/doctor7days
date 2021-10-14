@@ -59,6 +59,7 @@ class Appointment extends BaseController
             }
             echo view('Hospital_admin/footer');
         }
+        
 			
 	}
 

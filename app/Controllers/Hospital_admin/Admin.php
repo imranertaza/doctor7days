@@ -6,33 +6,54 @@ namespace App\Controllers\Hospital_admin;
 use App\Controllers\BaseController;
 
 use App\Models\Hospital_admin\AdminModel;
+use App\Libraries\Permission;
 
 class Admin extends BaseController
 {
 	
     protected $adminModel;
     protected $validation;
+    protected $session;
+    protected $permission;
+    private $module_name = 'Admin';
 	
 	public function __construct()
 	{
 	    $this->adminModel = new AdminModel();
        	$this->validation =  \Config\Services::validation();
-		
+		$this->session = \Config\Services::session();
+       	$this->permission = new Permission();
 	}
 	
 	public function index()
 	{
+		$isLoggedIAdmin = $this->session->isLoggedIAdmin;
+		$role_id = $this->session->AdminRole;
 
+		if (isset($isLoggedIAdmin)) {
 	    $data = [
                 'controller'    	=> 'Hospital_admin/admin',
                 'title'     		=> 'Admin'				
 			];
 
+			$perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+            }
+
 	    echo view('Hospital_admin/header');
 	    echo view('Hospital_admin/sidebar');
-	    echo view('Hospital_admin/Admin/index', $data);
+	    if ($data['mod_access'] == 1) {
+            	echo view('Hospital_admin/Admin/index', $data);
+            }else {
+            	echo view('Super_admin/No_permission', $data);
+            }
+	    
 	    echo view('Hospital_admin/footer');
 		//return view('hospital_admin/admin', $data);
+		 }else {
+    		return redirect()->to(site_url("/super_admin/login"));
+    	}
 			
 	}
 

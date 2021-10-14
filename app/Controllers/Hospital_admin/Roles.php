@@ -4,7 +4,7 @@
 namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
-
+use App\Libraries\Permission_hospital;
 use App\Models\Hospital_admin\RolesModel;
 
 class Roles extends BaseController
@@ -13,18 +13,21 @@ class Roles extends BaseController
     protected $rolesModel;
     protected $validation;
     protected $session;
+    protected $permission;
+    private $module_name = 'Role';
 	
 	public function __construct()
 	{
 	    $this->rolesModel = new RolesModel();
        	$this->validation =  \Config\Services::validation();
         $this->session = \Config\Services::session();
+        $this->permission = new Permission_hospital();
 	}
 	
 	public function index()
 	{
         $isLoggedInHospital = $this->session->isLoggedInHospital;
-
+        $role_id = $this->session->hospitalAdminRole;
         if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
         {
             echo view('Hospital_admin/Login/login');
@@ -36,9 +39,21 @@ class Roles extends BaseController
                 'title' => 'User Roles'
             ];
 
+             $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 //print $key." ,";
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+                 print $data['mod_access'];
+            }
+
             echo view('Hospital_admin/header');
             echo view('Hospital_admin/sidebar');
-            echo view('Hospital_admin/Roles/roles', $data);
+            if ($data['mod_access'] == 1) {
+            	echo view('Hospital_admin/Roles/roles', $data);
+            }else {
+            	echo view('Hospital_admin/No_permission', $data);
+            }
+            
             echo view('Hospital_admin/footer');
         }
 			

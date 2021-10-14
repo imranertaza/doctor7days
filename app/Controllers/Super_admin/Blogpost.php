@@ -6,37 +6,64 @@ namespace App\Controllers\Super_admin;
 use App\Controllers\BaseController;
 
 use App\Models\Super_admin\BlogpostModel;
+use App\Libraries\Permission;
 
 class Blogpost extends BaseController
 {
 
     protected $blogpostModel;
     protected $validation;
+    protected $session;
+    protected $permission;
+    private $module_name = 'Blogpost';
 
     public function __construct()
     {
         $this->blogpostModel = new BlogpostModel();
         $this->validation = \Config\Services::validation();
+        $this->session = \Config\Services::session();
+        $this->permission = new Permission();
 
     }
 
     public function index()
     {
 
-        $data = [
+        $isLoggedIAdmin = $this->session->isLoggedIAdmin;
+        $role_id = $this->session->AdminRole;
+
+        if (isset($isLoggedIAdmin)) {
+            $data = [
             'controller' => 'Super_admin/blogpost',
             'title' => 'Blog Post'
-        ];
+            ];
 
+        $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+        }
         echo view('Super_admin/header');
         echo view('Super_admin/sidebar');
-        echo view('Super_admin/blogpost/blogpost', $data);
-        echo view('Super_admin/footer');
+        if ($data['mod_access'] == 1) {
+                echo view('Super_admin/blogpost/blogpost', $data);
+            }else {
+                echo view('Super_admin/No_permission', $data);
+            }
+
+            echo view('Super_admin/footer');
+
+            }else {
+            return redirect()->to(site_url("/super_admin/login"));
+        }
 
     }
 
     public function update($id)
-    {
+    {   
+        $isLoggedIAdmin = $this->session->isLoggedIAdmin;
+        $role_id = $this->session->AdminRole;
+
+        if (isset($isLoggedIAdmin)) {
 
         $blogPost = $this->blogpostModel->where('post_id', $id)->first();
         $data = [
@@ -45,10 +72,23 @@ class Blogpost extends BaseController
             'blog' => $blogPost,
         ];
 
+        $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+            }
         echo view('Super_admin/header');
         echo view('Super_admin/sidebar');
-        echo view('Super_admin/blogpost/update_form', $data);
+        if ($data['mod_access'] == 1) {
+                echo view('Super_admin/blogpost/update_form', $data);
+            }else {
+                echo view('Super_admin/No_permission', $data);
+            }
+        
         echo view('Super_admin/footer');
+
+        }else {
+            return redirect()->to(site_url("/super_admin/login"));
+        }
     }
 
     public function getAll()

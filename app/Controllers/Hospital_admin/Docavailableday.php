@@ -4,7 +4,7 @@
 namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
-
+use App\Libraries\Permission_hospital;
 use App\Models\Hospital_admin\DocavailabledayModel;
 
 class Docavailableday extends BaseController
@@ -12,18 +12,22 @@ class Docavailableday extends BaseController
     protected $session;
     protected $docavailabledayModel;
     protected $validation;
+    protected $permission;
+    private $module_name = 'Docavailableday';
 	
 	public function __construct()
 	{
         $this->session = \Config\Services::session();
 	    $this->docavailabledayModel = new DocavailabledayModel();
        	$this->validation =  \Config\Services::validation();
+        $this->permission = new Permission_hospital();
 		
 	}
 	
 	public function index()
 	{
         $isLoggedInHospital = $this->session->isLoggedInHospital;
+        $role_id = $this->session->hospitalAdminRole;
 
         if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
         {
@@ -36,9 +40,22 @@ class Docavailableday extends BaseController
                 'title' => 'Doctor&#39;s Available Day'
             ];
 
+
+            $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 //print $key." ,";
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+                 print $data['mod_access'];
+            }
+
             echo view('Hospital_admin/header');
             echo view('Hospital_admin/sidebar');
-            echo view('Hospital_admin/Docavailableday/docavailableday', $data);
+            if ($data['mod_access'] == 1) {
+                echo view('Hospital_admin/Docavailableday/docavailableday', $data);
+            }else {
+                echo view('Hospital_admin/No_permission', $data);
+            }
+            
             echo view('Hospital_admin/footer');
         }
 			

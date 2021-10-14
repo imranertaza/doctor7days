@@ -4,7 +4,7 @@
 namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
-
+use App\Libraries\Permission_hospital;
 use App\Models\Hospital_admin\GensettingsModel;
 
 class Gensettings extends BaseController
@@ -12,18 +12,22 @@ class Gensettings extends BaseController
     protected $session;
     protected $gensettingsModel;
     protected $validation;
+    protected $permission;
+    private $module_name = 'Gensettings';
 	
 	public function __construct()
 	{
         $this->session = \Config\Services::session();
 	    $this->gensettingsModel = new GensettingsModel();
        	$this->validation =  \Config\Services::validation();
+       	$this->permission = new Permission_hospital();
 		
 	}
 	
 	public function index()
 	{
         $isLoggedInHospital = $this->session->isLoggedInHospital;
+        $role_id = $this->session->hospitalAdminRole;
 
         if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
         {
@@ -35,9 +39,21 @@ class Gensettings extends BaseController
                 'title' => 'General Settings'
             ];
 
+            $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 //print $key." ,";
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+                 print $data['mod_access'];
+            }
+
             echo view('Hospital_admin/header');
             echo view('Hospital_admin/sidebar');
-            echo view('Hospital_admin/Gensettings/gensettings', $data);
+            if ($data['mod_access'] == 1) {
+            	echo view('Hospital_admin/Gensettings/gensettings', $data);
+            }else {
+            	echo view('Hospital_admin/No_permission', $data);
+            }
+            
             echo view('Hospital_admin/footer');
         }
 			

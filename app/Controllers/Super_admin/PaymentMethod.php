@@ -6,32 +6,54 @@ namespace App\Controllers\Super_admin;
 use App\Controllers\BaseController;
 
 use App\Models\Super_admin\PaymentMethodModel;
+use App\Libraries\Permission;
 
 class PaymentMethod extends BaseController
 {
 	
     protected $paymentMethodModel;
     protected $validation;
+    protected $session;
+    protected $permission;
+    private $module_name = 'PaymentMethod';
 	
 	public function __construct()
 	{
 	    $this->paymentMethodModel = new PaymentMethodModel();
        	$this->validation =  \Config\Services::validation();
+       	$this->session = \Config\Services::session();
+       	$this->permission = new Permission();
 		
 	}
 	
 	public function index()
 	{
+		$isLoggedIAdmin = $this->session->isLoggedIAdmin;
+		$role_id = $this->session->AdminRole;
 
+		if (isset($isLoggedIAdmin)) {
 	    $data = [
                 'controller'    	=> 'Super_admin/paymentMethod',
                 'title'     		=> 'Payment Methods'				
 			];
 
+		$perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+            }
+
         echo view('Super_admin/header');
         echo view('Super_admin/sidebar');
-		echo view('Super_admin/PaymentMethod/paymentMethod', $data);
+        if ($data['mod_access'] == 1) {
+            	echo view('Super_admin/PaymentMethod/paymentMethod', $data);
+            }else {
+            	echo view('Super_admin/No_permission', $data);
+            }
+		
         echo view('Super_admin/footer');
+        }else {
+    		return redirect()->to(site_url("/super_admin/login"));
+    	}
 			
 	}
 

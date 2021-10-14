@@ -4,7 +4,7 @@
 namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
-
+use App\Libraries\Permission_hospital;
 use App\Models\Hospital_admin\SpecialistModel;
 
 class Specialist extends BaseController
@@ -13,19 +13,22 @@ class Specialist extends BaseController
     protected $specialistModel;
     protected $validation;
     protected $session;
+    protected $permission;
+    private $module_name = 'Specialist';
 	
 	public function __construct()
 	{
 	    $this->specialistModel = new SpecialistModel();
        	$this->validation =  \Config\Services::validation();
         $this->session = \Config\Services::session();
+        $this->permission = new Permission_hospital();
 		
 	}
 	
 	public function index()
 	{
         $isLoggedInHospital = $this->session->isLoggedInHospital;
-
+        $role_id = $this->session->hospitalAdminRole;
         if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
         {
             echo view('Hospital_admin/Login/login');
@@ -37,9 +40,21 @@ class Specialist extends BaseController
                 'title' => 'Specialist'
             ];
 
+            $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 //print $key." ,";
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+                 print $data['mod_access'];
+            }
+
             echo view('Hospital_admin/header');
             echo view('Hospital_admin/sidebar');
-            echo view('Hospital_admin/Specialist/specialist', $data);
+            if ($data['mod_access'] == 1) {
+            	echo view('Hospital_admin/Specialist/specialist', $data);
+            }else {
+            	echo view('Hospital_admin/No_permission', $data);
+            }
+            
             echo view('Hospital_admin/footer');
         }
 			

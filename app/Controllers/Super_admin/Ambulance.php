@@ -7,6 +7,8 @@ use App\Controllers\BaseController;
 
 use App\Models\Super_admin\AmbulanceModel;
 use App\Models\Super_admin\GlobaladdressModel;
+use App\Libraries\Permission;
+
 
 class Ambulance extends BaseController
 {
@@ -14,27 +16,49 @@ class Ambulance extends BaseController
     protected $ambulanceModel;
     protected $validation;
     protected $globaladdressModel;
+    protected $session;
+    protected $permission;
+    private $module_name = 'Ambulance';
 
     public function __construct()
     {
         $this->ambulanceModel = new AmbulanceModel();
         $this->globaladdressModel = new GlobaladdressModel();
         $this->validation = \Config\Services::validation();
+        $this->session = \Config\Services::session();
+        $this->permission = new Permission();
 
     }
 
     public function index()
     {
+        $isLoggedIAdmin = $this->session->isLoggedIAdmin;
+        $role_id = $this->session->AdminRole;
 
+        if (isset($isLoggedIAdmin)) {
         $data = [
             'controller' => 'Super_admin/ambulance',
             'title' => 'Ambulance'
         ];
 
+
+        $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+            }
+
         echo view('Super_admin/header');
         echo view('Super_admin/sidebar');
-        echo view('Super_admin/Ambulance/ambulance', $data);
+            if ($data['mod_access'] == 1) {
+                echo view('Super_admin/Ambulance/ambulance', $data);
+            }else {
+                echo view('Super_admin/No_permission', $data);
+            }
         echo view('Super_admin/footer');
+
+    }else {
+        return redirect()->to(site_url("/super_admin/login"));
+    }
 
     }
 
@@ -70,16 +94,35 @@ class Ambulance extends BaseController
 
     public function update($id)
     {
+
+        $isLoggedIAdmin = $this->session->isLoggedIAdmin;
+        $role_id = $this->session->AdminRole;
+
+        
+         if (isset($isLoggedIAdmin)) {
         $amb = $this->ambulanceModel->where('amb_id', $id)->first();
 
 
         $data['controller'] = 'Super_admin/ambulance';
         $data['ambulance'] = $amb;
 
+        $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+            }
+
         echo view('Super_admin/header');
         echo view('Super_admin/sidebar');
-        echo view('Super_admin/Ambulance/update_form', $data);
+        if ($data['mod_access'] == 1) {
+                echo view('Super_admin/Ambulance/update_form', $data);
+            }else {
+                echo view('Super_admin/No_permission', $data);
+            }       
         echo view('Super_admin/footer');
+
+        }else {
+            return redirect()->to(site_url("/super_admin/login"));
+        }
     }
 
     public function updateReg()

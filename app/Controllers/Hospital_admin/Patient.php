@@ -4,7 +4,7 @@
 namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
-
+use App\Libraries\Permission_hospital;
 use App\Models\Hospital_admin\PatientModel;
 
 class Patient extends BaseController
@@ -13,18 +13,22 @@ class Patient extends BaseController
     protected $patientModel;
     protected $validation;
     protected $session;
+    protected $permission;
+    private $module_name = 'Patients';
 	
 	public function __construct()
 	{
         $this->session = \Config\Services::session();
 	    $this->patientModel = new PatientModel();
        	$this->validation =  \Config\Services::validation();
+       	$this->permission = new Permission_hospital();
 		
 	}
 	
 	public function index()
 	{
         $isLoggedInHospital = $this->session->isLoggedInHospital;
+        $role_id = $this->session->hospitalAdminRole;
 
         if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
         {
@@ -37,9 +41,21 @@ class Patient extends BaseController
                 'title' => 'Patients'
             ];
 
+             $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                 //print $key." ,";
+                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+                 print $data['mod_access'];
+            }
+
             echo view('Hospital_admin/header');
             echo view('Hospital_admin/sidebar');
-            echo view('Hospital_admin/Patient/patient', $data);
+            if ($data['mod_access'] == 1) {
+            	echo view('Hospital_admin/Patient/patient', $data);
+            }else {
+            	echo view('Hospital_admin/No_permission', $data);
+            }
+            
             echo view('Hospital_admin/footer');
         }
 			

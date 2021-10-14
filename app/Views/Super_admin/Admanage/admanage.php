@@ -29,7 +29,7 @@
 				  <h3 class="card-title">Ad Manage</h3>
 			  	</div>
 				<div class="col-md-4">
-				  <button type="button" class="btn btn-block btn-success" onclick="add()" title="Add"> <i class="fa fa-plus"></i> Add</button>
+				  <?php if ($create == 1) { ?><button type="button" class="btn btn-block btn-success" onclick="add()" title="Add"> <i class="fa fa-plus"></i> Add</button><?php } ?>
 				</div>
 			  </div>			  
             </div>
