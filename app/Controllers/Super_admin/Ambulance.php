@@ -44,8 +44,8 @@ class Ambulance extends BaseController
 
         $perm = $this->permission->module_permission_list($role_id, $this->module_name);
             foreach($perm as $key=>$val){
-                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
-            }
+            $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+        }
 
         echo view('Super_admin/header');
         echo view('Super_admin/sidebar');

@@ -42,9 +42,8 @@ class Doctor extends BaseController
 
              $perm = $this->permission->module_permission_list($role_id, $this->module_name);
             foreach($perm as $key=>$val){
-                 //print $key." ,";
                  $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
-                 print $data['mod_access'];
+                 
             }
 
 

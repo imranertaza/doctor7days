@@ -74,12 +74,7 @@
                     <p>Role</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="<?php echo base_url('Hospital_admin/roles')?>" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>Roles</p>
-                </a>
-            </li>
+            
             <li class="nav-item">
                 <a href="<?php echo base_url('Hospital_admin/specialist')?>" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>

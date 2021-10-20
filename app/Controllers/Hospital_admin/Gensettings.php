@@ -39,12 +39,11 @@ class Gensettings extends BaseController
                 'title' => 'General Settings'
             ];
 
-            $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+           $perm = $this->permission->module_permission_list($role_id, $this->module_name);
             foreach($perm as $key=>$val){
-                 //print $key." ,";
                  $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
-                 print $data['mod_access'];
             }
+
 
             echo view('Hospital_admin/header');
             echo view('Hospital_admin/sidebar');
