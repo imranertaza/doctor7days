@@ -42,7 +42,7 @@ class Hospital extends BaseController
 
         if (isset($isLoggedIAdmin)) {
 	    $data = [
-                'controller'    	=> 'Super_admin/hospital',
+                'controller'    	=> 'Super_admin/Hospital',
                 'title'     		=> 'Hospital'
 			];
         $perm = $this->permission->module_permission_list($role_id, $this->module_name);
@@ -103,7 +103,7 @@ class Hospital extends BaseController
 
         $result = $this->hospitalModel->where('h_id' ,$id)->first();
         $data = [
-            'controller' => 'Super_admin/hospital',
+            'controller' => 'Super_admin/Hospital',
             'hospital' => $result,
         ];
 
