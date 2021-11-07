@@ -29,7 +29,9 @@
                             </div>
                             <div class="col-md-4">
                                 <?php if ($create == 1) { ?>
-                                <button type="button" class="btn btn-block btn-success" onclick="add()" title="Add"> <i class="fa fa-plus"></i> Add</button>
+                                    <button type="button" class="btn btn-block btn-success" onclick="add()" title="Add">
+                                        <i class="fa fa-plus"></i> Add
+                                    </button>
                                 <?php } ?>
                             </div>
                         </div>
@@ -39,16 +41,15 @@
                         <table id="data_table" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Prod id</th>
-                                <th>Store id</th>
+                                <th>Id</th>
+                                <th>Store</th>
                                 <th>Name</th>
+                                <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Unit</th>
-                                <th>Brand id</th>
+                                <th>Brand</th>
                                 <th>Picture</th>
-                                <th>Prod cat id</th>
-                                <th>Product type</th>
-                                <th>Description</th>
+                                <th>Category</th>
                                 <th>Status</th>
 
                                 <th>Action</th>
@@ -73,117 +74,126 @@
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="add-form" class="pl-3 pr-3">
+                    <form id="add-form" method="POST" enctype="multipart/form-data" class="pl-3 pr-3">
                         <div class="row">
-                            <input type="hidden" id="prodId" name="prodId" class="form-control" placeholder="Prod id" maxlength="11" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="storeId"> Store id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="storeId" name="storeId" class="form-control" placeholder="Store id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name"> Name: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="55" required>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Name"
+                                           maxlength="55" required>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="prodCatId"> Product Category: <span class="text-danger">*</span></label>
+                                    <select class="form-control" onchange="subCategory(this.value)" required>
+                                        <option value="">Please Select</option>
+                                        <?php foreach ($proCategory as $item) { ?>
+                                            <option value="<?php echo $item->prod_cat_id; ?>"><?php echo $item->product_category; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="prodSubCatId"> Product Subcategory: <span class="text-danger">*</span></label>
+                                    <select id="prodCatId" name="prodCatId" class="form-control" required>
+<!--                                        <option value="">Please Select</option>-->
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="quantity"> Quantity: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Quantity" maxlength="11" number="true" required>
+                                    <input type="number" id="quantity" name="quantity" class="form-control"
+                                           placeholder="Quantity" value="1" number="true" required>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="unit"> Unit: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="unit" name="unit" class="form-control" placeholder="Unit" maxlength="11" number="true" required>
+                                    <select id="unit" name="unit" class="form-control" required>
+                                        <?php echo unitInOptionArray(1); ?>
+                                    </select>
                                 </div>
                             </div>
+
+
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="brandId"> Brand id: </label>
-                                    <input type="number" id="brandId" name="brandId" class="form-control" placeholder="Brand id" maxlength="11" number="true" >
+                                    <label for="storeId"> Store : <span class="text-danger">*</span> </label>
+                                    <select id="storeId" name="storeId" class="form-control" required>
+                                        <option value="">Please Select</option>
+                                        <?php foreach ($store as $sto) { ?>
+                                            <option value="<?php echo $sto->store_id; ?>"><?php echo $sto->name; ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
+
+
+                        </div>
+                        <div class="row">
+
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="picture"> Picture: </label>
-                                    <input type="text" id="picture" name="picture" class="form-control" placeholder="Picture" maxlength="155" >
+                                    <label for="brandId"> Brand : </label>
+                                    <select id="brandId" name="brandId" class="form-control" required>
+                                        <option value="">Please Select</option>
+                                        <?php foreach ($brand as $bra) { ?>
+                                            <option value="<?php echo $bra->brand_id; ?>"><?php echo $bra->name; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="price"> Price: </label>
+                                    <input type="number" id="price" name="price" class="form-control"
+                                           placeholder="price"  number="true"  maxlength="155" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="status"> Status: <span class="text-danger">*</span> </label>
+                                    <select id="status" name="status" class="form-control" required>
+                                        <?php echo globalStatus(1); ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
+
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="prodCatId"> Prod cat id: </label>
-                                    <input type="number" id="prodCatId" name="prodCatId" class="form-control" placeholder="Prod cat id" maxlength="11" number="true" >
+                                    <label for="picture"> Picture: </label>
+                                    <input type="file" id="picture" name="picture" class="form-control"
+                                           placeholder="Picture" maxlength="155">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="productType"> Product type: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="productType" name="productType" class="form-control" placeholder="Product type" required>
+                                    <label for="productType"> Product type: </label>
+                                    <select id="productType" name="productType" class="form-control" required>
+                                        <?php echo productTypeInOption(0); ?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="description"> Description: </label>
-                                    <textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" ></textarea>
+                                    <textarea cols="40" rows="5" id="description" name="description"
+                                              class="form-control" placeholder="Description"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="status"> Status: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="status" name="status" class="form-control" placeholder="Status" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updateDtm"> UpdateDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updateDtm" name="updateDtm" class="form-control" placeholder="UpdateDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="form-group text-center">
@@ -207,117 +217,123 @@
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Update</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="edit-form" class="pl-3 pr-3">
+                    <form id="edit-form" method="POST" enctype="multipart/form-data" class="pl-3 pr-3">
                         <div class="row">
-                            <input type="hidden" id="prodId" name="prodId" class="form-control" placeholder="Prod id" maxlength="11" required>
+                            <input type="hidden" id="prodId" name="prodId" class="form-control" placeholder="Prod id"
+                                   maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="storeId"> Store id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="storeId" name="storeId" class="form-control" placeholder="Store id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="name"> Name: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="55" required>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Name"
+                                           maxlength="55" required>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="prodCatId"> Product Category: <span class="text-danger">*</span></label>
+                                    <select class="form-control" onchange="subCategory(this.value)" required>
+                                        <option value="">Please Select</option>
+                                        <?php foreach ($proCategory as $item) { ?>
+                                            <option value="<?php echo $item->prod_cat_id; ?>"><?php echo $item->product_category; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="prodSubCatId"> Product Subcategory: <span class="text-danger">*</span></label>
+                                    <select id="prodCatId" name="prodCatId" class="form-control" required>
+                                        <!--                                        <option value="">Please Select</option>-->
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="quantity"> Quantity: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Quantity" maxlength="11" number="true" required>
+                                    <input type="number" id="quantity" name="quantity" class="form-control"
+                                           placeholder="Quantity" value="1" number="true" required>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="unit"> Unit: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="unit" name="unit" class="form-control" placeholder="Unit" maxlength="11" number="true" required>
+                                    <select id="unit" name="unit" class="form-control" required>
+                                        <?php echo unitInOptionArray(1); ?>
+                                    </select>
                                 </div>
                             </div>
+
+
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="brandId"> Brand id: </label>
-                                    <input type="number" id="brandId" name="brandId" class="form-control" placeholder="Brand id" maxlength="11" number="true" >
+                                    <label for="storeId"> Store : <span class="text-danger">*</span> </label>
+                                    <select id="storeId" name="storeId" class="form-control" required>
+                                        <option value="">Please Select</option>
+                                        <?php foreach ($store as $sto) { ?>
+                                            <option value="<?php echo $sto->store_id; ?>"><?php echo $sto->name; ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="picture"> Picture: </label>
-                                    <input type="text" id="picture" name="picture" class="form-control" placeholder="Picture" maxlength="155" >
-                                </div>
-                            </div>
+
+
                         </div>
                         <div class="row">
+
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="prodCatId"> Prod cat id: </label>
-                                    <input type="number" id="prodCatId" name="prodCatId" class="form-control" placeholder="Prod cat id" maxlength="11" number="true" >
+                                    <label for="brandId"> Brand : </label>
+                                    <select id="brandId" name="brandId" class="form-control" required>
+                                        <option value="">Please Select</option>
+                                        <?php foreach ($brand as $bra) { ?>
+                                            <option value="<?php echo $bra->brand_id; ?>"><?php echo $bra->name; ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
+
+
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="productType"> Product type: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="productType" name="productType" class="form-control" placeholder="Product type" required>
+                                    <label for="productType"> Product type: </label>
+                                    <select id="productType" name="productType" class="form-control" required>
+                                        <?php echo productTypeInOption(0); ?>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="description"> Description: </label>
-                                    <textarea cols="40" rows="5" id="description" name="description" class="form-control" placeholder="Description" ></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="status"> Status: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="status" name="status" class="form-control" placeholder="Status" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
+                                    <select id="status" name="status" class="form-control" required>
+                                        <?php echo globalStatus(1); ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
+
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="updateDtm"> UpdateDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updateDtm" name="updateDtm" class="form-control" placeholder="UpdateDtm" required>
+                                    <label for="picture"> Picture: </label>
+                                    <input type="file" id="picture" name="picture" class="form-control"
+                                           placeholder="Picture" maxlength="155">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-8">
                                 <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
+                                    <label for="description"> Description: </label>
+                                    <textarea cols="40" rows="5" id="description" name="description"
+                                              class="form-control" placeholder="Description"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="form-group text-center">
@@ -346,116 +362,120 @@
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                "url": '<?php echo base_url($controller.'/getAll') ?>',
+                "url": '<?php echo base_url($controller . '/getAll') ?>',
                 "type": "POST",
                 "dataType": "json",
                 async: "true"
             }
         });
     });
+
     function add() {
         // reset the form
-        $("#add-form")[0].reset();
         $(".form-control").removeClass('is-invalid').removeClass('is-valid');
         $('#add-modal').modal('show');
         // submit the add from
-        $.validator.setDefaults({
-            highlight: function(element) {
-                $(element).addClass('is-invalid').removeClass('is-valid');
-            },
-            unhighlight: function(element) {
-                $(element).removeClass('is-invalid').addClass('is-valid');
-            },
-            errorElement: 'div ',
-            errorClass: 'invalid-feedback',
-            errorPlacement: function(error, element) {
-                if (element.parent('.input-group').length) {
-                    error.insertAfter(element.parent());
-                } else if ($(element).is('.select')) {
-                    element.next().after(error);
-                } else if (element.hasClass('select2')) {
-                    //error.insertAfter(element);
-                    error.insertAfter(element.next());
-                } else if (element.hasClass('selectpicker')) {
-                    error.insertAfter(element.next());
-                } else {
-                    error.insertAfter(element);
-                }
-            },
+        $('#add-form').validate({
 
-            submitHandler: function(form) {
+                highlight: function (element) {
+                    $(element).addClass('is-invalid').removeClass('is-valid');
+                },
+                unhighlight: function (element) {
+                    $(element).removeClass('is-invalid').addClass('is-valid');
+                },
+                errorElement: 'div ',
+                errorClass: 'invalid-feedback',
+                errorPlacement: function (error, element) {
+                    if (element.parent('.input-group').length) {
+                        error.insertAfter(element.parent());
+                    } else if ($(element).is('.select')) {
+                        element.next().after(error);
+                    } else if (element.hasClass('select2')) {
+                        //error.insertAfter(element);
+                        error.insertAfter(element.next());
+                    } else if (element.hasClass('selectpicker')) {
+                        error.insertAfter(element.next());
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
 
-                var form = $('#add-form');
-                // remove the text-danger
-                $(".text-danger").remove();
+                submitHandler: function (form) {
+                    var form = $("#add-form");
+                    var formData = new FormData(form[0]);
+                    // remove the text-danger
+                    $(".text-danger").remove();
 
-                $.ajax({
-                    url: '<?php echo base_url($controller.'/add') ?>',
-                    type: 'post',
-                    data: form.serialize(), // /converting the form data into array and sending it to server
-                    dataType: 'json',
-                    beforeSend: function() {
-                        $('#add-form-btn').html('<i class="fa fa-spinner fa-spin"></i>');
-                    },
-                    success: function(response) {
+                    $.ajax({
+                        url: '<?php echo base_url($controller . '/add') ?>',
+                        method: "POST",
+                        data: formData,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        beforeSend: function () {
+                            $('#add-form-btn').html('<i class="fa fa-spinner fa-spin"></i>');
+                        },
+                        success: function (response) {
 
-                        if (response.success === true) {
+                            if (response.success === true) {
 
-                            Swal.fire({
-                                position: 'bottom-end',
-                                icon: 'success',
-                                title: response.messages,
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(function() {
-                                $('#data_table').DataTable().ajax.reload(null, false).draw(false);
-                                $('#add-modal').modal('hide');
-                            })
-
-                        } else {
-
-                            if (response.messages instanceof Object) {
-                                $.each(response.messages, function(index, value) {
-                                    var id = $("#" + index);
-
-                                    id.closest('.form-control')
-                                        .removeClass('is-invalid')
-                                        .removeClass('is-valid')
-                                        .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
-
-                                    id.after(value);
-
-                                });
-                            } else {
                                 Swal.fire({
                                     position: 'bottom-end',
-                                    icon: 'error',
+                                    icon: 'success',
                                     title: response.messages,
                                     showConfirmButton: false,
                                     timer: 1500
+                                }).then(function () {
+                                    $('#data_table').DataTable().ajax.reload(null, false).draw(false);
+                                    $('#add-modal').modal('hide');
                                 })
 
-                            }
-                        }
-                        $('#add-form-btn').html('Add');
-                    }
-                });
+                            } else {
 
-                return false;
-            }
-        });
-        $('#add-form').validate();
+                                if (response.messages instanceof Object) {
+                                    $.each(response.messages, function (index, value) {
+                                        var id = $("#" + index);
+
+                                        id.closest('.form-control')
+                                            .removeClass('is-invalid')
+                                            .removeClass('is-valid')
+                                            .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+
+                                        id.after(value);
+
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        position: 'bottom-end',
+                                        icon: 'error',
+                                        title: response.messages,
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+
+                                }
+                            }
+                            $('#add-form-btn').html('Add');
+                        }
+                    });
+
+                    return false;
+                }
+            });
+            $('#add-form').validate();
+
     }
 
     function edit(prod_id) {
         $.ajax({
-            url: '<?php echo base_url($controller.'/getOne') ?>',
+            url: '<?php echo base_url($controller . '/getOne') ?>',
             type: 'post',
             data: {
                 prod_id: prod_id
             },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 // reset the form
                 $("#edit-form")[0].reset();
                 $(".form-control").removeClass('is-invalid').removeClass('is-valid');
@@ -472,24 +492,18 @@
                 $("#edit-form #productType").val(response.product_type);
                 $("#edit-form #description").val(response.description);
                 $("#edit-form #status").val(response.status);
-                $("#edit-form #createdDtm").val(response.createdDtm);
-                $("#edit-form #createdBy").val(response.createdBy);
-                $("#edit-form #updateDtm").val(response.updateDtm);
-                $("#edit-form #updatedBy").val(response.updatedBy);
-                $("#edit-form #deleted").val(response.deleted);
-                $("#edit-form #deletedRole").val(response.deletedRole);
 
                 // submit the edit from
                 $.validator.setDefaults({
-                    highlight: function(element) {
+                    highlight: function (element) {
                         $(element).addClass('is-invalid').removeClass('is-valid');
                     },
-                    unhighlight: function(element) {
+                    unhighlight: function (element) {
                         $(element).removeClass('is-invalid').addClass('is-valid');
                     },
                     errorElement: 'div ',
                     errorClass: 'invalid-feedback',
-                    errorPlacement: function(error, element) {
+                    errorPlacement: function (error, element) {
                         if (element.parent('.input-group').length) {
                             error.insertAfter(element.parent());
                         } else if ($(element).is('.select')) {
@@ -504,18 +518,18 @@
                         }
                     },
 
-                    submitHandler: function(form) {
+                    submitHandler: function (form) {
                         var form = $('#edit-form');
                         $(".text-danger").remove();
                         $.ajax({
-                            url: '<?php echo base_url($controller.'/edit') ?>' ,
+                            url: '<?php echo base_url($controller . '/edit') ?>',
                             type: 'post',
                             data: form.serialize(),
                             dataType: 'json',
-                            beforeSend: function() {
+                            beforeSend: function () {
                                 $('#edit-form-btn').html('<i class="fa fa-spinner fa-spin"></i>');
                             },
-                            success: function(response) {
+                            success: function (response) {
 
                                 if (response.success === true) {
 
@@ -525,7 +539,7 @@
                                         title: response.messages,
                                         showConfirmButton: false,
                                         timer: 1500
-                                    }).then(function() {
+                                    }).then(function () {
                                         $('#data_table').DataTable().ajax.reload(null, false).draw(false);
                                         $('#edit-modal').modal('hide');
                                     })
@@ -533,7 +547,7 @@
                                 } else {
 
                                     if (response.messages instanceof Object) {
-                                        $.each(response.messages, function(index, value) {
+                                        $.each(response.messages, function (index, value) {
                                             var id = $("#" + index);
 
                                             id.closest('.form-control')
@@ -582,13 +596,13 @@
 
             if (result.value) {
                 $.ajax({
-                    url: '<?php echo base_url($controller.'/remove') ?>',
+                    url: '<?php echo base_url($controller . '/remove') ?>',
                     type: 'post',
                     data: {
                         prod_id: prod_id
                     },
                     dataType: 'json',
-                    success: function(response) {
+                    success: function (response) {
 
                         if (response.success === true) {
                             Swal.fire({
@@ -597,7 +611,7 @@
                                 title: response.messages,
                                 showConfirmButton: false,
                                 timer: 1500
-                            }).then(function() {
+                            }).then(function () {
                                 $('#data_table').DataTable().ajax.reload(null, false).draw(false);
                             })
                         } else {
@@ -615,5 +629,19 @@
                 });
             }
         })
+    }
+
+    function subCategory(id) {
+        $.ajax({
+            url: '<?php echo base_url($controller . '/subcategory') ?>',
+            type: 'post',
+            data: {
+                subId: id
+            },
+            dataType: 'text',
+            success: function (response) {
+                $('#prodCatId').html(response);
+            }
+        });
     }
 </script>

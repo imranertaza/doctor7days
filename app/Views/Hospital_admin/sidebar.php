@@ -3,10 +3,10 @@
     <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-            <img src="https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="<?php echo base_url('assets/uplode/hospital/'.hospitalProfilePic())?>" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            <a href="#" class="d-block">Alexander Pierce</a>
+            <a href="#" class="d-block"><?php echo hospitalName();?></a>
         </div>
     </div>
 
@@ -29,12 +29,12 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="<?php echo base_url('Hospital_admin/docavailableday')?>" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>Docavailableday</p>
-                </a>
-            </li>
+<!--            <li class="nav-item">-->
+<!--                <a href="--><?php //echo base_url('Hospital_admin/docavailableday')?><!--" class="nav-link">-->
+<!--                    <i class="nav-icon fas fa-th"></i>-->
+<!--                    <p>Docavailableday</p>-->
+<!--                </a>-->
+<!--            </li>-->
             <li class="nav-item">
                 <a href="<?php echo base_url('Hospital_admin/doctor')?>" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
@@ -54,19 +54,7 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="<?php echo base_url('Hospital_admin/invoice')?>" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>Invoice</p>
-                </a>
-            </li>
 
-            <li class="nav-item">
-                <a href="<?php echo base_url('Hospital_admin/patient')?>" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>Patient</p>
-                </a>
-            </li>
 
             <li class="nav-item">
                 <a href="<?php echo base_url('Hospital_admin/role')?>" class="nav-link">
@@ -75,17 +63,26 @@
                 </a>
             </li>
             
-            <li class="nav-item">
-                <a href="<?php echo base_url('Hospital_admin/specialist')?>" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>Specialist</p>
-                </a>
-            </li>
+
 
             <li class="nav-item">
                 <a href="<?php echo base_url('Hospital_admin/users')?>" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>Users</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('Hospital_admin/job')?>" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Job</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('Hospital_admin/Settings')?>" class="nav-link">
+                    <i class="nav-icon fas fa-cog"></i>
+                    <p>Settings</p>
                 </a>
             </li>
 

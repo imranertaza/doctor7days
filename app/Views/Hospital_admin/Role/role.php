@@ -39,17 +39,8 @@
                         <table id="data_table" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Role id</th>
-                                <th>H id</th>
                                 <th>Role</th>
                                 <th>Permission</th>
-                                <th>Is default</th>
-                                <th>CreatedBy</th>
-                                <th>CreatedDtm</th>
-                                <th>Updatedby</th>
-                                <th>UpdatedDtm</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
 
                                 <th></th>
                             </tr>
@@ -67,7 +58,7 @@
     <!-- Add modal content -->
     <div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
@@ -75,76 +66,33 @@
                 <div class="modal-body">
                     <form id="add-form" class="pl-3 pr-3">
                         <div class="row">
-                            <input type="hidden" id="roleId" name="roleId" class="form-control" placeholder="Role id" maxlength="11" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="hId"> H id: </label>
-                                    <input type="number" id="hId" name="hId" class="form-control" placeholder="H id" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="role"> Role: <span class="text-danger">*</span> </label>
                                     <input type="text" id="role" name="role" class="form-control" placeholder="Role" maxlength="30" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="permission"> Permission: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="permission" name="permission" class="form-control" placeholder="Permission" required></textarea>
+                                    <ol>
+                                        <?php foreach ($permission as $key => $value) { ?>
+                                            <li><?php echo $key; ?>
+                                                <?php foreach ($value as $k=>$v) {
+                                                    $isChecked = ($v == 1) ? 'checked="checked"' : ''; ?>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" <?php echo $isChecked; ?>  name="permission[<?php print $key; ?>][<?php print $k; ?>]" value="1" > <?php echo $k ?></label>
+                                                    </div>
+
+                                                <?php } ?>
+                                            </li>
+                                        <?php } ?>
+                                    </ol>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="isDefault"> Is default: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="isDefault" name="isDefault" class="form-control" placeholder="Is default" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedby"> Updatedby: </label>
-                                    <input type="number" id="updatedby" name="updatedby" class="form-control" placeholder="Updatedby" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group text-center">
                             <div class="btn-group">
@@ -161,7 +109,7 @@
     <!-- Add modal content -->
     <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Update</h4>
@@ -172,73 +120,33 @@
                             <input type="hidden" id="roleId" name="roleId" class="form-control" placeholder="Role id" maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="hId"> H id: </label>
-                                    <input type="number" id="hId" name="hId" class="form-control" placeholder="H id" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="role"> Role: <span class="text-danger">*</span> </label>
                                     <input type="text" id="role" name="role" class="form-control" placeholder="Role" maxlength="30" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="permission"> Permission: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="permission" name="permission" class="form-control" placeholder="Permission" required></textarea>
+                                    <ol>
+                                        <?php foreach ($permission as $key => $value) { ?>
+                                            <li><?php echo $key; ?>
+                                                <?php foreach ($value as $k=>$v) {
+                                                    $isChecked = ($v == 1) ? 'checked="checked"' : ''; ?>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" <?php echo $isChecked; ?>  name="permission[<?php print $key; ?>][<?php print $k; ?>]" value="1" > <?php echo $k ?></label>
+                                                    </div>
+
+                                                <?php } ?>
+                                            </li>
+                                        <?php } ?>
+                                    </ol>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="isDefault"> Is default: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="isDefault" name="isDefault" class="form-control" placeholder="Is default" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedby"> Updatedby: </label>
-                                    <input type="number" id="updatedby" name="updatedby" class="form-control" placeholder="Updatedby" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group text-center">
                             <div class="btn-group">
@@ -381,17 +289,9 @@
                 $(".form-control").removeClass('is-invalid').removeClass('is-valid');
                 $('#edit-modal').modal('show');
 
-                $("#edit-form #roleId").val(response.role_id);
-                $("#edit-form #hId").val(response.h_id);
+
                 $("#edit-form #role").val(response.role);
                 $("#edit-form #permission").val(response.permission);
-                $("#edit-form #isDefault").val(response.is_default);
-                $("#edit-form #createdBy").val(response.createdBy);
-                $("#edit-form #createdDtm").val(response.createdDtm);
-                $("#edit-form #updatedby").val(response.updatedby);
-                $("#edit-form #updatedDtm").val(response.updatedDtm);
-                $("#edit-form #deleted").val(response.deleted);
-                $("#edit-form #deletedRole").val(response.deletedRole);
 
                 // submit the edit from
                 $.validator.setDefaults({

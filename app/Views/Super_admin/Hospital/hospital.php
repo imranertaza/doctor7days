@@ -82,6 +82,18 @@
                                     <input type="text" id="email" name="email" class="form-control" placeholder="Email" maxlength="30" required>
                                 </div>
                             </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="email"> Category: <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="cat_id" required>
+                                        <option value="">Please Select</option>
+                                        <?php foreach ($category as $item) { ?>
+                                            <option value="<?php echo $item->hospital_cat_id;?>"><?php echo $item->name;?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
 

@@ -32,10 +32,11 @@ class ProductCategory extends BaseController
 		$role_id = $this->session->AdminRole;
 
 		if (isset($isLoggedIAdmin)) {
-
+        $catego = $this->productCategoryModel->where('parent_pro_cat_id',0)->findAll();
 	    $data = [
                 'controller'    	=> 'Super_admin/productCategory',
-                'title'     		=> 'Product Category'				
+                'title'     		=> 'Product Category',
+                'category'     		=> $catego,
 			];
 
 		$perm = $this->permission->module_permission_list($role_id, $this->module_name);
@@ -76,10 +77,9 @@ class ProductCategory extends BaseController
 			
 			$data['data'][$key] = array(
 				$value->prod_cat_id,
-				$value->parent_pro_cat_id,
-				$value->product_category,
-				$value->image,
-				$value->status,
+                $value->product_category,
+                pro_parent_category_by_category_id($value->parent_pro_cat_id),
+                statusView($value->status),
 
 				$ops,
 			);
@@ -112,31 +112,17 @@ class ProductCategory extends BaseController
 	{
 
         $response = array();
+        $id = $this->session->admin_id;
 
-        $fields['prod_cat_id'] = $this->request->getPost('prodCatId');
         $fields['parent_pro_cat_id'] = $this->request->getPost('parentProCatId');
         $fields['product_category'] = $this->request->getPost('productCategory');
-        $fields['image'] = $this->request->getPost('image');
         $fields['status'] = $this->request->getPost('status');
-        $fields['createdDtm'] = $this->request->getPost('createdDtm');
-        $fields['createdBy'] = $this->request->getPost('createdBy');
-        $fields['updatedDtm'] = $this->request->getPost('updatedDtm');
-        $fields['updatedBy'] = $this->request->getPost('updatedBy');
-        $fields['deleted'] = $this->request->getPost('deleted');
-        $fields['deletedRole'] = $this->request->getPost('deletedRole');
+        $fields['createdBy'] = $id;
 
 
         $this->validation->setRules([
-            'parent_pro_cat_id' => ['label' => 'Parent pro cat id', 'rules' => 'required|numeric|max_length[11]'],
             'product_category' => ['label' => 'Product category', 'rules' => 'required|max_length[155]'],
-            'image' => ['label' => 'Image', 'rules' => 'permit_empty|max_length[255]'],
             'status' => ['label' => 'Status', 'rules' => 'required'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required|valid_date'],
-            'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'updatedDtm' => ['label' => 'UpdatedDtm', 'rules' => 'required|valid_date'],
-            'updatedBy' => ['label' => 'UpdatedBy', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
 
         ]);
 
@@ -167,31 +153,17 @@ class ProductCategory extends BaseController
 	{
 
         $response = array();
-		
+        $id = $this->session->admin_id;
         $fields['prod_cat_id'] = $this->request->getPost('prodCatId');
         $fields['parent_pro_cat_id'] = $this->request->getPost('parentProCatId');
         $fields['product_category'] = $this->request->getPost('productCategory');
-        $fields['image'] = $this->request->getPost('image');
         $fields['status'] = $this->request->getPost('status');
-        $fields['createdDtm'] = $this->request->getPost('createdDtm');
-        $fields['createdBy'] = $this->request->getPost('createdBy');
-        $fields['updatedDtm'] = $this->request->getPost('updatedDtm');
-        $fields['updatedBy'] = $this->request->getPost('updatedBy');
-        $fields['deleted'] = $this->request->getPost('deleted');
-        $fields['deletedRole'] = $this->request->getPost('deletedRole');
+        $fields['updatedBy'] = $id;
 
 
         $this->validation->setRules([
-            'parent_pro_cat_id' => ['label' => 'Parent pro cat id', 'rules' => 'required|numeric|max_length[11]'],
             'product_category' => ['label' => 'Product category', 'rules' => 'required|max_length[155]'],
-            'image' => ['label' => 'Image', 'rules' => 'permit_empty|max_length[255]'],
             'status' => ['label' => 'Status', 'rules' => 'required'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required|valid_date'],
-            'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'updatedDtm' => ['label' => 'UpdatedDtm', 'rules' => 'required|valid_date'],
-            'updatedBy' => ['label' => 'UpdatedBy', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
 
         ]);
 

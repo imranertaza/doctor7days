@@ -37,7 +37,8 @@ class Role extends BaseController
 
             $data = [
                 'controller' => 'Hospital_admin/role',
-                'title' => 'Role'
+                'title' => 'Role',
+                'permission' => json_decode($this->permission->hospital_all_permissions),
             ];
 
             $perm = $this->permission->module_permission_list($role_id, $this->module_name);
@@ -59,33 +60,62 @@ class Role extends BaseController
 			
 	}
 
+	public function update($id){
+
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
+        $role_id = $this->session->hospitalAdminRole;
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
+            $result = $this->roleModel->where('role_id' ,$id)->first();
+
+            $data = [
+                'controller' => 'Hospital_admin/role',
+                'title' => 'Role',
+                'role' => $result,
+            ];
+
+            $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach($perm as $key=>$val){
+                $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+            }
+
+
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            if ($data['update'] == 1) {
+                echo view('Hospital_admin/Role/update', $data);
+            }else {
+                echo view('Hospital_admin/No_permission', $data);
+            }
+
+            echo view('Hospital_admin/footer');
+        }
+
+    }
+
 	public function getAll()
 	{
  		$response = array();		
 		
 	    $data['data'] = array();
- 
-		$result = $this->roleModel->select('role_id, h_id, role, permission, is_default, createdBy, createdDtm, updatedby, updatedDtm, deleted, deletedRole')->findAll();
+        $h_id = $this->session->h_Id;
+		$result = $this->roleModel->select('role_id, h_id, role, permission, is_default, createdBy, createdDtm, updatedby, updatedDtm, deleted, deletedRole')->where('h_id',$h_id)->findAll();
 		
 		foreach ($result as $key => $value) {
 							
 			$ops = '<div class="btn-group">';
-			$ops .= '	<button type="button" class="btn btn-sm btn-info" onclick="edit('. $value->role_id .')"><i class="fa fa-edit"></i></button>';
+			$ops .= '<a href="'.base_url('Hospital_admin/Role/update/'.$value->role_id).'" type="button" class="btn btn-sm btn-info" ><i class="fa fa-edit"></i></a>';
+			//$ops .= '	<button type="button" class="btn btn-sm btn-info" onclick="edit('. $value->role_id .')"><i class="fa fa-edit"></i></button>';
 			$ops .= '	<button type="button" class="btn btn-sm btn-danger" onclick="remove('. $value->role_id .')"><i class="fa fa-trash"></i></button>';
 			$ops .= '</div>';
 			
 			$data['data'][$key] = array(
-				$value->role_id,
-				$value->h_id,
+
 				$value->role,
 				$value->permission,
-				$value->is_default,
-				$value->createdBy,
-				$value->createdDtm,
-				$value->updatedby,
-				$value->updatedDtm,
-				$value->deleted,
-				$value->deletedRole,
 
 				$ops,
 			);
@@ -119,38 +149,28 @@ class Role extends BaseController
 
         $response = array();
 
-        $fields['role_id'] = $this->request->getPost('roleId');
-        $fields['h_id'] = $this->request->getPost('hId');
+        $fields['h_id'] = $this->session->h_Id;
         $fields['role'] = $this->request->getPost('role');
-        $fields['permission'] = $this->request->getPost('permission');
-        $fields['is_default'] = $this->request->getPost('isDefault');
-        $fields['createdBy'] = $this->request->getPost('createdBy');
-        $fields['createdDtm'] = $this->request->getPost('createdDtm');
-        $fields['updatedby'] = $this->request->getPost('updatedby');
-        $fields['updatedDtm'] = $this->request->getPost('updatedDtm');
-        $fields['deleted'] = $this->request->getPost('deleted');
-        $fields['deletedRole'] = $this->request->getPost('deletedRole');
+        $perm = $this->request->getPost('permission[][]');
 
+        $all_permissions = json_decode($this->permission->hospital_all_permissions);
+
+        foreach($perm as $k =>$v){
+            foreach ($v as $key => $value) {
+                $all_permissions->$k->$key = $value;
+            }
+        }
+
+        $fields['permission'] = json_encode($all_permissions);
+        $fields['createdBy'] = $this->session->h_Id;
 
         $this->validation->setRules([
-            'h_id' => ['label' => 'H id', 'rules' => 'permit_empty|numeric|max_length[11]'],
             'role' => ['label' => 'Role', 'rules' => 'required|max_length[30]'],
-            'permission' => ['label' => 'Permission', 'rules' => 'required'],
-            'is_default' => ['label' => 'Is default', 'rules' => 'required'],
-            'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required|valid_date'],
-            'updatedby' => ['label' => 'Updatedby', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'updatedDtm' => ['label' => 'UpdatedDtm', 'rules' => 'required|valid_date'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
-
         ]);
 
         if ($this->validation->run($fields) == FALSE) {
-
             $response['success'] = false;
             $response['messages'] = $this->validation->listErrors();
-			
         } else {
 
             if ($this->roleModel->insert($fields)) {
@@ -175,29 +195,24 @@ class Role extends BaseController
         $response = array();
 		
         $fields['role_id'] = $this->request->getPost('roleId');
-        $fields['h_id'] = $this->request->getPost('hId');
+
         $fields['role'] = $this->request->getPost('role');
-        $fields['permission'] = $this->request->getPost('permission');
-        $fields['is_default'] = $this->request->getPost('isDefault');
-        $fields['createdBy'] = $this->request->getPost('createdBy');
-        $fields['createdDtm'] = $this->request->getPost('createdDtm');
-        $fields['updatedby'] = $this->request->getPost('updatedby');
-        $fields['updatedDtm'] = $this->request->getPost('updatedDtm');
-        $fields['deleted'] = $this->request->getPost('deleted');
-        $fields['deletedRole'] = $this->request->getPost('deletedRole');
+
+        $perm = $this->request->getPost('permission[][]');
+
+        $all_permissions = json_decode($this->permission->hospital_all_permissions);
+
+        foreach($perm as $k =>$v){
+            foreach ($v as $key => $value) {
+                $all_permissions->$k->$key = $value;
+            }
+        }
+
+        $fields['permission'] = json_encode($all_permissions);
 
 
         $this->validation->setRules([
-            'h_id' => ['label' => 'H id', 'rules' => 'permit_empty|numeric|max_length[11]'],
             'role' => ['label' => 'Role', 'rules' => 'required|max_length[30]'],
-            'permission' => ['label' => 'Permission', 'rules' => 'required'],
-            'is_default' => ['label' => 'Is default', 'rules' => 'required'],
-            'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required|valid_date'],
-            'updatedby' => ['label' => 'Updatedby', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'updatedDtm' => ['label' => 'UpdatedDtm', 'rules' => 'required|valid_date'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
 
         ]);
 

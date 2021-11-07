@@ -59,7 +59,7 @@
     <!-- Add modal content -->
     <div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
@@ -70,59 +70,20 @@
                             <input type="hidden" id="blogSettingsId" name="blogSettingsId" class="form-control" placeholder="Blog settings id" maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="blogTitle"> Blog title: <span class="text-danger">*</span> </label>
                                     <input type="text" id="blogTitle" name="blogTitle" class="form-control" placeholder="Blog title" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="blogLogo"> Blog logo: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="blogLogo" name="blogLogo" class="form-control" placeholder="Blog logo" maxlength="155" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
+                                    <input type="file" id="blogLogo" name="blogLogo" class="form-control" placeholder="Blog logo" maxlength="155" required>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updatedDtm" name="updatedDtm" class="form-control" placeholder="UpdatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group text-center">
                             <div class="btn-group">
@@ -139,7 +100,7 @@
     <!-- Add modal content -->
     <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Update</h4>
@@ -150,56 +111,16 @@
                             <input type="hidden" id="blogSettingsId" name="blogSettingsId" class="form-control" placeholder="Blog settings id" maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="blogTitle"> Blog title: <span class="text-danger">*</span> </label>
                                     <input type="text" id="blogTitle" name="blogTitle" class="form-control" placeholder="Blog title" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="blogLogo"> Blog logo: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="blogLogo" name="blogLogo" class="form-control" placeholder="Blog logo" maxlength="155" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updatedDtm" name="updatedDtm" class="form-control" placeholder="UpdatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
+                                    <input type="file" id="blogLogo" name="blogLogo" class="form-control" placeholder="Blog logo" maxlength="155" required>
                                 </div>
                             </div>
                         </div>

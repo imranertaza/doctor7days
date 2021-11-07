@@ -5,6 +5,7 @@ namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
 
+use App\Models\Super_admin\BlogcommentsModel;
 use App\Models\Super_admin\BlogpostModel;
 use App\Libraries\Permission;
 
@@ -12,6 +13,7 @@ class Blogpost extends BaseController
 {
 
     protected $blogpostModel;
+    protected $blogcommentsModel;
     protected $validation;
     protected $session;
     protected $permission;
@@ -20,6 +22,7 @@ class Blogpost extends BaseController
     public function __construct()
     {
         $this->blogpostModel = new BlogpostModel();
+        $this->blogcommentsModel = new BlogcommentsModel();
         $this->validation = \Config\Services::validation();
         $this->session = \Config\Services::session();
         $this->permission = new Permission();
@@ -34,59 +37,61 @@ class Blogpost extends BaseController
 
         if (isset($isLoggedIAdmin)) {
             $data = [
-            'controller' => 'Super_admin/blogpost',
-            'title' => 'Blog Post'
+                'controller' => 'Super_admin/blogpost',
+                'title' => 'Blog Post'
             ];
 
-        $perm = $this->permission->module_permission_list($role_id, $this->module_name);
-            foreach($perm as $key=>$val){
-                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
-        }
-        echo view('Super_admin/header');
-        echo view('Super_admin/sidebar');
-        if ($data['mod_access'] == 1) {
+            $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach ($perm as $key => $val) {
+                $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+            }
+            echo view('Super_admin/header');
+            echo view('Super_admin/sidebar');
+            if ($data['mod_access'] == 1) {
                 echo view('Super_admin/blogpost/blogpost', $data);
-            }else {
+            } else {
                 echo view('Super_admin/No_permission', $data);
             }
 
             echo view('Super_admin/footer');
 
-            }else {
+        } else {
             return redirect()->to(site_url("/super_admin/login"));
         }
 
     }
 
     public function update($id)
-    {   
+    {
         $isLoggedIAdmin = $this->session->isLoggedIAdmin;
         $role_id = $this->session->AdminRole;
 
         if (isset($isLoggedIAdmin)) {
 
-        $blogPost = $this->blogpostModel->where('post_id', $id)->first();
-        $data = [
-            'controller' => 'Super_admin/blogpost',
-            'title' => 'Blog Post',
-            'blog' => $blogPost,
-        ];
+            $blogPost = $this->blogpostModel->where('post_id', $id)->first();
+            $blogComm = $this->blogcommentsModel->where('post_id', $id)->findAll();
+            $data = [
+                'controller' => 'Super_admin/blogpost',
+                'title' => 'Blog Post',
+                'blog' => $blogPost,
+                'blogcomments' => $blogComm,
+            ];
 
-        $perm = $this->permission->module_permission_list($role_id, $this->module_name);
-            foreach($perm as $key=>$val){
-                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+            $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach ($perm as $key => $val) {
+                $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
             }
-        echo view('Super_admin/header');
-        echo view('Super_admin/sidebar');
-        if ($data['mod_access'] == 1) {
+            echo view('Super_admin/header');
+            echo view('Super_admin/sidebar');
+            if ($data['mod_access'] == 1) {
                 echo view('Super_admin/blogpost/update_form', $data);
-            }else {
+            } else {
                 echo view('Super_admin/No_permission', $data);
             }
-        
-        echo view('Super_admin/footer');
 
-        }else {
+            echo view('Super_admin/footer');
+
+        } else {
             return redirect()->to(site_url("/super_admin/login"));
         }
     }
@@ -243,13 +248,13 @@ class Blogpost extends BaseController
 
         if (!empty($_FILES['image']['name'])) {
             $name = $image->getRandomName();
-            $image->move(FCPATH . '\assets\uplode\blog',$name);
+            $image->move(FCPATH . '\assets\uplode\blog', $name);
             $fields['image'] = $name;
         }
 
         if (!empty($_FILES['featured_image']['name'])) {
             $fname = $featImage->getRandomName();
-            $featImage->move(FCPATH . '\assets\uplode\blog',$fname);
+            $featImage->move(FCPATH . '\assets\uplode\blog', $fname);
             $fields['featured_image'] = $fname;
         }
 
@@ -266,6 +271,22 @@ class Blogpost extends BaseController
 
         }
 
+
+        return $this->response->setJSON($response);
+    }
+
+    public function updateStatus()
+    {
+
+        $response = array();
+        $fields['blog_comment_id'] = $this->request->getPost('id');
+        $fields['status'] = $this->request->getPost('status');
+
+        $this->blogcommentsModel->update($fields['blog_comment_id'], $fields);
+
+
+        $response['success'] = true;
+        $response['messages'] = 'Successfully updated';
 
         return $this->response->setJSON($response);
     }

@@ -39,10 +39,9 @@
                         <table id="data_table" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Prod cat id</th>
-                                <th>Parent pro cat id</th>
+                                <th>Category id</th>
                                 <th>Product category</th>
-                                <th>Image</th>
+                                <th>Parent Category</th>
                                 <th>Status</th>
 
                                 <th>Action</th>
@@ -61,7 +60,7 @@
     <!-- Add modal content -->
     <div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
@@ -72,73 +71,38 @@
                             <input type="hidden" id="prodCatId" name="prodCatId" class="form-control" placeholder="Prod cat id" maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="parentProCatId"> Parent pro cat id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="parentProCatId" name="parentProCatId" class="form-control" placeholder="Parent pro cat id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="productCategory"> Product category: <span class="text-danger">*</span> </label>
                                     <input type="text" id="productCategory" name="productCategory" class="form-control" placeholder="Product category" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="image"> Image: </label>
-                                    <input type="text" id="image" name="image" class="form-control" placeholder="Image" maxlength="255" >
+                                    <label for="parentProCatId"> Parent Category: <span class="text-danger">*</span> </label>
+
+                                    <select id="parentProCatId" name="parentProCatId" class="form-control" placeholder="Parent Category" >
+                                        <option value="">Please Select</option>
+                                        <?php foreach ($category as $item) { ?>
+                                            <option value="<?php echo $item->prod_cat_id;?>"><?php echo $item->product_category;?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="status"> Status: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="status" name="status" class="form-control" placeholder="Status" required>
+                                    <select id="status" name="status"class="form-control" placeholder="Status" required>
+                                        <?php echo globalStatus(1);?>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
+
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group text-center">
                             <div class="btn-group">
@@ -155,7 +119,7 @@
     <!-- Add modal content -->
     <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Update</h4>
@@ -166,73 +130,37 @@
                             <input type="hidden" id="prodCatId" name="prodCatId" class="form-control" placeholder="Prod cat id" maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="parentProCatId"> Parent pro cat id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="parentProCatId" name="parentProCatId" class="form-control" placeholder="Parent pro cat id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="productCategory"> Product category: <span class="text-danger">*</span> </label>
                                     <input type="text" id="productCategory" name="productCategory" class="form-control" placeholder="Product category" maxlength="155" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="image"> Image: </label>
-                                    <input type="text" id="image" name="image" class="form-control" placeholder="Image" maxlength="255" >
+                                    <label for="parentProCatId"> Parent Category: <span class="text-danger">*</span> </label>
+                                    <select id="parentProCatId" name="parentProCatId" class="form-control" placeholder="Parent Category" >
+                                        <option value="">Please Select</option>
+                                        <?php foreach ($category as $item) { ?>
+                                            <option value="<?php echo $item->prod_cat_id;?>"><?php echo $item->product_category;?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="status"> Status: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="status" name="status" class="form-control" placeholder="Status" required>
+                                    <select id="status" name="status"class="form-control" placeholder="Status" required>
+                                        <?php echo globalStatus();?>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
+
                         </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="form-group text-center">
                             <div class="btn-group">

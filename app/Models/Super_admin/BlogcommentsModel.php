@@ -10,7 +10,7 @@ class BlogcommentsModel extends Model {
 	protected $primaryKey = 'blog_comment_id';
 	protected $returnType = 'object';
 	protected $useSoftDeletes = false;
-	protected $allowedFields = ['post_id', 'comment', 'patient_id', 'createdDtm', 'createdBy', 'updatedDtm', 'updatedBy', 'deleted', 'deletedRole'];
+	protected $allowedFields = ['post_id', 'name', 'email', 'comment', 'patient_id', 'status', 'createdDtm', 'createdBy', 'updatedDtm', 'updatedBy', 'deleted', 'deletedRole'];
 	protected $useTimestamps = false;
 	protected $createdField  = 'created_at';
 	protected $updatedField  = 'updated_at';

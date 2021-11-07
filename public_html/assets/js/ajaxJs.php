@@ -35,5 +35,9 @@
         });
     }
 
+    // $(document).ready(function() {
+    //     $("#txtEditor").Editor();
+    // });
+
 
 </script>

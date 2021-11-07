@@ -17,6 +17,7 @@
         <div class="col-12 p-3 text-right">
             <small class="sm-ti">Doctor specialties</small><br>
             <button class="btn-card" >Cardiologist</button>
+
         </div>
         <div class="col-12 p-3 dr-row ">
             <table class="" style="width: 100%;">

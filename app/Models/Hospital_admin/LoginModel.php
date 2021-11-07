@@ -25,9 +25,9 @@ class LoginModel extends Model
         $query = $builder->get();
         
         $user = $query->getRow();
-        // print $db->getLastQuery();
-        
+
         if(!empty($user)){
+
             if(SHA1($password) == $user->password){
                 return $user;
             } else {

@@ -40,10 +40,7 @@
                             <thead>
                             <tr>
                                 <th>Store id</th>
-                                <th>Prod id</th>
-                                <th>Quantity</th>
-                                <th>Unit</th>
-                                <th>Purchase date</th>
+                                <th>Name</th>
 
                                 <th>Action</th>
                             </tr>
@@ -61,7 +58,7 @@
     <!-- Add modal content -->
     <div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
@@ -69,75 +66,13 @@
                 <div class="modal-body">
                     <form id="add-form" class="pl-3 pr-3">
                         <div class="row">
-                            <input type="hidden" id="storeId" name="storeId" class="form-control" placeholder="Store id" maxlength="11" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="prodId"> Prod id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="prodId" name="prodId" class="form-control" placeholder="Prod id" maxlength="11" number="true" required>
+                                    <label for="name"> Name: <span class="text-danger">*</span> </label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Name" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="quantity"> Quantity: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Quantity" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="unit"> Unit: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="unit" name="unit" class="form-control" placeholder="Unit" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="purchaseDate"> Purchase date: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="purchaseDate" name="purchaseDate" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updateDtm"> UpdateDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updateDtm" name="updateDtm" class="form-control" placeholder="UpdateDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-                                </div>
-                            </div>
+
                         </div>
 
                         <div class="form-group text-center">
@@ -155,7 +90,7 @@
     <!-- Add modal content -->
     <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Update</h4>
@@ -166,70 +101,10 @@
                             <input type="hidden" id="storeId" name="storeId" class="form-control" placeholder="Store id" maxlength="11" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="prodId"> Prod id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="prodId" name="prodId" class="form-control" placeholder="Prod id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="quantity"> Quantity: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Quantity" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="unit"> Unit: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="unit" name="unit" class="form-control" placeholder="Unit" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="purchaseDate"> Purchase date: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="purchaseDate" name="purchaseDate" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updateDtm"> UpdateDtm: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="updateDtm" name="updateDtm" class="form-control" placeholder="UpdateDtm" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
+                                    <label for="name"> Name: <span class="text-danger">*</span> </label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Name" required>
                                 </div>
                             </div>
                         </div>
@@ -377,16 +252,7 @@
                 $('#edit-modal').modal('show');
 
                 $("#edit-form #storeId").val(response.store_id);
-                $("#edit-form #prodId").val(response.prod_id);
-                $("#edit-form #quantity").val(response.quantity);
-                $("#edit-form #unit").val(response.unit);
-                $("#edit-form #purchaseDate").val(response.purchase_date);
-                $("#edit-form #createdDtm").val(response.createdDtm);
-                $("#edit-form #createdBy").val(response.createdBy);
-                $("#edit-form #updateDtm").val(response.updateDtm);
-                $("#edit-form #updatedBy").val(response.updatedBy);
-                $("#edit-form #deleted").val(response.deleted);
-                $("#edit-form #deletedRole").val(response.deletedRole);
+                $("#edit-form #name").val(response.name);
 
                 // submit the edit from
                 $.validator.setDefaults({

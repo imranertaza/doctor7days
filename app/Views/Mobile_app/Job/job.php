@@ -13,7 +13,7 @@
                 <i class="flaticon-suitcase ti-icon"></i>
             </div>
             <div class="col-10 p-2">
-                <span class="title-m" >Job</span>
+                <span class="title-m" >Jobs</span>
             </div>
         </div>
     </div>
@@ -21,6 +21,9 @@
 
 <section class="banner" >
     <div class="row">
+        <div class="col-12 p-3 ">
+            <a href="<?php echo base_url('Mobile_app/job/search_location')?>" class="btn-loca"> <i class="flaticon-pin"></i> Select your location</a>
+        </div>
         <div class="col-12 p-3 ">
             <table class="" style="width: 100%;">
                 <?php foreach ($job as $item) {?>
@@ -30,7 +33,7 @@
                             <div class="job-rou"></div>
                         </div>
                         <div class="col-10" style="padding-left: 10px;">
-                            <p class="job-pb">Publisher</p>
+                            <p class="job-pb"><?php echo get_data_by_id('name','hospital','h_id',$item->h_id)?></p>
 
                         </div>
                         <div class="col-10">

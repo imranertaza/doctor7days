@@ -42,8 +42,6 @@
                 <thead>
                 <tr>
 					<th>Amb id</th>
-					<th>Mobile</th>
-					<th>Contact name</th>
 					<th>Oxygen</th>
 					<th>Ac</th>
 					<th>Car model name</th>
@@ -73,30 +71,14 @@
 					<form id="add-form" class="pl-3 pr-3">								
 
 						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="mobile"> Mobile: <span class="text-danger">*</span> </label>
-									<input type="number" id="mobile" name="mobile" class="form-control" placeholder="Mobile" maxlength="11" number="true" required>
-								</div>
-							</div>
+
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="contactName"> Contact name: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="contactName" name="contactName" class="form-control" placeholder="Contact name" maxlength="155" required>
+                                    <label for="contactName"> car_model_name: <span class="text-danger">*</span> </label>
+                                    <input type="text" id="contactName" name="car_model_name" class="form-control" placeholder="Contact name" maxlength="155" required>
                                 </div>
                             </div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="password"> Password: <span class="text-danger">*</span> </label>
-                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-								</div>
-							</div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="con_password"> Confirm Password: <span class="text-danger">*</span> </label>
-                                    <input type="password" id="con_password" name="con_password" class="form-control" placeholder="Confirm Password" required>
-                                </div>
-                            </div>
+
 
 						</div>
 

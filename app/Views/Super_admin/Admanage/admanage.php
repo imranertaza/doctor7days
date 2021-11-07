@@ -38,7 +38,7 @@
               <table id="data_table" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-					<th>Ad id</th>
+					<th>Id</th>
 					<th>Title</th>
 					<th>Image</th>
 					<th>Position</th>
@@ -65,7 +65,7 @@
 	<!-- Add modal content -->
 	<div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
 		aria-hidden="true">
-		<div class="modal-dialog modal-xl">
+		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="text-center bg-info p-3">
 					<h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
@@ -76,19 +76,14 @@
  							<input type="hidden" id="adId" name="adId" class="form-control" placeholder="Ad id" maxlength="11" required>
 						</div>
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label for="title"> Title: <span class="text-danger">*</span> </label>
 									<input type="text" id="title" name="title" class="form-control" placeholder="Title" maxlength="155" required>
 								</div>
 							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="image"> Image: <span class="text-danger">*</span> </label>
-									<input type="text" id="image" name="image" class="form-control" placeholder="Image" maxlength="155" required>
-								</div>
-							</div>
-							<div class="col-md-4">
+
+							<div class="col-md-12">
 								<div class="form-group">
 									<label for="position"> Position: <span class="text-danger">*</span> </label>
 									<input type="text" id="position" name="position" class="form-control" placeholder="Position" required>
@@ -96,19 +91,19 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label for="width"> Width: <span class="text-danger">*</span> </label>
 									<input type="text" id="width" name="width" class="form-control" placeholder="Width" maxlength="155" required>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label for="height"> Height: <span class="text-danger">*</span> </label>
 									<input type="text" id="height" name="height" class="form-control" placeholder="Height" maxlength="155" required>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label for="status"> Status: <span class="text-danger">*</span> </label>
 									<input type="text" id="status" name="status" class="form-control" placeholder="Status" required>
@@ -116,67 +111,33 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label for="expireDate"> Expire date: <span class="text-danger">*</span> </label>
 									<input type="date" id="expireDate" name="expireDate" class="form-control" dateISO="true" required>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-12">
 								<div class="form-group">
 									<label for="price"> Price: <span class="text-danger">*</span> </label>
 									<input type="number" id="price" name="price" class="form-control" placeholder="Price" maxlength="11" number="true" required>
 								</div>
 							</div>
-							<div class="col-md-4">
+
+							<div class="col-md-12">
 								<div class="form-group">
 									<label for="paidStatus"> Paid status: <span class="text-danger">*</span> </label>
 									<input type="text" id="paidStatus" name="paidStatus" class="form-control" placeholder="Paid status" required>
 								</div>
 							</div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="image"> Image: <span class="text-danger">*</span> </label>
+                                    <input type="file" id="image" name="image" class="form-control" placeholder="Image" maxlength="155" required>
+                                </div>
+                            </div>
 						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-									<input type="text" id="createdDtm" name="createdDtm" class="form-control" placeholder="CreatedDtm" required>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-									<input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="updatedDtm"> UpdatedDtm: </label>
-									<input type="text" id="updatedDtm" name="updatedDtm" class="form-control" placeholder="UpdatedDtm" >
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="updatedBy"> UpdatedBy: </label>
-									<input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="deleted"> Deleted: </label>
-									<input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="deletedRole"> DeletedRole: </label>
-									<input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
-								</div>
-							</div>
-						</div>
-						<div class="row">
-						</div>
+
 																				
 						<div class="form-group text-center">
 							<div class="btn-group">

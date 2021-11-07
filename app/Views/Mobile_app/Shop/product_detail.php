@@ -1,7 +1,7 @@
 <section class="back" >
     <div class="row">
         <div class="col-12 p-2 pl-3 pt-3">
-            <a href="#" ><i class="flaticon-left-arrow back-icon"></i></a>
+            <a href="<?php echo base_url('mobile_app/shop')?>" ><i class="flaticon-left-arrow back-icon"></i></a>
             <i class="flaticon-shopping-cart ic-cart" ></i>
         </div>
     </div>
@@ -10,12 +10,12 @@
 <section class="banner" >
     <div class="row">
         <div class="col-12 p-3 text-center">
-            <img src="<?php echo base_url()?>/assets/mobile/image/bprod.png">
+            <img src="<?php echo base_url('assets/uplode/product/'.$product->picture) ?>">
 
         </div>
         <div class="col-12 p-3 text-center">
-            <p class="pro-pr">$39</p>
-            <p class="pro-n-d">Product Name</p>
+            <p class="pro-pr"><?php echo $product->price?></p>
+            <p class="pro-n-d"><?php echo $product->name?></p>
             <p class="pro-ic">
                 <i class="flaticon-star" ></i>
                 <i class="flaticon-star" ></i>

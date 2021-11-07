@@ -68,7 +68,7 @@ class Ambulance extends BaseController
 
         $data['data'] = array();
 
-        $result = $this->ambulanceModel->select('amb_id, mobile, password, contact_name, oxygen, ac, car_model_name, description, createdDtm, createdBy, updatedDtm, updatedBy, deleted, deletedRole')->findAll();
+        $result = $this->ambulanceModel->findAll();
 
         foreach ($result as $key => $value) {
 
@@ -79,8 +79,6 @@ class Ambulance extends BaseController
 
             $data['data'][$key] = array(
                 $value->amb_id,
-                $value->mobile,
-                $value->contact_name,
                 $value->oxygen,
                 $value->ac,
                 $value->car_model_name,
@@ -274,17 +272,13 @@ class Ambulance extends BaseController
         $response = array();
 
 
-        $fields['mobile'] = $this->request->getPost('mobile');
-        $fields['password'] = SHA1($this->request->getPost('password'));
-        $fields['con_password'] = SHA1($this->request->getPost('con_password'));
-        $fields['contact_name'] = $this->request->getPost('contactName');
+
+        $fields['car_model_name'] = $this->request->getPost('car_model_name');
 
 
         $this->validation->setRules([
-            'mobile' => ['label' => 'Mobile', 'rules' => 'required|numeric|max_length[11]'],
-            'contact_name' => ['label' => 'Contact name', 'rules' => 'required|max_length[155]'],
-            'password' => ['label' => 'Password', 'rules' => 'required|min_length[6]'],
-            'con_password' => ['label' => 'ConfirmPassword', 'rules' => 'required|matches[password]'],
+
+            'car_model_name' => ['label' => 'car_model_name', 'rules' => 'required|max_length[155]'],
 
         ]);
 
