@@ -37,6 +37,10 @@
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#image">Images</a>
                                     </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#avilDay">Doctor's Available Day</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-12">
@@ -66,18 +70,21 @@
                                                     <div class="form-group">
                                                         <label for="phone"> Phone: <span class="text-danger">*</span>
                                                         </label>
-                                                        <input type="text" id="mobile" name="mobile" class="form-control"
+                                                        <input type="text" id="mobile" name="mobile"
+                                                               class="form-control"
                                                                value="<?php echo $doctor->mobile; ?>" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="status"> Specialist: <span class="text-danger">*</span>
+                                                        <label for="status"> Specialist: <span
+                                                                    class="text-danger">*</span>
                                                         </label>
-                                                        <select id="specialistId" name="specialistId" class="form-control" placeholder="Specialist" required>
+                                                        <select id="specialistId" name="specialistId"
+                                                                class="form-control" placeholder="Specialist" required>
                                                             <option value="">Please select</option>
-                                                            <?php echo getListInOption($doctor->specialist_id ,'specialist_id','specialist_type_name','specialist')?>
+                                                            <?php echo getListInOption($doctor->specialist_id, 'specialist_id', 'specialist_type_name', 'specialist') ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -85,7 +92,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="password"> Password: <span
-                                                                class="text-danger">*</span></label>
+                                                                    class="text-danger">*</span></label>
                                                         <input type="password" id="password" name="password"
                                                                class="form-control" placeholder="Password" required>
                                                     </div>
@@ -94,7 +101,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="ConfirmPassword">Confirm Password: <span
-                                                                class="text-danger">*</span></label>
+                                                                    class="text-danger">*</span></label>
                                                         <input type="password" id="con_password" name="con_password"
                                                                class="form-control" placeholder="Confirm Password"
                                                                required>
@@ -102,7 +109,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <input type="hidden" id="doc_id" name="doc_id"
-                                                           value="<?php echo $doctor->doc_id ; ?>" required>
+                                                           value="<?php echo $doctor->doc_id; ?>" required>
                                                     <button type="submit" onclick="updateReg()" class="btn btn-success"
                                                             id="add-form-btn"
                                                             style="float: right;">Update
@@ -122,7 +129,8 @@
                                                     <div class="form-group">
                                                         <label for="comment"> NID: </label>
                                                         <input type="text" id="nid" name="nid"
-                                                               class="form-control" placeholder="NID number" value="<?php echo $doctor->nid;?>">
+                                                               class="form-control" placeholder="NID number"
+                                                               value="<?php echo $doctor->nid; ?>">
                                                     </div>
                                                 </div>
 
@@ -130,18 +138,18 @@
                                                     <div class="form-group">
                                                         <label for="description"> Description: </label>
                                                         <textarea cols="40" rows="5" id="description" name="description"
-                                                                  class="form-control" placeholder="Description" ><?php echo $doctor->description; ?></textarea>
+                                                                  class="form-control"
+                                                                  placeholder="Description"><?php echo $doctor->description; ?></textarea>
                                                     </div>
                                                 </div>
-
-
 
 
                                                 <div class="col-md-6 text-center">
                                                     <input type="hidden" id="doc_id" name="doc_id"
                                                            value="<?php echo $doctor->doc_id; ?>" required>
-                                                    <button type="submit" onclick="updateBasic()" class="btn btn-success"
-                                                            id="up-basic-btn" style="margin-top: 30px;" >Update
+                                                    <button type="submit" onclick="updateBasic()"
+                                                            class="btn btn-success"
+                                                            id="up-basic-btn" style="margin-top: 30px;">Update
                                                     </button>
 
                                                 </div>
@@ -153,24 +161,27 @@
 
                                     <div class="tab-pane container" id="image">
                                         <!--    id="update-image"   action="<?php //echo base_url($controller . '/updateImage') ?>" method="Post"-->
-                                        <form action="<?php echo base_url($controller . '/updateImage') ?>" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
+                                        <form id="update-image" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
                                             <div class="row pt-4">
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="logo"> Profile Image: </label>
-                                                        <input type="file" id="pic" name="pic" class="form-control" placeholder="Logo"  >
+                                                        <input type="file" id="pic" name="pic" class="form-control"
+                                                               placeholder="Logo">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <?php $img = (!empty($doctor->pic))?$doctor->pic:'noimage.jpg';?>
-                                                    <img src="<?php echo base_url()?>/assets/uplode/doctor/<?php echo $img ?>"  style="max-width: 200px;" >
+                                                <div class="col-md-6" id="imgRelode">
+                                                    <?php $img = (!empty($doctor->pic)) ? $doctor->pic : 'noimage.jpg'; ?>
+                                                    <img src="<?php echo base_url() ?>/assets/uplode/doctor/<?php echo $img ?>"
+                                                         style="max-width: 200px;">
                                                 </div>
 
                                                 <div class="col-md-6 text-right">
                                                     <input type="hidden" id="doc_id" name="doc_id"
                                                            value="<?php echo $doctor->doc_id; ?>" required>
-                                                    <button type="submit" onclick="updateimage()" class="btn btn-success"
+                                                    <button type="submit" onclick="updateimage()"
+                                                            class="btn btn-success"
                                                             id="up-image-btn" style="margin-top: 30px;">Update
                                                     </button>
 
@@ -179,6 +190,175 @@
                                         </form>
                                     </div>
 
+                                    <div class="tab-pane container" id="avilDay">
+
+                                        <form id="update-avilDay" class="pl-3 pr-3">
+                                            <div class="row pt-4">
+
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="saturday"> Saturday: </label>
+                                                        <select id="saturday" name="saturday" class="form-control">
+                                                            <option value="1" <?php if($day->saturday == 1){echo 'selected';}?> >Active</option>
+                                                            <option value="0" <?php if($day->saturday == 0){echo 'selected';}?>>Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="saturdayTime"> Saturday time: </label>
+                                                        <select id="saturdayTime" name="saturdayTime" class="form-control">
+                                                            <option value="">Please select</option>
+                                                            <option value="morning" <?php if($day->saturday_time == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->saturday_time == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->saturday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="sunday"> Sunday: </label>
+                                                        <select id="sunday" name="sunday" class="form-control">
+                                                            <option value="1" <?php if($day->sunday == 1){echo 'selected';}?> >Active</option>
+                                                            <option value="0" <?php if($day->sunday == 0){echo 'selected';}?>>Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="sundayTime"> Sunday time: </label>
+
+                                                        <select id="sundayTime" name="sundayTime" class="form-control">
+                                                            <option value="">Please select</option>
+                                                            <option value="morning" <?php if($day->sunday_time == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->sunday_time == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->sunday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="monday"> Monday: </label>
+                                                        <select id="monday" name="monday" class="form-control">
+                                                            <option value="1" <?php if($day->monday == 1){echo 'selected';}?> >Active</option>
+                                                            <option value="0" <?php if($day->monday == 0){echo 'selected';}?>>Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="mondayTime"> Monday time: </label>
+                                                        <select id="mondayTime" name="mondayTime" class="form-control">
+                                                            <option value="">Please select</option>
+                                                            <option value="morning" <?php if($day->monday_time == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->monday_time == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->monday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="tuesday"> Tuesday: </label>
+                                                        <select id="tuesday" name="tuesday" class="form-control">
+                                                            <option value="1" <?php if($day->tuesday == 1){echo 'selected';}?> >Active</option>
+                                                            <option value="0" <?php if($day->tuesday == 0){echo 'selected';}?>>Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="tuesdayTime"> Tuesday time: </label>
+                                                        <select id="tuesdayTime" name="tuesdayTime" class="form-control">
+                                                            <option value="">Please select</option>
+                                                            <option value="morning" <?php if($day->tuesday_time == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->tuesday_time == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->tuesday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="wednesday"> Wednesday: </label>
+                                                        <select id="wednesday" name="wednesday" class="form-control">
+                                                            <option value="1" <?php if($day->wednesday == 1){echo 'selected';}?> >Active</option>
+                                                            <option value="0" <?php if($day->wednesday == 0){echo 'selected';}?>>Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="wednesdayTime"> Wednesday time: </label>
+                                                        <select id="wednesdayTime" name="wednesdayTime" class="form-control">
+                                                            <option value="">Please select</option>
+                                                            <option value="morning" <?php if($day->wednesday_time == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->wednesday_time == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->wednesday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="thursday"> Thursday: </label>
+
+                                                        <select id="thursday" name="thursday" class="form-control">
+                                                            <option value="1" <?php if($day->thursday == 1){echo 'selected';}?> >Active</option>
+                                                            <option value="0" <?php if($day->thursday == 0){echo 'selected';}?>>Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="thursdayTime"> Thursday time: </label>
+                                                        <select id="thursdayTime" name="thursdayTime" class="form-control">
+                                                            <option value="">Please select</option>
+                                                            <option value="morning" <?php if($day->thursday_time == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->thursday_time == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->thursday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="friday"> Friday: </label>
+
+                                                        <select id="friday" name="friday" class="form-control">
+                                                            <option value="1" <?php if($day->friday == 1){echo 'selected';}?> >Active</option>
+                                                            <option value="0" <?php if($day->friday == 0){echo 'selected';}?>>Inactive</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="fridayTime"> Friday time: </label>
+
+                                                        <select id="fridayTime" name="fridayTime" class="form-control">
+                                                            <option value="">Please select</option>
+                                                            <option value="morning" <?php if($day->friday_time == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->friday_time == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->friday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 text-right">
+                                                    <input type="hidden" id="doc_id" name="doc_id"
+                                                           value="<?php echo $doctor->doc_id; ?>" required>
+                                                    <button type="submit" onclick="updateavilavil()"
+                                                            class="btn btn-success"
+                                                            id="up-avilDay-btn" style="margin-top: 30px;">Update
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
 
 
                                 </div>
@@ -463,7 +643,7 @@
         $('#update-address').validate();
     }
 
-    function updateimage() {
+    function updateavilavil() {
         // reset the form
         $(".form-control").removeClass('is-invalid').removeClass('is-valid');
 
@@ -492,22 +672,17 @@
                 }
             },
             submitHandler: function (form) {
-                var form = $('#update-image');
+                var form = $('#update-avilDay');
                 // remove the text-danger
                 $(".text-danger").remove();
 
                 $.ajax({
-                    url: '<?php echo base_url($controller . '/updateImage') ?>',
-                    // type: 'post',
-                    method:"POST",
+                    url: '<?php echo base_url($controller . '/updateApoDay') ?>',
+                    type: 'post',
                     data: form.serialize(), // /converting the form data into array and sending it to server
-                    // contentType: "application/json; charset=utf-8",
-                    processData: false,
-                    contentType: false,
-                    cache: false,
                     dataType: 'json',
                     beforeSend: function () {
-                        $('#up-image-btn').html('<i class="fa fa-spinner fa-spin"></i>');
+                        $('#up-avilDay-btn').html('<i class="fa fa-spinner fa-spin"></i>');
                     },
                     success: function (response) {
 
@@ -519,7 +694,7 @@
                                 title: response.messages,
                                 showConfirmButton: false,
                                 timer: 1500
-                            })
+                            });
 
                         } else {
 
@@ -546,14 +721,75 @@
 
                             }
                         }
-                        $('#up-image-btn').html('Add');
+                        $('#up-avilDay-btn').html('Update');
                     }
                 });
 
                 return false;
             }
         });
-        $('#update-image').validate();
+        $('#update-avilDay').validate();
+    }
+
+    function updateimage() {
+        $('#update-image').on('submit', function (e) {
+
+            e.preventDefault();
+            $.ajax({
+                url: "<?php echo base_url($controller . '/updateImage') ?>",
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "json",
+                beforeSend: function () {
+                    $('#up-image-btn').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function (response) {
+                    if (response.success === true) {
+
+                        Swal.fire({
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: response.messages,
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function() {
+                            document.getElementById("update-image").reset();
+                            $('#imgRelode').load(document.URL + ' #imgRelode');
+                        })
+
+                    } else {
+
+                        if (response.messages instanceof Object) {
+                            $.each(response.messages, function (index, value) {
+                                var id = $("#" + index);
+
+                                id.closest('.form-control')
+                                    .removeClass('is-invalid')
+                                    .removeClass('is-valid')
+                                    .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+
+                                id.after(value);
+
+                            });
+                        } else {
+                            Swal.fire({
+                                position: 'bottom-end',
+                                icon: 'error',
+                                title: response.messages,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+
+                        }
+                    }
+                    $('#up-image-btn').html('Update');
+                }
+            });
+
+        });
     }
 
 

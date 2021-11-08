@@ -5,6 +5,7 @@ namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
 
+use App\Models\Super_admin\HospitalcategoryModel;
 use App\Models\Super_admin\RolesModel;
 use App\Models\Super_admin\GlobaladdressModel;
 use App\Models\Super_admin\HospitalModel;
@@ -32,6 +33,7 @@ class Hospital extends BaseController
        	$this->validation =  \Config\Services::validation();
         $this->session = \Config\Services::session();
         $this->permission = new Permission();
+        $this->hospitalcategoryModel = new HospitalcategoryModel();
 		
 	}
 	
@@ -39,26 +41,26 @@ class Hospital extends BaseController
 	{
         $isLoggedIAdmin = $this->session->isLoggedIAdmin;
         $role_id = $this->session->AdminRole;
-
         if (isset($isLoggedIAdmin)) {
-	    $data = [
-                'controller'    	=> 'Super_admin/Hospital',
-                'title'     		=> 'Hospital'
-			];
-        $perm = $this->permission->module_permission_list($role_id, $this->module_name);
-            foreach($perm as $key=>$val){
-                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
-            }
+            $catego = $this->hospitalcategoryModel->findAll();
+            $data = [
+                    'controller'    	=> 'Super_admin/Hospital',
+                    'title'     		=> 'Hospital',
+                    'category'     		=> $catego,
+                ];
+            $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+                foreach($perm as $key=>$val){
+                     $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
+                }
 
-        echo view('Super_admin/header');
-        echo view('Super_admin/sidebar');
-        if ($data['mod_access'] == 1) {
+            echo view('Super_admin/header');
+            echo view('Super_admin/sidebar');
+            if ($data['mod_access'] == 1) {
                 echo view('Super_admin/Hospital/hospital', $data);
-            }else {
+            } else {
                 echo view('Super_admin/No_permission', $data);
             }
-		
-        echo view('Super_admin/footer');
+            echo view('Super_admin/footer');
 
         }else {
             return redirect()->to(site_url("/super_admin/login"));
@@ -79,6 +81,7 @@ class Hospital extends BaseController
 			$ops = '<div class="btn-group">';
 			$ops .= '<a href="'.base_url().'/Super_admin/hospital/updateForm/'. $value->h_id .'" class="btn btn-sm btn-info" ><i class="fa fa-edit"></i></a>';
 			$ops .= '	<button type="button" class="btn btn-sm btn-danger" onclick="remove('. $value->h_id .')"><i class="fa fa-trash"></i></button>';
+//			$ops .= '	<a href="'.base_url().'/Super_admin/hospital/remove/'. $value->h_id .'" class="btn btn-sm btn-danger" ><i class="fa fa-trash"></i></a>';
 			$ops .= '</div>';
 
 			$data['data'][$key] = array(
@@ -100,11 +103,12 @@ class Hospital extends BaseController
         $role_id = $this->session->AdminRole;
 
         if (isset($isLoggedIAdmin)) {
-
+        $catego = $this->hospitalcategoryModel->findAll();
         $result = $this->hospitalModel->where('h_id' ,$id)->first();
         $data = [
             'controller' => 'Super_admin/Hospital',
             'hospital' => $result,
+            'category' => $catego,
         ];
 
         $perm = $this->permission->module_permission_list($role_id, $this->module_name);
@@ -172,6 +176,7 @@ class Hospital extends BaseController
         $response = array();
 
         $fields['h_id'] = $this->request->getPost('h_id');
+        $fields['hospital_cat_id'] = $this->request->getPost('cat_id');
         $fields['description'] = $this->request->getPost('description');
         $fields['comment'] = $this->request->getPost('comment');
         $fields['is_default'] = $this->request->getPost('is_default');
@@ -286,6 +291,7 @@ class Hospital extends BaseController
         $fields['name'] = $this->request->getPost('name');
         $fields['email'] = $this->request->getPost('email');
         $fields['mobile'] = $this->request->getPost('mobile');
+        $fields['hospital_cat_id'] = $this->request->getPost('cat_id');
         $fields['status'] = $this->request->getPost('status');
         $fields['password'] = SHA1($this->request->getPost('password'));
         $fields['con_password'] = SHA1($this->request->getPost('con_password'));
@@ -422,18 +428,18 @@ class Hospital extends BaseController
 
 			throw new \CodeIgniter\Exceptions\PageNotFoundException();
 			
-		} else {	
-		
+		} else {
+
 			if ($this->hospitalModel->where('h_id', $id)->delete()) {
-								
+
 				$response['success'] = true;
 				$response['messages'] = 'Deletion succeeded';	
 				
 			} else {
-				
 				$response['success'] = false;
+//				$response['messages'] = print $this->hospitalModel->getLastQuery();
 				$response['messages'] = 'Deletion error!';
-				
+
 			}
 		}	
 	

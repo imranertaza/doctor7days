@@ -5,6 +5,7 @@ namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
 use App\Libraries\Permission_hospital;
+use App\Models\Hospital_admin\DocavailabledayModel;
 use App\Models\Hospital_admin\DoctorModel;
 
 class Doctor extends BaseController
@@ -13,6 +14,7 @@ class Doctor extends BaseController
     protected $doctorModel;
     protected $validation;
     protected $permission;
+    protected $docavailabledayModel;
     private $module_name = 'Doctor';
 
     public function __construct()
@@ -21,6 +23,7 @@ class Doctor extends BaseController
         $this->doctorModel = new DoctorModel();
         $this->validation = \Config\Services::validation();
         $this->permission = new Permission_hospital();
+        $this->docavailabledayModel = new DocavailabledayModel();
 
     }
 
@@ -98,9 +101,11 @@ class Doctor extends BaseController
         }
         else {
             $result = $this->doctorModel->where('doc_id', $id)->first();
+            $abilDoc = $this->docavailabledayModel->where('doc_id', $id)->first();
             $data = [
                 'controller' => 'Hospital_admin/doctor',
                 'doctor' => $result,
+                'day' => $abilDoc,
             ];
             echo view('Hospital_admin/header');
             echo view('Hospital_admin/sidebar');
@@ -175,7 +180,7 @@ class Doctor extends BaseController
                 $response['messages'] = 'Insertion error!';
             }
         }
-        //return $this->response->setJSON($response);
+        return $this->response->setJSON($response);
     }
 
     public function updateBasic()
@@ -188,6 +193,45 @@ class Doctor extends BaseController
 
 
         if ($this->doctorModel->update($fields['doc_id'], $fields)) {
+
+            $response['success'] = true;
+            $response['messages'] = 'Data has been inserted successfully';
+
+        } else {
+
+            $response['success'] = false;
+            $response['messages'] = 'Insertion error!';
+
+        }
+
+
+        return $this->response->setJSON($response);
+    }
+
+    public function updateApoDay()
+    {
+        $response = array();
+        $h_Id = $this->session->h_Id;
+
+        $fields['doc_id'] = $this->request->getPost('doc_id');
+        $fields['saturday'] = $this->request->getPost('saturday');
+        $fields['sunday'] = $this->request->getPost('sunday');
+        $fields['monday'] = $this->request->getPost('monday');
+        $fields['tuesday'] = $this->request->getPost('tuesday');
+        $fields['wednesday'] = $this->request->getPost('wednesday');
+        $fields['thursday'] = $this->request->getPost('thursday');
+        $fields['friday'] = $this->request->getPost('friday');
+        $fields['saturday_time'] = $this->request->getPost('saturdayTime');
+        $fields['sunday_time'] = $this->request->getPost('sundayTime');
+        $fields['monday_time'] = $this->request->getPost('mondayTime');
+        $fields['tuesday_time'] = $this->request->getPost('tuesdayTime');
+        $fields['wednesday_time'] = $this->request->getPost('wednesdayTime');
+        $fields['thursday_time'] = $this->request->getPost('thursdayTime');
+        $fields['friday_time'] = $this->request->getPost('fridayTime');
+        $fields['createdBy'] = $h_Id;
+
+
+        if ($this->docavailabledayModel->update($fields['doc_id'], $fields)) {
 
             $response['success'] = true;
             $response['messages'] = 'Data has been inserted successfully';
@@ -237,6 +281,7 @@ class Doctor extends BaseController
         $fields['specialist_id'] = $this->request->getPost('specialistId');
         $fields['role_id'] = '1';
         $fields['h_id'] = $this->session->h_Id;
+        $fields['createdBy'] = $this->session->h_Id;
 
         $this->validation->setRules([
             'name' => ['label' => 'Name', 'rules' => 'required|max_length[155]'],
@@ -255,8 +300,11 @@ class Doctor extends BaseController
             $response['messages'] = $this->validation->listErrors();
 
         } else {
-
             if ($this->doctorModel->insert($fields)) {
+                $doc_id = $this->doctorModel->getInsertID();
+
+                $docApp['doc_id'] = $doc_id;
+                $this->docavailabledayModel->insert($docApp);
 
                 $response['success'] = true;
                 $response['messages'] = 'Data has been inserted successfully';
@@ -267,6 +315,7 @@ class Doctor extends BaseController
                 $response['messages'] = 'Insertion error!';
 
             }
+
         }
 
         return $this->response->setJSON($response);

@@ -176,8 +176,7 @@ class Admin extends BaseController
         return $this->response->setJSON($response);
 	}
 
-	public function edit()
-	{
+	public function edit(){
 
         $response = array();
 		

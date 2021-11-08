@@ -52,7 +52,7 @@
                     <select class="form-control in-c" name="upazila" id="subdistrict" onchange="checkCity(this.value)"
                             required>
                         <option value="">Please Select</option>
-                        <?php echo upazilaselect($upazila); ?>
+                        <?php echo upazilaselect(); ?>
                     </select>
                 </div>
 

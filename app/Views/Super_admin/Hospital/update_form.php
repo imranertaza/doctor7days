@@ -115,6 +115,20 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+                                                        <label for="cat_id"> Category: <span class="text-danger">*</span></label>
+                                                        <select class="form-control" name="cat_id" required>
+                                                            <option value="">Please Select</option>
+                                                            <?php foreach ($category as $item) {
+                                                                $sel =  ($item->hospital_cat_id == $hospital->hospital_cat_id)?'selected':'';
+                                                            ?>
+                                                                <option value="<?php echo $item->hospital_cat_id;?>" <?php echo $sel;?>><?php echo $item->name;?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
                                                         <label for="comment"> Comment: </label>
                                                         <textarea cols="40" rows="5" id="comment" name="comment"
                                                                   class="form-control"
@@ -156,8 +170,13 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col-md-6" id="imgRelode">
+                                                    <?php $img = (!empty($hospital->logo)) ? $hospital->logo : 'noimage.jpg'; ?>
+                                                    <img src="<?php echo base_url() ?>/assets/uplode/hospital/<?php echo $img ?>" style="max-width: 200px;">
+                                                </div>
 
-                                                <div class="col-md-6 text-center">
+
+                                                <div class="col-md-12 text-center">
                                                     <input type="hidden" id="h_id" name="h_id"
                                                            value="<?php echo $hospital->h_id; ?>" required>
                                                     <button type="submit" onclick="updateimage()" class="btn btn-success"
@@ -503,96 +522,64 @@
     }
 
     function updateimage() {
-        // reset the form
-        $(".form-control").removeClass('is-invalid').removeClass('is-valid');
+        $('#update-image').on('submit', function (e) {
 
-        // submit the add from
-        $.validator.setDefaults({
-            highlight: function (element) {
-                $(element).addClass('is-invalid').removeClass('is-valid');
-            },
-            unhighlight: function (element) {
-                $(element).removeClass('is-invalid').addClass('is-valid');
-            },
-            errorElement: 'div ',
-            errorClass: 'invalid-feedback',
-            errorPlacement: function (error, element) {
-                if (element.parent('.input-group').length) {
-                    error.insertAfter(element.parent());
-                } else if ($(element).is('.select')) {
-                    element.next().after(error);
-                } else if (element.hasClass('select2')) {
-                    //error.insertAfter(element);
-                    error.insertAfter(element.next());
-                } else if (element.hasClass('selectpicker')) {
-                    error.insertAfter(element.next());
-                } else {
-                    error.insertAfter(element);
-                }
-            },
-            submitHandler: function (form) {
-                var form = $('#update-image');
-                // remove the text-danger
-                $(".text-danger").remove();
+            e.preventDefault();
+            $.ajax({
+                url: "<?php echo base_url($controller . '/updateImage') ?>",
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "json",
+                beforeSend: function () {
+                    $('#up-image-btn').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function (response) {
+                    if (response.success === true) {
 
-                $.ajax({
-                    url: '<?php echo base_url($controller . '/updateImage') ?>',
-                    // type: 'post',
-                    method:"POST",
-                    data: form.serialize(), // /converting the form data into array and sending it to server
-                    // contentType: "application/json; charset=utf-8",
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    dataType: 'json',
-                    beforeSend: function () {
-                        $('#up-image-btn').html('<i class="fa fa-spinner fa-spin"></i>');
-                    },
-                    success: function (response) {
+                        Swal.fire({
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: response.messages,
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function() {
+                            document.getElementById("update-image").reset();
+                            $('#imgRelode').load(document.URL + ' #imgRelode');
+                        })
 
-                        if (response.success === true) {
+                    } else {
 
+                        if (response.messages instanceof Object) {
+                            $.each(response.messages, function (index, value) {
+                                var id = $("#" + index);
+
+                                id.closest('.form-control')
+                                    .removeClass('is-invalid')
+                                    .removeClass('is-valid')
+                                    .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+
+                                id.after(value);
+
+                            });
+                        } else {
                             Swal.fire({
                                 position: 'bottom-end',
-                                icon: 'success',
+                                icon: 'error',
                                 title: response.messages,
                                 showConfirmButton: false,
                                 timer: 1500
                             })
 
-                        } else {
-
-                            if (response.messages instanceof Object) {
-                                $.each(response.messages, function (index, value) {
-                                    var id = $("#" + index);
-
-                                    id.closest('.form-control')
-                                        .removeClass('is-invalid')
-                                        .removeClass('is-valid')
-                                        .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
-
-                                    id.after(value);
-
-                                });
-                            } else {
-                                Swal.fire({
-                                    position: 'bottom-end',
-                                    icon: 'error',
-                                    title: response.messages,
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-
-                            }
                         }
-                        $('#up-image-btn').html('Add');
                     }
-                });
+                    $('#up-image-btn').html('Update');
+                }
+            });
 
-                return false;
-            }
         });
-        $('#update-image').validate();
     }
 
 

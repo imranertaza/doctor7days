@@ -54,6 +54,14 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label for="specialist" class="lab-t"> Specialist: </label>
+                    <select class="form-control in-c" name="specialist" >
+                        <option value="">Please select</option>
+                        <?php echo getListInOption('', 'specialist_id', 'specialist_type_name', 'specialist') ?>
+                    </select>
+                </div>
+
             </div>
 
             <div class="col-12 p-1 row">

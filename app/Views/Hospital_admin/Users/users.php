@@ -40,23 +40,10 @@
                             <thead>
                             <tr>
                                 <th>User id</th>
-                                <th>H id</th>
                                 <th>Email</th>
-                                <th>Password</th>
                                 <th>Name</th>
                                 <th>Mobile</th>
-                                <th>Global address id</th>
-                                <th>Pic</th>
-                                <th>Role id</th>
                                 <th>Status</th>
-                                <th>Is default</th>
-                                <th>Permission</th>
-                                <th>CreatedBy</th>
-                                <th>CreatedDtm</th>
-                                <th>UpdatedBy</th>
-                                <th>UpdatedDtm</th>
-                                <th>Deleted</th>
-                                <th>DeletedRole</th>
 
                                 <th></th>
                             </tr>
@@ -74,7 +61,7 @@
     <!-- Add modal content -->
     <div id="add-modal" class="modal fade" tabindex="-1" role="dialog"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="text-center bg-info p-3">
                     <h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
@@ -82,22 +69,13 @@
                 <div class="modal-body">
                     <form id="add-form" class="pl-3 pr-3">
                         <div class="row">
-                            <input type="hidden" id="userId" name="userId" class="form-control" placeholder="User id" maxlength="11" required>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="hId"> H id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="hId" name="hId" class="form-control" placeholder="H id" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="email"> Email: <span class="text-danger">*</span> </label>
                                     <input type="text" id="email" name="email" class="form-control" placeholder="Email" maxlength="30" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="password"> Password: <span class="text-danger">*</span> </label>
                                     <input type="password" id="password" name="password" class="form-control" placeholder="Password" maxlength="155" required>
@@ -105,96 +83,38 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="name"> Name: <span class="text-danger">*</span> </label>
                                     <input type="text" id="name" name="name" class="form-control" placeholder="Name" maxlength="40" required>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="mobile"> Mobile: </label>
                                     <input type="number" id="mobile" name="mobile" class="form-control" placeholder="Mobile" maxlength="11" number="true" >
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="globalAddressId"> Global address id: </label>
-                                    <input type="number" id="globalAddressId" name="globalAddressId" class="form-control" placeholder="Global address id" maxlength="11" number="true" >
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="pic"> Pic: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="pic" name="pic" class="form-control" placeholder="Pic" maxlength="100" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="roleId"> Role id: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="roleId" name="roleId" class="form-control" placeholder="Role id" maxlength="11" number="true" required>
+
+                                    <select id="roleId" name="roleId" class="form-control" required>
+                                        <option value="">Please select</option>
+                                        <?php foreach ($role as $item) { ?>
+                                            <option value="<?php echo $item->role_id ?>"><?php echo $item->role ?></option>
+                                        <?php }?>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="status"> Status: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="status" name="status" class="form-control" placeholder="Status" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="isDefault"> Is default: <span class="text-danger">*</span> </label>
-                                    <input type="text" id="isDefault" name="isDefault" class="form-control" placeholder="Is default" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="permission"> Permission: <span class="text-danger">*</span> </label>
-                                    <textarea cols="40" rows="5" id="permission" name="permission" class="form-control" placeholder="Permission" required></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdBy"> CreatedBy: <span class="text-danger">*</span> </label>
-                                    <input type="number" id="createdBy" name="createdBy" class="form-control" placeholder="CreatedBy" maxlength="11" number="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="createdDtm"> CreatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="createdDtm" name="createdDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedBy"> UpdatedBy: </label>
-                                    <input type="number" id="updatedBy" name="updatedBy" class="form-control" placeholder="UpdatedBy" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="updatedDtm"> UpdatedDtm: <span class="text-danger">*</span> </label>
-                                    <input type="date" id="updatedDtm" name="updatedDtm" class="form-control" dateISO="true" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deleted"> Deleted: </label>
-                                    <input type="number" id="deleted" name="deleted" class="form-control" placeholder="Deleted" maxlength="11" number="true" >
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="deletedRole"> DeletedRole: </label>
-                                    <input type="number" id="deletedRole" name="deletedRole" class="form-control" placeholder="DeletedRole" maxlength="11" number="true" >
+                                    <select id="status" name="status" class="form-control" required>
+                                        <?php echo globalStatus(1) ;?>
+                                    </select>
                                 </div>
                             </div>
                         </div>

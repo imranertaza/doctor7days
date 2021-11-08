@@ -41,6 +41,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#image">Images</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#comments">Comments</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-12">
@@ -73,8 +76,10 @@
                                                     <div class="form-group">
                                                         <label for="description"> Description: <span
                                                                     class="text-danger">*</span></label>
-                                                        <textarea id="description" name="description" class="form-control"
-                                                                  placeholder="Description" required style="height: 300px;"><?php echo $blog->description; ?>
+                                                        <textarea id="description" name="description"
+                                                                  class="form-control"
+                                                                  placeholder="Description" required
+                                                                  style="height: 300px;"><?php echo $blog->description; ?>
 
                                                         </textarea>
                                                     </div>
@@ -118,7 +123,8 @@
                                                 <div class="col-md-6 pt-4">
                                                     <div class="form-group">
                                                         <label for="logo"> Featured Image: </label>
-                                                        <input type="file" id="featured_image" name="featured_image" class="form-control"
+                                                        <input type="file" id="featured_image" name="featured_image"
+                                                               class="form-control"
                                                                placeholder="Featured Image">
                                                     </div>
                                                 </div>
@@ -142,6 +148,52 @@
                                         </form>
                                     </div>
 
+                                    <div class="tab-pane container" id="comments">
+
+                                        <div class="row pt-4">
+                                            <div class="col-md-12">
+                                                <table id="data_table" class="table table-bordered table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th width="10">Id</th>
+                                                        <th>Name</th>
+                                                        <th>Email</th>
+                                                        <th>Comments</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <?php foreach ($blogcomments as $item) { ?>
+                                                        <tr>
+                                                            <td><?php echo $item->blog_comment_id; ?></td>
+                                                            <td><?php echo $item->name; ?></td>
+                                                            <td><?php echo $item->email; ?></td>
+                                                            <td><?php echo $item->comment; ?></td>
+                                                            <td>
+                                                                <?php $ch = '';
+                                                                $val = '1';
+                                                                if ($item->status == 1) {
+                                                                    $ch = 'checked';
+                                                                    $val = '0';
+                                                                }; ?>
+                                                                <input type="hidden" value="<?php echo $item->blog_comment_id; ?>" id="blcomId">
+                                                                <label class="switch">
+                                                                    <input type="checkbox" name="status" <?php echo $ch; ?>
+                                                                           value="<?php echo $val; ?>"
+                                                                           onchange="statusChange(this.value)">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
 
                                 </div>
                             </div>
@@ -161,6 +213,25 @@
 <!-- /.content-wrapper -->
 
 <script>
+
+    $(function () {
+        $('#data_table').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            //"ajax": {
+            //    "url": '<?php //echo base_url($controller . '/getAll') ?>//',
+            //    "type": "POST",
+            //    "dataType": "json",
+            //    async: "true"
+            //}
+        });
+    });
+
     function updateReg() {
         // reset the form
         $(".form-control").removeClass('is-invalid').removeClass('is-valid');
@@ -276,7 +347,7 @@
                             title: response.messages,
                             showConfirmButton: false,
                             timer: 1500
-                        }).then(function() {
+                        }).then(function () {
                             document.getElementById("update-image").reset();
                             $('#imgRelode').load(document.URL + ' #imgRelode');
                             $('#imgRelode2').load(document.URL + ' #imgRelode2');
@@ -319,4 +390,24 @@
         // Summernote
         $('#description').summernote()
     })
+
+    function statusChange(status) {
+        var id = $('#blcomId').val();
+
+        $.ajax({
+            url: "<?php echo base_url($controller . '/updateStatus') ?>",
+            method: "POST",
+            data: {id:id,status: status},
+            dataType: "json",
+            success: function (response) {
+                Swal.fire({
+                    position: 'bottom-end',
+                    icon: 'success',
+                    title: response.messages,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        });
+    }
 </script>

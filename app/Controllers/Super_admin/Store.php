@@ -65,7 +65,7 @@ class Store extends BaseController
 		
 	    $data['data'] = array();
  
-		$result = $this->storeModel->select('store_id, prod_id, quantity, unit, purchase_date, createdDtm, createdBy, updateDtm, updatedBy, deleted, deletedRole')->findAll();
+		$result = $this->storeModel->select('store_id, prod_id, name, quantity, unit, purchase_date, createdDtm, createdBy, updateDtm, updatedBy, deleted, deletedRole')->findAll();
 		
 		foreach ($result as $key => $value) {
 							
@@ -76,10 +76,7 @@ class Store extends BaseController
 			
 			$data['data'][$key] = array(
 				$value->store_id,
-				$value->prod_id,
-				$value->quantity,
-				$value->unit,
-				$value->purchase_date,
+				$value->name,
 
 				$ops,
 			);
@@ -113,30 +110,11 @@ class Store extends BaseController
 
         $response = array();
 
-        $fields['store_id'] = $this->request->getPost('storeId');
-        $fields['prod_id'] = $this->request->getPost('prodId');
-        $fields['quantity'] = $this->request->getPost('quantity');
-        $fields['unit'] = $this->request->getPost('unit');
-        $fields['purchase_date'] = $this->request->getPost('purchaseDate');
-        $fields['createdDtm'] = $this->request->getPost('createdDtm');
-        $fields['createdBy'] = $this->request->getPost('createdBy');
-        $fields['updateDtm'] = $this->request->getPost('updateDtm');
-        $fields['updatedBy'] = $this->request->getPost('updatedBy');
-        $fields['deleted'] = $this->request->getPost('deleted');
-        $fields['deletedRole'] = $this->request->getPost('deletedRole');
 
+        $fields['name'] = $this->request->getPost('name');
 
         $this->validation->setRules([
-            'prod_id' => ['label' => 'Prod id', 'rules' => 'required|numeric|max_length[11]'],
-            'quantity' => ['label' => 'Quantity', 'rules' => 'required|numeric|max_length[11]'],
-            'unit' => ['label' => 'Unit', 'rules' => 'required|numeric|max_length[11]'],
-            'purchase_date' => ['label' => 'Purchase date', 'rules' => 'required|valid_date'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required'],
-            'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'updateDtm' => ['label' => 'UpdateDtm', 'rules' => 'required'],
-            'updatedBy' => ['label' => 'UpdatedBy', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
+            'name' => ['label' => 'Name', 'rules' => 'required'],
 
         ]);
 
@@ -169,29 +147,11 @@ class Store extends BaseController
         $response = array();
 		
         $fields['store_id'] = $this->request->getPost('storeId');
-        $fields['prod_id'] = $this->request->getPost('prodId');
-        $fields['quantity'] = $this->request->getPost('quantity');
-        $fields['unit'] = $this->request->getPost('unit');
-        $fields['purchase_date'] = $this->request->getPost('purchaseDate');
-        $fields['createdDtm'] = $this->request->getPost('createdDtm');
-        $fields['createdBy'] = $this->request->getPost('createdBy');
-        $fields['updateDtm'] = $this->request->getPost('updateDtm');
-        $fields['updatedBy'] = $this->request->getPost('updatedBy');
-        $fields['deleted'] = $this->request->getPost('deleted');
-        $fields['deletedRole'] = $this->request->getPost('deletedRole');
+        $fields['name'] = $this->request->getPost('name');
 
 
         $this->validation->setRules([
-            'prod_id' => ['label' => 'Prod id', 'rules' => 'required|numeric|max_length[11]'],
-            'quantity' => ['label' => 'Quantity', 'rules' => 'required|numeric|max_length[11]'],
-            'unit' => ['label' => 'Unit', 'rules' => 'required|numeric|max_length[11]'],
-            'purchase_date' => ['label' => 'Purchase date', 'rules' => 'required|valid_date'],
-            'createdDtm' => ['label' => 'CreatedDtm', 'rules' => 'required'],
-            'createdBy' => ['label' => 'CreatedBy', 'rules' => 'required|numeric|max_length[11]'],
-            'updateDtm' => ['label' => 'UpdateDtm', 'rules' => 'required'],
-            'updatedBy' => ['label' => 'UpdatedBy', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deleted' => ['label' => 'Deleted', 'rules' => 'permit_empty|numeric|max_length[11]'],
-            'deletedRole' => ['label' => 'DeletedRole', 'rules' => 'permit_empty|numeric|max_length[11]'],
+            'name' => ['label' => 'Name', 'rules' => 'required'],
 
         ]);
 
