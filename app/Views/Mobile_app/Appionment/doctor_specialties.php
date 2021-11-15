@@ -31,6 +31,11 @@
                     </td>
                     <td style="font-size: 10px">
                         <a href="<?php echo base_url('Mobile_app/appionment/appionment_booking_form/'.$sp->doc_id )?>"><i class="flaticon-right-arrow"></i></a>
+<!--                        --><?php //if(!empty(newSession()->isPatientLogin) || newSession()->isPatientLogin == TRUE){ ?>
+<!--                            <a href="--><?php //echo base_url('Mobile_app/appionment/appionment_booking_form/'.$sp->doc_id )?><!--"><i class="flaticon-right-arrow"></i></a>-->
+<!--                        --><?php //}else{ ?>
+<!--                            <a href="--><?php //echo base_url('Mobile_app/Patient/login' )?><!--"><i class="flaticon-right-arrow"></i></a>-->
+<!--                        --><?php //} ?>
                     </td>
                 </tr>
                 <?php }?>

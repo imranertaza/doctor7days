@@ -196,155 +196,209 @@
                                             <div class="row pt-4">
 
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="saturday"> Saturday: </label>
-                                                        <select id="saturday" name="saturday" class="form-control">
-                                                            <option value="1" <?php if($day->saturday == 1){echo 'selected';}?> >Active</option>
-                                                            <option value="0" <?php if($day->saturday == 0){echo 'selected';}?>>Inactive</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="saturdayTime"> Saturday time: </label>
-                                                        <select id="saturdayTime" name="saturdayTime" class="form-control">
+                                                        <select id="saturdayTime" name="saturday" class="form-control">
                                                             <option value="">Please select</option>
-                                                            <option value="morning" <?php if($day->saturday_time == 'morning'){echo 'selected';}?> >Morning</option>
-                                                            <option value="evening" <?php if($day->saturday_time == 'evening'){echo 'selected';}?> >Evening</option>
-                                                            <option value="both" <?php if($day->saturday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                            <option value="morning" <?php if($day->saturday == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->saturday == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->saturday == 'both'){echo 'selected';}?>>Both</option>
                                                         </select>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="sunday"> Sunday: </label>
-                                                        <select id="sunday" name="sunday" class="form-control">
-                                                            <option value="1" <?php if($day->sunday == 1){echo 'selected';}?> >Active</option>
-                                                            <option value="0" <?php if($day->sunday == 0){echo 'selected';}?>>Inactive</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
+
                                                     <div class="form-group">
                                                         <label for="sundayTime"> Sunday time: </label>
 
-                                                        <select id="sundayTime" name="sundayTime" class="form-control">
+                                                        <select id="sundayTime" name="sunday" class="form-control">
                                                             <option value="">Please select</option>
-                                                            <option value="morning" <?php if($day->sunday_time == 'morning'){echo 'selected';}?> >Morning</option>
-                                                            <option value="evening" <?php if($day->sunday_time == 'evening'){echo 'selected';}?> >Evening</option>
-                                                            <option value="both" <?php if($day->sunday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                            <option value="morning" <?php if($day->sunday == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->sunday == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->sunday == 'both'){echo 'selected';}?>>Both</option>
                                                         </select>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="monday"> Monday: </label>
-                                                        <select id="monday" name="monday" class="form-control">
-                                                            <option value="1" <?php if($day->monday == 1){echo 'selected';}?> >Active</option>
-                                                            <option value="0" <?php if($day->monday == 0){echo 'selected';}?>>Inactive</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
+
                                                     <div class="form-group">
                                                         <label for="mondayTime"> Monday time: </label>
-                                                        <select id="mondayTime" name="mondayTime" class="form-control">
+                                                        <select id="mondayTime" name="monday" class="form-control">
                                                             <option value="">Please select</option>
-                                                            <option value="morning" <?php if($day->monday_time == 'morning'){echo 'selected';}?> >Morning</option>
-                                                            <option value="evening" <?php if($day->monday_time == 'evening'){echo 'selected';}?> >Evening</option>
-                                                            <option value="both" <?php if($day->monday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                            <option value="morning" <?php if($day->monday == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->monday == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->monday == 'both'){echo 'selected';}?>>Both</option>
                                                         </select>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="tuesday"> Tuesday: </label>
-                                                        <select id="tuesday" name="tuesday" class="form-control">
-                                                            <option value="1" <?php if($day->tuesday == 1){echo 'selected';}?> >Active</option>
-                                                            <option value="0" <?php if($day->tuesday == 0){echo 'selected';}?>>Inactive</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
+
                                                     <div class="form-group">
                                                         <label for="tuesdayTime"> Tuesday time: </label>
-                                                        <select id="tuesdayTime" name="tuesdayTime" class="form-control">
+                                                        <select id="tuesdayTime" name="tuesday" class="form-control">
                                                             <option value="">Please select</option>
-                                                            <option value="morning" <?php if($day->tuesday_time == 'morning'){echo 'selected';}?> >Morning</option>
-                                                            <option value="evening" <?php if($day->tuesday_time == 'evening'){echo 'selected';}?> >Evening</option>
-                                                            <option value="both" <?php if($day->tuesday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                            <option value="morning" <?php if($day->tuesday == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->tuesday == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->tuesday == 'both'){echo 'selected';}?>>Both</option>
                                                         </select>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="wednesday"> Wednesday: </label>
-                                                        <select id="wednesday" name="wednesday" class="form-control">
-                                                            <option value="1" <?php if($day->wednesday == 1){echo 'selected';}?> >Active</option>
-                                                            <option value="0" <?php if($day->wednesday == 0){echo 'selected';}?>>Inactive</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
+
                                                     <div class="form-group">
                                                         <label for="wednesdayTime"> Wednesday time: </label>
-                                                        <select id="wednesdayTime" name="wednesdayTime" class="form-control">
+                                                        <select id="wednesdayTime" name="wednesday" class="form-control">
                                                             <option value="">Please select</option>
-                                                            <option value="morning" <?php if($day->wednesday_time == 'morning'){echo 'selected';}?> >Morning</option>
-                                                            <option value="evening" <?php if($day->wednesday_time == 'evening'){echo 'selected';}?> >Evening</option>
-                                                            <option value="both" <?php if($day->wednesday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                            <option value="morning" <?php if($day->wednesday == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->wednesday == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->wednesday == 'both'){echo 'selected';}?>>Both</option>
                                                         </select>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="thursday"> Thursday: </label>
 
-                                                        <select id="thursday" name="thursday" class="form-control">
-                                                            <option value="1" <?php if($day->thursday == 1){echo 'selected';}?> >Active</option>
-                                                            <option value="0" <?php if($day->thursday == 0){echo 'selected';}?>>Inactive</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="thursdayTime"> Thursday time: </label>
-                                                        <select id="thursdayTime" name="thursdayTime" class="form-control">
+                                                        <select id="thursdayTime" name="thursday" class="form-control">
                                                             <option value="">Please select</option>
-                                                            <option value="morning" <?php if($day->thursday_time == 'morning'){echo 'selected';}?> >Morning</option>
-                                                            <option value="evening" <?php if($day->thursday_time == 'evening'){echo 'selected';}?> >Evening</option>
-                                                            <option value="both" <?php if($day->thursday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                            <option value="morning" <?php if($day->thursday == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->thursday == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->thursday == 'both'){echo 'selected';}?>>Both</option>
                                                         </select>
                                                     </div>
-                                                </div>
 
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="friday"> Friday: </label>
 
-                                                        <select id="friday" name="friday" class="form-control">
-                                                            <option value="1" <?php if($day->friday == 1){echo 'selected';}?> >Active</option>
-                                                            <option value="0" <?php if($day->friday == 0){echo 'selected';}?>>Inactive</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="fridayTime"> Friday time: </label>
 
-                                                        <select id="fridayTime" name="fridayTime" class="form-control">
+                                                        <select id="fridayTime" name="friday" class="form-control">
                                                             <option value="">Please select</option>
-                                                            <option value="morning" <?php if($day->friday_time == 'morning'){echo 'selected';}?> >Morning</option>
-                                                            <option value="evening" <?php if($day->friday_time == 'evening'){echo 'selected';}?> >Evening</option>
-                                                            <option value="both" <?php if($day->friday_time == 'both'){echo 'selected';}?>>Both</option>
+                                                            <option value="morning" <?php if($day->friday == 'morning'){echo 'selected';}?> >Morning</option>
+                                                            <option value="evening" <?php if($day->friday == 'evening'){echo 'selected';}?> >Evening</option>
+                                                            <option value="both" <?php if($day->friday == 'both'){echo 'selected';}?>>Both</option>
                                                         </select>
                                                     </div>
+
+                                                    <h5>Booking date</h5>
+                                                    <div class="row">
+                                                        <div class="form-group col-6">
+                                                            <label for="fridayTime"> Start Date: </label>
+                                                            <input type="date" class="form-control" name="appointment_start_date" value="<?php echo $day->appointment_start_date; ?>">
+                                                        </div>
+                                                        <div class="form-group col-6">
+                                                            <label for="fridayTime"> End Date: </label>
+                                                            <input type="date" class="form-control" name="appointment_end_date" value="<?php echo $day->appointment_end_date; ?>">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+
+
+                                                    <h5>Doctor available time </h5>
+                                                    <div class="row" style="border: 1px solid #eaeaeb; padding: 20px;">
+                                                        <div class="form-group col-12 text-center">
+                                                        <h5>Morning</h5>
+                                                        </div>
+                                                        <div class="form-group col-12">
+                                                            <h6>Start time</h6>
+                                                        </div>
+                                                        <div class="form-group col-6">
+                                                            <label for="fridayTime"> Hour: </label>
+                                                            <input type="text" class="form-control" name="morning_start_hour">
+                                                        </div>
+                                                        <div class="form-group col-6">
+                                                            <label for="fridayTime"> Minute: </label>
+                                                            <input type="text" class="form-control" name="morning_start_minute">
+                                                        </div>
+
+                                                        <div class="form-group col-12">
+                                                            <h6>End time</h6>
+                                                        </div>
+
+                                                        <div class="form-group col-6">
+                                                            <label for="fridayTime"> Hour: </label>
+                                                            <input type="text" class="form-control" name="morning_end_hour">
+                                                        </div>
+                                                        <div class="form-group col-6">
+                                                            <label for="fridayTime"> Minute: </label>
+                                                            <input type="text" class="form-control" name="morning_end_minute">
+                                                        </div>
+                                                        <div class="form-group col-12">
+                                                            <label for="fridayTime"> Total patient:  </label>
+                                                            <input type="text" class="form-control" name="qty_in_morning" value="<?php echo $day->qty_in_morning; ?>">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row mt-3" style="border: 1px solid #eaeaeb; padding: 20px;">
+                                                        <div class="form-group col-12 text-center">
+                                                            <h5>Evening</h5>
+                                                        </div>
+                                                        <div class="form-group col-12 ">
+                                                            <h6>Start time</h6>
+                                                        </div>
+                                                        <div class="form-group col-6">
+                                                            <?php
+                                                            $evStTi =  $day->evening_start_time;
+                                                            $evStTi =  '3:00';
+                                                            $sub =   '';
+                                                            $string = str_ireplace($sub, ": ", $evStTi);
+                                                            //echo $string;
+
+                                                            $search  = array('A', 'B','C');
+                                                            $replace = array('B');
+                                                            $subject = 'D';
+//                                                            echo str_replace($search, $replace, $subject);
+                                                            ?>
+                                                            <label for="fridayTime"> Hour: </label>
+                                                            <input type="text" class="form-control" name="evening_start_hour">
+                                                        </div>
+                                                        <div class="form-group col-6">
+                                                            <label for="fridayTime"> Minute: </label>
+                                                            <input type="text" class="form-control" name="evening_start_minute">
+                                                        </div>
+                                                        <div class="form-group col-12">
+                                                            <h6>End time</h6>
+                                                        </div>
+
+                                                        <div class="form-group col-6">
+                                                            <label for="fridayTime"> Hour: </label>
+                                                            <input type="text" class="form-control" name="evening_end_hour">
+                                                        </div>
+                                                        <div class="form-group col-6">
+                                                            <label for="fridayTime"> Minute: </label>
+                                                            <input type="text" class="form-control" name="evening_end_minute">
+                                                        </div>
+
+                                                        <div class="form-group col-12">
+                                                            <label for="fridayTime"> Total patient:  </label>
+                                                            <input type="text" class="form-control" name="qty_in_evening" value="<?php echo $day->qty_in_evening; ?>">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row mt-3" style="border: 1px solid #eaeaeb; padding: 20px;">
+                                                        <div class="form-group col-12 text-center">
+                                                            <h6>Holidays</h6>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <?php $holidays =  json_decode($day->holidays);
+                                                                foreach ($holidays as $row){
+                                                            ?>
+                                                            <div id="inputFormRow">
+                                                                <div class="input-group mb-3">
+                                                                    <input type="date" name="holidays[]" class="form-control"  autocomplete="off" value="<?php echo $row; ?>">
+                                                                    <div class="input-group-append">
+                                                                        <button id="removeRow" type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <?php } ?>
+
+                                                            <div id="newRow"></div>
+                                                            <button id="addRow" type="button" class="form-control" class="btn btn-default" ><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
                                                 <div class="col-md-12 text-right">
@@ -791,6 +845,24 @@
 
         });
     }
+
+    $("#addRow").click(function () {
+        var html = '';
+        html += '<div id="inputFormRow">';
+        html += '<div class="input-group mb-3">';
+        html += '<input type="date" name="holidays[]" class="form-control"  autocomplete="off">';
+        html += '<div class="input-group-append">';
+        html += '<button id="removeRow" type="button" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+        html += '</div>';
+        html += '</div>';
+
+        $('#newRow').append(html);
+    });
+
+    // remove row
+    $(document).on('click', '#removeRow', function () {
+        $(this).closest('#inputFormRow').remove();
+    });
 
 
 </script>

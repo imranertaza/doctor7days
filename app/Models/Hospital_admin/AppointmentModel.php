@@ -10,7 +10,7 @@ class AppointmentModel extends Model {
 	protected $primaryKey = 'appointment_id';
 	protected $returnType = 'object';
 	protected $useSoftDeletes = false;
-	protected $allowedFields = ['doc_id', 'pat_id', 'day', 'time', 'date', 'name', 'phone', 'serial_number', 'h_id', 'createdDtm', 'createdBy', 'updatedDtm', 'updatedBy', 'deleted', 'deletedRole'];
+	protected $allowedFields = ['doc_id', 'pat_id', 'day', 'time', 'date', 'name', 'phone', 'serial_number', 'h_id' ,'status' , 'createdDtm', 'createdBy', 'updatedDtm', 'updatedBy', 'deleted', 'deletedRole'];
 	protected $useTimestamps = false;
 	protected $createdField  = 'created_at';
 	protected $updatedField  = 'updated_at';

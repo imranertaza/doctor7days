@@ -22,12 +22,6 @@
 <section class="banner">
     <div class="row">
         <div class="col-12 p-3 ">
-            <form action="<?php echo base_url('Mobile_app/Diagnostic/specialist_search')?>" method="post">
-                <select class="btn-loca-select" name="specialist" style="float: right; margin-top: -10px;"  onchange="this.form.submit()">
-                    <option value="">Specialist select</option>
-                    <?php echo getListInOption('', 'specialist_id', 'specialist_type_name', 'specialist') ?>
-                </select>
-            </form>
             <a href="<?php echo base_url('Mobile_app/diagnostic/diagnostic_form') ?>" class="btn-loca"> <i
                         class="flaticon-pin"></i> Select your location</a>
 
@@ -43,7 +37,7 @@
                     <p class="tit-u mt-2"><b><?php echo $item->name; ?></b></p>
                 </div>
                 <div class="col-4 map">
-                    <a href="<?php echo base_url('Mobile_app/appionment/doctor_specialties/' . $item->h_id) ?>"
+                    <a href="<?php echo base_url('Mobile_app/Diagnostic/diagnostic_detail/' . $item->h_id) ?>"
                        class="btn btn-sm btn-col mt-2">Go</a>
                 </div>
             </div>
@@ -51,7 +45,9 @@
 
 
         <div class="col-12 p-3 pl-4 ">
+            <?php if (!empty($pager)){ ?>
             <b><?= $pager->links() ?></b>
+            <?php } ?>
 
         </div>
     </div>

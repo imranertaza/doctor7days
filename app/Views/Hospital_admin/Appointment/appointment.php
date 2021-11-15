@@ -25,23 +25,46 @@
           <div class="card">
             <div class="card-header">
               <div class="row">
-			  	<div class="col-md-8 mt-2">
+			  	<div class="col-md-4 mt-2">
 				  <h3 class="card-title">Appointment</h3>
 			  	</div>
-				<div class="col-md-4">
-					<?php if ($create == 1) { ?>
-				  		<button type="button" class="btn btn-block btn-success" onclick="add()" title="Add"> <i class="fa fa-plus"></i> Add</button>
-					<?php } ?>
+				<div class="col-md-8">
+                    <form action="<?php echo base_url($controller.'/search')?>" method="post">
+                        <div class="row">
+                        <div class="col-md-3">
+                            <select name="doc_id" class="form-control" required>
+                                <option value="">Please select</option>
+                                <?php foreach ($doctor as $item) {?>
+                                    <option value="<?php echo $item->doc_id;?>"><?php echo $item->name;?></option>
+                                <?php } ?>
+
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="time" class="form-control" required>
+                                <option value="">Please select</option>
+                                <option value="morning">Morning</option>
+                                <option value="evening">Evening</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="date" name="date" class="form-control" min="<?php echo date('Y-m-d') ?>" value="<?php echo date('Y-m-d') ?>" required>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-primary" >Filter</button>
+                        </div>
+                    </div>
+                    </form>
 				</div>
 			  </div>			  
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="data_table" class="table table-bordered table-striped">
+              <table id="data_table" class="table table-bordered table-striped" style="text-transform: capitalize;">
                 <thead>
                 <tr>
 					<th>Appointment id</th>
-					<th>Doc id</th>
+					<th>Doctor</th>
 					<th>Pat id</th>
 					<th>Day</th>
 					<th>Time</th>
@@ -49,15 +72,7 @@
 					<th>Name</th>
 					<th>Phone</th>
 					<th>Serial number</th>
-					<th>H id</th>
-					<th>CreatedDtm</th>
-					<th>CreatedBy</th>
-					<th>UpdatedDtm</th>
-					<th>UpdatedBy</th>
-					<th>Deleted</th>
-					<th>DeletedRole</th>
-
-					<th></th>
+					<th>Status</th>
                 </tr>
                 </thead>
               </table>
@@ -79,7 +94,7 @@
 					<h4 class="modal-title text-white" id="info-header-modalLabel">Add</h4>
 				</div>
 				<div class="modal-body">
-					<form id="add-form" class="pl-3 pr-3">								
+					<form id="add-form" class="pl-3 pr-3">
                         <div class="row">
  							<input type="hidden" id="appointmentId" name="appointmentId" class="form-control" placeholder="Appointment id" maxlength="11" required>
 						</div>
@@ -185,7 +200,7 @@
 						</div>
 						<div class="row">
 						</div>
-																				
+
 						<div class="form-group text-center">
 							<div class="btn-group">
 								<button type="submit" class="btn btn-success" id="add-form-btn">Add</button>
@@ -196,9 +211,9 @@
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->	
+	</div><!-- /.modal -->
 
-	<!-- Add modal content -->				
+	<!-- Add modal content -->
 	<div id="edit-modal" class="modal fade" tabindex="-1" role="dialog"
 		aria-hidden="true">
 		<div class="modal-dialog modal-xl">
@@ -313,7 +328,7 @@
 						</div>
 						<div class="row">
 						</div>
-											
+
 						<div class="form-group text-center">
 							<div class="btn-group">
 								<button type="submit" class="btn btn-success" id="edit-form-btn">Update</button>
@@ -325,7 +340,7 @@
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->			
+	</div><!-- /.modal -->
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
@@ -608,5 +623,41 @@
                   });
               }
           })
+      }
+
+      function appStatusChange(id,sta){
+
+          $.ajax({
+              url: '<?php echo base_url($controller.'/status_update') ?>',
+              type: 'post',
+              data: {
+                  appointment_id: id,status:sta
+              },
+              dataType: 'json',
+              success: function(response) {
+
+                  if (response.success === true) {
+                      Swal.fire({
+                          position: 'bottom-end',
+                          icon: 'success',
+                          title: response.messages,
+                          showConfirmButton: false,
+                          timer: 1500
+                      }).then(function() {
+                          $('#data_table').DataTable().ajax.reload(null, false).draw(false);
+                      })
+                  } else {
+                      Swal.fire({
+                          position: 'bottom-end',
+                          icon: 'error',
+                          title: response.messages,
+                          showConfirmButton: false,
+                          timer: 1500
+                      })
+
+
+                  }
+              }
+          });
       }
   </script>

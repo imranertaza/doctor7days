@@ -7,11 +7,13 @@ use App\Controllers\BaseController;
 use App\Libraries\Permission_hospital;
 
 use App\Models\Hospital_admin\AppointmentModel;
+use App\Models\Mobile_app\DoctorModel;
 
 class Appointment extends BaseController
 {
 	
     protected $appointmentModel;
+    protected $doctorModel;
     protected $validation;
     protected $session;
     protected $permission;
@@ -21,6 +23,7 @@ class Appointment extends BaseController
 	{
         $this->session = \Config\Services::session();
 	    $this->appointmentModel = new AppointmentModel();
+	    $this->doctorModel = new DoctorModel();
        	$this->validation =  \Config\Services::validation();
        	$this->permission = new Permission_hospital();
 		
@@ -36,18 +39,20 @@ class Appointment extends BaseController
             echo view('Hospital_admin/Login/login');
         }
         else {
+            $hId = $this->session->h_Id;
+            $doc = $this->doctorModel->where('h_id',$hId)->findAll();
 
             $data = [
                 'controller' => 'Hospital_admin/appointment',
-                'title' => 'Appointment'
+                'title' => 'Appointment',
+                'doctor' => $doc,
             ];
 
 
             $perm = $this->permission->module_permission_list($role_id, $this->module_name);
             foreach($perm as $key=>$val){
-                 //print $key." ,";
                  $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
-                 print $data['mod_access'];
+                 $data['mod_access'];
             }
 
             echo view('Hospital_admin/header');
@@ -69,34 +74,29 @@ class Appointment extends BaseController
 		
 	    $data['data'] = array();
  
-		$result = $this->appointmentModel->select('appointment_id, doc_id, pat_id, day, time, date, name, phone, serial_number, h_id, createdDtm, createdBy, updatedDtm, updatedBy, deleted, deletedRole')->findAll();
+		$result = $this->appointmentModel->select('appointment_id, doc_id, pat_id, day, time, date, name, phone, serial_number, status')->findAll();
 		
 		foreach ($result as $key => $value) {
-							
-			$ops = '<div class="btn-group">';
-			$ops .= '	<button type="button" class="btn btn-sm btn-info" onclick="edit('. $value->appointment_id .')"><i class="fa fa-edit"></i></button>';
-			$ops .= '	<button type="button" class="btn btn-sm btn-danger" onclick="remove('. $value->appointment_id .')"><i class="fa fa-trash"></i></button>';
-			$ops .= '</div>';
-			
+
+
+             $ch = ($value->status == 1)?'checked':'';
+             $val = ($value->status == 1)?'0':'1';
+
 			$data['data'][$key] = array(
 				$value->appointment_id,
-				$value->doc_id,
+				get_data_by_id('name','doctor','doc_id',$value->doc_id),
 				$value->pat_id,
 				$value->day,
 				$value->time,
-				$value->date,
+                globalDateFormat($value->date),
 				$value->name,
 				$value->phone,
 				$value->serial_number,
-				$value->h_id,
-				$value->createdDtm,
-				$value->createdBy,
-				$value->updatedDtm,
-				$value->updatedBy,
-				$value->deleted,
-				$value->deletedRole,
+                '<label class="switch" onchange="appStatusChange('.$value->appointment_id.','.$val.')">
+                  <input type="checkbox"  '.$ch.' >
+                  <span class="slider round"></span>
+                </label>',
 
-				$ops,
 			);
 		} 
 
@@ -280,6 +280,66 @@ class Appointment extends BaseController
 		}	
 	
         return $this->response->setJSON($response);		
-	}	
-		
+	}
+
+	public function search(){
+        $isLoggedInHospital = $this->session->isLoggedInHospital;
+        $role_id = $this->session->hospitalAdminRole;
+
+        if(!isset($isLoggedInHospital) || $isLoggedInHospital != TRUE)
+        {
+            echo view('Hospital_admin/Login/login');
+        }
+        else {
+
+            $hId = $this->session->h_Id;
+            $doc = $this->doctorModel->where('h_id',$hId)->findAll();
+            $data['doctor'] = $doc;
+
+            $data['controller'] = 'Hospital_admin/appointment';
+
+            $doc_id = $this->request->getPost('doc_id');
+            $time = $this->request->getPost('time');
+            $date = $this->request->getPost('date');
+            $where = ['doc_id' => $doc_id,'time' => $time,'date' => $date];
+            $data['result'] = $this->appointmentModel->where($where)->findAll();
+
+            $data['doc_id'] = $doc_id;
+            $data['time'] = $time;
+            $data['date'] = $date;
+
+            echo view('Hospital_admin/header');
+            echo view('Hospital_admin/sidebar');
+            echo view('Hospital_admin/Appointment/search', $data);
+            echo view('Hospital_admin/footer');
+        }
+    }
+
+
+    public function status_update()
+    {
+        $response = array();
+
+        $id = $this->request->getPost('appointment_id');
+        $status = $this->request->getPost('status');
+
+        $fields['appointment_id'] = $id;
+        $fields['status'] = $status;
+
+        if ($this->appointmentModel->update($fields['appointment_id'], $fields)) {
+
+            $response['success'] = true;
+            $response['messages'] = 'Update succeeded';
+
+        } else {
+
+            $response['success'] = false;
+            $response['messages'] = 'Update error!';
+
+        }
+
+
+        return $this->response->setJSON($response);
+    }
+
 }	
