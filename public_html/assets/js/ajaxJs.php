@@ -39,5 +39,9 @@
     //     $("#txtEditor").Editor();
     // });
 
+    function passShow(){
+        $('#password').attr('type', 'text');
+    }
+
 
 </script>

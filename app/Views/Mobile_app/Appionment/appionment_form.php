@@ -29,7 +29,8 @@
                 <?php echo session()->getFlashdata('message'); ?>
             <?php endif; ?>
         </div>
-        <form action="<?php echo base_url('mobile_app/appionment/diagnostic_center_list')?>" method="POST">
+<!--        <form action="--><?php //echo base_url('mobile_app/appionment/diagnostic_center_list')?><!--" method="POST">-->
+        <form action="<?php echo base_url('mobile_app/appionment/diagnostic_center_list') ?>" method="POST">
             <div class="col-12 p-3 in-fil">
 
                 <div class="form-group">
@@ -51,6 +52,13 @@
                     <select class="form-control in-c" name="upazila" id="subdistrict" onchange="checkCity(this.value)"  required>
                         <option value="">Please Select</option>
                         <?php echo upazilaselect(); ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="specialist" class="lab-t"> Specialist: </label>
+                    <select class="form-control in-c" name="specialist" >
+                        <option value="">Please select</option>
+                        <?php echo getListInOption('', 'specialist_id', 'specialist_type_name', 'specialist') ?>
                     </select>
                 </div>
 

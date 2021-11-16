@@ -2490,3 +2490,19 @@ function count_doctor_by_hospitalId_or_specialistId($hospitalId,$specialistId){
     $result = $table->where('h_id',$hospitalId)->where('specialist_id',$specialistId)->countAllResults();
     return $result;
 }
+
+function appionment_count($docId,$date,$time){
+    $where = ['doc_id' => $docId,'date' => $date,'time' => $time,'status' => '1'];
+    $table = DB()->table('appointment');
+    $query = $table->where($where);
+    $row = $query->countAllResults();
+    return $row;
+}
+
+function appionment_count_insert($docId,$date,$time){
+    $where = ['doc_id' => $docId,'date' => $date,'time' => $time];
+    $table = DB()->table('appointment');
+    $query = $table->where($where);
+    $row = $query->countAllResults();
+    return $row;
+}

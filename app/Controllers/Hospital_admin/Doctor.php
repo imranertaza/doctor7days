@@ -221,13 +221,30 @@ class Doctor extends BaseController
         $fields['wednesday'] = $this->request->getPost('wednesday');
         $fields['thursday'] = $this->request->getPost('thursday');
         $fields['friday'] = $this->request->getPost('friday');
-        $fields['saturday_time'] = $this->request->getPost('saturdayTime');
-        $fields['sunday_time'] = $this->request->getPost('sundayTime');
-        $fields['monday_time'] = $this->request->getPost('mondayTime');
-        $fields['tuesday_time'] = $this->request->getPost('tuesdayTime');
-        $fields['wednesday_time'] = $this->request->getPost('wednesdayTime');
-        $fields['thursday_time'] = $this->request->getPost('thursdayTime');
-        $fields['friday_time'] = $this->request->getPost('fridayTime');
+
+        $fields['appointment_start_date'] = $this->request->getPost('appointment_start_date');
+        $fields['appointment_end_date'] = $this->request->getPost('appointment_end_date');
+
+        $morStartTime = $this->request->getPost('morning_start_hour').':'.$this->request->getPost('morning_start_minute');
+        $fields['morning_start_time'] = $morStartTime;
+
+        $morEndTime = $this->request->getPost('morning_end_hour').':'.$this->request->getPost('morning_end_minute');
+        $fields['morning_end_time'] = $morEndTime;
+
+        $fields['qty_in_morning'] = $this->request->getPost('qty_in_morning');
+
+
+        $evStartTime = $this->request->getPost('evening_start_hour').':'.$this->request->getPost('evening_start_minute');
+        $fields['evening_start_time'] = $evStartTime;
+
+        $evEndTime = $this->request->getPost('evening_end_hour').':'.$this->request->getPost('evening_end_minute');
+        $fields['evening_end_time'] = $evEndTime;
+
+        $fields['qty_in_evening'] = $this->request->getPost('qty_in_evening');
+
+        $holIda = $this->request->getPost('holidays[]');
+        $fields['holidays'] = json_encode($holIda);
+
         $fields['createdBy'] = $h_Id;
 
 

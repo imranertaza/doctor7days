@@ -7,10 +7,9 @@
                    style="float: right;">My account</a>
             <?php } else {
                 ?>
-                <a href="<?php echo base_url('Mobile_app/Ambulance/register') ?>" class="btn-loca"
-                   style="float: right;">Register</a>
+                <a href="<?php echo base_url('Mobile_app/Ambulance/login') ?>" class="btn-loca"
+                   style="float: right;">Login</a>
             <?php } ?>
-
             <a href="<?php echo base_url('Mobile_app/home') ?>"><i class="flaticon-left-arrow back-icon"></i></a>
         </div>
     </div>

@@ -17,6 +17,20 @@
                 <a class="dropdown-item " href="<?php echo base_url('Mobile_app/Ambulance/logout');?>">Logout</a>
             </div>
             <?php }?>
+
+            <?php if (newSession()->isPatientLogin == true){?>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="<?php echo base_url('Mobile_app/Patient/dashboard/');?>">Dashboard</a>
+                    <a class="dropdown-item" href="<?php echo base_url('Mobile_app/Patient/profile');?>">Profile</a>
+                    <a class="dropdown-item" href="#">Inbox</a>
+                    <a class="dropdown-item " href="<?php echo base_url('Mobile_app/Patient/logout');?>">Logout</a>
+                </div>
+            <?php }else{?>
+            <div class="dropdown-menu">
+                <a class="dropdown-item " href="<?php echo base_url('Mobile_app/Patient/login');?>">Login</a>
+            </div>
+            <?php }?>
+
         </div>
     </div>
 </section>

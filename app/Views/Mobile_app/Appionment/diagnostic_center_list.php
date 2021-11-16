@@ -25,6 +25,18 @@
             <p class="sub-t">Clinic / Hospital / Diagnostic / Center List</p>
         </div>
 
+        <div class="col-12 p-3 ">
+            <form action="<?php echo base_url('Mobile_app/Diagnostic/specialist_search')?>" method="post">
+                <select class="btn-loca-select" name="specialist" style="float: right; margin-top: -10px;"  onchange="this.form.submit()">
+                    <option value="">Specialist select</option>
+                    <?php echo getListInOption('', 'specialist_id', 'specialist_type_name', 'specialist') ?>
+                </select>
+            </form>
+            <a href="<?php echo base_url('Mobile_app/Appionment') ?>" class="btn-loca"> <i
+                        class="flaticon-pin"></i> Select your location</a>
+
+        </div>
+
 
         <?php if(!empty($hospitalData)){foreach ($hospitalData as $item) {?>
         <div class="col-12 p-3 row">
