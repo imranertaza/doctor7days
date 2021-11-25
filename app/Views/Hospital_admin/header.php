@@ -19,11 +19,14 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url()?>/assets/css/adminlte.min.css">
     <link rel="stylesheet" href="<?php echo base_url()?>/assets/css/css.css">
+
+    <link rel="stylesheet" href="<?php echo base_url()?>/assets/css/richtext.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link href="<?php echo base_url()?>/assets/fontawesome/css/all.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="<?php echo base_url()?>/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>/assets/js/jquery.richtext.js"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -155,7 +158,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link text-center">
-            <img src="<?php echo base_url('assets/uplode/hospital/'.hospitalLogo())?>"
+            <img src="<?php echo base_url('assets/upload/hospital/'.newSession()->h_Id.'/'. hospitalLogo())?>"
                  alt="<?php echo hospitalName();?>"
                  class=" elevation-3"
                  style="opacity: .8;width: 200px;">

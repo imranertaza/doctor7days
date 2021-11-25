@@ -11,7 +11,7 @@
     <div class="row ">
         <div class="col-12 text-center" >
             <?php $image = (!empty($ambulance->image)) ? $ambulance->image : 'noimage.jpg'; ?>
-            <img src="<?php echo base_url('assets/uplode/ambulance/' . $image) ?>" alt="ambulance" >
+            <img src="<?php echo base_url('assets/upload/ambulance/'.$ambulance->ambulance_user_id.'/'. $image) ?>" alt="ambulance" >
         </div>
     </div>
 </section>

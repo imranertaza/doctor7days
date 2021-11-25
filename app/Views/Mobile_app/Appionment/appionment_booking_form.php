@@ -8,7 +8,22 @@
 
 <section class="category mt-1">
     <div class="row bg-c">
-        <img src="<?php echo base_url() ?>/assets/mobile/image/imgti.png" width="100%">
+        <div class="col-12 row">
+            <div class="col-2">
+                <i class="flaticon-checkup ti-icon"></i>
+            </div>
+            <div class="col-10 p-2">
+                <span class="title-m"><?php echo $hospital->name;?></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="category mt-1">
+    <div class="row bg-c">
+
+        <?php $banImg = (!empty($hospital->image))?$hospital->image:'imgti.png'; ?>
+        <img src="<?php echo base_url()?>/assets/upload/hospital/<?php echo $hospital->h_id;?>/<?php echo $banImg;?>" width="100%">
     </div>
 </section>
 
@@ -17,7 +32,7 @@
         <div class="col-12 p-3 row">
             <div class="col-6">
                 <?php $img = (!empty($specialties->pic)) ? $specialties->pic : 'noimage.jpg'; ?>
-                <img src="<?php echo base_url() ?>/assets/uplode/doctor/<?php echo $img ?>" width="100%">
+                <img src="<?php echo base_url() ?>/assets/upload/doctor/<?php echo $specialties->doc_id;?>/<?php echo $img ?>" width="100%">
             </div>
             <div class="col-6">
                 <p class="tit"><?php echo $specialties->name; ?></p>

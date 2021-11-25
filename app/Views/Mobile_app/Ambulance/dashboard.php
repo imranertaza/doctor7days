@@ -1,11 +1,12 @@
 
 
+
 <section class="category mt-5">
     <div class="row">
         <div class="col-12 p-3  in-fil text-center">
-            <?php if (!empty($image)){?>
+            <?php $userId = newSession()->user_id; if (!empty($image)){?>
                     <center>
-                        <img src="<?php echo base_url('assets/uplode/ambulance_user/'.$image)?>" alt="user" class="pro-img" >
+                        <img src="<?php echo base_url('assets/upload/ambulance/'.$userId.'/'.$image)?>" alt="user" class="pro-img" >
                     </center>
             <?php }else{?>
             <div class="af-pro">
@@ -32,7 +33,7 @@
                     <div class="col-6 " style="padding: 10px;">
                         <div class="product ">
                             <div class="col-12 pad-0">
-                                <img src="<?php echo base_url()?>/assets/uplode/ambulance/<?php echo $img;?>" width="100%">
+                                <img src="<?php echo base_url()?>/assets/upload/ambulance/<?php echo $item->ambulance_user_id;?>/<?php echo $img;?>" width="100%">
                             </div>
                             <div class="col-12 mt-4" style="line-height: 5px;">
                                 <p class="proName"><?php echo newSession()->name;?></p>

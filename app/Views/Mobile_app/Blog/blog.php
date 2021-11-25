@@ -28,10 +28,10 @@
             <div class="col-12 row pad-r-0 pt-4">
 
                 <div class="col-4 pad-0">
-                    <img src="<?php echo base_url()?>/assets/uplode/blog/<?php echo $item->featured_image;?>" width="100%">
+                    <img src="<?php echo base_url()?>/assets/upload/blog/<?php echo $item->post_id ;?>/<?php echo $item->featured_image;?>" width="100%">
                 </div>
                 <div class="col-8 pad-0 pl-2">
-                    <p class="b-st">Cardiologi</p>
+                    <p class="b-st">Administrator</p>
                     <p class="b-tf"><?php echo $item->title;?></p>
                     <p class="b-sd"><?php echo $item->createdDtm;?></p>
                 </div>

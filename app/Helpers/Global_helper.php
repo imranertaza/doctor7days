@@ -2401,7 +2401,9 @@ function hospitalProfilePic()
     $query = $table->where('h_id', $session->h_Id);
     $row = $query->countAllResults();
     if (!empty($row)) {
-        $view = $query->get()->getRow()->image;
+        $table2 = DB()->table('hospital');
+        $query2 = $table2->where('h_id', $session->h_Id);
+        $view = $query2->get()->getRow()->image;
     } else {
         $view = "noimage.jpg";
     }
@@ -2415,7 +2417,9 @@ function hospitalLogo()
     $query = $table->where('h_id', $session->h_Id);
     $row = $query->countAllResults();
     if (!empty($row)) {
-        $view = $query->get()->getRow()->logo;
+        $table2 = DB()->table('hospital');
+        $query2 = $table2->where('h_id', $session->h_Id);
+        $view = $query2->get()->getRow()->logo;
     } else {
         $view = "noimage.jpg";
     }
@@ -2505,4 +2509,11 @@ function appionment_count_insert($docId,$date,$time){
     $query = $table->where($where);
     $row = $query->countAllResults();
     return $row;
+}
+
+function price($tk = 0, $extension = 'Tk.')
+{
+//    $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+//    return $f->format($tk) . $extension;
+    return $extension.''.$tk;
 }

@@ -98,6 +98,7 @@ class Appionment extends BaseController
             $add = $gloaddre->first()->global_address_id;
 
             $hospital = $this->hospitalModel->where('hospital_cat_id !=',2)->where('global_address_id', $add)->findAll();
+
         } else {
             $hospital = array();
             $this->session->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Hospital not found this Address! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -124,9 +125,10 @@ class Appionment extends BaseController
     public function doctor_specialties($id)
     {
         $spec = $this->doctorModel->where('h_id', $id)->findAll();
-
-
         $data['specialties'] = $spec;
+
+        $data['hospital'] = $this->hospitalModel->where('h_id', $id)->first();
+
         echo view('Mobile_app/header');
         echo view('Mobile_app/Appionment/doctor_specialties', $data);
         echo view('Mobile_app/footer');
@@ -135,7 +137,7 @@ class Appionment extends BaseController
     public function doctor_specialties_appointment($id, $specialistId)
     {
         $spec = $this->doctorModel->where('h_id', $id)->where('specialist_id', $specialistId)->findAll();
-
+        $data['hospital'] = $this->hospitalModel->where('h_id', $id)->first();
         $data['specialties'] = $spec;
         echo view('Mobile_app/header');
         echo view('Mobile_app/Appionment/doctor_specialties', $data);
@@ -150,6 +152,10 @@ class Appionment extends BaseController
             $data['specialties'] = $spec;
 
             $data['avilDay'] = $this->docavailabledayModel->where('doc_id', $id)->first();
+
+            $h_id = get_data_by_id('h_id','doctor','doc_id',$id);
+
+            $data['hospital'] = $this->hospitalModel->where('h_id', $h_id)->first();
 
             echo view('Mobile_app/header');
             echo view('Mobile_app/Appionment/appionment_booking_form', $data);

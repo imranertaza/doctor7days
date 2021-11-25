@@ -20,6 +20,7 @@ class Settings extends BaseController
     protected $rolesModel;
     protected $globaladdressModel;
     protected $hospitalModel;
+    protected $crop;
     private $module_name = 'Users';
 
     public function __construct()
@@ -31,6 +32,7 @@ class Settings extends BaseController
         $this->rolesModel = new RolesModel();
         $this->globaladdressModel = new GlobaladdressModel();
         $this->hospitalModel = new HospitalModel() ;
+        $this->crop = \Config\Services::image();
 
     }
 
@@ -69,8 +71,6 @@ class Settings extends BaseController
         }
 
     }
-
-
 
     public function updateReg()
     {
@@ -156,24 +156,64 @@ class Settings extends BaseController
         $fields['h_id'] = $this->request->getPost('h_id');
         $logo = $this->request->getFile('logo');
         $image = $this->request->getFile('image');
-        $banner = $this->request->getFile('banner');
+        $target_dir = FCPATH . '/assets/upload/hospital/'.$fields['h_id'].'/';
+        if(!file_exists($target_dir)){
+            mkdir($target_dir,0655);
+        }
+
 
         if (!empty($_FILES['logo']['name'])) {
             $namelogo = $logo->getRandomName();
-            $logo->move(FCPATH . '\assets\uplode\hospital',$namelogo);
-            $fields['logo'] = $namelogo;
+            $logo->move($target_dir,$namelogo);
+            $lo_nameimg = 'lo_'.$logo->getName();
+            $this->crop->withFile($target_dir.''.$namelogo)->fit(220, 80, 'center')->save($target_dir.''.$lo_nameimg);
+            unlink($target_dir.''.$namelogo);
+            $fields['logo'] = $lo_nameimg;
         }
+
 
         if (!empty($_FILES['image']['name'])) {
+
             $nameimg = $image->getRandomName();
-            $image->move(FCPATH . '\assets\uplode\hospital',$nameimg);
-            $fields['image'] = $nameimg;
+            $image->move($target_dir, $nameimg);
+            $re_nameimg = 're_'.$image->getName();
+            $this->crop->withFile($target_dir.''.$nameimg)->fit(360, 122,'center')->save($target_dir.''.$re_nameimg);
+            unlink($target_dir.''.$nameimg);
+            $fields['image'] = $re_nameimg;
         }
 
-        if (!empty($_FILES['banner']['name'])) {
+
+        if (!empty($_FILES['banner_1']['name'])) {
+            $banner = $this->request->getFile('banner_1');
             $namebanner = $banner->getRandomName();
-            $banner->move(FCPATH . '\assets\uplode\hospital',$namebanner);
-            $fields['banner'] = $namebanner;
+            $banner->move($target_dir,$namebanner);
+
+            $n1img = 'bn_1_'.$banner->getName();
+            $this->crop->withFile($target_dir.''.$namebanner)->fit(328, 185, 'center')->save($target_dir.''.$n1img);
+            unlink($target_dir.''.$namebanner);
+            $fields['banner_1'] = $n1img;
+        }
+
+        if (!empty($_FILES['banner_2']['name'])) {
+            $banner2 = $this->request->getFile('banner_2');
+            $namebanner1 = $banner2->getRandomName();
+            $banner2->move($target_dir,$namebanner1);
+
+            $n2img = 'bn_2_'.$banner2->getName();
+            $this->crop->withFile($target_dir.''.$namebanner1)->fit(328, 185, 'center')->save($target_dir.''.$n2img);
+            unlink($target_dir.''.$namebanner1);
+            $fields['banner_2'] = $n2img;
+        }
+
+        if (!empty($_FILES['banner_3']['name'])) {
+            $banner3 = $this->request->getFile('banner_3');
+            $namebanner2 = $banner3->getRandomName();
+            $banner3->move($target_dir,$namebanner2);
+
+            $n3img = 'bn_3_'.$banner3->getName();
+            $this->crop->withFile($target_dir.''.$namebanner2)->fit(328, 185, 'center')->save($target_dir.''.$n3img);
+            unlink($target_dir.''.$namebanner2);
+            $fields['banner_3'] = $n3img;
         }
 
 

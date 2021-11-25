@@ -21,6 +21,7 @@ class Product extends BaseController
     protected $productCategoryModel;
     protected $brandModel;
     protected $storeModel;
+    protected $crop;
     private $module_name = 'Product';
 
     public function __construct()
@@ -32,6 +33,7 @@ class Product extends BaseController
         $this->productCategoryModel = new ProductCategoryModel();
         $this->brandModel = new BrandModel();
         $this->storeModel = new StoreModel();
+        $this->crop = \Config\Services::image();
 
     }
 
@@ -135,7 +137,7 @@ class Product extends BaseController
                 $value->quantity,
                 showUnitName($value->unit),
                 get_data_by_id('name','brand','brand_id',$value->brand_id),
-                '<img src="'.base_url('assets/uplode/product/'.$value->picture).'" width="80">',
+                '<img src="'.base_url('assets/upload/product/'.$value->prod_id.'/'.$value->picture).'" width="80">',
                 get_data_by_id('product_category','product_category','prod_cat_id',$value->prod_cat_id),
                 statusView($value->status),
 
@@ -193,12 +195,7 @@ class Product extends BaseController
         $fields['status'] = $this->request->getPost('status');
 
 
-        if (!empty($_FILES['picture']['name'])) {
-            $picture= $this->request->getFile('picture');
-            $name = $picture->getRandomName();
-            $picture->move(FCPATH . '\assets\uplode\product',$name);
-            $fields['picture'] = $name;
-        }
+
 
 
         $this->validation->setRules([
@@ -218,6 +215,28 @@ class Product extends BaseController
         } else {
 
             if ($this->productModel->insert($fields)) {
+                $proId = $this->productModel->getInsertID();
+
+                if (!empty($_FILES['picture']['name'])) {
+
+                    $target_dir = FCPATH . '/assets/upload/product/'.$proId.'/';
+                    if(!file_exists($target_dir)){
+                        mkdir($target_dir,0655);
+                    }
+
+                    $picture= $this->request->getFile('picture');
+                    $name = $picture->getRandomName();
+                    $picture->move($target_dir,$name);
+
+                    $lo_nameimg = 'pro_'.$picture->getName();
+                    $this->crop->withFile($target_dir.''.$name)->fit(172, 168, 'center')->save($target_dir.''.$lo_nameimg);
+                    unlink($target_dir.''.$name);
+                    $data['picture'] = $lo_nameimg;
+                    $data['prod_id'] = $proId;
+
+                    $this->productModel->update($data['prod_id'],$data);
+
+                }
 
                 $response['success'] = true;
                 $response['messages'] = 'Data has been inserted successfully';
@@ -249,10 +268,23 @@ class Product extends BaseController
         $fields['status'] = $this->request->getPost('status');
 
         if (!empty($_FILES['picture']['name'])) {
+
+            $target_dir = FCPATH . '/assets/upload/product/'.$fields['prod_id'].'/';
+            if(!file_exists($target_dir)){
+                mkdir($target_dir,0655);
+            }
+
             $picture= $this->request->getFile('picture');
             $name = $picture->getRandomName();
-            $picture->move(FCPATH . '\assets\uplode\product',$name);
-            $fields['picture'] = $name;
+            $picture->move($target_dir,$name);
+
+            $lo_nameimg = 'pro_'.$picture->getName();
+            $this->crop->withFile($target_dir.''.$name)->fit(172, 168, 'center')->save($target_dir.''.$lo_nameimg);
+            unlink($target_dir.''.$name);
+            $fields['picture'] = $lo_nameimg;
+
+
+
         }
 
         $this->validation->setRules([

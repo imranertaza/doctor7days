@@ -8,10 +8,10 @@
 
 <section class="category mt-1">
     <div class="row ">
-        <?php if (!empty($image)) { ?>
+        <?php $userId = newSession()->user_id;if (!empty($image)) { ?>
             <div class="col-12">
                 <center>
-                    <img src="<?php echo base_url('assets/uplode/ambulance_user/' .$image) ?>" alt="user"
+                    <img src="<?php echo base_url('assets/upload/ambulance/'.$userId.'/'.$image) ?>" alt="user"
                          class="pro-img">
                 </center>
                 <div class="small-icon-pro">

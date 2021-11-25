@@ -15,6 +15,7 @@ class Ambulance_dashboard extends BaseController
     protected $globaladdressModel;
     protected $ambulanceUserModel;
     protected $validation;
+    protected $crop;
     protected $session;
 
     public function __construct(){
@@ -24,6 +25,7 @@ class Ambulance_dashboard extends BaseController
         $this->pager = \Config\Services::pager();
         $this->session = \Config\Services::session();
         $this->validation = \Config\Services::validation();
+        $this->crop = \Config\Services::image();
     }
 
     public function index()
@@ -88,6 +90,7 @@ class Ambulance_dashboard extends BaseController
     }
 
     public  function update_action(){
+        $userId = $this->session->user_id;
         $data['amb_id'] = $this->request->getPost('amb_id');
         $data['car_model_name'] = $this->request->getPost('car_model_name');
         $data['oxygen'] = $this->request->getPost('oxygen');
@@ -113,10 +116,20 @@ class Ambulance_dashboard extends BaseController
 
         //image upload
         if (!empty($_FILES['image']['name'])) {
+
+            $target_dir = FCPATH . '/assets/upload/ambulance/'.$userId.'/';
+            if(!file_exists($target_dir)){
+                mkdir($target_dir,0655);
+            }
+
             $image = $this->request->getFile('image');
             $name = $image->getRandomName();
-            $image->move(FCPATH . '\assets\uplode\ambulance', $name);
-            $data['image'] = $name;
+            $image->move($target_dir, $name);
+            $lo_nameimg = 'am_'.$image->getName();
+            $this->crop->withFile($target_dir.''.$name)->fit(150, 145, 'center')->save($target_dir.''.$lo_nameimg);
+            unlink($target_dir.''.$name);
+
+            $data['image'] = $lo_nameimg;
         }
 
 
@@ -144,10 +157,19 @@ class Ambulance_dashboard extends BaseController
 
         //image upload
         if (!empty($_FILES['image']['name'])) {
+            $target_dir = FCPATH . '/assets/upload/ambulance/'.$userId.'/';
+            if(!file_exists($target_dir)){
+                mkdir($target_dir,0655);
+            }
+
             $image = $this->request->getFile('image');
             $name = $image->getRandomName();
-            $image->move(FCPATH . '\assets\uplode\ambulance', $name);
-            $data['image'] = $name;
+            $image->move($target_dir, $name);
+            $lo_nameimg = 'am_'.$image->getName();
+            $this->crop->withFile($target_dir.''.$name)->fit(150, 145, 'center')->save($target_dir.''.$lo_nameimg);
+            unlink($target_dir.''.$name);
+
+            $data['image'] = $lo_nameimg;
         }
 
         if ($this->ambulanceModel->insert($data)) {
@@ -195,10 +217,20 @@ class Ambulance_dashboard extends BaseController
 
             //image upload
             if (!empty($_FILES['photo']['name'])) {
+
+                $target_dir = FCPATH . '/assets/upload/ambulance/'.$userId.'/';
+                if(!file_exists($target_dir)){
+                    mkdir($target_dir,0655);
+                }
+
                 $image = $this->request->getFile('photo');
                 $name = $image->getRandomName();
-                $image->move(FCPATH . '\assets\uplode\ambulance_user', $name);
-                $data['photo'] = $name;
+                $image->move($target_dir, $name);
+                $lo_nameimg = 'am_'.$image->getName();
+                $this->crop->withFile($target_dir.''.$name)->fit(150, 145, 'center')->save($target_dir.''.$lo_nameimg);
+                unlink($target_dir.''.$name);
+
+                $data['photo'] = $lo_nameimg;
             }
 
             $this->ambulanceUserModel->update($data['ambulance_user_id'],$data);

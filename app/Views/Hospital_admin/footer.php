@@ -39,6 +39,11 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo base_url()?>/assets/js/demo.js"></script>
 <!-- page script -->
+<script>
+    $(document).ready(function() {
+        $('#description').richText();
+    });
+</script>
 
 </body>
 </html>

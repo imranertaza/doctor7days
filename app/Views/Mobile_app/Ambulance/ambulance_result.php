@@ -36,7 +36,7 @@
                 <div class="col-6 " style="padding: 10px;">
                     <div class="product ">
                         <div class="col-12 pad-0">
-                            <img src="<?php echo base_url()?>/assets/uplode/ambulance/<?php echo $img;?>" width="100%">
+                            <img src="<?php echo base_url()?>/assets/upload/ambulance/<?php echo $img;?>" width="100%">
                         </div>
                         <div class="col-12 mt-4" style="line-height: 5px;">
                             <p class="proName"><?php echo $item->contact_name;?></p>

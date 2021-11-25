@@ -20,6 +20,7 @@ class Hospital extends BaseController
     protected $rolesModel;
     protected $usersModel;
     protected $validation;
+    protected $crop;
     protected $session;
     protected $permission;
     private $module_name = 'Hospital';
@@ -34,7 +35,7 @@ class Hospital extends BaseController
         $this->session = \Config\Services::session();
         $this->permission = new Permission();
         $this->hospitalcategoryModel = new HospitalcategoryModel();
-		
+        $this->crop = \Config\Services::image();
 	}
 	
 	public function index()
@@ -74,7 +75,7 @@ class Hospital extends BaseController
 
 	    $data['data'] = array();
 
-		$result = $this->hospitalModel->select('h_id, name, description, email, global_address_id, mobile, comment, logo, image, banner, is_default, hospital_cat_id, status, createdDtm, updatedBy, updatedDtm, deleted, deletedRole')->findAll();
+		$result = $this->hospitalModel->select('h_id, name, description, email, global_address_id, mobile, comment, logo, image, banner_1, is_default, hospital_cat_id, status, createdDtm, updatedBy, updatedDtm, deleted, deletedRole')->findAll();
 
 		foreach ($result as $key => $value) {
 
@@ -227,18 +228,24 @@ class Hospital extends BaseController
     }
 
     public function updateImage(){
-        helper(['form', 'url']);
+
         $response = array();
 
         $fields['h_id'] = $this->request->getPost('h_id');
+
+        $target_dir = FCPATH . '/assets/upload/hospital/'.$fields['h_id'].'/';
+        if(!file_exists($target_dir)){
+            mkdir($target_dir,0655);
+        }
         $logo = $this->request->getFile('logo');
-//        $image = $this->request->getFile('image');
-//        $banner = $this->request->getFile('banner');
+        $namelogo = $logo->getRandomName();
+        $logo->move($target_dir,$namelogo);
+        $lo_nameimg = 'lo_'.$logo->getName();
+        $this->crop->withFile($target_dir.''.$namelogo)->fit(220, 80, 'center')->save($target_dir.''.$lo_nameimg);
+        unlink($target_dir.''.$namelogo);
+        $fields['logo'] = $lo_nameimg;
 
 
-//        if (!empty($_FILES['logo']['name'])){
-            $logo->move(FCPATH.'\assets\uplode\hospital');
-            $fields['logo'] = $logo->getClientName();
             if ($this->hospitalModel->update($fields['h_id'], $fields)) {
                 $response['success'] = true;
                 $response['messages'] = 'Data has been Update successfully';
@@ -246,22 +253,97 @@ class Hospital extends BaseController
                 $response['success'] = false;
                 $response['messages'] = 'Insertion error!';
             }
-//        }
-
-
-
-//        if ($this->hospitalModel->update($fields['h_id'], $fields)) {
-//            $response['success'] = true;
-//            $response['messages'] = 'Data has been Update successfully';
-//        } else {
-//            $response['success'] = false;
-//            $response['messages'] = 'Insertion error!';
-//        }
-//
-//
         return $this->response->setJSON($response);
     }
-	
+
+    public function updateBanner_1(){
+        $response = array();
+
+        $fields['h_id'] = $this->request->getPost('h_id');
+
+        $target_dir = FCPATH . '/assets/upload/hospital/'.$fields['h_id'].'/';
+        if(!file_exists($target_dir)){
+            mkdir($target_dir,0655);
+        }
+
+        $banner = $this->request->getFile('banner_1');
+        $namebanner = $banner->getRandomName();
+        $banner->move($target_dir,$namebanner);
+
+        $n1img = 'bn_1_'.$banner->getName();
+        $this->crop->withFile($target_dir.''.$namebanner)->fit(328, 185, 'center')->save($target_dir.''.$n1img);
+        unlink($target_dir.''.$namebanner);
+        $fields['banner_1'] = $n1img;
+
+
+            if ($this->hospitalModel->update($fields['h_id'], $fields)) {
+                $response['success'] = true;
+                $response['messages'] = 'Data has been Update successfully';
+            } else {
+                $response['success'] = false;
+                $response['messages'] = 'Insertion error!';
+            }
+        return $this->response->setJSON($response);
+    }
+
+    public function updateBanner_2(){
+        $response = array();
+
+        $fields['h_id'] = $this->request->getPost('h_id');
+        $target_dir = FCPATH . '/assets/upload/hospital/'.$fields['h_id'].'/';
+        if(!file_exists($target_dir)){
+            mkdir($target_dir,0655);
+        }
+
+        $banner2 = $this->request->getFile('banner_2');
+        $namebanner1 = $banner2->getRandomName();
+        $banner2->move($target_dir,$namebanner1);
+
+        $n2img = 'bn_2_'.$banner2->getName();
+        $this->crop->withFile($target_dir.''.$namebanner1)->fit(328, 185, 'center')->save($target_dir.''.$n2img);
+        unlink($target_dir.''.$namebanner1);
+        $fields['banner_2'] = $n2img;
+
+
+            if ($this->hospitalModel->update($fields['h_id'], $fields)) {
+                $response['success'] = true;
+                $response['messages'] = 'Data has been Update successfully';
+            } else {
+                $response['success'] = false;
+                $response['messages'] = 'Insertion error!';
+            }
+        return $this->response->setJSON($response);
+    }
+
+    public function updateBanner_3(){
+        $response = array();
+
+        $fields['h_id'] = $this->request->getPost('h_id');
+        $target_dir = FCPATH . '/assets/upload/hospital/'.$fields['h_id'].'/';
+        if(!file_exists($target_dir)){
+            mkdir($target_dir,0655);
+        }
+
+        $banner3 = $this->request->getFile('banner_3');
+        $namebanner2 = $banner3->getRandomName();
+        $banner3->move($target_dir,$namebanner2);
+
+        $n3img = 'bn_3_'.$banner3->getName();
+        $this->crop->withFile($target_dir.''.$namebanner2)->fit(328, 185, 'center')->save($target_dir.''.$n3img);
+        unlink($target_dir.''.$namebanner2);
+        $fields['banner_3'] = $n3img;
+
+
+            if ($this->hospitalModel->update($fields['h_id'], $fields)) {
+                $response['success'] = true;
+                $response['messages'] = 'Data has been Update successfully';
+            } else {
+                $response['success'] = false;
+                $response['messages'] = 'Insertion error!';
+            }
+        return $this->response->setJSON($response);
+    }
+
 	public function getOne()
 	{
  		$response = array();

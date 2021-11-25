@@ -16,15 +16,16 @@ class Patient extends BaseController
     protected $globaladdressModel;
     protected $appointmentModel;
     protected $validation;
+    protected $crop;
     protected $session;
 
     public function __construct(){
         $this->patientModel = new PatientModel();
         $this->appointmentModel = new AppointmentModel();
         $this->globaladdressModel = new GlobaladdressModel();
-        $this->pager = \Config\Services::pager();
         $this->session = \Config\Services::session();
         $this->validation = \Config\Services::validation();
+        $this->crop = \Config\Services::image();
     }
 
     public function index(){
@@ -101,10 +102,20 @@ class Patient extends BaseController
         }
 
         if (!empty($_FILES['photo']['name'])) {
+            $target_dir = FCPATH . '/assets/upload/patient/'.$userId.'/';
+            if(!file_exists($target_dir)){
+                mkdir($target_dir,0655);
+            }
+
             $photo = $this->request->getFile('photo');
             $name = $photo->getRandomName();
-            $photo->move(FCPATH . '\assets\uplode\patient', $name);
-            $data['photo'] = $name;
+            $photo->move($target_dir, $name);
+
+            $lo_nameimg = 'pa_'.$photo->getName();
+            $this->crop->withFile($target_dir.''.$name)->fit(100, 100, 'center')->save($target_dir.''.$lo_nameimg);
+            unlink($target_dir.''.$name);
+
+            $data['photo'] = $lo_nameimg;
         }
 
 

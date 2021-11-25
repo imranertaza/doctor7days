@@ -15,6 +15,7 @@ class Blogpost extends BaseController
     protected $blogpostModel;
     protected $blogcommentsModel;
     protected $validation;
+    protected $crop;
     protected $session;
     protected $permission;
     private $module_name = 'Blogpost';
@@ -26,7 +27,7 @@ class Blogpost extends BaseController
         $this->validation = \Config\Services::validation();
         $this->session = \Config\Services::session();
         $this->permission = new Permission();
-
+        $this->crop = \Config\Services::image();
     }
 
     public function index()
@@ -116,9 +117,9 @@ class Blogpost extends BaseController
                 $value->post_id,
                 $value->title,
                 $value->description,
-                '<img src="' . base_url() . '/assets/uplode/blog/' . $img . '"
+                '<img src="' . base_url() . '/assets/upload/blog/'.$value->post_id.'/'.$img . '"
                                                          width="100%">',
-                '<img src="' . base_url() . '/assets/uplode/blog/' . $featuredimg . '"
+                '<img src="' . base_url() . '/assets/upload/blog/'.$value->post_id.'/'.$featuredimg . '"
                                                          width="80">',
                 $value->tags,
 
@@ -176,15 +177,31 @@ class Blogpost extends BaseController
 
         } else {
 
-            $name = $image->getRandomName();
-            $image->move(FCPATH . '\assets\uplode\blog', $name);
-            $fields['image'] = $name;
-
-            $featured = $featured_image->getRandomName();
-            $featured_image->move(FCPATH . '\assets\uplode\blog', $featured);
-            $fields['featured_image'] = $featured;
-
             if ($this->blogpostModel->insert($fields)) {
+
+                $data['post_id'] = $this->blogpostModel->getInsertID();
+
+                $target_dir = FCPATH . '/assets/upload/blog/'.$data['post_id'].'/';
+                if(!file_exists($target_dir)){
+                    mkdir($target_dir,0655);
+                }
+
+                $name = $image->getRandomName();
+                $image->move($target_dir, $name);
+                $lo_nameimg = 'bI_'.$image->getName();
+                $this->crop->withFile($target_dir.''.$name)->fit(328, 185, 'center')->save($target_dir.''.$lo_nameimg);
+                unlink($target_dir.''.$name);
+                $data['image'] = $lo_nameimg;
+
+
+                $featured = $featured_image->getRandomName();
+                $featured_image->move($target_dir, $featured);
+                $fu_nameimg = 'bI_'.$featured_image->getName();
+                $this->crop->withFile($target_dir.''.$featured)->fit(150, 100, 'center')->save($target_dir.''.$fu_nameimg);
+                unlink($target_dir.''.$featured);
+                $data['featured_image'] = $fu_nameimg;
+
+                $this->blogpostModel->update($data['post_id'], $data);
 
                 $response['success'] = true;
                 $response['messages'] = 'Data has been inserted successfully';
@@ -245,17 +262,27 @@ class Blogpost extends BaseController
         $fields['post_id'] = $this->request->getPost('post_id');
         $image = $this->request->getFile('image');
         $featImage = $this->request->getFile('featured_image');
+        $target_dir = FCPATH . '/assets/upload/blog/'.$fields['post_id'].'/';
+        if(!file_exists($target_dir)){
+            mkdir($target_dir,0655);
+        }
 
         if (!empty($_FILES['image']['name'])) {
             $name = $image->getRandomName();
-            $image->move(FCPATH . '\assets\uplode\blog', $name);
-            $fields['image'] = $name;
+            $image->move($target_dir, $name);
+            $lo_nameimg = 'bI_'.$image->getName();
+            $this->crop->withFile($target_dir.''.$name)->fit(328, 185, 'center')->save($target_dir.''.$lo_nameimg);
+            unlink($target_dir.''.$name);
+            $fields['image'] = $lo_nameimg;
         }
 
         if (!empty($_FILES['featured_image']['name'])) {
             $fname = $featImage->getRandomName();
-            $featImage->move(FCPATH . '\assets\uplode\blog', $fname);
-            $fields['featured_image'] = $fname;
+            $featImage->move($target_dir, $fname);
+            $fu_nameimg = 'bI_'.$featImage->getName();
+            $this->crop->withFile($target_dir.''.$fname)->fit(150, 100, 'center')->save($target_dir.''.$fu_nameimg);
+            unlink($target_dir.''.$fname);
+            $fields['featured_image'] = $fu_nameimg;
         }
 
 

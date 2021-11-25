@@ -18,11 +18,13 @@
     <link rel="stylesheet" href="<?php echo base_url()?>/assets/css/responsive.bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo base_url()?>/assets/css/adminlte.min.css">
+    <link rel="stylesheet" href="<?php echo base_url()?>/assets/css/richtext.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link href="<?php echo base_url()?>/assets/fontawesome/css/all.css" rel="stylesheet">
     <!-- jQuery -->
     <script src="<?php echo base_url()?>/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url()?>/assets/js/jquery.richtext.js"></script>
     <!-- summernote -->
     <link rel="stylesheet" href="<?php echo base_url()?>/assets/plugins/summernote/summernote-bs4.min.css">
     <style>
@@ -88,6 +90,9 @@
 
         .slider.round:before {
             border-radius: 50%;
+        }
+        .img_style{
+            border: 1px solid #e5e5e5; padding: 10px;
         }
     </style>
 </head>

@@ -71,7 +71,6 @@
                 </div>
                 <div class="modal-body">
                     <form id="add-form" class="pl-3 pr-3" method="post" enctype="multipart/form-data">
-
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -121,7 +120,7 @@
 
                         <div class="form-group text-center">
                             <div class="btn-group">
-                                <button type="submit" class="btn btn-success" id="add-form-btn">Add</button>
+                                <button type="submit" class="btn btn-success" id="add-form-btn1">Add</button>
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -245,7 +244,7 @@
                         processData: false,
                         dataType: 'json',
                         beforeSend: function () {
-                            $('#add-form-btn').html('<i class="fa fa-spinner fa-spin"></i>');
+                            $('#add-form-btn1').html('<i class="fa fa-spinner fa-spin"></i>');
                         },
                         success: function (response) {
 
@@ -287,7 +286,7 @@
 
                                 }
                             }
-                            $('#add-form-btn').html('Add');
+                            $('#add-form-btn1').html('Add');
                         }
                     });
 
@@ -455,9 +454,4 @@
             }
         })
     }
-
-    $(function () {
-        // Summernote
-        $('#description').summernote()
-    })
 </script>

@@ -113,12 +113,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="photo"> Photo: <span class="text-danger">*</span> </label>
-                                    <input type="file" id="photo" name="photo" class="form-control" placeholder="Photo" maxlength="155" >
-                                </div>
-                            </div>
+<!--                            <div class="col-md-12">-->
+<!--                                <div class="form-group">-->
+<!--                                    <label for="photo"> Photo: <span class="text-danger">*</span> </label>-->
+<!--                                    <input type="file" id="photo" name="photo" class="form-control" placeholder="Photo" maxlength="155" >-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
 
                         <div class="form-group text-center">

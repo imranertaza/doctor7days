@@ -26,7 +26,7 @@
             <p class="bl-title"><?php echo $post->title;?></p>
         </div>
         <div class="col-12 p-3 pad-r-0">
-            <img src="<?php echo base_url()?>/assets/uplode/blog/<?php echo $post->image;?>" width="100%">
+            <img src="<?php echo base_url()?>/assets/upload/blog/<?php echo $post->post_id ;?>/<?php echo $post->image;?>" width="100%">
         </div>
         <div class="col-12 p-3 pad-r-0">
             <?php echo $post->description;?>

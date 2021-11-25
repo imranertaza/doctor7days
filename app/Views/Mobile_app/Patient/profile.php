@@ -11,7 +11,7 @@
         <?php if (!empty($patient->photo)) { ?>
             <div class="col-12">
                 <center>
-                    <img src="<?php echo base_url('assets/uplode/patient/'.$patient->photo)?>" alt="user"
+                    <img src="<?php echo base_url('assets/upload/patient/'.$patient->pat_id.'/'.$patient->photo)?>" alt="user"
                          class="pro-img">
                 </center>
                 <div class="small-icon-pro">

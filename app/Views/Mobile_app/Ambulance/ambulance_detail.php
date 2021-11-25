@@ -22,7 +22,7 @@
 <section class="banner" >
     <div class="row">
         <div class="col-12 p-3 text-center ">
-            <img src="<?php echo base_url('assets/uplode/ambulance/'.$ambulance->image)?>" >
+            <img src="<?php echo base_url('assets/upload/ambulance/'.$ambulance->ambulance_user_id.'/'.$ambulance->image)?>" >
         </div>
         <div class="col-6 p-3">
             <?php

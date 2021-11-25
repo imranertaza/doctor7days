@@ -116,7 +116,7 @@
 
                                                 <div class="col-md-6 text-center" id="imgRelode">
                                                     <?php $img = (!empty($blog->image)) ? $blog->image : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/uplode/blog/<?php echo $img; ?>"
+                                                    <img src="<?php echo base_url() ?>/assets/upload/blog/<?php echo $blog->post_id; ?>/<?php echo $img; ?>"
                                                          width="150">
                                                 </div>
 
@@ -131,7 +131,7 @@
 
                                                 <div class="col-md-6 text-center pt-4" id="imgRelode2">
                                                     <?php $img2 = (!empty($blog->featured_image)) ? $blog->featured_image : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/uplode/blog/<?php echo $img2; ?>"
+                                                    <img src="<?php echo base_url() ?>/assets/upload/blog/<?php echo $blog->post_id; ?>/<?php echo $img2; ?>"
                                                          width="150">
                                                 </div>
 
@@ -385,11 +385,6 @@
         });
 
     }
-
-    $(function () {
-        // Summernote
-        $('#description').summernote()
-    })
 
     function statusChange(status) {
         var id = $('#blcomId').val();

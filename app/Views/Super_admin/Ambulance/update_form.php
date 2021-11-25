@@ -228,8 +228,7 @@
 
                                     <div class="tab-pane container" id="image">
                                         <!--    id="update-image"   action="<?php //echo base_url($controller . '/updateImage') ?>" method="Post"-->
-                                        <form id="update-image" method="Post" class="pl-3 pr-3"
-                                              enctype="multipart/form-data">
+                                        <form id="update-image" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
                                             <div class="row pt-4">
 
                                                 <div class="col-md-6">
@@ -242,7 +241,7 @@
 
                                                 <div class="col-md-6 text-center" id="imgRelode">
                                                     <?php $img = (!empty($ambulance->image)) ? $ambulance->image : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/uplode/ambulance/<?php echo $img; ?>"
+                                                    <img src="<?php echo base_url() ?>/assets/upload/ambulance/<?php echo $ambulance->ambulance_user_id; ?>/<?php echo $img; ?>"
                                                          width="150">
                                                 </div>
 

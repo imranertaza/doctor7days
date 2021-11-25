@@ -173,7 +173,7 @@
                                                 </div>
                                                 <div class="col-md-6" id="imgRelode">
                                                     <?php $img = (!empty($doctor->pic)) ? $doctor->pic : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/uplode/doctor/<?php echo $img ?>"
+                                                    <img src="<?php echo base_url() ?>/assets/upload/doctor/<?php echo $doctor->doc_id;?>/<?php echo $img ?>"
                                                          style="max-width: 200px;">
                                                 </div>
 
@@ -191,6 +191,7 @@
                                     </div>
 
                                     <div class="tab-pane container" id="avilDay">
+
 
                                         <form id="update-avilDay" class="pl-3 pr-3">
                                             <div class="row pt-4">
@@ -381,8 +382,8 @@
                                                             <h6>Holidays</h6>
                                                         </div>
                                                         <div class="col-12">
-                                                            <?php $holidays =  json_decode($day->holidays);
-                                                                foreach ($holidays as $row){
+                                                            <?php  $holidays =  json_decode($day->holidays);
+                                                            if (!empty($holidays)){ foreach ($holidays as $row){
                                                             ?>
                                                             <div id="inputFormRow">
                                                                 <div class="input-group mb-3">
@@ -392,7 +393,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <?php } ?>
+                                                            <?php } } ?>
 
                                                             <div id="newRow"></div>
                                                             <button id="addRow" type="button" class="form-control" class="btn btn-default" ><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -402,8 +403,8 @@
                                                 </div>
 
                                                 <div class="col-md-12 text-right">
-                                                    <input type="hidden" id="doc_id" name="doc_id"
-                                                           value="<?php echo $doctor->doc_id; ?>" required>
+                                                    <input type="hidden" id="doc_avil_id" name="doc_avil_id"
+                                                           value="<?php echo $day->doc_avil_id; ?>" required>
                                                     <button type="submit" onclick="updateavilavil()"
                                                             class="btn btn-success"
                                                             id="up-avilDay-btn" style="margin-top: 30px;">Update

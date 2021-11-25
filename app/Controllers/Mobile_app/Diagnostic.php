@@ -5,6 +5,7 @@ namespace App\Controllers\Mobile_app;
 
 use App\Controllers\BaseController;
 use App\Models\Hospital_admin\SpecialistModel;
+use App\Models\Hospital_admin\TestModel;
 use App\Models\Mobile_app\DoctorModel;
 use App\Models\Mobile_app\GlobaladdressModel;
 use App\Models\Mobile_app\HospitalModel;
@@ -16,6 +17,7 @@ class Diagnostic extends BaseController
     protected $hospitalModel;
     protected $specialistModel;
     protected $doctorModel;
+    protected $testModel;
     protected $globaladdressModel;
     protected $session;
     protected $pager;
@@ -27,6 +29,7 @@ class Diagnostic extends BaseController
         $this->doctorModel = new DoctorModel();
         $this->globaladdressModel = new GlobaladdressModel();
         $this->session = \Config\Services::session();
+        $this->testModel = new TestModel();
     }
 
     public function index()
@@ -97,7 +100,20 @@ class Diagnostic extends BaseController
     }
 
     public function diagnostic_detail($id){
-        print $id;
+        $data['hospital'] = $this->hospitalModel->where('h_id', $id)->first();
+        $data['test'] = $this->testModel->where('h_id', $id)->findAll();
+        echo view('Mobile_app/header');
+        echo view('Mobile_app/Diagnostic/diagnostic_detail',$data);
+        echo view('Mobile_app/footer');
+    }
+
+    public function test_detail($id){
+        $hid = get_data_by_id('h_id','tests','test_id',$id);
+        $data['hospital'] = $this->hospitalModel->where('h_id', $hid)->first();
+        $data['test'] = $this->testModel->where('test_id', $id)->first();
+        echo view('Mobile_app/header');
+        echo view('Mobile_app/Diagnostic/test_detail',$data);
+        echo view('Mobile_app/footer');
     }
 
 
