@@ -17,6 +17,7 @@ class Users extends BaseController
     protected $session;
     protected $permission;
     protected $rolesModel;
+    protected $crop;
     protected $globaladdressModel;
     private $module_name = 'Users';
 
@@ -28,6 +29,7 @@ class Users extends BaseController
         $this->permission = new Permission_hospital();
         $this->rolesModel = new RolesModel();
         $this->globaladdressModel = new GlobaladdressModel();
+        $this->crop = \Config\Services::image();
     }
 
     public function index()
@@ -350,10 +352,20 @@ class Users extends BaseController
         $fields['user_id'] = $this->request->getPost('user_id');
         $image = $this->request->getFile('pic');
 
+        $target_dir = FCPATH .'/assets/upload/users/'.$fields['user_id'].'/';
+        if(!file_exists($target_dir)){
+            mkdir($target_dir,0655);
+        }
+
         if (!empty($_FILES['pic']['name'])) {
             $name = $image->getRandomName();
-            $image->move(FCPATH . '\assets\uplode\users',$name);
-            $fields['pic'] = $name;
+            $image->move($target_dir,$name);
+
+            $lo_nameimg = 'us_'.$image->getName();
+            $this->crop->withFile($target_dir.''.$name)->fit(100, 100, 'center')->save($target_dir.''.$lo_nameimg);
+            unlink($target_dir.''.$name);
+
+            $fields['pic'] = $lo_nameimg;
         }
 
 

@@ -159,20 +159,18 @@
 
 
                                     <div class="tab-pane container" id="image">
-<!--    id="update-image"   action="<?php //echo base_url($controller . '/updateImage') ?>" method="Post"-->
                                         <form id="update-image" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
-                                            <div class="row pt-4">
-
+                                            <div class="row pt-4 mt-4 img_style" >
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="logo"> Logo: </label>
-                                                        <input type="file" id="logo" name="logo" class="form-control" placeholder="Logo"  >
+                                                        <input type="file" id="logo" name="logo" class="form-control" required  >
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6" id="imgRelode">
                                                     <?php $img = (!empty($hospital->logo)) ? $hospital->logo : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/uplode/hospital/<?php echo $img ?>" style="max-width: 200px;">
+                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id;?>/<?php echo $img ?>" style="max-width: 200px;">
                                                 </div>
 
 
@@ -181,6 +179,84 @@
                                                            value="<?php echo $hospital->h_id; ?>" required>
                                                     <button type="submit" onclick="updateimage()" class="btn btn-success"
                                                             id="up-image-btn" style="margin-top: 30px;">Update
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <form id="update-image-banner1" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
+                                            <div class="row pt-4 mt-4 img_style" >
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="logo"> Banner one: </label>
+                                                        <input type="file" id="banner_1" name="banner_1" class="form-control"  required >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6" id="imgRelode1">
+                                                    <?php $img1 = (!empty($hospital->banner_1)) ? $hospital->banner_1 : 'noimage.jpg'; ?>
+                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id;?>/<?php echo $img1 ?>" style="max-width: 200px;">
+                                                </div>
+
+
+                                                <div class="col-md-12 text-center">
+                                                    <input type="hidden" id="h_id" name="h_id"
+                                                           value="<?php echo $hospital->h_id; ?>" required>
+                                                    <button type="submit" onclick="updateimage1()" class="btn btn-success"
+                                                            id="up-image-btn1" style="margin-top: 30px;">Update
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <form id="update-image-banner2" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
+                                            <div class="row pt-4 mt-4 img_style" >
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="logo"> Banner two: </label>
+                                                        <input type="file" id="banner_2" name="banner_2" class="form-control"  required >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6" id="imgRelode2">
+                                                    <?php $img2 = (!empty($hospital->banner_2)) ? $hospital->banner_2 : 'noimage.jpg'; ?>
+                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id;?>/<?php echo $img2 ?>" style="max-width: 200px;">
+                                                </div>
+
+
+                                                <div class="col-md-12 text-center">
+                                                    <input type="hidden" id="h_id" name="h_id"
+                                                           value="<?php echo $hospital->h_id; ?>" required>
+                                                    <button type="submit" onclick="updateimage2()" class="btn btn-success"
+                                                            id="up-image-btn2" style="margin-top: 30px;">Update
+                                                    </button>
+
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <form id="update-image-banner3" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
+                                            <div class="row pt-4 mt-4 img_style" >
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="logo"> Banner three: </label>
+                                                        <input type="file" id="banner_3" name="banner_3" class="form-control"  required >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6" id="imgRelode3">
+                                                    <?php $img3 = (!empty($hospital->banner_3)) ? $hospital->banner_3 : 'noimage.jpg'; ?>
+                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id;?>/<?php echo $img3 ?>" style="max-width: 200px;">
+                                                </div>
+
+
+                                                <div class="col-md-12 text-center">
+                                                    <input type="hidden" id="h_id" name="h_id"
+                                                           value="<?php echo $hospital->h_id; ?>" required>
+                                                    <button type="submit" onclick="updateimage3()" class="btn btn-success"
+                                                            id="up-image-btn3" style="margin-top: 30px;">Update
                                                     </button>
 
                                                 </div>
@@ -523,7 +599,6 @@
 
     function updateimage() {
         $('#update-image').on('submit', function (e) {
-
             e.preventDefault();
             $.ajax({
                 url: "<?php echo base_url($controller . '/updateImage') ?>",
@@ -576,6 +651,177 @@
                         }
                     }
                     $('#up-image-btn').html('Update');
+                }
+            });
+
+        });
+    }
+
+    function updateimage1() {
+        $('#update-image-banner1').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?php echo base_url($controller . '/updateBanner_1') ?>",
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "json",
+                beforeSend: function () {
+                    $('#up-image-btn1').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function (response) {
+                    if (response.success === true) {
+
+                        Swal.fire({
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: response.messages,
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function() {
+                            document.getElementById("update-image-banner1").reset();
+                            $('#imgRelode1').load(document.URL + ' #imgRelode1');
+                        })
+
+                    } else {
+
+                        if (response.messages instanceof Object) {
+                            $.each(response.messages, function (index, value) {
+                                var id = $("#" + index);
+                                id.closest('.form-control')
+                                    .removeClass('is-invalid')
+                                    .removeClass('is-valid')
+                                    .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+                                id.after(value);
+                            });
+                        } else {
+                            Swal.fire({
+                                position: 'bottom-end',
+                                icon: 'error',
+                                title: response.messages,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+
+                        }
+                    }
+                    $('#up-image-btn1').html('Update');
+                }
+            });
+
+        });
+    }
+
+    function updateimage2() {
+        $('#update-image-banner2').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?php echo base_url($controller . '/updateBanner_2') ?>",
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "json",
+                beforeSend: function () {
+                    $('#up-image-btn2').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function (response) {
+                    if (response.success === true) {
+
+                        Swal.fire({
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: response.messages,
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function() {
+                            document.getElementById("update-image-banner2").reset();
+                            $('#imgRelode2').load(document.URL + ' #imgRelode2');
+                        })
+
+                    } else {
+
+                        if (response.messages instanceof Object) {
+                            $.each(response.messages, function (index, value) {
+                                var id = $("#" + index);
+                                id.closest('.form-control')
+                                    .removeClass('is-invalid')
+                                    .removeClass('is-valid')
+                                    .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+                                id.after(value);
+                            });
+                        } else {
+                            Swal.fire({
+                                position: 'bottom-end',
+                                icon: 'error',
+                                title: response.messages,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+
+                        }
+                    }
+                    $('#up-image-btn2').html('Update');
+                }
+            });
+
+        });
+    }
+
+    function updateimage3() {
+        $('#update-image-banner3').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "<?php echo base_url($controller . '/updateBanner_3') ?>",
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: "json",
+                beforeSend: function () {
+                    $('#up-image-btn3').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function (response) {
+                    if (response.success === true) {
+
+                        Swal.fire({
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: response.messages,
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(function() {
+                            document.getElementById("update-image-banner3").reset();
+                            $('#imgRelode3').load(document.URL + ' #imgRelode3');
+                        })
+
+                    } else {
+
+                        if (response.messages instanceof Object) {
+                            $.each(response.messages, function (index, value) {
+                                var id = $("#" + index);
+                                id.closest('.form-control')
+                                    .removeClass('is-invalid')
+                                    .removeClass('is-valid')
+                                    .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+                                id.after(value);
+                            });
+                        } else {
+                            Swal.fire({
+                                position: 'bottom-end',
+                                icon: 'error',
+                                title: response.messages,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+
+                        }
+                    }
+                    $('#up-image-btn3').html('Update');
                 }
             });
 

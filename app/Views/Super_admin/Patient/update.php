@@ -130,7 +130,7 @@
 
                                                 <div class="col-md-6" id="imgRelode">
                                                     <?php $img = (!empty($patient->photo)) ? $patient->photo : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/uplode/patient/<?php echo $img ?>" style="max-width: 200px;">
+                                                    <img src="<?php echo base_url() ?>/assets/upload/patient/<?php echo $patient->pat_id;?>/<?php echo $img ?>" style="max-width: 200px;">
                                                 </div>
 
 

@@ -154,16 +154,6 @@
                             </div>
                         </div>
                         <div class="row">
-<!--                            <div class="col-md-12">-->
-<!--                                <div class="form-group">-->
-<!--                                    <label for="location"> Location: <span class="text-danger">*</span> </label>-->
-<!---->
-<!--                                    <select class="form-control" id="location" name="location" onchange="viewdistrict(this.value)" required >-->
-<!--                                        <option value="">Please Select</option>-->
-<!--                                        --><?php //echo divisionView() ; ?>
-<!--                                    </select>-->
-<!--                                </div>-->
-<!--                            </div>-->
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="dailyTime"> Daily time: <span class="text-danger">*</span> </label>
@@ -320,10 +310,11 @@
                 $("#edit-form")[0].reset();
                 $(".form-control").removeClass('is-invalid').removeClass('is-valid');
                 $('#edit-modal').modal('show');
+                $("#edit-form #description").unRichText();
 
                 $("#edit-form #jobId").val(response.job_id);
                 $("#edit-form #title").val(response.title);
-                $("#edit-form #description").val(response.description);
+                $("#edit-form #description").val(response.description).richText();
                 $("#edit-form #salary").val(response.salary);
                 $("#edit-form #location").val(response.location);
                 $("#edit-form #dailyTime").val(response.daily_time);

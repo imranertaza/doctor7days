@@ -282,3 +282,8 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.img_div{
+  border: 1px solid #e1e1e1;
+  padding: 10px;
+}

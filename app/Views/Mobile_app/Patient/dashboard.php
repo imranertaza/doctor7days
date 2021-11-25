@@ -5,7 +5,7 @@
         <div class="col-12 p-3  in-fil text-center">
             <?php if (!empty($patient->photo)){?>
                 <center>
-                    <img src="<?php echo base_url('assets/uplode/patient/'.$patient->photo)?>" alt="user" class="pro-img" >
+                    <img src="<?php echo base_url('assets/upload/patient/'.$patient->pat_id.'/'.$patient->photo)?>" alt="user" class="pro-img" >
                 </center>
             <?php }else{?>
                 <div class="af-pro">

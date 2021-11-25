@@ -13,6 +13,7 @@ class Doctor extends BaseController
     protected $session;
     protected $doctorModel;
     protected $validation;
+    protected $crop;
     protected $permission;
     protected $docavailabledayModel;
     private $module_name = 'Doctor';
@@ -24,6 +25,7 @@ class Doctor extends BaseController
         $this->validation = \Config\Services::validation();
         $this->permission = new Permission_hospital();
         $this->docavailabledayModel = new DocavailabledayModel();
+        $this->crop = \Config\Services::image();
 
     }
 
@@ -167,11 +169,21 @@ class Doctor extends BaseController
         $fields['doc_id'] = $this->request->getPost('doc_id');
         $logo = $this->request->getFile('pic');
 
+        $target_dir = FCPATH . '/assets/upload/doctor/'.$fields['doc_id'].'/';
+        if(!file_exists($target_dir)){
+            mkdir($target_dir,0655);
+        }
 
         if (!empty($_FILES['pic']['name'])) {
             $name = $logo->getRandomName();
-            $logo->move(FCPATH . '\assets\uplode\doctor',$name);
-            $fields['pic'] = $name;
+            $logo->move($target_dir,$name);
+
+            $lo_nameimg = 'lo_'.$logo->getName();
+            $this->crop->withFile($target_dir.''.$name)->fit(100, 100, 'center')->save($target_dir.''.$lo_nameimg);
+            unlink($target_dir.''.$name);
+
+            $fields['pic'] = $lo_nameimg;
+
             if ($this->doctorModel->update($fields['doc_id'],$fields)) {
                 $response['success'] = true;
                 $response['messages'] = 'Data has been Update successfully';
@@ -213,7 +225,7 @@ class Doctor extends BaseController
         $response = array();
         $h_Id = $this->session->h_Id;
 
-        $fields['doc_id'] = $this->request->getPost('doc_id');
+        $fields['doc_avil_id'] = $this->request->getPost('doc_avil_id');
         $fields['saturday'] = $this->request->getPost('saturday');
         $fields['sunday'] = $this->request->getPost('sunday');
         $fields['monday'] = $this->request->getPost('monday');
@@ -248,8 +260,7 @@ class Doctor extends BaseController
         $fields['createdBy'] = $h_Id;
 
 
-        if ($this->docavailabledayModel->update($fields['doc_id'], $fields)) {
-
+        if ($this->docavailabledayModel->update($fields['doc_avil_id'], $fields)) {
             $response['success'] = true;
             $response['messages'] = 'Data has been inserted successfully';
 

@@ -15,6 +15,7 @@ class Patient extends BaseController
     protected $globaladdressModel;
     protected $validation;
     protected $session;
+    protected $crop;
     protected $permission;
     private $module_name = 'Patients';
 
@@ -25,7 +26,7 @@ class Patient extends BaseController
         $this->validation = \Config\Services::validation();
         $this->permission = new Permission_hospital();
         $this->globaladdressModel = new GlobaladdressModel();
-
+        $this->crop = \Config\Services::image();
     }
 
     public function index()
@@ -82,7 +83,7 @@ class Patient extends BaseController
                 $value->name,
                 $value->email,
                 $value->phone,
-                '<img src="' . base_url('assets/uplode/patient/' . $value->photo) . '" width="80">',
+                '<img src="' . base_url('assets/upload/patient/'.$value->pat_id.'/'. $value->photo) . '" width="80">',
                 $value->nid,
                 $value->age,
 
@@ -158,12 +159,13 @@ class Patient extends BaseController
         $fields['nid'] = $this->request->getPost('nid');
         $fields['age'] = $this->request->getPost('age');
 
-        if (!empty($_FILES['photo']['name'])) {
-            $photo = $this->request->getFile('photo');
-            $name = $photo->getRandomName();
-            $photo->move(FCPATH . '\assets\uplode\patient', $name);
-            $fields['photo'] = $name;
-        }
+//        if (!empty($_FILES['photo']['name'])) {
+//
+//            $photo = $this->request->getFile('photo');
+//            $name = $photo->getRandomName();
+//            $photo->move(FCPATH . '\assets\upload\patient', $name);
+//            $fields['photo'] = $name;
+//        }
 
 
         $this->validation->setRules([
@@ -350,10 +352,20 @@ class Patient extends BaseController
         $fields['pat_id'] = $this->request->getPost('pat_id');
 
         if (!empty($_FILES['photo']['name'])) {
+            $target_dir = FCPATH . '/assets/upload/patient/'.$fields['pat_id'].'/';
+            if(!file_exists($target_dir)){
+                mkdir($target_dir,0655);
+            }
             $photo = $this->request->getFile('photo');
+
             $name = $photo->getRandomName();
-            $photo->move(FCPATH . '\assets\uplode\patient', $name);
-            $fields['photo'] = $name;
+            $photo->move($target_dir, $name);
+
+            $lo_nameimg = 'pa_'.$photo->getName();
+            $this->crop->withFile($target_dir.''.$name)->fit(100, 100, 'center')->save($target_dir.''.$lo_nameimg);
+            unlink($target_dir.''.$name);
+
+            $fields['photo'] = $lo_nameimg;
         }
 
         if ($this->patientModel->update($fields['pat_id'], $fields)) {

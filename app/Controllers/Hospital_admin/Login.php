@@ -56,13 +56,6 @@ class Login extends BaseController
         $session = \Config\Services::session();
         $db = \Config\Database::connect();
 
-        $this->validation->setRule('email', 'Email', 'required|valid_email|max_length[128]|trim');
-        $this->validation->setRule('password', 'Password', 'required|max_length[32]');
-
-        if ($this->validation->withRequest($this->request)->run() == FALSE) {
-            return redirect()->to(site_url("/hospital_admin/login"));
-        } else {
-            // $email = strtolower($this->security->xss_clean($this->input->post('email')));
             $email = strtolower($this->request->getPost('email'));
             $password = $this->request->getPost('password');
 
@@ -130,7 +123,6 @@ class Login extends BaseController
                 $session->setFlashdata('error', 'Email or password mismatch');
                 $this->index();
             }
-        }
     }
 
     /**

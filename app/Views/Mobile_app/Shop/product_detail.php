@@ -10,7 +10,7 @@
 <section class="banner" >
     <div class="row">
         <div class="col-12 p-3 text-center">
-            <img src="<?php echo base_url('assets/uplode/product/'.$product->picture) ?>">
+            <img src="<?php echo base_url('assets/upload/product/'.$product->prod_id.'/'.$product->picture) ?>">
 
         </div>
         <div class="col-12 p-3 text-center">

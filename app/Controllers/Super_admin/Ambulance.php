@@ -16,6 +16,7 @@ class Ambulance extends BaseController
     protected $ambulanceModel;
     protected $validation;
     protected $globaladdressModel;
+    protected $crop;
     protected $session;
     protected $permission;
     private $module_name = 'Ambulance';
@@ -27,7 +28,7 @@ class Ambulance extends BaseController
         $this->validation = \Config\Services::validation();
         $this->session = \Config\Services::session();
         $this->permission = new Permission();
-
+        $this->crop = \Config\Services::image();
     }
 
     public function index()
@@ -197,12 +198,20 @@ class Ambulance extends BaseController
 
         $fields['amb_id'] = $this->request->getPost('amb_id');
         $image = $this->request->getFile('image');
-
+        $userId = get_data_by_id('ambulance_user_id','ambulance','amb_id',$fields['amb_id']);
+        $target_dir = FCPATH . '/assets/upload/ambulance/'.$userId.'/';
+        if(!file_exists($target_dir)){
+            mkdir($target_dir,0655);
+        }
 
         if (!empty($_FILES['image']['name'])) {
             $name = $image->getRandomName();
-            $image->move(FCPATH . '\assets\uplode\ambulance',$name);
-            $fields['image'] = $name;
+            $image->move($target_dir,$name);
+            $lo_nameimg = 'am_'.$image->getName();
+            $this->crop->withFile($target_dir.''.$name)->fit(150, 145, 'center')->save($target_dir.''.$lo_nameimg);
+            unlink($target_dir.''.$name);
+
+            $fields['image'] = $lo_nameimg;
             if ($this->ambulanceModel->update($fields['amb_id'], $fields)) {
                 $response['success'] = true;
                 $response['messages'] = 'Image has been Update successfully';

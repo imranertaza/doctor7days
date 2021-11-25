@@ -193,7 +193,7 @@
                                                 </div>
                                                 <div class="col-md-6" id="imgRelode">
                                                     <?php $img = (!empty($user->pic)) ? $user->pic : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/uplode/users/<?php echo $img ?>" style="max-width: 200px;">
+                                                    <img src="<?php echo base_url() ?>/assets/upload/users/<?php echo $user->user_id;?>/<?php echo $img ?>" style="max-width: 200px;">
                                                 </div>
 
                                                 <div class="col-md-6 text-right">

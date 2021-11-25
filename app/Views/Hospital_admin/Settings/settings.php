@@ -166,11 +166,11 @@
 
                                     <div class="tab-pane container" id="image">
 
-                                        <form id="update-image" method="Post" class="pl-3 pr-3"
-                                              enctype="multipart/form-data">
-                                            <div class="row pt-4">
+                                        <form id="update-image" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
+<!--                                        <form action="--><?php //echo base_url($controller . '/updateImage') ?><!--" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">-->
+                                            <div class="row pt-4 mt-4 img_div">
 
-                                                <div class="col-md-6">
+                                                <div class="col-md-6" >
                                                     <div class="form-group">
                                                         <label for="logo"> Logo: </label>
                                                         <input type="file" id="logo" name="logo" class="form-control"
@@ -179,9 +179,11 @@
                                                 </div>
                                                 <div class="col-md-6" id="imgRelode">
                                                     <?php $logo = (!empty($hospital->logo)) ? $hospital->logo : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/uplode/hospital/<?php echo $logo ?>"
+                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id; ?>/<?php echo $logo ?>"
                                                          style="max-width: 200px;">
                                                 </div>
+                                            </div>
+                                            <div class="row pt-4 mt-4 img_div">
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -192,30 +194,66 @@
                                                 </div>
                                                 <div class="col-md-6" id="imgRelode2" style="padding-top: 20px;">
                                                     <?php $image = (!empty($hospital->image)) ? $hospital->image : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/uplode/hospital/<?php echo $image ?>"
+                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id; ?>/<?php echo $image ?>"
                                                          style="max-width: 200px;">
                                                 </div>
+                                            </div>
+                                            <div class="row pt-4 mt-4 img_div">
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="logo"> Banner: </label>
-                                                        <input type="file" id="banner" name="banner" class="form-control"
+                                                        <label for="logo"> Banner one: </label>
+                                                        <input type="file" id="banner_1" name="banner_1" class="form-control"
                                                                placeholder="Logo">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6" id="imgRelode3" style="padding-top: 20px;">
-                                                    <?php $banner = (!empty($hospital->banner)) ? $hospital->banner : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/uplode/hospital/<?php echo $banner ?>"
+                                                    <?php $banner = (!empty($hospital->banner_1)) ? $hospital->banner_1 : 'noimage.jpg'; ?>
+                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id; ?>/<?php echo $banner ?>"
                                                          style="max-width: 200px;">
                                                 </div>
+                                            </div>
+
+                                            <div class="row pt-4 mt-4 img_div">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="logo"> Banner two: </label>
+                                                        <input type="file" id="banner_2" name="banner_2" class="form-control"
+                                                               placeholder="Logo">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6" id="imgRelode4" style="padding-top: 20px;">
+                                                    <?php $banner1 = (!empty($hospital->banner_2)) ? $hospital->banner_2 : 'noimage.jpg'; ?>
+                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id; ?>/<?php echo $banner1 ?>"
+                                                         style="max-width: 200px;">
+                                                </div>
+                                            </div>
+
+                                            <div class="row pt-4 mt-4 img_div">
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="logo"> Banner three: </label>
+                                                        <input type="file" id="banner_3" name="banner_3" class="form-control"
+                                                               placeholder="Logo">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6" id="imgRelode5" style="padding-top: 20px;">
+                                                    <?php $banner3 = (!empty($hospital->banner_3)) ? $hospital->banner_3 : 'noimage.jpg'; ?>
+                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id; ?>/<?php echo $banner3 ?>"
+                                                         style="max-width: 200px;">
+                                                </div>
+                                            </div>
+
+                                            <div class="row pt-4">
 
                                                 <div class="col-md-12 text-right">
                                                     <input type="hidden" id="h_id" name="h_id"
                                                            value="<?php echo $hospital->h_id; ?>" required>
-                                                    <button type="submit" onclick="updateimage()"
-                                                            class="btn btn-success"
-                                                            id="up-image-btn" style="margin-top: 30px;">Update
+                                                    <button type="submit" class="btn btn-success" id="up-image-btn" onclick="updateimage()" style="margin-top: 30px;">Update
                                                     </button>
+
 
                                                 </div>
                                             </div>
@@ -456,6 +494,8 @@
                             $('#imgRelode').load(document.URL + ' #imgRelode');
                             $('#imgRelode2').load(document.URL + ' #imgRelode2');
                             $('#imgRelode3').load(document.URL + ' #imgRelode3');
+                            $('#imgRelode4').load(document.URL + ' #imgRelode4');
+                            $('#imgRelode5').load(document.URL + ' #imgRelode5');
                         })
 
                     } else {

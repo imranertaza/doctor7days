@@ -41,7 +41,7 @@
 
                     <div class="col-12 pad-0">
                         <a href="<?php echo base_url('Mobile_app/Shop/product_detail/' . $item->prod_id) ?>">
-                            <img src="<?php echo base_url('assets/uplode/product/' . $item->picture) ?>" width="100%">
+                            <img src="<?php echo base_url('assets/upload/product/'.$item->prod_id.'/'.$item->picture) ?>" width="100%">
                         </a>
                     </div>
                     <div class="col-12 pad-0 p-3" style="line-height: 4px;">

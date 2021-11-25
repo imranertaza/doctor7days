@@ -50,7 +50,7 @@
                     <div class="product ">
                         <div class="col-12 pad-0">
                             <a href="<?php echo base_url('Mobile_app/Ambulance/ambulance_details/'.$item->amb_id) ?>">
-                                <img src="<?php echo base_url() ?>/assets/uplode/ambulance/<?php echo $img; ?>"
+                                <img src="<?php echo base_url() ?>/assets/upload/ambulance/<?php echo $item->ambulance_user_id;?>/<?php echo $img; ?>"
                                      width="100%">
                             </a>
                         </div>
@@ -85,7 +85,7 @@
                     <div class="product ">
                         <div class="col-12 pad-0">
                             <a href="<?php echo base_url('Mobile_app/Ambulance/ambulance_details/'.$item->amb_id) ?>">
-                                <img src="<?php echo base_url() ?>/assets/uplode/ambulance/<?php echo $img; ?>"
+                                <img src="<?php echo base_url() ?>/assets/upload/ambulance/<?php echo $item->ambulance_user_id; ?>/<?php echo $img; ?>"
                                      width="100%">
                             </a>
                         </div>
