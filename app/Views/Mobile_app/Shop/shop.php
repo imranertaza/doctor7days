@@ -12,28 +12,37 @@
             <div class="col-2">
                 <i class="flaticon-shop ti-icon"></i>
             </div>
-            <div class="col-10 p-2">
+            <div class="col-10 p-2" id="reloadCart">
                 <span class="title-m">Your Shop</span>
-                <i class="flaticon-shopping-cart ic-shop"></i>
+                <a href="<?php echo base_url('Mobile_app/Cart') ?>" style="float: right"><i
+                            class="flaticon-shopping-cart ic-shop"></i>(<?php echo Cart()->totalItems(); ?>)</a>
                 <i class="flaticon-heart ic-shop ic-shop" style="padding-right: 20px;"></i>
             </div>
         </div>
+
     </div>
 </section>
 
 <section class="banner">
     <div class="row">
+        <?php if (session()->getFlashdata('message') !== NULL) : ?>
+            <div class="col-12 p-3 ">
+                <?php echo session()->getFlashdata('message'); ?>
+            </div>
+        <?php endif; ?>
         <div class="col-12 p-3" style="padding-left: 0px !important; padding-right: 0px !important;">
             <img src="<?php echo base_url() ?>/assets/mobile/image/shop.png" width="100%">
         </div>
+        <form method="get">
         <div class="col-12 p-3 ">
             <div class="input-group mb-3 col-8">
                 <div class="input-group-prepend">
-                    <span class="input-group-text sear-icon"><i class="flaticon-loupe"></i></span>
+                    <button type="submit" class="input-group-text sear-icon btn"><i class="flaticon-loupe"></i></button>
                 </div>
-                <input type="text" class="form-control sear-inp" placeholder="Search">
+                <input type="text" name="search" class="form-control sear-inp" value="<?php echo $key; ?>" placeholder="Search">
             </div>
         </div>
+        </form>
         <div class="col-12 p-3 " style="padding-right: 0px !important;  ">
 
             <?php foreach ($product as $item) { ?>
@@ -41,18 +50,20 @@
 
                     <div class="col-12 pad-0">
                         <a href="<?php echo base_url('Mobile_app/Shop/product_detail/' . $item->prod_id) ?>">
-                            <img src="<?php echo base_url('assets/upload/product/'.$item->prod_id.'/'.$item->picture) ?>" width="100%">
+                            <img src="<?php echo base_url('assets/upload/product/' . $item->prod_id . '/' . $item->picture) ?>"
+                                 width="100%">
                         </a>
                     </div>
                     <div class="col-12 pad-0 p-3" style="line-height: 4px;">
                         <a href="<?php echo base_url('Mobile_app/Shop/product_detail/' . $item->prod_id) ?>">
                             <p class="p-n"><?php echo $item->name; ?></p>
-                            <span class="p-p"><?php echo $item->price; ?></span>
+                            <span class="p-p"><?php echo priceSymbol($item->price); ?></span>
                             <span class="p-s">Quentaty: (<?php echo $item->quantity; ?>)</span>
                         </a>
                     </div>
                     <div class="col-12 pad-0 p-3">
-                        <button class="btn-cart">Add to Cart</button>
+                        <button class="btn-cart" onclick="addToCart('<?php echo $item->prod_id ?>')">Add to Cart
+                        </button>
                     </div>
                 </div>
 

@@ -6,6 +6,18 @@ function DB()
     return $db;
 }
 
+function Cart(){
+    $ca = \Config\Services::cart();
+    return $ca;
+}
+
+function priceSymbol($amount){
+    $symbol = 'TK.';
+    $data = $symbol.''.$amount;
+    return $data;
+
+}
+
 function newSession()
 {
     $session = \Config\Services::session();
@@ -2516,4 +2528,50 @@ function price($tk = 0, $extension = 'Tk.')
 //    $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
 //    return $f->format($tk) . $extension;
     return $extension.''.$tk;
+}
+
+function orderStatusView($sel = '0')
+{
+    $status = [
+        0 => 'unpaid',
+        1 => 'paid',
+        2 =>'pandding',
+        3 => 'cancel'
+    ];
+    $row = '';
+    foreach ($status as $key => $option) {
+        $row .= ($sel == $key) ? $option : '';
+    }
+    return $row;
+}
+
+function orderStatusInOption($sel = '0')
+{
+    $status = [
+        0 => 'unpaid',
+        1 => 'paid',
+        2 =>'pandding',
+        3 => 'cancel'
+    ];
+    $row = '<option value="">Please select</option>';
+    foreach ($status as $key => $option) {
+        $s = ($key == $sel)?'selected':'';
+        $row .= '<option value="'.$key.'" '.$s.'>'.$option.'</option>';
+    }
+    return $row;
+}
+
+function superLogo(){
+    $table = DB()->table('admin');
+    $data = $table->where('admin_id',3)->get()->getRow();
+
+    $img = base_url('assets/upload/superAdmin/3/'.$data->pic);
+    return $img;
+}
+
+function superData(){
+    $table = DB()->table('admin');
+    $data = $table->where('admin_id',3)->get()->getRow();
+
+    return $data;
 }

@@ -1,7 +1,7 @@
 <section class="head-logo" >
     <div class="row">
         <div class="col-12 p-4 text-center">
-            <img src="<?php echo base_url()?>/assets/mobile/image/logo 200.png" class="logo-main">
+            <img src="<?php echo superLogo()?>" class="logo-main">
         </div>
     </div>
 </section>

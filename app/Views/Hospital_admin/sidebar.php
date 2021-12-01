@@ -79,6 +79,20 @@
             </li>
 
             <li class="nav-item">
+                <a href="<?php echo base_url('Hospital_admin/Products')?>" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Products</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('Hospital_admin/Order')?>" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Order</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="<?php echo base_url('Hospital_admin/Settings')?>" class="nav-link">
                     <i class="nav-icon fas fa-cog"></i>
                     <p>Settings</p>

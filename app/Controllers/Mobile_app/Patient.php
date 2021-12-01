@@ -3,9 +3,13 @@
 
 namespace App\Controllers\Mobile_app;
 
+
+
 use App\Models\Hospital_admin\AppointmentModel;
 use App\Models\Mobile_app\GlobaladdressModel;
 use App\Controllers\BaseController;
+use App\Models\Mobile_app\OrderModel;
+use App\Models\Super_admin\OrderItemModel;
 use App\Models\Super_admin\PatientModel;
 
 
@@ -18,6 +22,8 @@ class Patient extends BaseController
     protected $validation;
     protected $crop;
     protected $session;
+    protected $orderModel;
+    protected $orderItem;
 
     public function __construct(){
         $this->patientModel = new PatientModel();
@@ -26,6 +32,8 @@ class Patient extends BaseController
         $this->session = \Config\Services::session();
         $this->validation = \Config\Services::validation();
         $this->crop = \Config\Services::image();
+        $this->orderModel = new OrderModel();
+        $this->orderItem = new  OrderItemModel();
     }
 
     public function index(){
@@ -75,6 +83,39 @@ class Patient extends BaseController
             return redirect()->to(site_url('Mobile_app/Patient/login'));
         }
     }
+
+    public function order(){
+        if(!empty($this->session->isPatientLogin) || $this->session->isPatientLogin == TRUE){
+
+            $userId = $this->session->Patient_user_id;
+            $data['order'] = $this->orderModel->where('patient_id',$userId)->findAll();
+            //$this->orderItem;
+
+            echo view('Mobile_app/header');
+            echo view('Mobile_app/Patient/order_list',$data);
+            echo view('Mobile_app/footer');
+        }else{
+            return redirect()->to(site_url('Mobile_app/Patient/login'));
+        }
+    }
+
+    public function invoice($id){
+        if(!empty($this->session->isPatientLogin) || $this->session->isPatientLogin == TRUE){
+
+            $userId = $this->session->Patient_user_id;
+            $data['order'] = $this->orderModel->find($id);
+            $data['orderItem'] = $this->orderItem->where('order_id',$id)->findAll();
+
+            echo view('Mobile_app/header');
+            echo view('Mobile_app/Patient/invoice',$data);
+            echo view('Mobile_app/footer');
+        }else{
+            return redirect()->to(site_url('Mobile_app/Patient/login'));
+        }
+    }
+
+
+
 
     public function cancel($id){
         $data['appointment_id'] = $id;

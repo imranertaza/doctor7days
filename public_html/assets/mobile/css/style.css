@@ -560,3 +560,8 @@ a:hover{
     text-decoration: none !important;
 }
 
+.hr-div{
+    border-bottom: 1px solid #d3d3d3;
+    width: 100%;
+}
+

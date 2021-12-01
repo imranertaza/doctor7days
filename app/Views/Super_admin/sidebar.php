@@ -83,9 +83,9 @@
 
 
             <li class="nav-item">
-                <a href="<?php echo base_url('Super_admin/orderItem')?>" class="nav-link">
+                <a href="<?php echo base_url('Super_admin/Orders')?>" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
-                    <p>Order Item</p>
+                    <p>Orders</p>
                 </a>
             </li>
 
@@ -119,6 +119,13 @@
                 <a href="<?php echo base_url('Super_admin/store')?>" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>Store</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('Super_admin/Settings')?>" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Settings</p>
                 </a>
             </li>
 

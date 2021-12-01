@@ -12,20 +12,30 @@ class Shop extends BaseController
 {
 
     protected $storeModel;
+    protected $cart;
     protected $productModel;
 
     public function __construct(){
         $this->storeModel = new StoreModel();
         $this->productModel = new ProductModel();
+        $this->cart = \Config\Services::cart();
     }
 
     public function index()
     {
+        $key = '';
+        $keyword = $this->request->getGet('search');
         $store = $this->storeModel->where('is_default','1')->first();
-        $pro = $this->productModel->where('store_id',$store->store_id)->findAll();
+        if (!empty($keyword)){
+            $pro = $this->productModel->like('name', $keyword)->findAll();
+            $key = $keyword;
+        }else{
+            $pro = $this->productModel->findAll();
+        }
         $data = [
           'shop' => $store,
           'product' => $pro,
+          'key' => $key,
         ];
         echo view('Mobile_app/header');
         echo view('Mobile_app/Shop/shop',$data);

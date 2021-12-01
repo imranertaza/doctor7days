@@ -4,14 +4,31 @@
 namespace App\Controllers\Mobile_app;
 
 use App\Controllers\BaseController;
+use App\Models\Mobile_app\GlobaladdressModel;
+use App\Models\Mobile_app\OrderModel;
+use App\Models\Super_admin\OrderItemModel;
+use App\Models\Super_admin\ProductModel;
 
 
 class Cart extends BaseController
 {
 
+    protected $session;
+    protected $cart;
+    protected $globaladdressModel;
+    protected $orderModel;
+    protected $orderItemModel;
+    protected $productModel;
 
-
-    public function __construct(){}
+    public function __construct()
+    {
+        $this->session = \Config\Services::session();
+        $this->cart = \Config\Services::cart();
+        $this->globaladdressModel = new GlobaladdressModel();
+        $this->orderModel = new OrderModel();
+        $this->orderItemModel = new OrderItemModel();
+        $this->productModel = new ProductModel();
+    }
 
     public function index()
     {
@@ -22,12 +39,90 @@ class Cart extends BaseController
 
     }
 
-    public function payment(){
-        echo view('Mobile_app/header');
-        echo view('Mobile_app/Cart/payment');
-        echo view('Mobile_app/footer');
+    public function payment()
+    {
+        if ($this->session->isPatientLogin == true) {
+            if (!empty($_SESSION['redirectUrl'])) {
+                unset($_SESSION['redirectUrl']);
+            }
+            $data['address'] = [];
+            $userId = $this->session->Patient_user_id;
+            $userAdd = get_data_by_id('global_address_id', 'patient', 'pat_id', $userId);
+            if (!empty($userAdd)) {
+                $data['address'] = $this->globaladdressModel->find($userAdd);
+            }
+
+            echo view('Mobile_app/header');
+            echo view('Mobile_app/Cart/payment', $data);
+            echo view('Mobile_app/footer');
+        } else {
+            $redirectUrl = 'Mobile_app/Cart/payment';
+            $this->session->set("redirectUrl", $redirectUrl);
+            return redirect()->to('/Mobile_app/Patient/login');
+        }
+
     }
 
+    public function checkout()
+    {
+        $shippingAdd = $this->request->getPost('shippingAdd');
+        $total = $this->request->getPost('total');
+        $shipping = $this->request->getPost('shipping');
+        $grandTotal = $this->request->getPost('grandTotal');
+
+        if (empty($shippingAdd)) {
+            $this->session->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Please set the shipping address! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>');
+            return redirect()->back();
+        }
+        $userId = $this->session->Patient_user_id;
+        $cart = $this->cart->contents();
+        DB()->transStart();
+            //order create
+            $orData = [
+                'patient_id' => $userId,
+                'pymnt_method_id' => '1',
+                'amount' => $total,
+                'delivery_charge' => $shipping,
+                'final_amount' => $grandTotal,
+                'global_address_id' => $shippingAdd,
+                'status' => '2',
+                'createdBy' => $userId,
+            ];
+
+            $this->orderModel->insert($orData);
+            $orderId = $this->orderModel->getInsertID();
+
+            foreach ($cart as $item) {
+                $subTotl = $item['price'] * $item['qty'];
+
+                //product Qty update
+                $oldproQty = get_data_by_id('quantity','products','prod_id',$item['id']);
+                $newQty['quantity'] = $oldproQty - $item['qty'];
+                $this->productModel->update($item['id'],$newQty);
+
+                //order item insert
+                $dataOrItem = [
+                    'order_id' => $orderId,
+                    'h_id' => '8',
+                    'prod_id' => $item['id'],
+                    'price' => $item['price'],
+                    'quantity' => $item['qty'],
+                    'total_price' => $subTotl,
+                    'final_price' => $subTotl,
+                    'createdBy' => $userId,
+                ];
+                $this->orderItemModel->insert($dataOrItem);
+
+            }
+
+        DB()->transComplete();
+
+        $this->session->setFlashdata('message', '<div class="alert alert-success alert-dismissible fade show" role="alert">Your order has been confirmed <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>');
+        $this->cart->destroy();
+        return redirect()->to(site_url('Mobile_app/Patient/invoice/'.$orderId));
+    }
 
 
 }

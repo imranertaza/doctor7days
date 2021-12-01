@@ -1,8 +1,9 @@
 <section class="back" >
     <div class="row">
-        <div class="col-12 p-2 pl-3 pt-3">
+        <div class="col-12 p-2 pl-3 pt-3" id="reloadCart">
             <a href="<?php echo base_url('mobile_app/shop')?>" ><i class="flaticon-left-arrow back-icon"></i></a>
-            <i class="flaticon-shopping-cart ic-cart" ></i>
+
+            <a href="<?php echo base_url('Mobile_app/Cart')?>" style="float: right;padding-right: 20px;" ><i class="flaticon-shopping-cart ic-shop"></i>(<?php echo Cart()->totalItems();?>)</a>
         </div>
     </div>
 </section>
@@ -13,8 +14,8 @@
             <img src="<?php echo base_url('assets/upload/product/'.$product->prod_id.'/'.$product->picture) ?>">
 
         </div>
-        <div class="col-12 p-3 text-center">
-            <p class="pro-pr"><?php echo $product->price?></p>
+        <div class="col-12 p-3 text-center" style="text-transform: capitalize;">
+            <p class="pro-pr"><?php echo priceSymbol($product->price)?></p>
             <p class="pro-n-d"><?php echo $product->name?></p>
             <p class="pro-ic">
                 <i class="flaticon-star" ></i>
@@ -41,7 +42,7 @@
             </div>
 
             <div class="col-12 pt-3" style="padding-right: 0px !important;">
-                <button class="btn-check">Add to Cart</button>
+                <button class="btn-check" onclick="addToCart('<?php echo $product->prod_id;?>')">Add to Cart</button>
             </div>
 
         </div>

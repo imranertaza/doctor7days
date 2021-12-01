@@ -1,4 +1,4 @@
-<section class="footer">
+<section class="footer ">
     <div class="row fixed-bottom  foot pt-3">
         <div class="col-4">
             <a class="nav-link" href="#"><i class="flaticon-menu iconfoot"></i></a>
@@ -22,6 +22,7 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="<?php echo base_url('Mobile_app/Patient/dashboard/');?>">Dashboard</a>
                     <a class="dropdown-item" href="<?php echo base_url('Mobile_app/Patient/profile');?>">Profile</a>
+                    <a class="dropdown-item" href="<?php echo base_url('Mobile_app/Patient/order');?>">Order</a>
                     <a class="dropdown-item" href="#">Inbox</a>
                     <a class="dropdown-item " href="<?php echo base_url('Mobile_app/Patient/logout');?>">Logout</a>
                 </div>
