@@ -2575,3 +2575,39 @@ function superData(){
 
     return $data;
 }
+
+function in_appoin_status($selected = 'sel')
+{
+    $status = [
+        'sel' => '--Select--',
+        '0' => 'Pending',
+        '1' => 'Processing',
+        '2' => 'Complete',
+        '3' => 'Fail',
+    ];
+
+    $row = '';
+    foreach ($status as $key => $option) {
+        $row .= '<option value="' . $key . '"';
+        $row .= ($selected == $key) ? ' selected' : '';
+        $row .= '>' . $option . '</option>';
+    }
+    return $row;
+}
+
+function in_appoin_status_view($selected = 'sel')
+{
+    $status = [
+        'sel' => '--Select--',
+        '0' => 'Pending',
+        '1' => 'Processing',
+        '2' => 'Complete',
+        '3' => 'Fail',
+    ];
+
+    $row = '';
+    foreach ($status as $key => $option) {
+        $row .= ($selected == $key) ? $option : '';
+    }
+    return $row;
+}

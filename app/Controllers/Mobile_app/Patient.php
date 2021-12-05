@@ -9,6 +9,7 @@ use App\Models\Hospital_admin\AppointmentModel;
 use App\Models\Mobile_app\GlobaladdressModel;
 use App\Controllers\BaseController;
 use App\Models\Mobile_app\OrderModel;
+use App\Models\Super_admin\Indianappointment;
 use App\Models\Super_admin\OrderItemModel;
 use App\Models\Super_admin\PatientModel;
 
@@ -19,6 +20,7 @@ class Patient extends BaseController
     protected $patientModel;
     protected $globaladdressModel;
     protected $appointmentModel;
+    protected $indianappointment;
     protected $validation;
     protected $crop;
     protected $session;
@@ -28,12 +30,14 @@ class Patient extends BaseController
     public function __construct(){
         $this->patientModel = new PatientModel();
         $this->appointmentModel = new AppointmentModel();
+        $this->indianappointment = new Indianappointment();
         $this->globaladdressModel = new GlobaladdressModel();
         $this->session = \Config\Services::session();
         $this->validation = \Config\Services::validation();
         $this->crop = \Config\Services::image();
         $this->orderModel = new OrderModel();
         $this->orderItem = new  OrderItemModel();
+
     }
 
     public function index(){
@@ -45,7 +49,7 @@ class Patient extends BaseController
 
             $userId = $this->session->Patient_user_id;
             $data['patient'] = $this->patientModel->where('pat_id',$userId)->first();
-
+            $data['indAppionment'] = $this->indianappointment->where('pat_id',$userId)->findAll();
             $data['appointment'] = $this->appointmentModel->where('status','1')->where('pat_id',$userId)->findAll();
 
             echo view('Mobile_app/header');
@@ -269,10 +273,11 @@ class Patient extends BaseController
                 );
                 $this->session->set($sessionArray);
 
+
                 if (!empty($this->session->redirectUrl)){
                     return redirect()->to($this->session->redirectUrl);
                     unset($this->session->redirectUrl);
-                }else {
+                }else{
                     return redirect()->to('/Mobile_app');
                 }
             }else{

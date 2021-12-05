@@ -10,6 +10,8 @@ use App\Models\Hospital_admin\SpecialistModel;
 use App\Models\Mobile_app\GlobaladdressModel;
 use App\Models\Mobile_app\HospitalModel;
 use App\Models\Mobile_app\DoctorModel;
+use App\Models\Super_admin\Indianappointment;
+use App\Models\Super_admin\IndianhospitalModel;
 use DateTime;
 
 
@@ -23,23 +25,32 @@ class Appionment extends BaseController
     protected $specialistModel;
     protected $session;
     protected $appointmentModel;
+    protected $indianhospitalModel;
+    protected $indianappointment;
 
     public function __construct()
     {
         $this->hospitalModel = new HospitalModel();
+        $this->indianhospitalModel = new IndianhospitalModel();
         $this->globaladdressModel = new GlobaladdressModel();
         $this->doctorModel = new DoctorModel();
         $this->session = \Config\Services::session();
         $this->specialistModel = new SpecialistModel();
         $this->docavailabledayModel = new DocavailabledayModel();
         $this->appointmentModel = new AppointmentModel();
+        $this->indianappointment = new Indianappointment();
     }
 
     public function index()
     {
+        if ($this->session->isPatientLogin != true) {
+            $redirectUrl = 'Mobile_app/appionment?tab=ind';
+            newSession()->set("redirectUrl", $redirectUrl);
+        }
 
+        $data['inhospital']=$this->indianhospitalModel->findAll();
         echo view('Mobile_app/header');
-        echo view('Mobile_app/Appionment/appionment_form');
+        echo view('Mobile_app/Appionment/appionment_form',$data);
         echo view('Mobile_app/footer');
 
     }
@@ -120,6 +131,8 @@ class Appionment extends BaseController
         } else {
             return $this->diagonstic_center_with_location();
         }
+
+
     }
 
     public function doctor_specialties($id)
@@ -314,6 +327,39 @@ class Appionment extends BaseController
         echo view('Mobile_app/Appionment/appionment_success');
         echo view('Mobile_app/footer');
     }
+
+    public function indian(){
+        echo view('Mobile_app/header');
+        echo view('Mobile_app/Appionment/indian_form');
+        echo view('Mobile_app/footer');
+    }
+
+    public function indian_appionment_action(){
+
+        $data['pat_id'] = $this->session->Patient_user_id;
+        $data['name'] = $this->request->getPost('name');
+        $data['phone'] = $this->request->getPost('phone');
+        $data['ind_h_id'] = $this->request->getPost('inHospital');
+        $data['ind_hos_bran_id'] = $this->request->getPost('hos_branch');
+
+        if ($this->indianappointment->insert($data)){
+
+            return redirect()->to(site_url('/mobile_app/appionment/success'));
+
+        }else{
+            $this->session->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert"> Something went wrong!  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>');
+            return redirect()->back();
+        }
+
+    }
+
+    public function success(){
+        echo view('Mobile_app/header');
+        echo view('Mobile_app/Appionment/ind_success');
+        echo view('Mobile_app/footer');
+    }
+
 
 
 }

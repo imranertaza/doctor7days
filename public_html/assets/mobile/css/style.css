@@ -564,4 +564,14 @@ a:hover{
     border-bottom: 1px solid #d3d3d3;
     width: 100%;
 }
+.nav-tabs .nav-link{
+    color: #1b1e21 !important;
+}
 
+.nav-tabs .nav-link.active{
+    background-color: #28aed6 !important;
+    color: #ffffff !important;
+}
+.icon-css{
+    width: 20px;
+}

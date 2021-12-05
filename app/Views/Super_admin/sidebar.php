@@ -67,6 +67,21 @@
                     <p>Hospital</p>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('Super_admin/indianhospital')?>" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Indian Hospital</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('Super_admin/indianhospital/appointment')?>" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Indian appointment list</p>
+                </a>
+            </li>
+
             <li class="nav-item">
                 <a href="<?php echo base_url('Super_admin/hospitalcategory')?>" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>

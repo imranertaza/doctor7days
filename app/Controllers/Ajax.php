@@ -6,6 +6,8 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\Mobile_app\GlobaladdressModel;
 use App\Models\Super_admin\HospitalModel;
+use App\Models\Super_admin\IndianHospitalBranchModel;
+use App\Models\Super_admin\IndianhospitalModel;
 use App\Models\Super_admin\PatientModel;
 use App\Models\Super_admin\ProductModel;
 
@@ -18,6 +20,8 @@ class Ajax extends BaseController
     protected $globaladdressModel;
     protected $hospitalModel;
     protected $patientModel;
+    protected $indianHospitalBranchModel;
+    protected $indianhospitalModel;
     protected $session;
 
     public function __construct(){
@@ -27,11 +31,19 @@ class Ajax extends BaseController
         $this->session = \Config\Services::session();
         $this->patientModel = new PatientModel();
         $this->hospitalModel = new HospitalModel();
+        $this->indianhospitalModel = new IndianhospitalModel();
+        $this->indianHospitalBranchModel = new IndianHospitalBranchModel();
     }
 
-    public function index()
-    {
+    public function getInHosBranch() {
+        $id = $this->request->getPost('ind_h_id');
 
+        $branch = $this->indianHospitalBranchModel->where('ind_h_id',$id)->findAll();
+        $row = '<option value="">Please Select</option>';
+        foreach ($branch as $rows) {
+            $row .= '<option value="'.$rows->ind_hos_bran_id.'">'.$rows->branch_name.'</option>';
+        }
+        echo $row;
     }
 
     public function search_district(){
