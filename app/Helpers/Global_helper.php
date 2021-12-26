@@ -1178,6 +1178,23 @@ function divisionname($id)
 }
 
 
+
+function division()
+{
+    $divisions = array(
+        array('id' => '1', 'name' => 'Chattagram', 'bn_name' => 'চট্টগ্রাম', 'url' => 'www.chittagongdiv.gov.bd'),
+        array('id' => '2', 'name' => 'Rajshahi', 'bn_name' => 'রাজশাহী', 'url' => 'www.rajshahidiv.gov.bd'),
+        array('id' => '3', 'name' => 'Khulna', 'bn_name' => 'খুলনা', 'url' => 'www.khulnadiv.gov.bd'),
+        array('id' => '4', 'name' => 'Barisal', 'bn_name' => 'বরিশাল', 'url' => 'www.barisaldiv.gov.bd'),
+        array('id' => '5', 'name' => 'Sylhet', 'bn_name' => 'সিলেট', 'url' => 'www.sylhetdiv.gov.bd'),
+        array('id' => '6', 'name' => 'Dhaka', 'bn_name' => 'ঢাকা', 'url' => 'www.dhakadiv.gov.bd'),
+        array('id' => '7', 'name' => 'Rangpur', 'bn_name' => 'রংপুর', 'url' => 'www.rangpurdiv.gov.bd'),
+        array('id' => '8', 'name' => 'Mymensingh', 'bn_name' => 'ময়মনসিংহ', 'url' => 'www.mymensinghdiv.gov.bd')
+    );
+
+    return $divisions;
+}
+
 function districtView()
 {
     $districts = array(
@@ -1248,6 +1265,32 @@ function districtView()
     );
     return $districts;
 }
+
+function div_by_dist($divId, $select){
+    $sel = json_decode($select);
+    $dis = districtView();
+    $view = '';
+    foreach ($dis as $key => $d){
+        if ($d['division_id'] == $divId){
+            if(!empty($sel)) {
+                $s = (in_array($d['id'], $sel)) ? 'checked' : '';
+            }else{
+                $s = '';
+            }
+
+            $view .='<div class="form-check">
+                <input class="form-check-input" name="district[]" '.$s.' type="checkbox" id="check_'.($key + 1).'" value="'.$d['id'].'">
+                <label class="form-check-label" for="check_'.($key + 1).'">
+                '.$d['name'].'
+                </label>
+            </div>';
+        }
+    }
+
+    return $view;
+}
+
+
 
 function districtselect($selected = '1', $division = '0')
 {
@@ -2610,4 +2653,12 @@ function in_appoin_status_view($selected = 'sel')
         $row .= ($selected == $key) ? $option : '';
     }
     return $row;
+}
+
+function hospitalBanner(){
+    $table = DB()->table('ad_management');
+    $data = $table->where('org_type','hospital')->where('start_date <=' ,date("Y-m-d"))->where('status','active')->where('end_date >',date("Y-m-d"))->get(3)->getResult();
+
+    return $data;
+
 }

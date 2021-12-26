@@ -19,7 +19,7 @@
     </div>
 </section>
 
-<section class="banner" >
+<section class="banner2" >
     <div class="row">
         <div class="col-12 p-3 ">
             <img src="<?php echo base_url()?>/assets/mobile/image/ambulance.png" width="100%">
@@ -36,12 +36,16 @@
                 <div class="col-6 " style="padding: 10px;">
                     <div class="product ">
                         <div class="col-12 pad-0">
-                            <img src="<?php echo base_url()?>/assets/upload/ambulance/<?php echo $img;?>" width="100%">
+                            <a href="<?php echo base_url('Mobile_app/Ambulance/ambulance_details/'.$item->amb_id) ?>">
+                            <img src="<?php echo base_url()?>/assets/upload/ambulance/<?php echo $item->ambulance_user_id;?>/<?php echo $img;?>" width="100%">
+                            </a>
                         </div>
                         <div class="col-12 mt-4" style="line-height: 5px;">
+                            <a href="<?php echo base_url('Mobile_app/Ambulance/ambulance_details/'.$item->amb_id) ?>">
                             <p class="proName"><?php echo $item->contact_name;?></p>
                             <p class="pro_nm"><?php echo substr($item->description, 0, 20); ?>..</p>
                             <p class="pro_pho"><?php echo $item->mobile; ?></p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -50,5 +54,13 @@
         </div>
 
 
+    </div>
+</section>
+
+<section class="banner" >
+    <div class="row">
+        <div class="col-12 p-3 ">
+            <img src="<?php echo base_url()?>/assets/mobile/image/home-img.png" class="ban-img">
+        </div>
     </div>
 </section>

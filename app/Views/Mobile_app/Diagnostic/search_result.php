@@ -28,7 +28,7 @@
                     <?php echo getListInOption( $specialistId , 'specialist_id', 'specialist_type_name', 'specialist') ?>
                 </select>
             </form>
-            <a href="<?php echo base_url('Mobile_app/diagnostic/diagnostic_form') ?>" class="btn-loca"> <i
+            <a href="<?php echo base_url('Mobile_app/appionment') ?>" class="btn-loca"> <i
                         class="flaticon-pin"></i> Select your location</a>
 
         </div>
@@ -57,5 +57,17 @@
         <?php }?>
 
 
+    </div>
+</section>
+
+<section class="banner" >
+    <div class="row">
+        <div class="col-12 p-3 " >
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="addViewNational">
+                </div>
+            </div>
+            <div class="num"></div>
+        </div>
     </div>
 </section>

@@ -46,9 +46,6 @@
             </table>
         </div>
         <div class="col-12 p-3 mt-2">
-
-
-
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <?php if (!empty($hospital->banner_1)){?>

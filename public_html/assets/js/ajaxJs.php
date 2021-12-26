@@ -2,17 +2,17 @@
     // $(document).ready(function() {
     //     $("#exampleModal").modal();
     // });
-    function viewdistrict(id){
+    function viewdistrict(id) {
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('ajax/search_district') ?>",
             dataType: "text",
-            data: {divisionsId: id },
+            data: {divisionsId: id},
 
-            beforeSend: function(){
+            beforeSend: function () {
                 $('#district').html('<img src="<?php print base_url(); ?>/assets/images/loading.gif" width="20" alt="loading"/> Progressing...');
             },
-            success: function(msg){
+            success: function (msg) {
                 $('#district').html(msg);
                 $('#zila').html(msg);
             }
@@ -20,17 +20,17 @@
         });
     }
 
-    function viewupazila(id){
+    function viewupazila(id) {
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('ajax/search_upazila') ?>",
             dataType: "text",
-            data: {districtId: id },
+            data: {districtId: id},
 
-            beforeSend: function(){
+            beforeSend: function () {
                 $('#upazila').html('<img src="<?php print base_url(); ?>/assets/images/loading.gif" width="20" alt="loading"/> Progressing...');
             },
-            success: function(msg){
+            success: function (msg) {
                 $('#upazila').html(msg);
                 $('#subdistrict').html(msg);
             }
@@ -38,21 +38,21 @@
         });
     }
 
-    function passShow(){
+    function passShow() {
         $('#password').attr('type', 'text');
     }
 
-    function addToCart(id){
+    function addToCart(id) {
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('ajax/addToCart') ?>",
             dataType: "text",
-            data: {proId: id },
+            data: {proId: id},
 
-            beforeSend: function(){
+            beforeSend: function () {
                 $('#upazila').html('<img src="<?php print base_url(); ?>/assets/images/loading.gif" width="20" alt="loading"/> Progressing...');
             },
-            success: function(msg){
+            success: function (msg) {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -75,18 +75,18 @@
         });
     }
 
-    function updateQty(val,id){
+    function updateQty(val, id) {
 
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('ajax/updateQty') ?>",
             dataType: 'json',
-            data: {proId: id, val:val },
+            data: {proId: id, val: val},
 
-            beforeSend: function(){
+            beforeSend: function () {
                 $('#upazila').html('<img src="<?php print base_url(); ?>/assets/images/loading.gif" width="20" alt="loading"/> Progressing...');
             },
-            success: function(response){
+            success: function (response) {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -103,7 +103,7 @@
                         icon: 'success',
                         title: response.msg
                     })
-                }else {
+                } else {
                     Toast.fire({
                         icon: 'error',
                         title: response.msg
@@ -118,16 +118,16 @@
         });
     }
 
-    function removeCart(id){
+    function removeCart(id) {
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('ajax/removeCart') ?>",
             dataType: "text",
             data: {proId: id},
-            beforeSend: function(){
+            beforeSend: function () {
                 $('#upazila').html('<img src="<?php print base_url(); ?>/assets/images/loading.gif" width="20" alt="loading"/> Progressing...');
             },
-            success: function(msg){
+            success: function (msg) {
                 const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -151,11 +151,11 @@
         });
     }
 
-    function showModal(){
+    function showModal() {
         $("#address").modal();
         $('#address-update').trigger("reset");
 
-        $('#address-update').on('submit', function(e) {
+        $('#address-update').on('submit', function (e) {
             e.preventDefault();
             var formData = new FormData(this);
             <?php //echo base_url('Mobile_app/Cart/addressUpdate')?>
@@ -167,7 +167,7 @@
                 processData: false,
                 contentType: false,
                 dataType: "JSON",
-                success: function(data) {
+                success: function (data) {
 
                     const Toast = Swal.mixin({
                         toast: true,
@@ -188,7 +188,7 @@
                         })
                         $("#address").modal('hide');
                         location.reload();
-                    }else {
+                    } else {
                         Toast.fire({
                             icon: 'error',
                             title: data.msg
@@ -202,22 +202,82 @@
 
     }
 
-    function getBranch(id){
+    function getBranch(id) {
         $.ajax({
             type: "POST",
             url: "<?php echo site_url('ajax/getInHosBranch') ?>",
             dataType: "text",
-            data: {ind_h_id: id },
+            data: {ind_h_id: id},
 
-            beforeSend: function(){
+            beforeSend: function () {
                 $('#upazila').html('<img src="<?php print base_url(); ?>/assets/images/loading.gif" width="20" alt="loading"/> Progressing...');
             },
-            success: function(msg){
+            success: function (msg) {
                 $('#hos_branch').html(msg);
             }
 
         });
     }
+
+
+    $(function () {
+        hospitalAdView();
+        nationalAdView()
+        setInterval(hospitalAdView, 25000);
+        setInterval(nationalAdView, 25000);
+
+        function hospitalAdView() {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('ajax/hospitalAd') ?>",
+                dataType: "text",
+                success: function (data) {
+                    $('#addView').html(data);
+                    $("#carouselExampleSlidesOnly").carousel();
+
+                    var addId = $('#carouselExampleSlidesOnly div.active').attr('add-id');
+                    addViewCount(addId);
+                }
+            });
+        }
+
+        function nationalAdView() {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('ajax/nationalAd') ?>",
+                dataType: "text",
+                success: function (data) {
+                    $('#addViewNational').html(data);
+                    $("#carouselExampleSlidesOnly").carousel();
+
+                    var addId = $('#carouselExampleSlidesOnly div.active').attr('add-id');
+                    addViewCount(addId);
+                }
+            });
+        }
+
+        $('#carouselExampleSlidesOnly').carousel({
+            interval: 5000
+        });
+
+        $('#carouselExampleSlidesOnly').on('slid.bs.carousel', function () {
+            var addId = $('#carouselExampleSlidesOnly div.active').attr('add-id');
+            addViewCount(addId);
+            // $('.num').html(addId);
+        });
+
+        function addViewCount(addId) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('ajax/adViewCount') ?>",
+                data: {adId: addId},
+                dataType: "text",
+                success: function (data) {
+                    // $('.num').html(data);
+                }
+            });
+        }
+    });
 
 
 </script>

@@ -19,7 +19,7 @@
     </div>
 </section>
 
-<section class="banner" >
+<section class="banner2" >
     <div class="row">
         <div class="col-12 p-3 ">
             <p class="job-pb"><?php echo get_data_by_id('name','hospital','h_id',$job->h_id)?></p>
@@ -32,5 +32,17 @@
             <a href="<?php echo base_url('Mobile_app/Job')?>" class="btn-apply">Back</a>
         </div>
 
+    </div>
+</section>
+
+<section class="banner" >
+    <div class="row">
+        <div class="col-12 p-3 " >
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="addView">
+                </div>
+            </div>
+            <div class="num"></div>
+        </div>
     </div>
 </section>

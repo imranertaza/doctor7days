@@ -19,7 +19,7 @@
     </div>
 </section>
 
-<section class="banner" >
+<section class="banner2" >
     <div class="row">
         <div class="col-12 p-3 text-center ">
             <img src="<?php echo base_url('assets/upload/ambulance/'.$ambulance->ambulance_user_id.'/'.$ambulance->image)?>" >
@@ -42,6 +42,18 @@
         </div>
         <div class="col-12 p-3">
             <p><b>Details:</b><br> <?php echo $ambulance->description;?></p>
+        </div>
+    </div>
+</section>
+
+<section class="banner" >
+    <div class="row">
+        <div class="col-12 p-3 " >
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="addView">
+                </div>
+            </div>
+            <div class="num"></div>
         </div>
     </div>
 </section>

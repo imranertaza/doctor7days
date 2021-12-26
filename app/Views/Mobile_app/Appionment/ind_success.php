@@ -1,4 +1,4 @@
-<section class="banner ">
+<section class="banner2 ">
     <div class="row">
         <div class="col-12 p-3 pt-5  text-center" >
             <h3>Thank You!</h3>
@@ -14,7 +14,8 @@
         <div class="col-12 mb-4">
 
             <center><a href="<?php echo base_url('Mobile_app')?>" type="submit" class="btn" style="margin-top: -45px;">
-                    <div class="cb-round text-center">
+                    <div class="cb-round text-center" style="transform: rotate(
+180deg);">
                         <i class="flaticon-keyboard-right-arrow-button nw-ar"></i>
                     </div>
                 </a></center>
@@ -23,4 +24,16 @@
         </div>
     </div>
 
+</section>
+
+<section class="banner" >
+    <div class="row">
+        <div class="col-12 p-3 " >
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="addViewNational">
+                </div>
+            </div>
+            <div class="num"></div>
+        </div>
+    </div>
 </section>

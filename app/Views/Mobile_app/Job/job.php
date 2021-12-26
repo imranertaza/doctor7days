@@ -52,3 +52,15 @@
 
     </div>
 </section>
+
+<section class="banner" >
+    <div class="row">
+        <div class="col-12 p-3 " >
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="addView">
+                </div>
+            </div>
+            <div class="num"></div>
+        </div>
+    </div>
+</section>

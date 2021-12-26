@@ -19,10 +19,14 @@
     </div>
 </section>
 
-<section class="banner">
+<section class="banner2">
     <div class="row">
         <div class="col-12 p-3 ">
             <p class="sub-t">Choose your addiction/locations</p>
+
+            <?php if (session()->getFlashdata('message') !== NULL) : ?>
+                <?php echo session()->getFlashdata('message'); ?>
+            <?php endif; ?>
         </div>
 
         <div class="col-12 p-3 in-fil">
@@ -132,19 +136,17 @@
             </div>
 
         </div>
-        <div class="col-12 p-3 ">
-            <?php if (session()->getFlashdata('message') !== NULL) : ?>
-                <?php echo session()->getFlashdata('message'); ?>
-            <?php endif; ?>
+    </div>
+</section>
+
+<section class="banner" >
+    <div class="row">
+        <div class="col-12 p-3 " >
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="addViewNational">
+                </div>
+            </div>
+            <div class="num"></div>
         </div>
-
-
-        <div class="col-12 p-1 " style="padding: 0px !important; object-fit: cover; ">
-
-            <img src="<?php echo base_url() ?>/assets/mobile/image/2nf.JPG" width="100%">
-
-        </div>
-
-
     </div>
 </section>

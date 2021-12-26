@@ -93,6 +93,28 @@
             </li>
 
             <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-chart-pie"></i>
+                    <p>Admanage <i class="right fas fa-angle-left"></i> </p>
+                </a>
+                <ul class="nav nav-treeview" style="display: none;">
+
+                    <li class="nav-item">
+                        <a href="<?php echo base_url('Hospital_admin/Admanagement')?>" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ad Management</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo base_url('Hospital_admin/Admanagement/package')?>" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ad Package</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
                 <a href="<?php echo base_url('Hospital_admin/Settings')?>" class="nav-link">
                     <i class="nav-icon fas fa-cog"></i>
                     <p>Settings</p>

@@ -12,7 +12,7 @@
     </div>
 </section>
 
-<section class="banner" >
+<section class="banner2" >
     <div class="row">
         <div class="col-12 p-3 row " style="margin-left: 0px;margin-top: -100px;">
             <div class="col-6 p-1 text-center">
@@ -35,8 +35,17 @@
                 <p class="com-ti ">GET WILL SOON</p>
             </div>
         </div>
-        <div class="col-12 p-3 ">
-            <img src="<?php echo base_url()?>/assets/mobile/image/home-img.png" class="ban-img">
+    </div>
+</section>
+
+<section class="banner" >
+    <div class="row">
+        <div class="col-12 p-3 " >
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="addViewNational">
+                </div>
+            </div>
+            <div class="num"></div>
         </div>
     </div>
 </section>

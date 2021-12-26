@@ -34,6 +34,41 @@
                     <p>Patient</p>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-chart-pie"></i>
+                    <p>Admanage <i class="right fas fa-angle-left"></i> </p>
+                </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                        <a href="<?php echo base_url('Super_admin/Adcompany')?>" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ad Company</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo base_url('Super_admin/Adpackage')?>" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ad Package</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?php echo base_url('Super_admin/Admanagement')?>" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Ad Management</p>
+                        </a>
+                    </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a href="#" class="nav-link">-->
+<!--                            <i class="far fa-circle nav-icon"></i>-->
+<!--                            <p>Ad Place</p>-->
+<!--                        </a>-->
+<!--                    </li>-->
+                </ul>
+            </li>
+
+
             <li class="nav-item">
                 <a href="<?php echo base_url('Super_admin/admanage')?>" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>

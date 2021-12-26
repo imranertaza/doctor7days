@@ -68,7 +68,8 @@
             <div class="col-12 mb-4">
 
                 <center><a href="<?php echo base_url('Mobile_app/Patient/order')?>" type="submit" class="btn" style="margin-top: -45px;">
-                        <div class="cb-round text-center">
+                        <div class="cb-round text-center"  style="transform: rotate(
+180deg);">
                             <i class="flaticon-keyboard-right-arrow-button nw-ar"></i>
                         </div>
                     </a></center>

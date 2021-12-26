@@ -19,14 +19,12 @@
     </div>
 </section>
 
-<section class="banner" >
+<section class="banner2" >
     <div class="row pad-r-0">
         <div class="col-12 p-3 pad-r-0">
-
             <?php foreach ($post as $item) { ?>
             <a href="<?php echo base_url()?>/Mobile_app/blog/blog_detail/<?php echo $item->post_id ;?>">
             <div class="col-12 row pad-r-0 pt-4">
-
                 <div class="col-4 pad-0">
                     <img src="<?php echo base_url()?>/assets/upload/blog/<?php echo $item->post_id ;?>/<?php echo $item->featured_image;?>" width="100%">
                 </div>
@@ -39,6 +37,18 @@
             <?php } ?>
 
 
+        </div>
+    </div>
+</section>
+
+<section class="banner" >
+    <div class="row">
+        <div class="col-12 p-3 " >
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="addView">
+                </div>
+            </div>
+            <div class="num"></div>
         </div>
     </div>
 </section>
