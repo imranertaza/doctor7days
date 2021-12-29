@@ -40,18 +40,18 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a href="<?php echo base_url('Hospital_admin/gensettings')?>" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>Gensettings</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="<?php echo base_url('Hospital_admin/globaladdress')?>" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>Global Address</p>
-                </a>
-            </li>
+<!--            <li class="nav-item">-->
+<!--                <a href="--><?php //echo base_url('Hospital_admin/gensettings')?><!--" class="nav-link">-->
+<!--                    <i class="nav-icon fas fa-th"></i>-->
+<!--                    <p>Gensettings</p>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a href="--><?php //echo base_url('Hospital_admin/globaladdress')?><!--" class="nav-link">-->
+<!--                    <i class="nav-icon fas fa-th"></i>-->
+<!--                    <p>Global Address</p>-->
+<!--                </a>-->
+<!--            </li>-->
 
 
 
@@ -112,6 +112,13 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('Hospital_admin/Message')?>" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Message</p>
+                </a>
             </li>
 
             <li class="nav-item">

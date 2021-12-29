@@ -23,7 +23,11 @@
                     <a class="dropdown-item" href="<?php echo base_url('Mobile_app/Patient/dashboard/');?>">Dashboard</a>
                     <a class="dropdown-item" href="<?php echo base_url('Mobile_app/Patient/profile');?>">Profile</a>
                     <a class="dropdown-item" href="<?php echo base_url('Mobile_app/Patient/order');?>">Order</a>
-                    <a class="dropdown-item" href="#">Inbox</a>
+                    <a class="dropdown-item" href="<?php echo base_url('Mobile_app/Inbox');?>">Inbox
+                        <?php $count = count_patient_notification(newSession()->Patient_user_id); if ($count != 0){?>
+                        <span class="badge red"><?php echo $count; ?></span>
+                        <?php } ?>
+                    </a>
                     <a class="dropdown-item " href="<?php echo base_url('Mobile_app/Patient/logout');?>">Logout</a>
                 </div>
             <?php }else{?>

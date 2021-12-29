@@ -2662,3 +2662,87 @@ function hospitalBanner(){
     return $data;
 
 }
+
+function count_patient_notification($pat_id){
+    $allMess = DB()->table('message');
+    $allmData = $allMess->where('for_patient','All')->get()->getResult();
+
+    $allMesCount = 0;
+
+    foreach ($allmData as $ms){
+        $mes_to = DB()->table('message_to');
+        $countMsTo = $mes_to->where('message_id',$ms->message_id)->where('to_patient_id',$pat_id)->countAllResults();
+        if (empty($countMsTo)){
+            $allMesCount+=1;
+        }
+    }
+
+    $speciMess = DB()->table('message');
+    $specData = $speciMess->where('for_patient','Specific')->get()->getResult();
+    foreach ($specData as $sp){
+        $table = DB()->table('message');
+        $spCount = $table->join('message_to','message_to.message_id = message.message_id')->where('message.message_id',$sp->message_id)->where('message_to.to_patient_id',$pat_id)->where('message_to.msg_read','0')->countAllResults();
+        if (!empty($spCount)){
+            $allMesCount+=1;
+        }
+    }
+
+    return $allMesCount;
+}
+
+
+function count_both_notification($h_id){
+    $hos = count_hospital_notification($h_id);
+    $dig = count_diagnostics_notification($h_id);
+
+    return $hos+$dig;
+}
+
+function count_hospital_notification($h_id){
+    $allMess = DB()->table('message');
+    $allmesData = $allMess->where('for_hospital','All')->get()->getResult();
+    $result = 0;
+    foreach ($allmesData as $al) {
+        $mess_al_to = DB()->table('message_to');
+        $allm = $mess_al_to->where('message_id',$al->message_id)->where('to_hospital_id',$h_id)->countAllResults();
+        if (empty($allm)){
+            $result+=1;
+        }
+    }
+
+    $specMess = DB()->table('message');
+    $spMsData = $specMess->where('for_hospital','Specific')->get()->getResult();
+    foreach ($spMsData as $sp) {
+        $mess_sp_to = DB()->table('message_to');
+        $spMs = $mess_sp_to->where('message_id',$sp->message_id)->where('to_hospital_id',$h_id)->where('msg_read','0')->countAllResults();
+        if (!empty($spMs)){
+            $result+=1;
+        }
+    }
+    return $result;
+}
+
+function count_diagnostics_notification($h_id){
+    $allMess = DB()->table('message');
+    $allmesData = $allMess->where('for_diagnostic','All')->get()->getResult();
+    $result = 0;
+    foreach ($allmesData as $al) {
+        $mess_al_to = DB()->table('message_to');
+        $allm = $mess_al_to->where('message_id',$al->message_id)->where('to_diagnostic_id',$h_id)->countAllResults();
+        if (empty($allm)){
+            $result+=1;
+        }
+    }
+
+    $specMess = DB()->table('message');
+    $spMsData = $specMess->where('for_diagnostic','Specific')->get()->getResult();
+    foreach ($spMsData as $sp) {
+        $mess_sp_to = DB()->table('message_to');
+        $spMs = $mess_sp_to->where('message_id',$sp->message_id)->where('to_diagnostic_id',$h_id)->where('msg_read','0')->countAllResults();
+        if (!empty($spMs)){
+            $result+=1;
+        }
+    }
+    return $result;
+}
+

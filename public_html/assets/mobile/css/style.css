@@ -1,5 +1,5 @@
 body{
-    font-family: font-family: 'Roboto', sans-serif;
+    font-family:'Roboto', sans-serif;
 }
 .fc{
     color: rgba(112,112,112,1);
@@ -574,4 +574,8 @@ a:hover{
 }
 .icon-css{
     width: 20px;
+}
+.red{
+    background-color: red;
+    color: #FFFFFF;
 }
