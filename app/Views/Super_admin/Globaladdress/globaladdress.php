@@ -39,7 +39,7 @@
                         <table id="data_table" class="table table-bordered table-striped">
                             <thead>
                             <tr>
-                                <th>Global address id</th>
+                                <th width="180">Global address id</th>
                                 <th>Division</th>
                                 <th>Zila</th>
                                 <th>Upazila</th>
@@ -84,16 +84,16 @@
                                     <label for="zila"> Zila: </label>
                                     <select class="form-control" name="zila" onchange="viewupazila(this.value)" id="district" required>
                                         <option value="">Please Select</option>
-                                        <?php echo districtselect($zila) ; ?>
+                                        <?php echo districtselect() ; ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="upazila"> Upazila: </label>
-                                    <select class="form-control" name="upazila" id="subdistrict" onchange="checkCity(this.value)"  required>
+                                    <select class="form-control" name="upazila" id="subdistrict"   required>
                                         <option value="">Please Select</option>
-                                        <?php echo upazilaselect($upazila) ; ?>
+                                        <?php echo upazilaselect() ; ?>
                                     </select>
                                 </div>
                             </div>

@@ -111,6 +111,13 @@
             </li>
 
             <li class="nav-item">
+                <a href="<?php echo base_url('Super_admin/license')?>" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>License</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="<?php echo base_url('Super_admin/indianhospital/appointment')?>" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>Indian appointment list</p>
@@ -176,6 +183,13 @@
                 <a href="<?php echo base_url('Super_admin/Message')?>" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>Message</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="<?php echo base_url('Super_admin/Globaladdress')?>" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Globaladdress</p>
                 </a>
             </li>
 
