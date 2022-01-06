@@ -42,9 +42,9 @@
                         </div>
                         <div class="col-12 mt-4" style="line-height: 5px;">
                             <a href="<?php echo base_url('Mobile_app/Ambulance/ambulance_details/'.$item->amb_id) ?>">
-                            <p class="proName"><?php echo $item->contact_name;?></p>
+                            <p class="proName"><?php echo !empty($item->contact_name) ? $item->contact_name : ''; ?></p>
                             <p class="pro_nm"><?php echo substr($item->description, 0, 20); ?>..</p>
-                            <p class="pro_pho"><?php echo $item->mobile; ?></p>
+                            <p class="pro_pho"><?php echo !empty($item->mobile) ? $item->mobile : ''; ?></p>
                             </a>
                         </div>
                     </div>
@@ -52,7 +52,6 @@
             <?php } ?>
 
         </div>
-
 
     </div>
 </section>

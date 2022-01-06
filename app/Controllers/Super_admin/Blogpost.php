@@ -49,7 +49,7 @@ class Blogpost extends BaseController
             echo view('Super_admin/header');
             echo view('Super_admin/sidebar');
             if ($data['mod_access'] == 1) {
-                echo view('Super_admin/blogpost/blogpost', $data);
+                echo view('Super_admin/Blogpost/blogpost', $data);
             } else {
                 echo view('Super_admin/No_permission', $data);
             }

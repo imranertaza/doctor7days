@@ -2231,7 +2231,11 @@ function id_by_global_address($id)
         $query = $glo->where('global_address_id',$id)->get()->getRow();
         $view = $query;
     } else {
-        $view = "0";
+        $view = array(
+            "division" => 0,
+            "zila" => 0,
+            "upazila" => 0
+            );
     }
 
     return $view;
@@ -2505,8 +2509,8 @@ function pro_parent_category_by_category_id($id)
         $prId = get_data_by_id('parent_pro_cat_id', 'product_category', 'parent_pro_cat_id', $id);
         $table2 = DB()->table('product_category');
         $query2 = $table2->where('prod_cat_id', $prId);
-        $catName = $query2->get()->getRow()->product_category;
-        $view = (!empty($catName)) ? $catName : 'No parent';
+        $catName = $query2->get()->getRow();
+        $view = (!empty($catName)) ? $catName->product_category : 'No parent';
     } else {
         $view = "No parent";
     }
@@ -2531,15 +2535,15 @@ function  proSubCatListInOption($categoryId,$selected){
 function superAdminName()
 {
     $session = newSession();
-    $id = $session->isLoggedIAdmin->admin_id;
+    $id = $session->admin_id;
     $table = DB()->table('admin');
-    $query = $table->where('admin_id', 3);
+    $query = $table->where('admin_id', $id);
     $row = $query->countAllResults();
     if (!empty($row)) {
-        $query = $table->where('admin_id', 3);
+        $query = $table->where('admin_id', $id);
         $view = $query->get()->getRow()->name;
     } else {
-        $view = "admin";
+        $view = "Super Admin";
     }
     return $view;
 }
