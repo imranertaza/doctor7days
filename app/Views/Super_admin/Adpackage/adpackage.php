@@ -379,7 +379,7 @@
                 $(".form-control").removeClass('is-invalid').removeClass('is-valid');
                 $('#edit-modal').modal('show');
 
-                $("#edit-form #ad_id").val(response.ad_id);
+                $("#edit-form #ad_package_id").val(response.ad_package_id);
                 $("#edit-form #org_type").val(response.org_type);
                 $("#edit-form #total_views").val(response.total_views);
                 $("#edit-form #size_width").val(response.size_width);

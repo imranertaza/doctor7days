@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-6" style="text-transform: capitalize;">
                                 <label>Ad Total View</label>
-                                <p><?php echo $add->ad_view_count;?></p>
+                                <p><?php echo $adCount;?></p>
                             </div>
 
                             <div class="col-6" >

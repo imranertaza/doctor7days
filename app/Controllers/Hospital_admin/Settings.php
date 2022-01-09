@@ -47,6 +47,13 @@ class Settings extends BaseController
             $h_id = $this->session->h_Id;
             $result = $this->hospitalModel->where('h_id', $h_id)->first();
             $glob = $this->globaladdressModel->where('global_address_id', $result->global_address_id)->first();
+            if (empty($glob)){
+                $glob = (object) array(
+                    "division" => 0,
+                    "zila" => 0,
+                    "upazila" => 0,
+                );
+            }
             $data = [
                 'controller' => 'Hospital_admin/Settings',
                 'title' => 'Settings',
@@ -156,9 +163,9 @@ class Settings extends BaseController
         $fields['h_id'] = $this->request->getPost('h_id');
         $logo = $this->request->getFile('logo');
         $image = $this->request->getFile('image');
-        $target_dir = FCPATH . '/assets/upload/hospital/'.$fields['h_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/hospital/'.$fields['h_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
 
 

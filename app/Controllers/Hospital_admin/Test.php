@@ -40,12 +40,10 @@ class Test extends BaseController
                 'title' => 'Tests'
             ];
 
-             $perm = $this->permission->module_permission_list($role_id, $this->module_name);
-            foreach($perm as $key=>$val){
-                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
-                 
+            $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach ($perm as $key => $val) {
+                $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
             }
-
 
             echo view('Hospital_admin/header');
             echo view('Hospital_admin/sidebar');

@@ -18,7 +18,7 @@ class Admanagement extends BaseController
     protected $adpackageModel;
     protected $globaladdressModel;
     protected $crop;
-    private $module_name = 'Doctor';
+    private $module_name = 'Admanage';
 
     public function __construct()
     {
@@ -51,10 +51,9 @@ class Admanagement extends BaseController
                 'adPack' => $pak,
             ];
 
-             $perm = $this->permission->module_permission_list($role_id, $this->module_name);
-            foreach($perm as $key=>$val){
-                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
-                 
+            $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach ($perm as $key => $val) {
+                $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
             }
 
 
@@ -116,9 +115,9 @@ class Admanagement extends BaseController
         $fields['org_type'] = $this->request->getPost('org_type');
         $banner = $this->request->getFile('banner');
 
-        $target_dir = FCPATH . '/assets/upload/adbanner/'.$fields['h_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/adbanner/'.$fields['h_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
         if (!empty($_FILES['banner']['name'])) {
             $name = $banner->getRandomName();
@@ -129,8 +128,6 @@ class Admanagement extends BaseController
             unlink($target_dir . '' . $name);
 
             $fields['banner'] = $lo_nameimg;
-        }else{
-            $fields['banner'] = $banner1;
         }
 
 
@@ -196,7 +193,7 @@ class Admanagement extends BaseController
 
             $admanage = $this->admanagementModel->find($id);
             $pak = $this->adpackageModel->findAll();
-            $add = $this->globaladdressModel->find($admanage->global_address_id);
+            $add = $this->globaladdressModel->find();
             $data = [
                 'controller' => 'Hospital_admin/Admanagement',
                 'title' => 'Admanagement',
@@ -206,9 +203,8 @@ class Admanagement extends BaseController
             ];
 
             $perm = $this->permission->module_permission_list($role_id, $this->module_name);
-            foreach($perm as $key=>$val){
+            foreach ($perm as $key => $val) {
                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
-
             }
 
 
@@ -233,7 +229,7 @@ class Admanagement extends BaseController
         $fields['org_type'] = $this->request->getPost('org_type');
         $banner = $this->request->getFile('banner');
 
-        $target_dir = FCPATH . '/assets/upload/adbanner/'.$fields['h_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/adbanner/'.$fields['h_id'].'/';
 
         if (!empty($_FILES['banner']['name'])) {
             $oldFile = get_data_by_id('banner','ad_management','ad_id',$fields['ad_id']);
@@ -350,9 +346,8 @@ class Admanagement extends BaseController
             ];
 
             $perm = $this->permission->module_permission_list($role_id, $this->module_name);
-            foreach($perm as $key=>$val){
+            foreach ($perm as $key => $val) {
                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
-
             }
 
 

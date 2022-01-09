@@ -219,9 +219,9 @@ class Product extends BaseController
 
                 if (!empty($_FILES['picture']['name'])) {
 
-                    $target_dir = FCPATH . '/assets/upload/product/'.$proId.'/';
+                    $target_dir = FCPATH . 'assets/upload/product/'.$proId.'/';
                     if(!file_exists($target_dir)){
-                        mkdir($target_dir,0655);
+                        mkdir($target_dir,0777);
                     }
 
                     $picture= $this->request->getFile('picture');
@@ -269,9 +269,9 @@ class Product extends BaseController
 
         if (!empty($_FILES['picture']['name'])) {
 
-            $target_dir = FCPATH . '/assets/upload/product/'.$fields['prod_id'].'/';
+            $target_dir = FCPATH . 'assets/upload/product/'.$fields['prod_id'].'/';
             if(!file_exists($target_dir)){
-                mkdir($target_dir,0655);
+                mkdir($target_dir,0777);
             }
 
             $picture= $this->request->getFile('picture');

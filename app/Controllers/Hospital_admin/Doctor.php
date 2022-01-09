@@ -45,10 +45,9 @@ class Doctor extends BaseController
                 'title' => 'Doctor'
             ];
 
-             $perm = $this->permission->module_permission_list($role_id, $this->module_name);
-            foreach($perm as $key=>$val){
-                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
-                 
+            $perm = $this->permission->module_permission_list($role_id, $this->module_name);
+            foreach ($perm as $key => $val) {
+                $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
             }
 
 
@@ -169,9 +168,9 @@ class Doctor extends BaseController
         $fields['doc_id'] = $this->request->getPost('doc_id');
         $logo = $this->request->getFile('pic');
 
-        $target_dir = FCPATH . '/assets/upload/doctor/'.$fields['doc_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/doctor/'.$fields['doc_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
 
         if (!empty($_FILES['pic']['name'])) {
@@ -201,6 +200,7 @@ class Doctor extends BaseController
 
         $fields['doc_id'] = $this->request->getPost('doc_id');
         $fields['nid'] = $this->request->getPost('nid');
+        $fields['degree'] = $this->request->getPost('degree');
         $fields['description'] = $this->request->getPost('description');
 
 

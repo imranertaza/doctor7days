@@ -2492,7 +2492,9 @@ function hospitalName()
     $query = $table->where('h_id', $session->h_Id);
     $row = $query->countAllResults();
     if (!empty($row)) {
-        $view = $query->get()->getRow()->name;
+        $table2 = DB()->table('hospital');
+        $query2 = $table2->where('h_id', $session->h_Id);
+        $view = $query2->get()->getRow()->name;
     } else {
         $view = "admin";
     }

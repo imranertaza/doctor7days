@@ -5,6 +5,7 @@ namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
 
+use App\Libraries\Permission_hospital;
 use App\Models\Super_admin\HospitalcategoryModel;
 use App\Models\Super_admin\RolesModel;
 use App\Models\Super_admin\GlobaladdressModel;
@@ -23,12 +24,14 @@ class Hospital extends BaseController
     protected $crop;
     protected $session;
     protected $permission;
+    protected $permission_hospital;
     private $module_name = 'Hospital';
 	
 	public function __construct()
 	{
 	    $this->hospitalModel = new HospitalModel();
         $this->globaladdressModel = new GlobaladdressModel();
+        $this->permission_hospital = new Permission_hospital();
         $this->rolesModel = new RolesModel();
         $this->usersModel = new UsersModel();
        	$this->validation =  \Config\Services::validation();
@@ -210,7 +213,8 @@ class Hospital extends BaseController
         $gloadd = $this->globaladdressModel->where($where);
 
         if ($gloadd->countAllResults() != 0){
-            $fields['global_address_id'] = $gloadd->first()->global_address_id;
+            $gloaddnew = $this->globaladdressModel->where($where);
+            $fields['global_address_id'] = $gloaddnew->first()->global_address_id;
             if ($this->hospitalModel->update($fields['h_id'], $fields)) {
                 $response['success'] = true;
                 $response['messages'] = 'Data has been Update successfully';
@@ -400,6 +404,7 @@ class Hospital extends BaseController
                 //Roles add
                 $roles['h_id'] = $h_id;
                 $roles['role'] = 'hospital_admin';
+                $roles['permission'] = $this->permission_hospital->admin_permissions;
                 $roles['is_default'] = '1';
                 $roles['createdBy'] = '1';
                 $this->rolesModel->insert($roles);

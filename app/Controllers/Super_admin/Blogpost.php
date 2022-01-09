@@ -85,7 +85,7 @@ class Blogpost extends BaseController
             echo view('Super_admin/header');
             echo view('Super_admin/sidebar');
             if ($data['mod_access'] == 1) {
-                echo view('Super_admin/blogpost/update_form', $data);
+                echo view('Super_admin/Blogpost/update_form', $data);
             } else {
                 echo view('Super_admin/No_permission', $data);
             }
@@ -170,7 +170,7 @@ class Blogpost extends BaseController
 
         ]);
 
-        if ($this->validation->run($fields) == FALSE) {
+        if ($this->validation->withRequest($this->request)->run() == FALSE) {
 
             $response['success'] = false;
             $response['messages'] = $this->validation->listErrors();
@@ -181,9 +181,10 @@ class Blogpost extends BaseController
 
                 $data['post_id'] = $this->blogpostModel->getInsertID();
 
-                $target_dir = FCPATH . '/assets/upload/blog/'.$data['post_id'].'/';
+                $target_dir = FCPATH . 'assets/upload/blog/'.$data['post_id'].'/';
                 if(!file_exists($target_dir)){
-                    mkdir($target_dir,0655);
+                    mkdir($target_dir,0777);
+
                 }
 
                 $name = $image->getRandomName();

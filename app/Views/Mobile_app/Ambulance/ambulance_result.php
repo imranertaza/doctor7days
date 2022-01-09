@@ -32,7 +32,10 @@
         </div>
         <div class="col-12 p-3 row" style="padding-right: 0px !important;">
             <?php foreach ($ambulanceData as $item) {
-                $img = (!empty($item->image))?$item->image:'noimage.jpg';?>
+                $img = (!empty($item->image))?$item->image:'noimage.jpg';
+                $name = get_data_by_id('name', 'ambulance_users', 'ambulance_user_id', $item->ambulance_user_id);
+                $phone = get_data_by_id('mobile', 'ambulance_users', 'ambulance_user_id', $item->ambulance_user_id);
+            ?>
                 <div class="col-6 " style="padding: 10px;">
                     <div class="product ">
                         <div class="col-12 pad-0">
@@ -42,9 +45,9 @@
                         </div>
                         <div class="col-12 mt-4" style="line-height: 5px;">
                             <a href="<?php echo base_url('Mobile_app/Ambulance/ambulance_details/'.$item->amb_id) ?>">
-                            <p class="proName"><?php echo !empty($item->contact_name) ? $item->contact_name : ''; ?></p>
+                            <p class="proName"><?php echo $name; ?></p>
                             <p class="pro_nm"><?php echo substr($item->description, 0, 20); ?>..</p>
-                            <p class="pro_pho"><?php echo !empty($item->mobile) ? $item->mobile : ''; ?></p>
+                            <p class="pro_pho"><?php echo $phone; ?></p>
                             </a>
                         </div>
                     </div>

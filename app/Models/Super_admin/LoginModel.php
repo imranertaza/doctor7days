@@ -24,7 +24,7 @@ class LoginModel extends Model
         $query = $builder->get();
         
         $user = $query->getRow();
-        print $db->getLastQuery();
+//        print $db->getLastQuery();
         
         
         if(!empty($user)){

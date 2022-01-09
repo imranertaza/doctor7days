@@ -125,13 +125,18 @@ class Admanagement extends BaseController
         $role_id = $this->session->AdminRole;
 
         if (isset($isLoggedIAdmin)) {
-
+            $countad = 0;
             $result = $this->admanagementModel->find($id);
+            $datacount  = $this->adcountModel->where('ad_id',$id)->first();
 
+            if (!empty($datacount)){
+                $countad = $datacount->total_view_count;
+            }
             $data = [
                 'controller' => 'Super_admin/Admanagement',
                 'title' => 'Ad Management',
                 'add' => $result,
+                'adCount' => $countad,
             ];
 
 
@@ -233,7 +238,7 @@ class Admanagement extends BaseController
             $pak = $this->adpackageModel->findAll();
             $companey = $this->adcompanyModel->findAll();
             $admanagement = $this->admanagementModel->find($id);
-            $add = $this->globaladdressModel->find($admanagement->global_address_id);
+            $add = $this->globaladdressModel->find();
             $data = [
                 'controller' => 'Super_admin/Admanagement',
                 'title' => 'Ad Management',

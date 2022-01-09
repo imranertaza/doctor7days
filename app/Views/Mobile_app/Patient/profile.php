@@ -69,7 +69,7 @@
                     <input type="number" class="form-control in-c" name="age" value="<?php echo $patient->age; ?>" required>
                 </div>
 
-                <?php $address = id_by_global_address($patient->global_address_id); ?>
+                <?php $address = (object) id_by_global_address($patient->global_address_id); ?>
                 <div class="form-group">
                     <label for="division" class="lab-t"> Division </label>
                     <select class="form-control in-c" name="division" onchange="viewdistrict(this.value)" required>
