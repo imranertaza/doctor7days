@@ -154,7 +154,7 @@ class Brand extends BaseController
         if (!empty($_FILES['logo']['name'])) {
             $logo = $this->request->getFile('logo');
             $name = $logo->getRandomName();
-            $logo->move(FCPATH . '\assets\uplode\brand',$name);
+            $logo->move(FCPATH . '\assets\upload\brand',$name);
             $fields['logo'] = $name;
         }
 
