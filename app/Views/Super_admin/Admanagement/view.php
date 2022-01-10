@@ -52,11 +52,6 @@
                                 <label>Org Type</label>
                                 <p><?php echo $add->org_type;?></p>
                             </div>
-                            <div class="col-6" style="text-transform: capitalize;">
-                                <label>Ad Total View</label>
-                                <p><?php echo $adCount;?></p>
-                            </div>
-
                             <div class="col-6" >
                                 <label>Payment Status</label>
                                 <?php $pval = ($add->payment_status == 0)?1:0; $psel = ($add->payment_status == 1)?'checked':''; ?>
@@ -65,6 +60,16 @@
                                     <label class="custom-control-label" for="switch2"></label>
                                 </div>
                             </div>
+                            <div class="col-6" style="text-transform: capitalize;">
+                                <label>Package View Limit</label>
+                                <p><?php echo get_data_by_id('total_views','ad_package','ad_package_id',$add->ad_package_id);?></p>
+                            </div>
+                            <div class="col-6" style="text-transform: capitalize;">
+                                <label>Ad Total View</label>
+                                <p><?php echo $adCount;?></p>
+                            </div>
+
+
 
                         </div>
                     </div>

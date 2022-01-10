@@ -199,9 +199,9 @@ class Ambulance extends BaseController
         $fields['amb_id'] = $this->request->getPost('amb_id');
         $image = $this->request->getFile('image');
         $userId = get_data_by_id('ambulance_user_id','ambulance','amb_id',$fields['amb_id']);
-        $target_dir = FCPATH . '/assets/upload/ambulance/'.$userId.'/';
+        $target_dir = FCPATH . 'assets/upload/ambulance/'.$userId.'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
 
         if (!empty($_FILES['image']['name'])) {

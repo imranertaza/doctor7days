@@ -117,9 +117,9 @@ class Ambulance_dashboard extends BaseController
         //image upload
         if (!empty($_FILES['image']['name'])) {
 
-            $target_dir = FCPATH . '/assets/upload/ambulance/'.$userId.'/';
+            $target_dir = FCPATH . 'assets/upload/ambulance/'.$userId.'/';
             if(!file_exists($target_dir)){
-                mkdir($target_dir,0655);
+                mkdir($target_dir,0777);
             }
 
             $image = $this->request->getFile('image');
@@ -157,9 +157,9 @@ class Ambulance_dashboard extends BaseController
 
         //image upload
         if (!empty($_FILES['image']['name'])) {
-            $target_dir = FCPATH . '/assets/upload/ambulance/'.$userId.'/';
+            $target_dir = FCPATH . 'assets/upload/ambulance/'.$userId.'/';
             if(!file_exists($target_dir)){
-                mkdir($target_dir,0655);
+                mkdir($target_dir,0777);
             }
 
             $image = $this->request->getFile('image');
@@ -218,9 +218,9 @@ class Ambulance_dashboard extends BaseController
             //image upload
             if (!empty($_FILES['photo']['name'])) {
 
-                $target_dir = FCPATH . '/assets/upload/ambulance/'.$userId.'/';
+                $target_dir = FCPATH . 'assets/upload/ambulance/'.$userId.'/';
                 if(!file_exists($target_dir)){
-                    mkdir($target_dir,0655);
+                    mkdir($target_dir,0777);
                 }
 
                 $image = $this->request->getFile('photo');

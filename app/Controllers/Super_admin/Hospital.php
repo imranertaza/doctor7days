@@ -237,9 +237,9 @@ class Hospital extends BaseController
 
         $fields['h_id'] = $this->request->getPost('h_id');
 
-        $target_dir = FCPATH . '/assets/upload/hospital/'.$fields['h_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/hospital/'.$fields['h_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
         $logo = $this->request->getFile('logo');
         $namelogo = $logo->getRandomName();
@@ -265,9 +265,9 @@ class Hospital extends BaseController
 
         $fields['h_id'] = $this->request->getPost('h_id');
 
-        $target_dir = FCPATH . '/assets/upload/hospital/'.$fields['h_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/hospital/'.$fields['h_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
 
         $banner = $this->request->getFile('banner_1');
@@ -294,9 +294,9 @@ class Hospital extends BaseController
         $response = array();
 
         $fields['h_id'] = $this->request->getPost('h_id');
-        $target_dir = FCPATH . '/assets/upload/hospital/'.$fields['h_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/hospital/'.$fields['h_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
 
         $banner2 = $this->request->getFile('banner_2');
@@ -323,9 +323,9 @@ class Hospital extends BaseController
         $response = array();
 
         $fields['h_id'] = $this->request->getPost('h_id');
-        $target_dir = FCPATH . '/assets/upload/hospital/'.$fields['h_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/hospital/'.$fields['h_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
 
         $banner3 = $this->request->getFile('banner_3');
@@ -404,7 +404,7 @@ class Hospital extends BaseController
                 //Roles add
                 $roles['h_id'] = $h_id;
                 $roles['role'] = 'hospital_admin';
-                $roles['permission'] = $this->permission_hospital->admin_permissions;
+                $roles['permission'] = $this->permission_hospital->hospital_all_permissions;
                 $roles['is_default'] = '1';
                 $roles['createdBy'] = '1';
                 $this->rolesModel->insert($roles);

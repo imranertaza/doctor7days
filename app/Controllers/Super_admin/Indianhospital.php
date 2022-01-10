@@ -234,9 +234,9 @@ class Indianhospital extends BaseController
 
         $fields['ind_h_id'] = $this->request->getPost('ind_h_id');
 
-        $target_dir = FCPATH . '/assets/upload/indianhospital/'.$fields['ind_h_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/indianhospital/'.$fields['ind_h_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
         $logo = $this->request->getFile('logo');
         $namelogo = $logo->getRandomName();

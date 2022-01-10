@@ -133,9 +133,9 @@ class Settings extends BaseController
 
         $fields['admin_id'] = $this->request->getPost('admin_id');
 
-        $target_dir = FCPATH . '/assets/upload/superAdmin/'.$fields['admin_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/superAdmin/'.$fields['admin_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
         $logo = $this->request->getFile('pic');
         $namelogo = $logo->getRandomName();

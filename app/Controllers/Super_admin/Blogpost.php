@@ -263,9 +263,9 @@ class Blogpost extends BaseController
         $fields['post_id'] = $this->request->getPost('post_id');
         $image = $this->request->getFile('image');
         $featImage = $this->request->getFile('featured_image');
-        $target_dir = FCPATH . '/assets/upload/blog/'.$fields['post_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/blog/'.$fields['post_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
 
         if (!empty($_FILES['image']['name'])) {

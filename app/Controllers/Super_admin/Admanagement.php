@@ -189,9 +189,9 @@ class Admanagement extends BaseController
         $fields['org_type'] = $this->request->getPost('org_type');
         $banner = $this->request->getFile('banner');
 
-        $target_dir = FCPATH . '/assets/upload/adbanner/'.$fields['ad_com_id'].'/';
+        $target_dir = FCPATH . 'assets/upload/adbanner/'.$fields['ad_com_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
         if (!empty($_FILES['banner']['name'])) {
             $name = $banner->getRandomName();
@@ -361,7 +361,7 @@ class Admanagement extends BaseController
         $ad_com_id = get_data_by_id('ad_com_id','ad_management','ad_id',$fields['ad_id']);
         $id = (!empty($h_id))?$h_id:$ad_com_id;
 
-        $target_dir = FCPATH . '/assets/upload/adbanner/'.$id.'/';
+        $target_dir = FCPATH . 'assets/upload/adbanner/'.$id.'/';
 
         if (!empty($_FILES['banner']['name'])) {
             $oldFile = get_data_by_id('banner','ad_management','ad_id',$fields['ad_id']);
