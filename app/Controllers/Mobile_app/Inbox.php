@@ -31,8 +31,9 @@ class Inbox extends BaseController
 
     public function view($id)
     {
-        $mas_to = $this->messageToModel->where('message_id',$id)->countAllResults();
         $pat_id = newSession()->Patient_user_id;
+        $mas_to = $this->messageToModel->where('message_id',$id)->where('to_patient_id',$pat_id)->countAllResults();
+
         if(empty($mas_to)){
             $masData = [
               'message_id' => $id,

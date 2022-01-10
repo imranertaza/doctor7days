@@ -4,7 +4,7 @@
 namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
-use App\Libraries\Permission_hospital;
+use App\Libraries\Permission;
 use App\Models\Super_admin\GlobaladdressModel;
 use App\Models\Super_admin\PatientModel;
 
@@ -24,7 +24,7 @@ class Patient extends BaseController
         $this->session = \Config\Services::session();
         $this->patientModel = new PatientModel();
         $this->validation = \Config\Services::validation();
-        $this->permission = new Permission_hospital();
+        $this->permission = new Permission();
         $this->globaladdressModel = new GlobaladdressModel();
         $this->crop = \Config\Services::image();
     }
@@ -352,9 +352,9 @@ class Patient extends BaseController
         $fields['pat_id'] = $this->request->getPost('pat_id');
 
         if (!empty($_FILES['photo']['name'])) {
-            $target_dir = FCPATH . '/assets/upload/patient/'.$fields['pat_id'].'/';
+            $target_dir = FCPATH . 'assets/upload/patient/'.$fields['pat_id'].'/';
             if(!file_exists($target_dir)){
-                mkdir($target_dir,0655);
+                mkdir($target_dir,0777);
             }
             $photo = $this->request->getFile('photo');
 

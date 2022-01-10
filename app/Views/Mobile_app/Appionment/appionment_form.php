@@ -32,7 +32,9 @@
         <div class="col-12 p-3 in-fil">
             <nav>
                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                    <?php $act = ($_GET['tab'] == 'ind')?'active show':''; $inact = ($_GET['tab'] == 'ind')?'':'active show'; ?>
+                    <?php
+                    $act = ($_GET['tab'] == 'ind') ? 'active show':'';
+                    $inact = ($_GET['tab'] == 'ind') ? '':'active show'; ?>
 
                     <a class="nav-item nav-link <?php echo $inact ?> ?>" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                        aria-controls="nav-home" aria-selected="true"><img

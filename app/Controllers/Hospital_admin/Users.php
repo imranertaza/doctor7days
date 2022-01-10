@@ -352,9 +352,9 @@ class Users extends BaseController
         $fields['user_id'] = $this->request->getPost('user_id');
         $image = $this->request->getFile('pic');
 
-        $target_dir = FCPATH .'/assets/upload/users/'.$fields['user_id'].'/';
+        $target_dir = FCPATH .'assets/upload/users/'.$fields['user_id'].'/';
         if(!file_exists($target_dir)){
-            mkdir($target_dir,0655);
+            mkdir($target_dir,0777);
         }
 
         if (!empty($_FILES['pic']['name'])) {

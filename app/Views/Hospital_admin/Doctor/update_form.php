@@ -133,6 +133,13 @@
                                                                value="<?php echo $doctor->nid; ?>">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="degree"> Degree: </label>
+
+                                                        <textarea cols="40" rows="3" class="form-control" id="degree" name="degree" placeholder="Description"><?php echo $doctor->degree; ?></textarea>
+                                                    </div>
+                                                </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">

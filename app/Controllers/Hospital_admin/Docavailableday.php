@@ -42,8 +42,8 @@ class Docavailableday extends BaseController
 
 
             $perm = $this->permission->module_permission_list($role_id, $this->module_name);
-            foreach($perm as $key=>$val){
-                 $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);    
+            foreach ($perm as $key => $val) {
+                $data[$key] = $this->permission->have_access($role_id, $this->module_name, $key);
             }
 
             echo view('Hospital_admin/header');

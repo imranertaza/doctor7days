@@ -5,8 +5,8 @@ namespace App\Controllers\Hospital_admin;
 
 use App\Controllers\BaseController;
 
+use App\Libraries\Permission_hospital;
 use App\Models\Super_admin\JobModel;
-use App\Libraries\Permission;
 
 class Job extends BaseController
 {
@@ -22,7 +22,7 @@ class Job extends BaseController
         $this->jobModel = new JobModel();
         $this->validation = \Config\Services::validation();
         $this->session = \Config\Services::session();
-        $this->permission = new Permission();
+        $this->permission = new Permission_hospital();
 
     }
 
@@ -58,10 +58,10 @@ class Job extends BaseController
     public function getAll()
     {
         $response = array();
-
+        $hId = $this->session->h_Id;
         $data['data'] = array();
 
-        $result = $this->jobModel->select('job_id, title, description, salary, location, daily_time, total_applied, h_id, createdDtm, createdBy, updatedDtm, updatedBy, deleted, deletedRole')->findAll();
+        $result = $this->jobModel->where('h_id',$hId)->findAll();
 
         foreach ($result as $key => $value) {
 

@@ -188,7 +188,6 @@ class Adpackage extends BaseController
         $fields['price'] = $this->request->getPost('price');
         $fields['price_recurring'] = $this->request->getPost('price_recurring');
 
-
         $this->validation->setRules([
             'org_type' => ['label' => 'org_type', 'rules' => 'required'],
             'total_views' => ['label' => 'total_views', 'rules' => 'required'],
@@ -206,7 +205,6 @@ class Adpackage extends BaseController
             $response['messages'] = $this->validation->listErrors();
 			
         } else {
-
             if ($this->adpackageModel->update($fields['ad_package_id'], $fields)) {
 				
                 $response['success'] = true;

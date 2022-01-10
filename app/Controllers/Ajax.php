@@ -181,6 +181,7 @@ class Ajax extends BaseController
     public function hospitalAd(){
 
         $table = DB()->table('ad_management');
+        $data['hospitaladd'] = array();
         if ($this->session->isPatientLogin == true) {
             $patintId = $this->session->Patient_user_id;
             $glAddId = get_data_by_id('global_address_id','patient','pat_id',$patintId);
@@ -188,27 +189,24 @@ class Ajax extends BaseController
 
         $hospitaladd = $table->get()->getResult();
 
-        $data['hospitaladd'] = [];
         $i = 1;
         $limit = 5;
             foreach ($hospitaladd as $key=>$value){
-
                 if ($i <= $limit) {
                     $district_array = json_decode($value->district_id);
                     if (!empty($district_array)) {
                         if (in_array($cusdistricID, $district_array)) {
                             $table2 = DB()->table('ad_management');
                             $newArray = $table2->select('*')->join('ad_count', 'ad_count.ad_id = ad_management.ad_id')->where('ad_management.org_type', 'hospital')->where('ad_management.start_date <=', date("Y-m-d"))->where('ad_management.status', 'active')->where('ad_management.end_date >', date("Y-m-d"))->where('ad_management.ad_id', $value->ad_id)->orderBy('ad_count.total_view_count', 'ASC')->get()->getRow();
-                            array_push($data['hospitaladd'], $newArray);
+                            if (!empty($newArray)) {
+                                array_push($data['hospitaladd'], $newArray);
+                                $i++;
+                            }
                         }
                     }
-                    $i++;
                 }
             }
         }
-
-
-
 
 //        print DB()->getLastQuery();
         echo view('Mobile_app/Adview/hospital', $data);

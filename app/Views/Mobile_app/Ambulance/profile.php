@@ -74,7 +74,6 @@
             </div>
             <div class="col-12 p-3 in-fil">
                 <div class="form-group">
-                    <input type="hidden" name="amb_id" value="<?php echo $ambulance->amb_id; ?>" required>
                     <button type="submit" class="btn btn-info">Update</button>
                 </div>
             </div>

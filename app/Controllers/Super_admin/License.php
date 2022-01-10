@@ -4,7 +4,7 @@
 namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
-use App\Libraries\Permission_hospital;
+use App\Libraries\Permission;
 use App\Models\Mobile_app\HospitalModel;
 use App\Models\Super_admin\LicenseModel;
 
@@ -19,14 +19,14 @@ class License extends BaseController
    
     protected $session;
     protected $permission;
-    private $module_name = 'Globaladdress';
+    private $module_name = 'License';
 	public function __construct()
 	{
         $this->session = \Config\Services::session();
 	    $this->hospitalModel = new HospitalModel();
 	    $this->licenseModel = new LicenseModel();
        	$this->validation =  \Config\Services::validation();
-        $this->permission = new Permission_hospital();
+        $this->permission = new Permission;
 		
 	}
 	

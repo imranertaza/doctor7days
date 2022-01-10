@@ -28,9 +28,8 @@
 
 <section class="banner" >
     <div class="row">
-        <div class="col-12 p-3 text-right">
-            <small class="sm-ti">Doctor specialties</small><br>
-            <button class="btn-card" >Cardiologist</button>
+        <div class="col-12 p-3 ">
+            <span class="title-m">Doctor specialties list</span>
 
         </div>
         <div class="col-12 p-3 dr-row ">
@@ -75,3 +74,4 @@
         </div>
     </div>
 </section>
+

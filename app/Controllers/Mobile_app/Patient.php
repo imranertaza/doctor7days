@@ -147,9 +147,9 @@ class Patient extends BaseController
         }
 
         if (!empty($_FILES['photo']['name'])) {
-            $target_dir = FCPATH . '/assets/upload/patient/'.$userId.'/';
+            $target_dir = FCPATH . 'assets/upload/patient/'.$userId.'/';
             if(!file_exists($target_dir)){
-                mkdir($target_dir,0655);
+                mkdir($target_dir,0777);
             }
 
             $photo = $this->request->getFile('photo');
@@ -207,7 +207,7 @@ class Patient extends BaseController
         $data['password'] = sha1($this->request->getPost('password'));
 
         $this->validation->setRule('name', 'Name', 'required');
-        $this->validation->setRule('phone', 'Phone', 'required');
+        $this->validation->setRule('phone', 'Phone', 'required|min_length[10]|max_length[11]');
         $this->validation->setRule('password', 'Password', 'required');
 
         if ($this->validation->withRequest($this->request)->run() == FALSE) {

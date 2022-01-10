@@ -132,7 +132,7 @@ class Ambulance extends BaseController
         $data['password'] = sha1($this->request->getPost('password'));
 
         $this->validation->setRule('contact_name', 'Name', 'required');
-        $this->validation->setRule('mobile', 'Phone', 'required');
+        $this->validation->setRule('mobile', 'Phone', 'required|min_length[10]|max_length[11]');
         $this->validation->setRule('password', 'Password', 'required');
 
         if ($this->validation->withRequest($this->request)->run() == FALSE) {

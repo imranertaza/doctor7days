@@ -44,11 +44,16 @@ class LoginModel extends Model
         $query = $builder->select('end_date')->where('h_id',$h_Id)->get();
         
         $today = date('Y-m-d');
-        if ($query->getRow()->end_date > $today) {
-            $data = true;
+        if (!empty($query->getRow())){
+            if ($query->getRow()->end_date > $today) {
+                $data = true;
+            }else{
+                $data = false;
+            }
         }else{
             $data = false;
         }
+
         return $data;
     }
     

@@ -43,6 +43,7 @@ class Appionment extends BaseController
 
     public function index()
     {
+        $_GET['tab'] = '';
         if ($this->session->isPatientLogin != true) {
             $redirectUrl = 'Mobile_app/appionment?tab=ind';
             newSession()->set("redirectUrl", $redirectUrl);

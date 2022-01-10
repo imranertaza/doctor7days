@@ -35,7 +35,9 @@
                 <img src="<?php echo base_url() ?>/assets/upload/doctor/<?php echo $specialties->doc_id;?>/<?php echo $img ?>" width="100%">
             </div>
             <div class="col-6">
+
                 <p class="tit"><?php echo $specialties->name; ?></p>
+                <p class="sub-tit"><?php echo $specialties->degree; ?></p>
                 <p class="sub-tit"><?php echo get_data_by_id('specialist_type_name', 'specialist', 'specialist_id ', $specialties->specialist_id); ?></p>
             </div>
         </div>

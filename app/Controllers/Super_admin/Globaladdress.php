@@ -4,6 +4,7 @@
 namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
+use App\Libraries\Permission;
 use App\Libraries\Permission_hospital;
 use App\Models\Hospital_admin\GlobaladdressModel;
 //use App\Helpers\Global_helper;
@@ -23,7 +24,7 @@ class Globaladdress extends BaseController
         $this->session = \Config\Services::session();
 	    $this->globaladdressModel = new GlobaladdressModel();
        	$this->validation =  \Config\Services::validation();
-        $this->permission = new Permission_hospital();
+        $this->permission = new Permission();
 		
 	}
 	
