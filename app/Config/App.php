@@ -23,8 +23,9 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	// public $baseURL = 'http://localhost/doctor7days/public_html/';
-	public $baseURL = 'http://doctor7days.dn/';
+	 public $baseURL = 'http://doctor7days.dns/';
+//	 public $baseURL = 'http://localhost/doctor7days/public_html/';
+//	public $baseURL = 'http://doctor7days.dn/';
 
 	/**
 	 * --------------------------------------------------------------------------
@@ -109,7 +110,7 @@ class App extends BaseConfig
 	 *
 	 * @var string
 	 */
-	public $appTimezone = 'America/Chicago';
+	public $appTimezone = 'Asia/Dhaka';
 
 	/**
 	 * --------------------------------------------------------------------------
