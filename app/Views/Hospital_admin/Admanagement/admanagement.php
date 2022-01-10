@@ -192,7 +192,6 @@
         $('#add-modal').modal('show');
         // submit the add from
         $('#add-form').on('submit', function (e) {
-
             e.preventDefault();
             $.ajax({
                 url: "<?php echo base_url($controller . '/add') ?>",
