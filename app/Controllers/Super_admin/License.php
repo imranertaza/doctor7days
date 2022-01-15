@@ -9,14 +9,13 @@ use App\Models\Mobile_app\HospitalModel;
 use App\Models\Super_admin\LicenseModel;
 
 
-
 class License extends BaseController
 {
 	
     protected $hospitalModel;
     protected $validation;
     protected $licenseModel;
-   
+
     protected $session;
     protected $permission;
     private $module_name = 'License';
@@ -123,6 +122,7 @@ class License extends BaseController
         $response = array();
 
         $lic_key = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 12);
+        $h_id = $this->request->getPost('h_id');
         $fields['h_id'] = $this->request->getPost('h_id');
         $fields['lic_key'] = $lic_key;
         $fields['start_date'] = $this->request->getPost('start_date');
@@ -144,6 +144,15 @@ class License extends BaseController
         } else {
 
             if ($this->licenseModel->insert($fields)) {
+                $status = [
+                    'status'=>'1',
+                ];
+                $tableUser = DB()->table('users');
+                $tableUser->where('h_id',$h_id)->update($status);
+
+                $tableHosp = DB()->table('hospital');
+                $tableHosp->where('h_id',$h_id)->update($status);
+
                 $response['success'] = true;
                 $response['messages'] = 'Data has been inserted successfully';
 
@@ -164,6 +173,8 @@ class License extends BaseController
 
         $response = array();
 
+        $h_id = $this->request->getPost('h_id');
+
         $fields['lic_id'] = $this->request->getPost('lic_id');
         $fields['h_id'] = $this->request->getPost('h_id');
         $fields['start_date'] = $this->request->getPost('start_date');
@@ -183,9 +194,16 @@ class License extends BaseController
 			
         } else {
 
-
-
                 if ($this->licenseModel->update($fields['lic_id'], $fields)) {
+
+                    $status = [
+                        'status'=>'1',
+                    ];
+                    $tableUser = DB()->table('users');
+                    $tableUser->where('h_id',$h_id)->update($status);
+
+                    $tableHosp = DB()->table('hospital');
+                    $tableHosp->where('h_id',$h_id)->update($status);
 
                     $response['success'] = true;
                     $response['messages'] = 'Successfully updated';

@@ -80,6 +80,13 @@ class Login extends BaseController
                 // Remember me (Remembering the user email and password) End
 
 
+                $hospitalStatus = $this->loginModel->hospitalStatusCheck($result->h_id);
+
+                if ($hospitalStatus == false){
+                    $session->setFlashdata('error', 'Your Hospital Status Is Inactive');
+                    return redirect()->to(site_url("/hospital_admin/login"));
+                }
+
                 $license = $this->loginModel->licenseCheck($result->h_id);
 
                 if ($license == true) {
@@ -118,7 +125,9 @@ class Login extends BaseController
 
                     return redirect()->to(site_url("/hospital_admin/login"));
                 }
+
                 return redirect()->to(site_url("/hospital_admin/dashboard"));
+
             } else {
                 $session->setFlashdata('error', 'Email or password mismatch');
                 $this->index();

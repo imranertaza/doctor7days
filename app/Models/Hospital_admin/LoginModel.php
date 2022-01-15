@@ -56,6 +56,24 @@ class LoginModel extends Model
 
         return $data;
     }
+
+    function hospitalStatusCheck($h_Id){
+        $db = \Config\Database::connect();
+        $builder = $db->table('hospital');
+        $query = $builder->select('status')->where('h_id',$h_Id)->get();
+
+        if (!empty($query->getRow())){
+            if ($query->getRow()->status == '1') {
+                $data = true;
+            }else{
+                $data = false;
+            }
+        }else{
+            $data = false;
+        }
+
+        return $data;
+    }
     
     
    //  private function confirmRole($roleId){
