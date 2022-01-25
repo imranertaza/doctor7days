@@ -5,13 +5,14 @@
         </div>
     </div>
 </section>
+<br clear="all">
 
-<section class="category mt-3" >
-    <div class="row" style="margin-right: 0px !important;">
+<section class="category" >
+    <div class="row">
         <div class="col-4 text-center">
             <a href="<?php echo base_url('mobile_app/appionment')?>" >
             <div class="c-round">
-                <center><i class="flaticon-checkup icon"></i></center>
+                <i class="flaticon-checkup icon"></i>
             </div>
             <p class="fc fst mt-2">Doctor Appionment</p>
             </a>
@@ -19,7 +20,7 @@
         <div class="col-4 text-center">
             <a href="<?php echo base_url('mobile_app/shop')?>" >
             <div class="c-round">
-                <center><i class="flaticon-shop icon"></i></center>
+                <i class="flaticon-shop icon"></i>
             </div>
             <p class="fc fst mt-2">Your Shop</p>
             </a>
@@ -27,16 +28,15 @@
         <div class="col-4 text-center">
             <a href="<?php echo base_url('mobile_app/diagnostic')?>" >
             <div class="c-round">
-                <center><i class="flaticon-diagnostic icon"></i></center>
+                <i class="flaticon-diagnostic icon"></i>
             </div>
             <p class="fc fst mt-2">Diagnostic<br> & Pathology</p>
             </a>
         </div>
-
         <div class="col-4 mt-3 text-center">
             <a href="<?php echo base_url('mobile_app/ambulance')?>" >
             <div class="c-round">
-                <center><i class="flaticon-ambulance icon"></i></center>
+                <i class="flaticon-ambulance icon"></i>
             </div>
             <p class="fc fst mt-2">Ambulance</p>
             </a>
@@ -44,7 +44,7 @@
         <div class="col-4 mt-3 text-center">
             <a href="<?php echo base_url('mobile_app/blog')?>" >
             <div class="c-round">
-                <center><i class="flaticon-chat icon"></i></center>
+                <i class="flaticon-chat icon"></i>
             </div>
             <p class="fc fst mt-2">Health Tips</p>
             </a>
@@ -52,12 +52,11 @@
         <div class="col-4 mt-3 text-center">
             <a href="<?php echo base_url('mobile_app/job')?>" >
             <div class="c-round">
-                <center><i class="flaticon-suitcase icon"></i></center>
+                <i class="flaticon-suitcase icon"></i>
             </div>
             <p class="fc fst mt-2">Jobs</p>
             </a>
         </div>
-
     </div>
 </section>
 

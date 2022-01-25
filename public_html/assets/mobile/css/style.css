@@ -604,13 +604,13 @@ a:hover{
 }
 
 .c-round i{
-    /*width: 100px;*/
-    /*height: 100px;*/
+    width: 100px;
+    height: 100px;
     /*line-height: 100px;*/
     font-size: 50px;
     /*margin-right: 5px;*/
     /*border: 1px solid #dfdfdf;*/
-    padding: 17px 22px 6px 21px;
+    padding: 17px 17px 3px 17px;
     border-radius: 50%;
     text-align: center;
     cursor: pointer;
