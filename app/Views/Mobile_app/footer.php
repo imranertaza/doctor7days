@@ -4,8 +4,8 @@
             <a class="nav-link" href="#"><i class="flaticon-menu iconfoot"></i></a>
         </div>
         <div class="col-4 text-center">
-            <div class="f-home mt-1 mb-1">
-                <a class="nav-link" href="<?php echo base_url('Mobile_app/home')  ?>"><i class="flaticon-home iconhome"></i></a>
+            <div class="f-home  mb-1">
+                <a class="nav-link" href="<?php echo base_url('Mobile_app/home') ?>"><i class="flaticon-home iconhome"></i></a>
             </div>
         </div>
         <div class="col-4 text-right dropdown">

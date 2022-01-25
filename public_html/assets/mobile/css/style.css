@@ -2,7 +2,7 @@ body{
     font-family:'Roboto', sans-serif;
 }
 .fc{
-    color: rgba(112,112,112,1);
+    color: rgb(76 76 76);
 }
 .s-p{
     font-size: 19px;
@@ -11,13 +11,7 @@ body{
     font-size: 14px;
     line-height: 16px;
 }
-.c-round{
-    border: 1px solid rgba(0,174,214,1);
-    border-radius: 50px;
-    padding-top: 12px;
-    padding-bottom: 2px;
-    padding-left: 2px;
-}
+
 .cb-round{
     border: 1px solid rgba(0,174,214,1);
     border-radius: 50px;
@@ -105,10 +99,7 @@ body{
     font-size: 30px;
     margin-left: -14px;
 }
-.icon{
-    font-size: 50px;
-    color: rgba(0,174,214,1);
-}
+
 
 .icon-profile{
     font-size: 50px;
@@ -119,24 +110,14 @@ body{
     font-size: 25px;
     color: #000000;
 }
-.iconhome{
-    font-size: 24px;
-    color: #000000;
-    margin-left: -1px;
-}
+
 .ban-img{
     width: 100%;
 }
 .banner{
     margin-bottom: 80px;
 }
-.f-home{
-    border: 1px solid rgba(0,174,214,1);
-    border-radius: 50px;
-    background-color: rgba(0,174,214,1);
-    margin-left: 19px;
-    margin-right: 16px;
-}
+
 .foot{
     background-color: #ffff;
     -webkit-box-shadow: 5px 5px 36px 12px rgba(0,0,0,0.13);
@@ -578,4 +559,61 @@ a:hover{
 .red{
     background-color: red;
     color: #FFFFFF;
+}
+
+.iconhome{
+    font-size: 24px;
+    color: #000000;
+    margin-left: -5px;
+}
+
+/*.f-home{*/
+/*    border: 1px solid rgba(0,174,214,1);*/
+/*    border-radius: 50px;*/
+/*    background-color: rgba(0,174,214,1);*/
+/*    margin-left: 19px;*/
+/*    margin-right: 16px;*/
+/*}*/
+
+.f-home i{
+    width: 100px;
+    height: 100px;
+    /*line-height: 100px;*/
+    font-size: 35px;
+    /*margin-right: 5px;*/
+    /*border: 1px solid #dfdfdf;*/
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px 12px 5px 12px;
+    border: 1px solid rgba(0,174,214,1);
+    background-color: rgba(0,174,214,1);
+}
+
+/*.c-round{*/
+/*    border: 1px solid rgba(0,174,214,1);*/
+/*    border-radius: 50px;*/
+/*    padding-top: 12px;*/
+/*    padding-bottom: 2px;*/
+/*    padding-left: 2px;*/
+/*}*/
+
+.icon{
+    font-size: 50px;
+    color: rgba(0,174,214,1);
+}
+
+.c-round i{
+    /*width: 100px;*/
+    /*height: 100px;*/
+    /*line-height: 100px;*/
+    font-size: 50px;
+    /*margin-right: 5px;*/
+    /*border: 1px solid #dfdfdf;*/
+    padding: 17px 22px 6px 21px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid rgba(0,174,214,1);
+    border-radius: 50px;
 }

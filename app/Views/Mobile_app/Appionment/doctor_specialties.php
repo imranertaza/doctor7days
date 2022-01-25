@@ -42,9 +42,10 @@
                         <small class="dr-n"><?php echo $sp->name;?></small><br>
                         <small class="dr-t"><?php echo $title;?></small>
                     </td>
-                    <td style="font-size: 10px">
-                        <a href="<?php echo base_url('Mobile_app/appionment/appionment_booking_form/'.$sp->doc_id )?>"><i class="flaticon-right-arrow"></i></a>
+                    
 
+                    <td class="text-right">
+                        <a href="<?php echo base_url('Mobile_app/appionment/appionment_booking_form/'.$sp->doc_id )?>" class="btn btn-sm btn-col " >Go</a>
                     </td>
                 </tr>
                 <?php }?>

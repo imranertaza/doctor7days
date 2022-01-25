@@ -1,9 +1,12 @@
 <section class="back">
     <form action="<?php echo base_url('Mobile_app/Ambulance/login_action') ?>" method="post">
         <div class="row">
-            <img src="<?php echo base_url() ?>/assets/mobile/image/bnimg.JPG" width="100%">
+<!--            <img src="--><?php //echo base_url() ?><!--/assets/mobile/image/bnimg.JPG" width="100%">-->
             <div class="col-12 p-3 text-center">
                 <img src="<?php echo base_url() ?>/assets/mobile/image/logo.png" width="100%">
+            </div>
+            <div class="col-12 text-center">
+                <h4>Ambulance Login</h4>
             </div>
             <div class="col-12 p-3 ">
                 <?php if (session()->getFlashdata('message') !== NULL) : ?>
@@ -34,13 +37,13 @@
             </div>
 
             <div class="col-12 p-3 ">
-                <button type="submit" class="btn-login">Login</button>
+                <button type="submit" class="btn-login btn-block">Login</button>
             </div>
             <div class="col-12 p-3  or-row">
                 <label class="or-bor"></label> <b>Or</b> <label class="or-bor"></label>
             </div>
             <div class="col-12 p-3 " style="margin-bottom: 86px;">
-                <a href="<?php echo base_url('Mobile_app/Ambulance/register') ?>" class="btn-signup"
+                <a href="<?php echo base_url('Mobile_app/Ambulance/register') ?>" class="btn-signup btn-block"
                    style="padding: 12px 125px 12px 126px ;">Sign UP</a>
             </div>
 

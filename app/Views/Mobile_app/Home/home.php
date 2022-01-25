@@ -7,7 +7,7 @@
 </section>
 
 <section class="category mt-3" >
-    <div class="row">
+    <div class="row" style="margin-right: 0px !important;">
         <div class="col-4 text-center">
             <a href="<?php echo base_url('mobile_app/appionment')?>" >
             <div class="c-round">

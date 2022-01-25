@@ -32,12 +32,12 @@
             <table class="" style="width: 100%;">
                 <?php foreach($test as $row ){ ?>
                     <tr>
-                        <td >
+                        <td>
                             <small class="dr-n"><?php echo $row->name;?></small><br>
                             <small class="dr-t" style="font-size: 12px; font-weight: 600;"><?php echo price($row->price); ?></small>
                         </td>
-                        <td style="font-size: 10px">
-                            <a href="<?php echo base_url('Mobile_app/Diagnostic/test_detail/'.$row->test_id )?>"><i class="flaticon-right-arrow"></i></a>
+                        <td class="text-right">
+                            <a href="<?php echo base_url('Mobile_app/Diagnostic/test_detail/'.$row->test_id )?>" class="btn btn-sm btn-col " >Go</a>
                         </td>
                     </tr>
                 <?php }?>
