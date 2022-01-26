@@ -5,7 +5,7 @@
         </div>
         <div class="col-4 text-center">
             <div class="f-home  mb-1">
-                <a class="nav-link" href="<?php echo base_url('Mobile_app/home') ?>"><i class="flaticon-home iconhome"></i></a>
+                <a class="" href="<?php echo base_url('Mobile_app/home') ?>"><i class="flaticon-home iconhome"></i></a>
             </div>
         </div>
         <div class="col-4 text-right dropdown">
@@ -47,3 +47,9 @@
 
 </body>
 </html>
+
+<script>
+    window.onload = function(){
+        $("#loderImg").hide();
+    };
+</script>

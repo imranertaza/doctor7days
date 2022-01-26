@@ -20,3 +20,5 @@
 <body>
 
 <div class="container">
+
+     <img src="<?php echo base_url();?>/assets/loading.gif" class="loderImg" alt="" id="loderImg"  >
