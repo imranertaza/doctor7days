@@ -1148,6 +1148,7 @@ function division()
 }
 
 
+
 function divisionView($selected = 0)
 {
     $divisions = division();
