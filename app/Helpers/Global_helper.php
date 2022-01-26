@@ -2499,6 +2499,7 @@ function pro_parent_category_by_category_id($id)
     }
     return $view;
 }
+
 function  proSubCatListInOption($categoryId,$selected){
     $table = DB()->table('product_category');
     $query = $table->where('prod_cat_id', $categoryId);
@@ -2733,3 +2734,26 @@ function count_diagnostics_notification($h_id){
     return $result;
 }
 
+function hospital_license_check_by_h_id($h_id){
+
+
+    $countTable = DB()->table('license');
+    $liCount = $countTable->where('h_id',$h_id)->countAllResults();
+
+    if (!empty($liCount)){
+        $today = date('Y-m-d');
+        $liDate = DB()->table('license');
+        $lidatecount = $liDate->where('h_id',$h_id)->get();
+
+        if ($lidatecount->getRow()->end_date > $today) {
+            $view = '<span class="badge badge-pill badge-primary">License Running</span>';
+        }else{
+            $view = '<span class="badge badge-pill badge-warning">License expiry</span>';
+        }
+
+    }else{
+        $view = '<span class="badge badge-pill badge-danger">License not available</span>';
+    }
+
+    return $view;
+}

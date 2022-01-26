@@ -93,7 +93,7 @@ class Hospital extends BaseController
 				$value->name,
 				$value->email,
 				$value->mobile,
-                statusView($value->status),
+                statusView($value->status).'<br>'.hospital_license_check_by_h_id($value->h_id),
 
 				$ops,
 			);

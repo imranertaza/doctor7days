@@ -51,5 +51,6 @@
 <script>
     window.onload = function(){
         $("#loderImg").hide();
+        $("#loderdiv").attr('class', 'newClass');
     };
 </script>

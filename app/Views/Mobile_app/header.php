@@ -20,5 +20,6 @@
 <body>
 
 <div class="container">
-
-     <img src="<?php echo base_url();?>/assets/loading.gif" class="loderImg" alt="" id="loderImg"  >
+        <div class="loderdiv" id="loderdiv">
+            <img src="<?php echo base_url();?>/assets/loading.gif" class="loderImg" alt="" id="loderImg"  >
+        </div>

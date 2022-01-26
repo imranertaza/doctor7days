@@ -188,35 +188,27 @@ class License extends BaseController
         ]);
 
         if ($this->validation->run($fields) == FALSE) {
-
             $response['success'] = false;
             $response['messages'] = $this->validation->listErrors();
-			
         } else {
+            if ($this->licenseModel->update($fields['lic_id'], $fields)) {
 
-                if ($this->licenseModel->update($fields['lic_id'], $fields)) {
+                $status = [
+                    'status'=>'1',
+                ];
+                $tableUser = DB()->table('users');
+                $tableUser->where('h_id',$h_id)->update($status);
 
-                    $status = [
-                        'status'=>'1',
-                    ];
-                    $tableUser = DB()->table('users');
-                    $tableUser->where('h_id',$h_id)->update($status);
+                $tableHosp = DB()->table('hospital');
+                $tableHosp->where('h_id',$h_id)->update($status);
 
-                    $tableHosp = DB()->table('hospital');
-                    $tableHosp->where('h_id',$h_id)->update($status);
-
-                    $response['success'] = true;
-                    $response['messages'] = 'Successfully updated';
-
-                } else {
-
-                    $response['success'] = false;
-                    $response['messages'] = 'Update error!';
-
-                }
-
+                $response['success'] = true;
+                $response['messages'] = 'Successfully updated';
+            } else {
+                $response['success'] = false;
+                $response['messages'] = 'Update error!';
+            }
         }
-		
         return $this->response->setJSON($response);
 		
 	}
