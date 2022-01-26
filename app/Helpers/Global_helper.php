@@ -1033,9 +1033,9 @@ function unitArray()
 {
     $status = [
         '1' => 'Piece',
-         '2' => 'KG',
-         '3' => 'LETTER',
-         '4' => 'TON'
+        '2' => 'KG',
+        '3' => 'LETTER',
+        '4' => 'TON'
     ];
     return $status;
 }

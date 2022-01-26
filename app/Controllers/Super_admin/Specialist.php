@@ -4,7 +4,7 @@
 namespace App\Controllers\Super_admin;
 
 use App\Controllers\BaseController;
-use App\Libraries\Permission_hospital;
+use App\Libraries\Permission;
 use App\Models\Hospital_admin\SpecialistModel;
 
 class Specialist extends BaseController
@@ -21,7 +21,7 @@ class Specialist extends BaseController
 	    $this->specialistModel = new SpecialistModel();
        	$this->validation =  \Config\Services::validation();
         $this->session = \Config\Services::session();
-        $this->permission = new Permission_hospital();
+        $this->permission = new Permission();
 		
 	}
 	
