@@ -42,7 +42,7 @@
         </div>
         <div class="col-12 p-3 row" style="padding-right: 0px !important;">
             <?php foreach ($ambulance as $item) {
-                $img = (!empty($item->image)) ? $item->image : 'noimage.jpg';
+                $img = no_image_view('/assets/upload/ambulance/'.$item->ambulance_user_id.'/'.$item->image,'/assets/upload/ambulance/no_image.jpg',$item->image);
                 $name = get_data_by_id('name', 'ambulance_users', 'ambulance_user_id', $item->ambulance_user_id);
                 $phone = get_data_by_id('mobile', 'ambulance_users', 'ambulance_user_id', $item->ambulance_user_id);
                 ?>
@@ -50,8 +50,7 @@
                     <div class="product ">
                         <div class="col-12 pad-0">
                             <a href="<?php echo base_url('Mobile_app/Ambulance/ambulance_details/'.$item->amb_id) ?>">
-                                <img src="<?php echo base_url() ?>/assets/upload/ambulance/<?php echo $item->ambulance_user_id;?>/<?php echo $img; ?>"
-                                     width="100%">
+                                <img src="<?php echo $img; ?>" width="100%">
                             </a>
                         </div>
                         <div class="col-12 mt-4" style="line-height: 5px;">
@@ -77,7 +76,7 @@
         </div>
         <div class="col-12 p-3 row" style="padding-right: 0px !important;">
             <?php foreach ($ambulance as $item) {
-                $img = (!empty($item->image)) ? $item->image : 'noimage.jpg';
+                $img = no_image_view('/assets/upload/ambulance/'.$item->ambulance_user_id.'/'.$item->image,'/assets/upload/ambulance/no_image.jpg',$item->image);
                 $name = get_data_by_id('name', 'ambulance_users', 'ambulance_user_id', $item->ambulance_user_id);
                 $phone = get_data_by_id('mobile', 'ambulance_users', 'ambulance_user_id', $item->ambulance_user_id);
                 ?>
@@ -85,8 +84,7 @@
                     <div class="product ">
                         <div class="col-12 pad-0">
                             <a href="<?php echo base_url('Mobile_app/Ambulance/ambulance_details/'.$item->amb_id) ?>">
-                                <img src="<?php echo base_url() ?>/assets/upload/ambulance/<?php echo $item->ambulance_user_id; ?>/<?php echo $img; ?>"
-                                     width="100%">
+                                <img src="<?php echo $img; ?>" width="100%">
                             </a>
                         </div>
                         <div class="col-12 mt-4" style="line-height: 5px;">

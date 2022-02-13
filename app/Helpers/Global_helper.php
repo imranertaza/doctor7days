@@ -2757,3 +2757,12 @@ function hospital_license_check_by_h_id($h_id){
 
     return $view;
 }
+
+function no_image_view($image_path,$no_image_path,$imageName = '1'){
+    $imgPathcheck = FCPATH.$image_path;
+    if ((empty($imageName))||(!file_exists($imgPathcheck))){
+        return base_url().$no_image_path;
+    }else{
+        return base_url().$image_path;
+    }
+}

@@ -31,7 +31,8 @@
             </div>
         <?php endif; ?>
         <div class="col-12 p-3" style="padding-left: 0px !important; padding-right: 0px !important;">
-            <img src="<?php echo base_url() ?>/assets/mobile/image/shop.png" width="100%">
+            <?php  $img = no_image_view('/assets/mobile/image/shop.png','/assets/mobile/image/no_image.jpg');?>
+            <img src="<?php echo $img ?>" width="100%">
         </div>
         <form method="get">
         <div class="col-12 p-3 ">
@@ -50,7 +51,8 @@
 
                     <div class="col-12 pad-0">
                         <a href="<?php echo base_url('Mobile_app/Shop/product_detail/' . $item->prod_id) ?>">
-                            <img src="<?php echo base_url('assets/upload/product/' . $item->prod_id . '/' . $item->picture) ?>"
+                            <?php $proImg = no_image_view('/assets/upload/product/' .$item->prod_id.'/'.$item->picture,'/assets/upload/product/no_image.jpg',$item->picture);?>
+                            <img src="<?php echo $proImg ?>"
                                  width="100%">
                         </a>
                     </div>

@@ -18,7 +18,8 @@
                                     <span style="font-size: 12px;"><?php echo $item->createdDtm;?></span>
                                 </div>
                                 <div class="img mt-3">
-                                    <img src="<?php echo base_url()?>/assets/upload/blog/<?php echo $item->post_id ?>/<?php echo $item->image ?>" alt="" style="width: 100%;">
+                                    <?php $blogImg = no_image_view('/assets/upload/blog/'.$item->post_id.'/'.$item->image,'/assets/upload/blog/no_image.jpg',$item->image,$item->image);?>
+                                    <img src="<?php echo $blogImg;?>" alt="" style="width: 100%;">
                                 </div>
                             </div>
                         </div>

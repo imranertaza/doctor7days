@@ -69,8 +69,8 @@ class Brand extends BaseController
 		
 		foreach ($result as $key => $value) {
 
-		    $img = (!empty($value->logo))?$value->logo:'noimage.jpg';
-							
+		    $img = no_image_view('/assets/upload/brand/'.$value->logo,'/assets/upload/brand/no_image.jpg',$value->logo);
+
 			$ops = '<div class="btn-group">';
 			$ops .= '	<button type="button" class="btn btn-sm btn-info" onclick="edit('.$value->brand_id.')"><i class="fa fa-edit"></i></button>';
 			$ops .= '	<button type="button" class="btn btn-sm btn-danger" onclick="remove('.$value->brand_id.')"><i class="fa fa-trash"></i></button>';
@@ -79,8 +79,7 @@ class Brand extends BaseController
 			$data['data'][$key] = array(
 				$value->brand_id,
 				$value->name,
-				'<img src="'.base_url('assets/uplode/brand/'.$img).'" width="150">',
-
+				'<img src="'.$img.'" width="150">',
 				$ops,
 			);
 		} 

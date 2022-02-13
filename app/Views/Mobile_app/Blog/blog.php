@@ -26,7 +26,9 @@
             <a href="<?php echo base_url()?>/Mobile_app/blog/blog_detail/<?php echo $item->post_id ;?>">
             <div class="col-12 row pad-r-0 pt-4">
                 <div class="col-4 pad-0">
-                    <img src="<?php echo base_url()?>/assets/upload/blog/<?php echo $item->post_id ;?>/<?php echo $item->featured_image;?>" width="100%">
+                    <?php $blogImg = no_image_view('/assets/upload/blog/'.$item->post_id.'/'.$item->featured_image,'/assets/upload/blog/no_image.jpg',$item->featured_image);?>
+                    <img src="<?php echo $blogImg; ?>" width="100%">
+
                 </div>
                 <div class="col-8 pad-0 pl-2">
                     <p class="b-st">Administrator</p>

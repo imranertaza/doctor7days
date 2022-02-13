@@ -22,7 +22,8 @@
 <section class="banner2" >
     <div class="row">
         <div class="col-12 p-3 text-center ">
-            <img src="<?php echo base_url('assets/upload/ambulance/'.$ambulance->ambulance_user_id.'/'.$ambulance->image)?>" >
+            <?php $imgam = no_image_view('/assets/upload/ambulance/'.$ambulance->ambulance_user_id.'/'.$ambulance->image,'/assets/upload/ambulance/no_image.jpg',$ambulance->image);?>
+            <img src="<?php echo $imgam;?>" >
         </div>
         <div class="col-6 p-3">
             <?php

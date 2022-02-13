@@ -128,6 +128,7 @@ class Product extends BaseController
             $ops .= '<a href="'.base_url('Super_admin/Product/update/'.$value->prod_id).'" class="btn btn-sm btn-info" ><i class="fa fa-edit"></i></a>';
             $ops .= '	<button type="button" class="btn btn-sm btn-danger" onclick="remove(' . $value->prod_id . ')"><i class="fa fa-trash"></i></button>';
             $ops .= '</div>';
+            $pro = no_image_view('/assets/upload/product/'.$value->prod_id.'/'.$value->picture,'/assets/upload/product/no_image.jpg',$value->picture);
 
             $data['data'][$key] = array(
                 $value->prod_id,
@@ -137,7 +138,7 @@ class Product extends BaseController
                 $value->quantity,
                 showUnitName($value->unit),
                 get_data_by_id('name','brand','brand_id',$value->brand_id),
-                '<img src="'.base_url('assets/upload/product/'.$value->prod_id.'/'.$value->picture).'" width="80">',
+                '<img src="'.$pro.'" width="80">',
                 get_data_by_id('product_category','product_category','prod_cat_id',$value->prod_cat_id),
                 statusView($value->status),
 

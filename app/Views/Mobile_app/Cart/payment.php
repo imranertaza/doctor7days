@@ -95,10 +95,9 @@
                     </div>
                     <div class="form-group">
                         <label for="upazila" class="lab-t"> Upazila: </label>
-                        <select class="form-control in-c" name="upazila" id="subdistrict"
-                                onchange="checkCity(this.value)" required>
+                        <select class="form-control in-c" name="upazila" id="subdistrict" required>
                             <option value="">Please Select</option>
-                            <?php echo upazilaselect($address->upazila); ?>
+                            <?php echo upazilaselect(); ?>
                         </select>
                     </div>
                 </div>

@@ -139,7 +139,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <div id="image">
-                                            <img src="<?php echo base_url('assets/upload/product/'.$product->prod_id.'/'.$product->picture) ?>" width="100">
+                                            <?php $prod = no_image_view('/assets/upload/product/'.$product->prod_id.'/'.$product->picture,'/assets/upload/product/no_image.jpg',$product->picture)?>
+                                            <img src="<?php echo $prod; ?>" width="100">
                                         </div>
                                         <label for="picture"> Picture: </label>
                                         <input type="file" id="picture" name="picture" class="form-control"

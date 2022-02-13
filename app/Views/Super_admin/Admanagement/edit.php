@@ -79,7 +79,8 @@
 
                                                 <div class="col-md-6" id="imgrelode">
                                                     <?php $id = (!empty($admanage->h_id))?$admanage->h_id:$admanage->ad_com_id;?>
-                                                    <img src="<?php echo base_url('assets/upload/adbanner/'.$id.'/'.$admanage->banner)?>" alt="banner" width="250">
+                                                    <?php $adBann = no_image_view('/assets/upload/adbanner/'.$id.'/'.$admanage->banner,'/assets/upload/adbanner/no_image.jpg',$admanage->banner);?>
+                                                    <img src="<?php echo $adBann; ?>" alt="banner" width="250">
                                                 </div>
 
                                                 <div class="col-md-12">

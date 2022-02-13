@@ -11,7 +11,8 @@
         <?php $userId = newSession()->user_id;if (!empty($image)) { ?>
             <div class="col-12">
                 <center>
-                    <img src="<?php echo base_url('assets/upload/ambulance/'.$userId.'/'.$image) ?>" alt="user"
+                    <?php $proImg = no_image_view('/assets/upload/ambulance/'.$userId.'/'.$image,'/assets/upload/ambulance/no_image.jpg',$image);?>
+                    <img src="<?php echo $proImg; ?>" alt="user"
                          class="pro-img">
                 </center>
                 <div class="small-icon-pro">

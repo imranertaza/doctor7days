@@ -73,17 +73,16 @@ class Patient extends BaseController
         foreach ($result as $key => $value) {
 
             $ops = '<div class="btn-group">';
-//            $ops .= '	<button type="button" class="btn btn-sm btn-info" onclick="edit(' . $value->pat_id . ')"><i class="fa fa-edit"></i></button>';
             $ops .= '	<a href="' . base_url('Super_admin/Patient/update/' . $value->pat_id) . '" class="btn btn-sm btn-info" ><i class="fa fa-edit"></i></a>';
             $ops .= '	<button type="button" class="btn btn-sm btn-danger" onclick="remove(' . $value->pat_id . ')"><i class="fa fa-trash"></i></button>';
             $ops .= '</div>';
-
+            $proPic = no_image_view('/assets/upload/patient/'.$value->pat_id.'/'. $value->photo,'/assets/upload/patient/no_image.jpg',$value->photo);
             $data['data'][$key] = array(
                 $value->pat_id,
                 $value->name,
                 $value->email,
                 $value->phone,
-                '<img src="' . base_url('assets/upload/patient/'.$value->pat_id.'/'. $value->photo) . '" width="80">',
+                '<img src="' . $proPic . '" width="80">',
                 $value->nid,
                 $value->age,
 

@@ -179,8 +179,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6" id="imgRelode">
-                                                    <?php $img = (!empty($doctor->pic)) ? $doctor->pic : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/upload/doctor/<?php echo $doctor->doc_id;?>/<?php echo $img ?>"
+                                                    <?php $img = no_image_view('/assets/upload/doctor/'.$doctor->doc_id.'/'.$doctor->pic,'/assets/upload/doctor/no_image.jpg',$doctor->pic); ?>
+                                                    <img src="<?php echo $img; ?>"
                                                          style="max-width: 200px;">
                                                 </div>
 

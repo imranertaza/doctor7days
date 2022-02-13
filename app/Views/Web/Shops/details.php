@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-md-6 d-flex justify-content-center align-items-center">
             <div class="products-image ">
-                <img src="<?php echo base_url('assets/upload/product/' . $product->prod_id . '/' . $product->picture) ?>" alt="Products image" class="img-fluid" />
+                <?php $pro = no_image_view('/assets/upload/product/'.$product->prod_id.'/'. $product->picture,'/assets/upload/product/no_image.jpg',$product->picture)?>
+                <img src="<?php echo $pro; ?>" alt="Products image" class="img-fluid" />
             </div>
         </div>
         <div class="col-md-6">

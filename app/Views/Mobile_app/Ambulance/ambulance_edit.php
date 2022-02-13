@@ -10,8 +10,8 @@
 <section class="category mt-1">
     <div class="row ">
         <div class="col-12 text-center" >
-            <?php $image = (!empty($ambulance->image)) ? $ambulance->image : 'noimage.jpg'; ?>
-            <img src="<?php echo base_url('assets/upload/ambulance/'.$ambulance->ambulance_user_id.'/'. $image) ?>" alt="ambulance" >
+            <?php $image = no_image_view('/assets/upload/ambulance/'.$ambulance->ambulance_user_id.'/'.$ambulance->image,'/assets/upload/ambulance/no_image.jpg',$ambulance->image) ?>
+            <img src="<?php echo $image; ?>" alt="ambulance" >
         </div>
     </div>
 </section>

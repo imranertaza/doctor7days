@@ -46,10 +46,12 @@
                                     </thead>
                                     <tbody>
                                     <?php foreach (Cart()->contents() as $val) {
-                                        $img = get_data_by_id('picture', 'products', 'prod_id', $val['id']); ?>
+                                        $img = get_data_by_id('picture', 'products', 'prod_id', $val['id']);
+                                        $pro = no_image_view('/assets/upload/product/'.$val['id']. '/' . $img,'/assets/upload/product/no_image.jpg',$img);
+                                    ?>
                                         <tr>
                                             <td>
-                                                <img src="<?php echo base_url('assets/upload/product/' . $val['id'] . '/' . $img) ?>"
+                                                <img src="<?php echo $pro; ?>"
                                                      width="80">
                                             </td>
                                             <td>

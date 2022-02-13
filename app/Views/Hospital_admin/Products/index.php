@@ -46,7 +46,8 @@
                         <div class="col-md-3" >
                             <div class="box box-primary" style="border: 1px solid #e3e3e3; padding: 10px;">
                                 <div class="box-body box-profile" style="text-transform: capitalize;">
-                                    <center><img class="profile-user-img img-responsive " src="<?php echo base_url('assets/upload/product/' . $item->prod_id . '/' . $item->picture) ?>" alt="User profile picture"></center>
+                                    <?php $pro = no_image_view('/assets/upload/product/'.$item->prod_id . '/' . $item->picture,'/assets/upload/product/no_image.jpg',$item->picture);?>
+                                    <center><img class="profile-user-img img-responsive " src="<?php echo $pro;?>" alt="User profile picture"></center>
 
                                     <h3 class="profile-username text-center"><?php echo $item->name; ?></h3>
 

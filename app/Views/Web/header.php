@@ -54,7 +54,7 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto" id="reloadCart">
                     <?php if(!empty(newSession()->isPatientLoginWeb) || newSession()->isPatientLoginWeb == TRUE) {?>
                         <li class="nav-item mr-2">
                             <a href="<?php echo base_url('/Web/dashboard')?>" class="btn menu-btn">Dashboard</a>
@@ -63,6 +63,14 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url('Web/Login/logout')?>" class="btn login-btn">Logout</a>
                         </li>
+
+                    <?php }else{  if(!empty(newSession()->isAmbulanceLoginWeb) || newSession()->isAmbulanceLoginWeb == TRUE) { ?>
+                        <li class="nav-item mr-2">
+                            <a href="<?php echo base_url('/Web/Ambulance/dashboard')?>" class="btn menu-btn">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="<?php echo base_url('Web/Ambulance/logout');?>" class="btn login-btn">Logout</a>
+                        </li>
                     <?php }else{ ?>
                         <li class="nav-item">
                             <a href="<?php echo base_url('Web/Login')?>" class="btn login-btn">Login</a>
@@ -70,6 +78,13 @@
 
                         <li class="nav-item">
                             <a href="<?php echo base_url('/register')?>" class="btn menu-btn">sign UP</a>
+                        </li>
+                    <?php } } ?>
+
+                    <?php if(!empty(Cart()->totalItems())){ ?>
+                        <li class="nav-item ml-2" >
+                            <a href="<?php echo base_url('Web/Cart') ?>" class="btn login-btn" style="color: red"><i
+                                        class="flaticon-shopping-cart " ></i>(<?php echo Cart()->totalItems(); ?>)</a>
                         </li>
                     <?php } ?>
 

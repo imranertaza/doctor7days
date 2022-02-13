@@ -21,8 +21,10 @@
 
 <section class="category mt-1" >
     <div class="row bg-c">
-        <?php $banImg = (!empty($hospital->image))?$hospital->image:'imgti.png'; ?>
-        <img src="<?php echo base_url()?>/assets/upload/hospital/<?php echo $hospital->h_id;?>/<?php echo $banImg;?>" width="100%">
+        <?php
+            $banImg = no_image_view('/assets/upload/hospital/'.$hospital->h_id.'/'.$hospital->image,'/assets/upload/hospital/no_image.jpg',$hospital->image);
+        ?>
+        <img src="<?php echo $banImg;?>" width="100%">
     </div>
 </section>
 
@@ -59,17 +61,21 @@
 
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                    <?php if (!empty($hospital->banner_1)){?>
+                    <?php
+                        $banner_1 = no_image_view('/assets/upload/hospital/'.$hospital->h_id.'/'.$hospital->banner_1,'/assets/upload/hospital/no_image.jpg');
+                        $banner_2 = no_image_view('/assets/upload/hospital/'.$hospital->h_id.'/'.$hospital->banner_2,'/assets/upload/hospital/no_image.jpg');
+                        $banner_3 = no_image_view('/assets/upload/hospital/'.$hospital->h_id.'/'.$hospital->banner_3,'/assets/upload/hospital/no_image.jpg');
+                    ?>no_image.jpg
                     <div class="carousel-item active">
-                        <img src="<?php echo base_url()?>/assets/upload/hospital/<?php echo $hospital->h_id;?>/<?php echo $hospital->banner_1;?>" class="d-block w-100" alt="...">
+                        <img src="<?php echo $banner_1;?>" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<?php echo base_url()?>/assets/upload/hospital/<?php echo $hospital->h_id;?>/<?php echo $hospital->banner_2;?>" class="d-block w-100" alt="...">
+                        <img src="<?php echo $banner_2;?>" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="<?php echo base_url()?>/assets/upload/hospital/<?php echo $hospital->h_id;?>/<?php echo $hospital->banner_3;?>" class="d-block w-100" alt="...">
+                        <img src="<?php echo $banner_3;?>" class="d-block w-100" alt="...">
                     </div>
-                    <?php } ?>
+
                 </div>
             </div>
         </div>

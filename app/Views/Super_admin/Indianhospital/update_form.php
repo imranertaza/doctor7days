@@ -160,8 +160,8 @@
                                                 </div>
 
                                                 <div class="col-md-6" id="imgRelode">
-                                                    <?php $img = (!empty($hospital->logo)) ? $hospital->logo : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/upload/indianhospital/<?php echo $hospital->ind_h_id;?>/<?php echo $img ?>" style="max-width: 200px;">
+                                                    <?php $img = no_image_view('/assets/upload/indianhospital/'.$hospital->ind_h_id.'/'.$hospital->logo,'/assets/upload/indianhospital/no_image.jpg',$hospital->logo); ?>
+                                                    <img src="<?php echo $img; ?>" style="max-width: 200px;">
                                                 </div>
 
 
@@ -176,10 +176,7 @@
                                             </div>
                                         </form>
 
-
                                     </div>
-
-
 
                                 </div>
                             </div>
@@ -248,11 +245,8 @@
                                 timer: 1500
                             }).then(function () {
                                 $('#data_table').DataTable().ajax.reload(null, false).draw(false);
-                                //$('#add-modal').modal('hide');
                             })
-
                         } else {
-
                             if (response.messages instanceof Object) {
                                 $.each(response.messages, function (index, value) {
                                     var id = $("#" + index);
@@ -273,13 +267,11 @@
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
-
                             }
                         }
                         $('#add-form-btn').html('Add');
                     }
                 });
-
                 return false;
             }
         });

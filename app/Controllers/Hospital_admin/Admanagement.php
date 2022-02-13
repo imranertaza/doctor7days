@@ -86,12 +86,12 @@ class Admanagement extends BaseController
                 $ops .= '<button type="button" class="btn btn-sm btn-primary ml-2" onclick="re_active(' . $value->ad_id . ')">Re-active</button>';
             }
             $ops .= '</div>';
-
+            $adbanner = no_image_view('/assets/upload/adbanner/'.$this->session->h_Id.'/'.$value->banner,'/assets/upload/adbanner/no_image.jpg',$value->banner);
             $data['data'][$key] = array(
                 $value->ad_id,
                 get_data_by_id('name','ad_package','ad_package_id',$value->ad_package_id),
                 $value->org_type,
-                '<img src="'.base_url('assets/upload/adbanner/'.$this->session->h_Id.'/'.$value->banner).'" alt="adbanner" width="100">',
+                '<img src="'.$adbanner.'" alt="adbanner" width="100">',
                 $value->status,
                 $ops,
             );
