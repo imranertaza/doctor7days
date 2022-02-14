@@ -5,8 +5,9 @@
     <div class="row">
         <div class="col-12 p-3  in-fil text-center">
             <?php $userId = newSession()->user_id; if (!empty($image)){?>
+                <?php $proImg = no_image_view('/assets/upload/ambulance/'.$userId.'/'.$image,'/assets/upload/ambulance/no_image.jpg',$image);?>
                     <center>
-                        <img src="<?php echo base_url('assets/upload/ambulance/'.$userId.'/'.$image)?>" alt="user" class="pro-img" >
+                        <img src="<?php echo $proImg; ?>" alt="user" class="pro-img" >
                     </center>
             <?php }else{?>
             <div class="af-pro">
@@ -29,11 +30,11 @@
             </div>
             <div class="col-12 p-3 row" style="padding-right: 0px !important;">
                 <?php foreach ($ambulance as $item) {
-                    $img = (!empty($item->image))?$item->image:'noimage.jpg';?>
+                    $img = no_image_view('/assets/upload/ambulance/'.$item->ambulance_user_id.'/'.$item->image,'/assets/upload/ambulance/no_image.jpg',$item->image);?>
                     <div class="col-6 " style="padding: 10px;">
                         <div class="product ">
                             <div class="col-12 pad-0">
-                                <img src="<?php echo base_url()?>/assets/upload/ambulance/<?php echo $item->ambulance_user_id;?>/<?php echo $img;?>" width="100%">
+                                <img src="<?php echo $img;?>" width="100%">
                             </div>
                             <div class="col-12 mt-4" style="line-height: 5px;">
                                 <p class="proName"><?php echo newSession()->name;?></p>

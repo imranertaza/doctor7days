@@ -12,6 +12,10 @@
                             <h4 class="card-title">Dashboard</h4>
 
                             <center><h5 class="card-title mb-3">Appointment List</h5></center>
+
+                            <?php if (session()->getFlashdata('message') !== NULL) : ?>
+                                <?php echo session()->getFlashdata('message'); ?>
+                            <?php endif; ?>
                             <nav>
                                 <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 
@@ -42,9 +46,8 @@
                                                 <td><?php echo $item->time ?></td>
                                                 <td><?php echo $item->serial_number ?></td>
                                                 <td>
-                                                    <a href="<?php echo base_url('Mobile_app/Patient/view/'.$item->appointment_id)?>" class="btn" style="color: green;" title="View" ><i class="flaticon-view"></i></a>
-                                                    <a href="<?php echo base_url('Mobile_app/Patient/cancel/'.$item->appointment_id)?>" class="btn" style="color: red;" title="Cencel" onclick="return confirm('Are you sure cencel appionment ？')" ><i class="flaticon-delete
-"></i></a> </td>
+                                                    <a href="<?php echo base_url('Web/Dashboard/appointment/'.$item->appointment_id)?>" class="btn" style="background-color: #28aed6;" title="View" ><i class="flaticon-view"></i></a>
+                                                    <a href="<?php echo base_url('Web/Dashboard/cancel/'.$item->appointment_id)?>" class="btn" style="background-color: #ff0000;" title="Cencel" onclick="return confirm('Are you sure cencel appionment ？')" ><i class="flaticon-delete"></i></a> </td>
                                             </tr>
                                         <?php } ?>
 

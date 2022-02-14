@@ -21,8 +21,10 @@
 
 <section class="category mt-1">
     <div class="row bg-c">
-        <?php $banImg = (!empty($hospital->image)) ? $hospital->image : 'imgti.png'; ?>
-        <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id;?>/<?php echo $banImg; ?>" width="100%">
+        <?php
+        $banImg = no_image_view('/assets/upload/hospital/'.$hospital->h_id.'/'.$hospital->image,'/assets/upload/hospital/no_image.jpg',$hospital->image);
+        ?>
+        <img src="<?php echo $banImg;?>" width="100%">
     </div>
 </section>
 

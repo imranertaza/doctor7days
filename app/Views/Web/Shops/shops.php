@@ -1,7 +1,8 @@
 <!-- banner image -->
 <section>
     <div class="banner-img">
-        <img class="img-fluid" src="<?php echo base_url();?>/assets/web/image/Web-5.jpg" alt="" />
+        <?php $banner = no_image_view('/assets/web/image/Web-5.jpg','/assets/web/image/no_image.jpg')?>
+        <img class="img-fluid" src="<?php echo $banner; ?>" alt="" />
     </div>
 </section>
 <!-- banner image end -->
@@ -25,12 +26,13 @@
                     <div class="products-card mb-3">
                         <a href="<?php echo base_url('Web/Shops/details/'.$item->prod_id)?>">
                             <div class="card text-center" style="width: 100%">
-                                <img src="<?php echo base_url('assets/upload/product/' . $item->prod_id . '/' . $item->picture) ?>"class="img-fluid mt-3" alt="Product image"  />
+                                <?php $pro = no_image_view('/assets/upload/product/'.$item->prod_id.'/'. $item->picture,'/assets/upload/product/no_image.jpg',$item->picture)?>
+                                <img src="<?php echo $pro; ?>"class="img-fluid mt-3" alt="Product image"  />
                                 <div class="card-body">
                                     <h5 class="card-title m-0"><?php echo $item->name?></h5>
                                     <p><span>TK. <?php echo $item->price;?> </span>In-stock: (<?php echo $item->quantity;?>)</p>
                                     <div class="d-flex justify-content-center">
-                                        <a href="" class="cart-btn">Add to Cart</a>
+                                        <a href="javascript:void(0)" class="cart-btn" onclick="addToCart('<?php echo $item->prod_id ?>')">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>

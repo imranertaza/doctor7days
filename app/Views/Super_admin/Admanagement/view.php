@@ -35,9 +35,10 @@
                         <div class="row">
                             <div class="col-12 mt-4" >
                                 <?php if (!empty($add->h_id)){?>
-                                <img src="<?php echo base_url('assets/upload/adbanner/'.$add->h_id.'/'.$add->banner)?>" alt="adbanner" style="max-width: 100%;">
-                                <?php }else{?>
-                                <img src="<?php echo base_url('assets/upload/adbanner/'.$add->ad_com_id.'/'.$add->banner)?>" alt="adbanner" style="max-width: 100%;">
+                                    <?php $adBann = no_image_view('/assets/upload/adbanner/'.$add->h_id.'/'.$add->banner,'/assets/upload/adbanner/no_image.jpg',$add->banner);?>
+                                <img src="<?php echo $adBann; ?>" alt="adbanner" style="max-width: 100%;">
+                                <?php }else{ $adBann = no_image_view('/assets/upload/adbanner/'.$add->ad_com_id.'/'.$add->banner,'/assets/upload/adbanner/no_image.jpg',$add->banner);?>
+                                <img src="<?php echo $adBann; ?>" alt="adbanner" style="max-width: 100%;">
                                 <?php } ?>
                             </div>
                             <div class="col-6 mt-4">

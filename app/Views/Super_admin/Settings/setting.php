@@ -86,19 +86,12 @@
                                                 </div>
 
                                                 <div class="col-md-12">
-                                                    <input type="hidden" id="admin_id" name="admin_id"
-                                                           value="<?php echo $user->admin_id; ?>" required>
-                                                    <button type="submit" onclick="updateReg()" class="btn btn-success"
-                                                            id="add-form-btn"
-                                                            style="float: right;">Update
-                                                    </button>
+                                                    <input type="hidden" id="admin_id" name="admin_id" value="<?php echo $user->admin_id; ?>" required>
+                                                    <button type="submit" onclick="updateReg()" class="btn btn-success" id="add-form-btn" style="float: right;">Update </button>
                                                 </div>
-
                                             </div>
                                         </form>
-
                                     </div>
-
 
                                     <div class="tab-pane container" id="basic">
                                         <form id="update-basic" class="pl-3 pr-3">
@@ -106,8 +99,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="comName"> Company Name: </label>
-                                                        <input type="text" class="form-control" id="comName" name="comName"
-                                                               value="<?php echo $user->comName; ?>" required>
+                                                        <input type="text" class="form-control" id="comName" name="comName" value="<?php echo $user->comName; ?>" required>
                                                     </div>
                                                 </div>
 
@@ -124,9 +116,7 @@
                                                 <div class="col-md-6 text-center">
                                                     <input type="hidden" id="admin_id" name="admin_id"
                                                            value="<?php echo $user->admin_id; ?>" required>
-                                                    <button type="submit" onclick="updateBasic()" class="btn btn-success"
-                                                            id="up-basic-btn" style="margin-top: 30px;" >Update
-                                                    </button>
+                                                    <button type="submit" onclick="updateBasic()" class="btn btn-success" id="up-basic-btn" style="margin-top: 30px;" >Update </button>
 
                                                 </div>
 
@@ -146,25 +136,18 @@
                                                 </div>
 
                                                 <div class="col-md-6" id="imgRelode">
-                                                    <?php $img = (!empty($user->pic)) ? $user->pic : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/upload/superAdmin/<?php echo $user->admin_id;?>/<?php echo $img ?>" style="max-width: 200px;">
+                                                    <?php $img = no_image_view('/assets/upload/superAdmin/'.$user->admin_id.'/'.$user->pic,'/assets/upload/superAdmin/no_image.jpg',$user->pic); ?>
+                                                    <img src="<?php echo $img;?>" style="max-width: 200px;">
                                                 </div>
 
 
                                                 <div class="col-md-12 text-center">
-                                                    <input type="hidden" id="admin_id" name="admin_id"
-                                                           value="<?php echo $user->admin_id; ?>" required>
-                                                    <button type="submit" onclick="updateimage()" class="btn btn-success"
-                                                            id="up-image-btn" style="margin-top: 30px;">Update
-                                                    </button>
-
+                                                    <input type="hidden" id="admin_id" name="admin_id" value="<?php echo $user->admin_id; ?>" required>
+                                                    <button type="submit" onclick="updateimage()" class="btn btn-success" id="up-image-btn" style="margin-top: 30px;">Update </button>
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
-
-
-
 
                                 </div>
                             </div>

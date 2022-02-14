@@ -167,7 +167,6 @@
                                     <div class="tab-pane container" id="image">
 
                                         <form id="update-image" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">
-<!--                                        <form action="--><?php //echo base_url($controller . '/updateImage') ?><!--" method="Post" class="pl-3 pr-3" enctype="multipart/form-data">-->
                                             <div class="row pt-4 mt-4 img_div">
 
                                                 <div class="col-md-6" >
@@ -178,8 +177,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6" id="imgRelode">
-                                                    <?php $logo = (!empty($hospital->logo)) ? $hospital->logo : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id; ?>/<?php echo $logo ?>"
+                                                    <?php $logo = no_image_view('/assets/upload/hospital/'.$hospital->h_id.'/'.$hospital->logo,'/assets/upload/hospital/no_image.jpg',$hospital->logo) ?>
+                                                    <img src="<?php echo $logo; ?>"
                                                          style="max-width: 200px;">
                                                 </div>
                                             </div>
@@ -193,8 +192,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6" id="imgRelode2" style="padding-top: 20px;">
-                                                    <?php $image = (!empty($hospital->image)) ? $hospital->image : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id; ?>/<?php echo $image ?>"
+                                                    <?php $image = no_image_view('/assets/upload/hospital/'.$hospital->h_id.'/'.$hospital->image,'/assets/upload/hospital/no_image.jpg',$hospital->image) ?>
+                                                    <img src="<?php echo $image; ?>"
                                                          style="max-width: 200px;">
                                                 </div>
                                             </div>
@@ -208,8 +207,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6" id="imgRelode3" style="padding-top: 20px;">
-                                                    <?php $banner = (!empty($hospital->banner_1)) ? $hospital->banner_1 : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id; ?>/<?php echo $banner ?>"
+                                                    <?php $banner = no_image_view('/assets/upload/hospital/'.$hospital->h_id.'/'.$hospital->banner_1,'/assets/upload/hospital/no_image.jpg',$hospital->banner_1) ?>
+                                                    <img src="<?php echo $banner; ?>"
                                                          style="max-width: 200px;">
                                                 </div>
                                             </div>
@@ -224,8 +223,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6" id="imgRelode4" style="padding-top: 20px;">
-                                                    <?php $banner1 = (!empty($hospital->banner_2)) ? $hospital->banner_2 : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id; ?>/<?php echo $banner1 ?>"
+                                                    <?php $banner1 = no_image_view('/assets/upload/hospital/'.$hospital->h_id.'/'.$hospital->banner_2,'/assets/upload/hospital/no_image.jpg',$hospital->banner_2) ?>
+                                                    <img src="<?php echo $banner1; ?>"
                                                          style="max-width: 200px;">
                                                 </div>
                                             </div>
@@ -240,9 +239,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6" id="imgRelode5" style="padding-top: 20px;">
-                                                    <?php $banner3 = (!empty($hospital->banner_3)) ? $hospital->banner_3 : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/upload/hospital/<?php echo $hospital->h_id; ?>/<?php echo $banner3 ?>"
-                                                         style="max-width: 200px;">
+                                                    <?php $banner3 = no_image_view('/assets/upload/hospital/'.$hospital->h_id.'/'.$hospital->banner_3,'/assets/upload/hospital/no_image.jpg',$hospital->banner_3) ?>
+                                                    <img src="<?php echo $banner3; ?>" style="max-width: 200px;">
                                                 </div>
                                             </div>
 

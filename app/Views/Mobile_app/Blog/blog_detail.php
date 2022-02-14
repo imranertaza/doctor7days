@@ -26,7 +26,8 @@
             <p class="bl-title"><?php echo $post->title;?></p>
         </div>
         <div class="col-12 p-3 pad-r-0">
-            <img src="<?php echo base_url()?>/assets/upload/blog/<?php echo $post->post_id ;?>/<?php echo $post->image;?>" width="100%">
+            <?php $blogImg = no_image_view('/assets/upload/blog/'.$post->post_id.'/'.$post->image,'/assets/upload/blog/no_image.jpg',$post->image);?>
+            <img src="<?php echo $blogImg;?>" width="100%">
         </div>
         <div class="col-12 p-3 pad-r-0">
             <?php echo $post->description;?>

@@ -80,19 +80,13 @@ class Appionment extends BaseController
             $hosp->groupBy('hospital.h_id');
             $hospital = $hosp->where('hospital.global_address_id', $add)->get()->getResult();
 
-
         } else {
             $hospital = array();
-            $this->session->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Hospital not found this Address! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>');
-            return redirect()->back();
         }
         $data['hospitalData'] = $hospital;
         $data['specialist'] = $specialist;
 
-        echo view('Mobile_app/header');
         echo view('Mobile_app/Appionment/diagnostic_list', $data);
-        echo view('Mobile_app/footer');
     }
 
     private function diagonstic_center_with_location()
@@ -113,15 +107,10 @@ class Appionment extends BaseController
 
         } else {
             $hospital = array();
-            $this->session->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Hospital not found this Address! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>');
-            return redirect()->back();
         }
         $data['hospitalData'] = $hospital;
 
-        echo view('Mobile_app/header');
         echo view('Mobile_app/Appionment/diagnostic_center_list', $data);
-        echo view('Mobile_app/footer');
     }
 
     public function diagnostic_center_list()

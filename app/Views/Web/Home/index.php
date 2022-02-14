@@ -1,35 +1,32 @@
 <!-- banner image -->
 <section>
-      <div class="container">
+    <div class="container">
         <div class="row">
-          <div class="col-md-6">
-            <div class="home-text ml-3">
-              <h3>
-                You can appointment <br />
-                a doctor <span>at home</span>
-              </h3>
-              <div class="mt-3">
-                <a href="" class="main-btn">Download our app</a>
-              </div>
+            <div class="col-md-6">
+                <div class="home-text ml-3">
+                    <h3>
+                        You can appointment <br/>
+                        a doctor <span>at home</span>
+                    </h3>
+                    <div class="mt-3">
+                        <a href="" class="main-btn">Download our app</a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="banner-img">
-              <img
-                class="img-fluid"
-                src="assets/web/image/bannerf.png"
-                alt=""
-              />
+            <div class="col-md-6">
+                <div class="banner-img">
+                    <?php $banner = no_image_view('/assets/web/image/bannerf.png','/assets/web/image/no_image.jpg')?>
+                    <img class="img-fluid" src="<?php echo $banner; ?>" alt=""/>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 <!-- banner image end -->
 
 
 <!-- services area  -->
-<section class="service-area">
+<section>
     <div class="container">
         <div class="service-text text-center">
             <h1>Service.</h1>
@@ -38,41 +35,47 @@
         <div class="service-inner">
             <div class="row">
                 <div class="col-md-4 mt-5">
-                    <div class="service-inner-items">
-                        <h3>doctor appionment</h3>
-                        <i class="flaticon-checkup"></i>
-                    </div>
+                    <a href="<?php echo base_url('Web/Appointment') ?>">
+                        <div class="service-inner-items">
+                            <h3>Doctor appionment</h3>
+                            <i class="flaticon-checkup"></i>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-md-4 mt-5">
-                <a href="<?php echo base_url('Web/Shops')?>">
-                    <div class="service-inner-items">
-                        <h3>Your Shop</h3>
-                        <i class="flaticon-shop"></i>
-                    </div>
-                </a>
+                    <a href="<?php echo base_url('Web/Shops') ?>">
+                        <div class="service-inner-items">
+                            <h3>Your Shop</h3>
+                            <i class="flaticon-shop"></i>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-md-4 mt-5">
+                    <a href="<?php echo base_url('Web/Diagnostic') ?>">
                     <div class="service-inner-items">
                         <h3>Diagnostic & Pathology</h3>
                         <i class="flaticon-diagnostic"></i>
                     </div>
-                </div>
-                <div class="col-md-4 mt-3">
-                    <div class="service-inner-items">
-                        <h3>Ambulance</h3>
-                        <i class="flaticon-ambulance"></i>
-                    </div>
-                </div>
-                <div class="col-md-4 mt-3">
-                    <a href="<?php echo base_url('Web/Blog')?>">
-                    <div class="service-inner-items active">
-                        <h3>Health Tips</h3>
-                        <i class="flaticon-chat"></i>
-                    </div>
                     </a>
                 </div>
                 <div class="col-md-4 mt-3">
-                    <a href="<?php echo base_url('Web/Jobs')?>">
+                    <a href="<?php echo base_url('Web/Ambulance') ?>">
+                        <div class="service-inner-items">
+                            <h3>Ambulance</h3>
+                            <i class="flaticon-ambulance"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mt-3">
+                    <a href="<?php echo base_url('Web/Blog') ?>">
+                        <div class="service-inner-items active">
+                            <h3>Health Tips</h3>
+                            <i class="flaticon-chat"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mt-3">
+                    <a href="<?php echo base_url('Web/Jobs') ?>">
                         <div class="service-inner-items">
                             <h3>Jobs</h3>
                             <i class="flaticon-suitcase"></i>
@@ -94,7 +97,7 @@
     </div>
     <div class="office-area-details text-center mt-5">
         <p>
-            Lorem ipsum dolor sit amet consectetur <br />
+            Lorem ipsum dolor sit amet consectetur <br/>
             adipisicing elit. Labore quidem illo quaerat quidem
         </p>
     </div>
@@ -103,11 +106,8 @@
             <div class="col-md-8 mt-5">
                 <div class="office-inner position-relative">
                     <div class="office-image position-relative overflow-hidden">
-                        <img
-                                src="<?php echo base_url();?>/assets/web/image/hos.jpg"
-                                class="img-fluid"
-                                alt=""
-                        />
+                        <?php $bannerhos = no_image_view('/assets/web/image/hos.jpg','/assets/web/image/no_img_ban.jpg')?>
+                        <img src="<?php echo $bannerhos; ?>" class="img-fluid" alt="" />
                     </div>
                     <div class="office-overlay">
                         <div class="office-info">
@@ -123,7 +123,9 @@
             <div class="col-md-4 mt-5">
                 <div class="office-inner position-relative">
                     <div class="office-image mb-3">
-                        <img src="<?php echo base_url();?>/assets/web/image/slider (2).jpg" class="img-fluid" alt="" id="small-img" />
+                        <?php $bannerleft = no_image_view('/assets/web/image/slider (2).jpg','/assets/web/image/no_im_left.jpg')?>
+                        <img src="<?php echo $bannerleft; ?>" class="img-fluid" alt=""
+                             id="small-img"/>
                     </div>
                     <div class="office-overlay">
                         <div class="office-info">
@@ -136,7 +138,9 @@
                 </div>
                 <div class="office-inner position-relative">
                     <div class="office-image">
-                        <img src="<?php echo base_url();?>/assets/web/image/slider (3).jpg" class="img-fluid" alt="" id="small-img" />
+                        <?php $bannerleft2 = no_image_view('/assets/web/image/slider (3).jpg','/assets/web/image/no_im_left.jpg')?>
+                        <img src="<?php echo $bannerleft2; ?>" class="img-fluid" alt=""
+                             id="small-img"/>
                     </div>
                     <div class="office-overlay">
                         <div class="office-info">
@@ -196,36 +200,13 @@
         <!-- owl carousel  -->
         <div class="slider mt-5">
             <div class="owl-carousel owl-theme">
-                <div class="item">
-                    <img src="<?php echo base_url();?>/assets/web/image/slider (5).jpg" alt="" />
-                </div>
-                <div class="item">
-                    <img src="<?php echo base_url();?>/assets/web/image/slider (2).jpg" alt="" />
-                </div>
-                <div class="item">
-                    <img src="<?php echo base_url();?>/assets/web/image/slider (3).jpg" alt="" />
-                </div>
-                <div class="item">
-                    <img src="<?php echo base_url();?>/assets/web/image/slider (4).jpg" alt="" />
-                </div>
-                <div class="item">
-                    <img src="<?php echo base_url();?>/assets/web/image/slider (1).jpg" alt="" />
-                </div>
-                <div class="item">
-                    <img src="<?php echo base_url();?>/assets/web/image/slider (5).jpg" alt="" />
-                </div>
-                <div class="item">
-                    <img src="<?php echo base_url();?>/assets/web/image/slider (2).jpg" alt="" />
-                </div>
-                <div class="item">
-                    <img src="<?php echo base_url();?>/assets/web/image/slider (3).jpg" alt="" />
-                </div>
-                <div class="item">
-                    <img src="<?php echo base_url();?>/assets/web/image/slider (4).jpg" alt="" />
-                </div>
-                <div class="item">
-                    <img src="<?php echo base_url();?>/assets/web/image/slider (1).jpg" alt="" />
-                </div>
+                <?php for($i = 1; $i < 6; $i++){ ?>
+                    <?php $bannerslid = no_image_view('/assets/web/image/slider ('.$i.').jpg','/assets/web/image/no_im_left.jpg')?>
+                    <div class="item">
+                        <img src="<?php echo $bannerslid; ?>" alt=""/>
+                    </div>
+                <?php }?>
+
             </div>
         </div>
     </div>

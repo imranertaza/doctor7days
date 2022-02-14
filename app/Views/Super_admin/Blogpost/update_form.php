@@ -76,22 +76,14 @@
                                                     <div class="form-group">
                                                         <label for="description"> Description: <span
                                                                     class="text-danger">*</span></label>
-                                                        <textarea id="description" name="description"
-                                                                  class="form-control"
-                                                                  placeholder="Description" required
-                                                                  style="height: 300px;"><?php echo $blog->description; ?>
-
+                                                        <textarea id="description" name="description" class="form-control" placeholder="Description" required style="height: 300px;"><?php echo $blog->description; ?>
                                                         </textarea>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-12">
-                                                    <input type="hidden" id="post_id" name="post_id"
-                                                           value="<?php echo $blog->post_id; ?>" required>
-                                                    <button type="submit" onclick="updateReg()" class="btn btn-success"
-                                                            id="add-form-btn"
-                                                            style="float: right;">Update
-                                                    </button>
+                                                    <input type="hidden" id="post_id" name="post_id" value="<?php echo $blog->post_id; ?>" required>
+                                                    <button type="submit" onclick="updateReg()" class="btn btn-success" id="add-form-btn" style="float: right;">Update </button>
                                                 </div>
 
                                             </div>
@@ -109,38 +101,30 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="logo"> Image: </label>
-                                                        <input type="file" id="image" name="image" class="form-control"
-                                                               placeholder="image">
+                                                        <input type="file" id="image" name="image" class="form-control" placeholder="image">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 text-center" id="imgRelode">
-                                                    <?php $img = (!empty($blog->image)) ? $blog->image : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/upload/blog/<?php echo $blog->post_id; ?>/<?php echo $img; ?>"
-                                                         width="150">
+                                                    <?php $img = no_image_view('/assets/upload/blog/'.$blog->post_id.'/'.$blog->image,'/assets/upload/blog/no_image.jpg',$blog->image); ?>
+                                                    <img src="<?php echo $img; ?>" width="150">
                                                 </div>
 
                                                 <div class="col-md-6 pt-4">
                                                     <div class="form-group">
                                                         <label for="logo"> Featured Image: </label>
-                                                        <input type="file" id="featured_image" name="featured_image"
-                                                               class="form-control"
-                                                               placeholder="Featured Image">
+                                                        <input type="file" id="featured_image" name="featured_image" class="form-control" placeholder="Featured Image">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 text-center pt-4" id="imgRelode2">
-                                                    <?php $img2 = (!empty($blog->featured_image)) ? $blog->featured_image : 'noimage.jpg'; ?>
-                                                    <img src="<?php echo base_url() ?>/assets/upload/blog/<?php echo $blog->post_id; ?>/<?php echo $img2; ?>"
-                                                         width="150">
+                                                    <?php $img2 = no_image_view('/assets/upload/blog/'.$blog->post_id.'/'.$blog->featured_image,'/assets/upload/blog/no_image.jpg',$blog->featured_image); ?>
+                                                    <img src="<?php echo $img2; ?>" width="150">
                                                 </div>
 
                                                 <div class="col-md-12 ">
-                                                    <input type="hidden" id="post_id" name="post_id"
-                                                           value="<?php echo $blog->post_id; ?>" required>
-                                                    <button type="submit" onclick="updateimage()"
-                                                            class="btn btn-success"
-                                                            id="up-image-btn" style="margin-top: 30px;">Update
+                                                    <input type="hidden" id="post_id" name="post_id" value="<?php echo $blog->post_id; ?>" required>
+                                                    <button type="submit" onclick="updateimage()" class="btn btn-success" id="up-image-btn" style="margin-top: 30px;">Update
                                                     </button>
 
                                                 </div>

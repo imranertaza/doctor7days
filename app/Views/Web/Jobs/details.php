@@ -2,7 +2,8 @@
 <section class="mt-3 area-hight" >
     <div class="container">
         <div class="service-text text-capitalize" >
-            <h1><?php echo $jobs->title;?></h1>
+            <center><h2><?php echo get_data_by_id('name','hospital','h_id',$jobs->h_id) ;?></h2></center>
+            <h4><?php echo $jobs->title;?></h4>
         </div>
         <div class="service-inner">
             <div class="row">

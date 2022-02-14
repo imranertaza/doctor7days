@@ -1,3 +1,4 @@
+<div id="searchResult">
 <section class="back">
     <div class="row">
         <div class="col-12 p-2 pl-3 pt-3">
@@ -29,7 +30,7 @@
                 <?php echo session()->getFlashdata('message'); ?>
             <?php endif; ?>
         </div>
-        <form action="<?php echo base_url('Mobile_app/Diagnostic/diagnostic_center_list') ?>" method="POST" style="width: 100%;" >
+        <form id="searchForm" action="<?php echo base_url('Mobile_app/Diagnostic/diagnostic_center_list') ?>" method="POST" style="width: 100%;" >
             <div class="col-12 p-3 in-fil">
 
                 <div class="form-group">
@@ -54,7 +55,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-default" style="background-color: #28aed6;color: white ">Submit
+                    <button class="btn btn-default" style="background-color: #28aed6;color: white " id="sub-btn" onclick="searchHospital()">Submit
                     </button>
                 </div>
 
@@ -75,3 +76,25 @@
         </div>
     </div>
 </section>
+</div>
+
+<script>
+    function searchHospital(){
+        $('#searchForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type     : "POST",
+                cache    : false,
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                beforeSend: function () {
+                    $('#sub-btn').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function (data) {
+                    $('#searchResult').html(data);
+                    $('#sub-btn').html('Search');
+                }
+            });
+        });
+    }
+</script>

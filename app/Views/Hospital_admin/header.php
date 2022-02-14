@@ -115,9 +115,6 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="#" class="brand-link text-center">
-            <img src="<?php echo base_url('assets/upload/hospital/'.newSession()->h_Id.'/'. hospitalLogo())?>"
-                 alt="<?php echo hospitalName();?>"
-                 class=" elevation-3"
-                 style="opacity: .8;width: 200px;">
-<!--            <span class="brand-text font-weight-light">AdminLTE 3</span>-->
+            <?php $logoside = no_image_view('/assets/upload/hospital/'.newSession()->h_Id.'/'. hospitalLogo(),'/assets/upload/hospital/no_image.jpg',$imageName = '1')?>
+            <img src="<?php echo $logoside;?>" alt="<?php echo hospitalName();?>" class=" elevation-3" style="opacity: .8;width: 200px;">
         </a>

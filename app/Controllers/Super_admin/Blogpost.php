@@ -106,21 +106,18 @@ class Blogpost extends BaseController
         $result = $this->blogpostModel->select('post_id, title, description, image, featured_image, tags, createdDtm, createdBy, updatedDtm, updatedBy, deleted, deletedRole')->findAll();
 
         foreach ($result as $key => $value) {
-            $img = (!empty($value->image)) ? $value->image : 'noimage.jpg';
-            $featuredimg = (!empty($value->featured_image)) ? $value->featured_image : 'noimage.jpg';
             $ops = '<div class="btn-group">';
             $ops .= '	<a href="' . base_url() . '/Super_admin/blogpost/update/' . $value->post_id . '" class="btn btn-sm btn-info" ><i class="fa fa-edit"></i></a>';
             $ops .= '	<button type="button" class="btn btn-sm btn-danger" onclick="remove(' . $value->post_id . ')"><i class="fa fa-trash"></i></button>';
             $ops .= '</div>';
-
+            $img = no_image_view('/assets/upload/blog/'.$value->post_id.'/'.$value->image,'/assets/upload/blog/no_image.jpg',$value->image);
+            $featuredimg = no_image_view('/assets/upload/blog/'.$value->post_id.'/'.$value->featured_image,'/assets/upload/blog/no_image.jpg',$value->featured_image);
             $data['data'][$key] = array(
                 $value->post_id,
                 $value->title,
                 $value->description,
-                '<img src="' . base_url() . '/assets/upload/blog/'.$value->post_id.'/'.$img . '"
-                                                         width="100%">',
-                '<img src="' . base_url() . '/assets/upload/blog/'.$value->post_id.'/'.$featuredimg . '"
-                                                         width="80">',
+                '<img src="'.$img.'" width="100%">',
+                '<img src="'.$featuredimg.'" width="80">',
                 $value->tags,
 
                 $ops,
