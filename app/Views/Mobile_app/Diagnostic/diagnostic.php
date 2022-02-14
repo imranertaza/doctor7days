@@ -26,7 +26,7 @@
                         class="flaticon-pin"></i> Select your location</a>
 
         </div>
-        <?php foreach ($diagnostic as $item) { ?>
+        <?php if (!empty($diagnostic)){ foreach ($diagnostic as $item) { ?>
             <div class="col-12 p-3 row">
                 <div class="col-3">
                     <div class="user-round">
@@ -41,8 +41,11 @@
                        class="btn btn-sm btn-col mt-2">Go</a>
                 </div>
             </div>
+        <?php } }else{ ?>
+            <div class="col-12 p-3 ">
+                <p>No data found! </p>
+            </div>
         <?php } ?>
-
 
         <div class="col-12 p-3 pl-4 ">
             <?php if (!empty($pager)){ ?>

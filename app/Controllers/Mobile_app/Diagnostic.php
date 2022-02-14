@@ -66,17 +66,13 @@ class Diagnostic extends BaseController
             $hospital = $this->hospitalModel->where('hospital_cat_id !=',1)->where('global_address_id', $add)->findAll();
         } else {
             $hospital = array();
-            $this->session->setFlashdata('message', '<div class="alert alert-danger alert-dismissible fade show" role="alert">Diagnostic not found this Address! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>');
-            return redirect()->back();
         }
         $data['diagnostic'] = $hospital;
 
         $data['pager'] = '';
 
-        echo view('Mobile_app/header');
         echo view('Mobile_app/Diagnostic/diagnostic',$data);
-        echo view('Mobile_app/footer');
+
     }
 
     public function specialist_search(){

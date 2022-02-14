@@ -1,4 +1,5 @@
 <!-- services area  -->
+<div id="searchResult">
 <section class="area-hight">
     <div class="container text-capitalize">
         <div class="service-text text-center">
@@ -39,7 +40,7 @@
                             <div class="tab-pane fade <?php echo $inact ?>" id="nav-home" role="tabpanel"
                                  aria-labelledby="nav-home-tab">
 
-                                <form action="<?php echo base_url('Web/Appointment/search_location') ?>" method="POST">
+                                <form id="searchForm" action="<?php echo base_url('Web/Appointment/search_location') ?>" method="POST">
                                     <div class="form-group">
                                         <label for="division" class="lab-t"> Division </label>
                                         <select class="form-control in-c" name="division"
@@ -75,9 +76,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button class="btn btn-default"
-                                                style="background-color: #28aed6;color: white ">Search
-                                        </button>
+                                        <button class="btn btn-default" style="background-color: #28aed6;color: white " id="sub-btn" onclick="searchHospital()">Search </button>
                                     </div>
                                 </form>
                             </div>
@@ -146,4 +145,26 @@
         </div>
     </div>
 </section>
+</div>
 <!-- services area  end-->
+
+<script>
+    function searchHospital(){
+        $('#searchForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type     : "POST",
+                cache    : false,
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                beforeSend: function () {
+                    $('#sub-btn').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function (data) {
+                    $('#searchResult').html(data);
+                    $('#sub-btn').html('Search');
+                }
+            });
+        });
+    }
+</script>

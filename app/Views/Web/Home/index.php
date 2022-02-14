@@ -51,10 +51,12 @@
                     </a>
                 </div>
                 <div class="col-md-4 mt-5">
+                    <a href="<?php echo base_url('Web/Diagnostic') ?>">
                     <div class="service-inner-items">
                         <h3>Diagnostic & Pathology</h3>
                         <i class="flaticon-diagnostic"></i>
                     </div>
+                    </a>
                 </div>
                 <div class="col-md-4 mt-3">
                     <a href="<?php echo base_url('Web/Ambulance') ?>">
