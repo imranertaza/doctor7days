@@ -331,9 +331,7 @@
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-
                         } else {
-
                             if (response.messages instanceof Object) {
                                 $.each(response.messages, function (index, value) {
                                     var id = $("#" + index);
