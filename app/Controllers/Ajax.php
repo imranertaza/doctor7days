@@ -174,7 +174,6 @@ class Ajax extends BaseController
 
         $data['hospitaladd'] = $table->select('*')->join('ad_count', 'ad_count.ad_id = ad_management.ad_id')->where('ad_management.org_type','national')->where('ad_management.start_date <=' ,date("Y-m-d"))->where('ad_management.status','active')->where('ad_management.end_date >',date("Y-m-d"))->orderBy('ad_count.total_view_count', 'ASC')->get(5)->getResult();
 
-//        print DB()->getLastQuery();
         echo view('Mobile_app/Adview/national', $data);
     }
 
@@ -187,10 +186,10 @@ class Ajax extends BaseController
             $glAddId = get_data_by_id('global_address_id','patient','pat_id',$patintId);
             $cusdistricID = get_data_by_id('zila','global_address','global_address_id',$glAddId);
 
-        $hospitaladd = $table->get()->getResult();
+            $hospitaladd = $table->get()->getResult();
 
-        $i = 1;
-        $limit = 5;
+            $i = 1;
+            $limit = 5;
             foreach ($hospitaladd as $key=>$value){
                 if ($i <= $limit) {
                     $district_array = json_decode($value->district_id);
@@ -208,7 +207,6 @@ class Ajax extends BaseController
             }
         }
 
-//        print DB()->getLastQuery();
         echo view('Mobile_app/Adview/hospital', $data);
     }
 
