@@ -2767,11 +2767,11 @@ function no_image_view($image_path,$no_image_path,$imageName = '1'){
     }
 }
 
-function no_image_view($image_path,$no_image_path,$imageName = '1'){
-    $imgPathcheck = FCPATH.$image_path;
-    if ((empty($imageName))||(!file_exists($imgPathcheck))){
-        return base_url().$no_image_path;
-    }else{
-        return base_url().$image_path;
-    }
-}
+//function no_image_view($image_path,$no_image_path,$imageName = '1'){
+//    $imgPathcheck = FCPATH.$image_path;
+//    if ((empty($imageName))||(!file_exists($imgPathcheck))){
+//        return base_url().$no_image_path;
+//    }else{
+//        return base_url().$image_path;
+//    }
+//}
