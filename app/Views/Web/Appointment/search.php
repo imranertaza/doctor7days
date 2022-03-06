@@ -17,27 +17,23 @@
                     <div class="col-4 p-2 ">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <?php
-                                $act = ($_GET['tab'] == 'ind') ? 'active show' : '';
-                                $inact = ($_GET['tab'] == 'ind') ? '' : 'active show'; ?>
 
-                                <a class="nav-item nav-link <?php echo $inact ?> ?>" id="nav-home-tab" data-toggle="tab"
+                                <a class="nav-item nav-link active show " id="nav-home-tab" data-toggle="tab"
                                    href="#nav-home" role="tab"
                                    aria-controls="nav-home" aria-selected="true"><img
                                             src="<?php echo base_url() ?>/assets/mobile/image/bd.png" class="icon-css">
                                     Bangladesh</a>
-                                <a class="nav-item nav-link <?php echo $act ?>" id="nav-profile-tab" data-toggle="tab"
+                                <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab"
                                    href="#nav-profile" role="tab"
                                    aria-controls="nav-profile" aria-selected="false"> <img
                                             src="<?php echo base_url() ?>/assets/mobile/image/ind.png" class="icon-css">
                                     Indian</a>
 
-
                             </div>
                         </nav>
                         <div class="tab-content mt-2" id="nav-tabContent">
 
-                            <div class="tab-pane fade <?php echo $inact ?>" id="nav-home" role="tabpanel"
+                            <div class="tab-pane fade active show" id="nav-home" role="tabpanel"
                                  aria-labelledby="nav-home-tab">
 
                                 <form id="searchForm" action="<?php echo base_url('Web/Appointment/search_location') ?>" method="POST">
@@ -81,7 +77,7 @@
                                 </form>
                             </div>
 
-                            <div class="tab-pane fade <?php echo $act ?>" id="nav-profile" role="tabpanel"
+                            <div class="tab-pane fade " id="nav-profile" role="tabpanel"
                                  aria-labelledby="nav-profile-tab">
                                 <?php if (newSession()->isPatientLoginWeb == true) { ?>
                                     <form action="<?php echo base_url('Web/Appointment/indian_appionment_action') ?>"

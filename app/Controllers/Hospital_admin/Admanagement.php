@@ -115,6 +115,7 @@ class Admanagement extends BaseController
         $fields['org_type'] = $this->request->getPost('org_type');
         $banner = $this->request->getFile('banner');
 
+        // Banner image uploading section (start)
         $target_dir = FCPATH . 'assets/upload/adbanner/'.$fields['h_id'].'/';
         if(!file_exists($target_dir)){
             mkdir($target_dir,0777);
@@ -123,12 +124,14 @@ class Admanagement extends BaseController
             $name = $banner->getRandomName();
             $banner->move($target_dir, $name);
 
+            // Image cropping of the uploaded image
             $lo_nameimg = 'ban_' . $banner->getName();
             $this->crop->withFile($target_dir . '' . $name)->fit(330, 185, 'center')->save($target_dir . '' . $lo_nameimg);
             unlink($target_dir . '' . $name);
 
             $fields['banner'] = $lo_nameimg;
         }
+        // Banner image uploading section (End)
 
 
 
