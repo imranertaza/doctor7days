@@ -322,3 +322,59 @@ a:hover {
   padding: 4px 60px !important;
 }
 
+
+.btn-check{
+  background-color: #28aed6;
+  color: white;
+  padding: 7px 100px;
+  border-radius: 24px;
+  margin-right: 125px;
+}
+
+.btn-check2{
+  background-color: #28aed6;
+  color: white;
+  padding: 7px 100px;
+  border-radius: 24px;
+  border: none !important;
+}
+.btn-loca{
+  background-color: #28aed6;
+  color: white;
+  padding: 15px 80px;
+  border-radius: 25px;
+}
+.product{
+  border: 1px solid #e7e7e7;
+}
+.btn-amedit2 , .btn-amedit{
+
+    color: white;
+}
+
+.tab-content .active{
+  background-color: unset !important;
+  color: unset;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #28aed6 !important;
+  color: #ffffff !important;
+}
+.search-user i{
+  width: 60px;
+  height: 60px;
+  font-size: 25px;
+  background-color: rgb(40 130 150 / 11%);
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 12px 0px;
+}
+.go{
+  background-color: rgba(0,174,214,1) !important;
+  color: #ffffff !important;
+  padding: 4px 60px !important;
+}
+

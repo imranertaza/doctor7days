@@ -98,3 +98,25 @@
         });
     }
 </script>
+</div>
+
+<script>
+    function searchHospital(){
+        $('#searchForm').on('submit', function (e) {
+            e.preventDefault();
+            $.ajax({
+                type     : "POST",
+                cache    : false,
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                beforeSend: function () {
+                    $('#sub-btn').html('<i class="fa fa-spinner fa-spin"></i>');
+                },
+                success: function (data) {
+                    $('#searchResult').html(data);
+                    $('#sub-btn').html('Search');
+                }
+            });
+        });
+    }
+</script>

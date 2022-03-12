@@ -119,7 +119,6 @@
                                                     <button type="submit" onclick="updateBasic()" class="btn btn-success" id="up-basic-btn" style="margin-top: 30px;" >Update </button>
 
                                                 </div>
-
                                             </div>
                                         </form>
                                     </div>
