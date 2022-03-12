@@ -21,6 +21,7 @@ class Ambulance extends BaseController
     protected $ambulanceModel;
     protected $globaladdressModel;
     protected $ambulanceUserModel;
+    protected $crop;
 
     public function __construct()
     {
@@ -31,6 +32,7 @@ class Ambulance extends BaseController
         $this->validation =  \Config\Services::validation();
         $this->session = \Config\Services::session();
         $this->permission = new Permission();
+        $this->crop = \Config\Services::image();
 
     }
 
