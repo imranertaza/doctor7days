@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-md-4 mt-3">
                     <a href="<?php echo base_url('Web/Blog') ?>">
-                        <div class="service-inner-items active">
+                        <div class="service-inner-items ">
                             <h3>Health Tips</h3>
                             <i class="flaticon-chat"></i>
                         </div>

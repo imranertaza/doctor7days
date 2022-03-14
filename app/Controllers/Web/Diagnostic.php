@@ -39,7 +39,7 @@ class Diagnostic extends BaseController
 	
 	public function index(){
 
-        $data['diagnostic']= $this->hospitalModel->where('hospital_cat_id !=',1)->findAll();
+        $data['diagnostic']= $this->hospitalModel->where('hospital_cat_id !=',1)->where('status','1')->findAll();
 
 	    echo view('Web/header');
 	    echo view('Web/Diagnostic/index', $data);
@@ -84,7 +84,7 @@ class Diagnostic extends BaseController
                 $gloaddre = $this->globaladdressModel->where($where);
                 $add = $gloaddre->first()->global_address_id;
 
-                $hospital = $this->hospitalModel->where('hospital_cat_id !=', 1)->where('global_address_id', $add)->findAll();
+                $hospital = $this->hospitalModel->where('hospital_cat_id !=', 1)->where('status','1')->where('global_address_id', $add)->findAll();
             } else {
                 $hospital = array();
             }

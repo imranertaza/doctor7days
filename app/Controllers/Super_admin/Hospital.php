@@ -404,7 +404,7 @@ class Hospital extends BaseController
                 //Roles add
                 $roles['h_id'] = $h_id;
                 $roles['role'] = 'hospital_admin';
-                $roles['permission'] = $this->permission_hospital->hospital_all_permissions;
+                $roles['permission'] = $this->permission_hospital->hospital_admin_permissions;
                 $roles['is_default'] = '1';
                 $roles['createdBy'] = '1';
                 $this->rolesModel->insert($roles);

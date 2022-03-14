@@ -77,6 +77,7 @@ class Appionment extends BaseController
             $hosp->join('doctor', 'doctor.h_id = hospital.h_id');
             $hosp->where('doctor.specialist_id', $specialist);
             $hosp->where('hospital.hospital_cat_id !=', 2);
+            $hosp->where('hospital.status','1');
             $hosp->groupBy('hospital.h_id');
             $hospital = $hosp->where('hospital.global_address_id', $add)->get()->getResult();
 
@@ -103,7 +104,7 @@ class Appionment extends BaseController
             $gloaddre = $this->globaladdressModel->where($where);
             $add = $gloaddre->first()->global_address_id;
 
-            $hospital = $this->hospitalModel->where('hospital_cat_id !=',2)->where('global_address_id', $add)->findAll();
+            $hospital = $this->hospitalModel->where('hospital_cat_id !=',2)->where('status','1')->where('global_address_id', $add)->findAll();
 
         } else {
             $hospital = array();
@@ -121,8 +122,6 @@ class Appionment extends BaseController
         } else {
             return $this->diagonstic_center_with_location();
         }
-
-
     }
 
     public function doctor_specialties($id)

@@ -54,7 +54,12 @@ class Cart extends BaseController
                 unset($_SESSION['redirectUrl']);
             }
 
-            $data['address'] = [];
+            $data['address'] = [
+                'division' => '',
+                'zila' => '',
+                'upazila' => '',
+            ];
+
             $userId = $this->session->Patient_user_id;
             $userAdd = get_data_by_id('global_address_id', 'patient', 'pat_id', $userId);
             if (!empty($userAdd)) {

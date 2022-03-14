@@ -31,7 +31,12 @@ class Jobs extends BaseController
 
     public function index()
     {
-        $jobs = $this->jobModel->findAll();
+//        $jobs = $this->jobModel->findAll();
+        $tabl = DB()->table('job');
+        $tabl->select('*');
+        $tabl->join('hospital', 'hospital.h_id = job.h_id');
+        $tabl->where('hospital.status','1');
+        $jobs = $tabl->get()->getResult();
         $data = [
             'jobs'     		=> $jobs,
         ];

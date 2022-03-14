@@ -26,7 +26,13 @@ class Job extends BaseController
 
     public function index()
     {
-        $data['job'] = $this->jobModel->findAll();
+//        $data['job'] = $this->jobModel->findAll();
+        $tabl = DB()->table('job');
+        $tabl->select('*');
+        $tabl->join('hospital', 'hospital.h_id = job.h_id');
+        $tabl->where('hospital.status','1');
+        $data['job'] = $tabl->get()->getResult();
+
         echo view('Mobile_app/header');
         echo view('Mobile_app/Job/job',$data);
         echo view('Mobile_app/footer');
@@ -39,7 +45,6 @@ class Job extends BaseController
         echo view('Mobile_app/header');
         echo view('Mobile_app/Job/job_apply',$data);
         echo view('Mobile_app/footer');
-
     }
 
     public function search_location(){
@@ -66,6 +71,7 @@ class Job extends BaseController
             $tbHospital->select('job.*');
             $tbHospital->join('job', 'job.h_id = hospital.h_id');
             $tbHospital->where('hospital.global_address_id',$add);
+            $tbHospital->where('hospital.status','1');
             $query = $tbHospital->get()->getResult();
 
         }else{

@@ -75,6 +75,7 @@ class Appointment extends BaseController
             $hosp->select('hospital.name as hospitalname,hospital.*,doctor.*');
             $hosp->join('doctor', 'doctor.h_id = hospital.h_id');
             $hosp->where('doctor.specialist_id', $specialist);
+            $hosp->where('hospital.status','1');
             $hosp->where('hospital.hospital_cat_id !=', 2);
             $hosp->groupBy('hospital.h_id');
             $hospital = $hosp->where('hospital.global_address_id', $add)->get()->getResult();
@@ -102,7 +103,7 @@ class Appointment extends BaseController
             $gloaddre = $this->globaladdressModel->where($where);
             $add = $gloaddre->first()->global_address_id;
 
-            $hospital = $this->hospitalModel->where('hospital_cat_id !=',2)->where('global_address_id', $add)->findAll();
+            $hospital = $this->hospitalModel->where('hospital_cat_id !=',2)->where('global_address_id', $add)->where('status','1')->findAll();
 
         } else {
             $hospital = array();

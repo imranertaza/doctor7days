@@ -63,7 +63,7 @@ class Diagnostic extends BaseController
             $gloaddre = $this->globaladdressModel->where($where);
             $add = $gloaddre->first()->global_address_id;
 
-            $hospital = $this->hospitalModel->where('hospital_cat_id !=',1)->where('global_address_id', $add)->findAll();
+            $hospital = $this->hospitalModel->where('hospital_cat_id !=',1)->where('global_address_id', $add)->where('status','1')->findAll();
         } else {
             $hospital = array();
         }
@@ -82,6 +82,7 @@ class Diagnostic extends BaseController
         $special = DB()->table('doctor');
         $special->select('*');
         $special->join('hospital', 'hospital.h_id = doctor.h_id');
+        $special->where('hospital.status','1');
         $special->groupBy('hospital.h_id');
         $query = $special->where('doctor.specialist_id',$specialist_id)->get()->getResult();
 
