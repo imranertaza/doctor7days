@@ -72,8 +72,8 @@ class Appointment extends BaseController
  		$response = array();		
 		
 	    $data['data'] = array();
- 
-		$result = $this->appointmentModel->select('appointment_id, doc_id, pat_id, day, time, date, name, phone, serial_number, status')->findAll();
+        $hId = $this->session->h_Id;
+		$result = $this->appointmentModel->select('appointment_id, doc_id, pat_id, day, time, date, name, phone, serial_number, status')->where('h_id',$hId)->findAll();
 		
 		foreach ($result as $key => $value) {
 

@@ -236,28 +236,36 @@
 
                         } else {
 
-                            if (response.messages instanceof Object) {
-                                $.each(response.messages, function(index, value) {
-                                    var id = $("#" + index);
+                            Swal.fire({
+                                position: 'bottom-end',
+                                icon: 'error',
+                                title: response.messages,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
 
-                                    id.closest('.form-control')
-                                        .removeClass('is-invalid')
-                                        .removeClass('is-valid')
-                                        .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
-
-                                    id.after(value);
-
-                                });
-                            } else {
-                                Swal.fire({
-                                    position: 'bottom-end',
-                                    icon: 'error',
-                                    title: response.messages,
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                })
-
-                            }
+                            // if (response.messages instanceof Object) {
+                            //     $.each(response.messages, function(index, value) {
+                            //         var id = $("#" + index);
+                            //
+                            //         id.closest('.form-control')
+                            //             .removeClass('is-invalid')
+                            //             .removeClass('is-valid')
+                            //             .addClass(value.length > 0 ? 'is-invalid' : 'is-valid');
+                            //
+                            //         id.after(value);
+                            //
+                            //     });
+                            // } else {
+                            //     Swal.fire({
+                            //         position: 'bottom-end',
+                            //         icon: 'error',
+                            //         title: response.messages,
+                            //         showConfirmButton: false,
+                            //         timer: 1500
+                            //     })
+                            //
+                            // }
                         }
                         $('#add-form-btn').html('Add');
                     }

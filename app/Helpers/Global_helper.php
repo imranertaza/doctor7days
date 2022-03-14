@@ -651,8 +651,10 @@ function get_data_by_id($needCol, $table, $whereCol, $whereInfo)
     $db = \Config\Database::connect();
     $tabledta = $db->table($table);
     $findResult = $tabledta->select($needCol)->where($whereCol, $whereInfo)->countAllResults();
-    $result = $tabledta->select($needCol)->where($whereCol, $whereInfo)->get()->getRow();
+
     if ($findResult > 0) {
+        $tabledta2 = $db->table($table);
+        $result = $tabledta2->select($needCol)->where($whereCol, $whereInfo)->get()->getRow();
         $col = ($result->$needCol == NULL) ? NULL : $result->$needCol;
     } else {
         $col = '';

@@ -174,7 +174,9 @@ class Ajax extends BaseController
 
         $data['hospitaladd'] = $table->select('*')->join('ad_count', 'ad_count.ad_id = ad_management.ad_id')->where('ad_management.org_type','national')->where('ad_management.start_date <=' ,date("Y-m-d"))->where('ad_management.status','active')->where('ad_management.end_date >',date("Y-m-d"))->orderBy('ad_count.total_view_count', 'ASC')->get(5)->getResult();
 
-        echo view('Mobile_app/Adview/national', $data);
+        if(!empty($data['hospitaladd'])) {
+            echo view('Mobile_app/Adview/national', $data);
+        }else{ return false;}
     }
 
     public function hospitalAd(){
@@ -206,24 +208,15 @@ class Ajax extends BaseController
                 }
             }
         }
-
-        echo view('Mobile_app/Adview/hospital', $data);
+        if(!empty($data['hospitaladd'])) {
+            echo view('Mobile_app/Adview/hospital', $data);
+        }else{ return false; }
     }
 
     public function adViewCount(){
         $adId = $this->request->getPost('adId');
         $oldView = get_data_by_id('total_view_count','ad_count','ad_id',$adId);
 
-
-//        $packagId = get_data_by_id('ad_package_id','ad_management','ad_id',$adId);
-//        $packageview = get_data_by_id('total_views','ad_package','ad_package_id',$packagId);
-//        if ($oldView >= $packageview){
-//            $adData =[
-//                'status' => 'complete',
-//            ];
-//            $admanage = DB()->table('ad_management');
-//            $admanage->where('ad_id',$adId)->update($adData);
-//        }
 
         $newView = $oldView + 1;
 

@@ -49,6 +49,71 @@
 </html>
 
 <script>
+
+    $(function () {
+        hospitalAdView();
+        nationalAdView();
+        setInterval(hospitalAdView, 25000);
+        setInterval(nationalAdView, 25000);
+
+        function hospitalAdView() {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('ajax/hospitalAd') ?>",
+                dataType: "text",
+                success: function (data) {
+                    $('#addView').html(data);
+                    $("#carouselExampleSlidesOnly").carousel();
+
+                    var addId = $('#carouselExampleSlidesOnly div.active').attr('add-id');
+                    if(data == true) {
+                        addViewCount(addId);
+                    }
+                }
+            });
+        }
+
+        function nationalAdView() {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('ajax/nationalAd') ?>",
+                dataType: "text",
+                success: function (data) {
+                    $('#addViewNational').html(data);
+                    $("#carouselExampleSlidesOnly").carousel();
+
+                    var addId = $('#carouselExampleSlidesOnly div.active').attr('add-id');
+
+                    if(data == true) {
+                        addViewCount(addId);
+                    }
+                }
+            });
+        }
+
+        $('#carouselExampleSlidesOnly').carousel({
+            interval: 5000
+        });
+
+        $('#carouselExampleSlidesOnly').on('slid.bs.carousel', function () {
+            var addId = $('#carouselExampleSlidesOnly div.active').attr('add-id');
+            addViewCount(addId);
+            // $('.num').html(addId);
+        });
+
+        function addViewCount(addId) {
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('ajax/adViewCount') ?>",
+                data: {adId: addId},
+                dataType: "text",
+                success: function (data) {
+                    // $('.num').html(data);
+                }
+            });
+        }
+    });
+
     window.onload = function(){
         $("#loderImg").hide();
         $("#loderdiv").attr('class', 'newClass');
