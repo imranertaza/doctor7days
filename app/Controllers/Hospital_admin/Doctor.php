@@ -163,61 +163,35 @@ class Doctor extends BaseController
 
     public function updateImage()
     {
-
         $response = array();
 
         $fields['doc_id'] = $this->request->getPost('doc_id');
         $logo = $this->request->getFile('pic');
 
-//        $this->validation->setRules([
-//            'doc_id' => ['label' => 'doc_id', 'rules' => 'required'],
-//            'pic' => ['label' => 'pic', 'rules' => 'uploaded[pic]|mime_in[image/png, image/jpg, image/jpeg]'],
-//        ]);
-//
-//        if ($this->validation->run($fields) == FALSE) {
-//
-//            $response['success'] = false;
-//            $response['messages'] = $this->validation->listErrors();
-//
-//        } else {
+        $target_dir = FCPATH . 'assets/upload/doctor/'.$fields['doc_id'].'/';
+        if(!file_exists($target_dir)){
+            mkdir($target_dir,0777);
+        }
 
-//        $file = $this->validate([
-//            'pic' => [
-//                'uploaded[pic]',
-//                'mime_in[pic, image/png, image/jpg, image/jpeg]',
-//            ]
-//        ]);
-//
-//        if (!$file) {
-//            $response['success'] = false;
-//            $response['messages'] = $this->validation->listErrors();
-//        } else {
+        if (!empty($_FILES['pic']['name'])) {
+            $name = $logo->getRandomName();
+            $logo->move($target_dir,$name);
 
-            $target_dir = FCPATH . 'assets/upload/doctor/' . $fields['doc_id'] . '/';
-            if (!file_exists($target_dir)) {
-                mkdir($target_dir, 0777);
+            $lo_nameimg = 'lo_'.$logo->getName();
+            $this->crop->withFile($target_dir.''.$name)->fit(100, 100, 'center')->save($target_dir.''.$lo_nameimg);
+            unlink($target_dir.''.$name);
+
+            $fields['pic'] = $lo_nameimg;
+
+            if ($this->doctorModel->update($fields['doc_id'],$fields)) {
+                $response['success'] = true;
+                $response['messages'] = 'Data has been Update successfully';
+            } else {
+                $response['success'] = false;
+                $response['messages'] = 'Insertion error!';
             }
-
-            if (!empty($_FILES['pic']['name'])) {
-                $name = $logo->getRandomName();
-                $logo->move($target_dir, $name);
-
-                $lo_nameimg = 'lo_' . $logo->getName();
-                $this->crop->withFile($target_dir . '' . $name)->fit(100, 100, 'center')->save($target_dir . '' . $lo_nameimg);
-                unlink($target_dir . '' . $name);
-
-                $fields['pic'] = $lo_nameimg;
-
-                if ($this->doctorModel->update($fields['doc_id'], $fields)) {
-                    $response['success'] = true;
-                    $response['messages'] = 'Data has been Update successfully';
-                } else {
-                    $response['success'] = false;
-                    $response['messages'] = 'Insertion error!';
-                }
-            }
-            return $this->response->setJSON($response);
-//        }
+        }
+        return $this->response->setJSON($response);
     }
 
     public function updateBasic()
