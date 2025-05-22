@@ -311,11 +311,11 @@
                                                         </div>
                                                         <div class="form-group col-6">
                                                             <label for="fridayTime"> Hour: </label>
-                                                            <input type="text" class="form-control" name="morning_start_hour" value="<?php echo date("H", strtotime($day->morning_start_time)); ?>">
+                                                            <input type="text" class="form-control" name="morning_start_hour">
                                                         </div>
                                                         <div class="form-group col-6">
                                                             <label for="fridayTime"> Minute: </label>
-                                                            <input type="text" class="form-control" name="morning_start_minute" value="<?php echo date("i", strtotime($day->morning_start_time)); ?>">
+                                                            <input type="text" class="form-control" name="morning_start_minute">
                                                         </div>
 
                                                         <div class="form-group col-12">
@@ -324,11 +324,11 @@
 
                                                         <div class="form-group col-6">
                                                             <label for="fridayTime"> Hour: </label>
-                                                            <input type="text" class="form-control" name="morning_end_hour" value="<?php echo date("H", strtotime($day->morning_end_time)); ?>">
+                                                            <input type="text" class="form-control" name="morning_end_hour">
                                                         </div>
                                                         <div class="form-group col-6">
                                                             <label for="fridayTime"> Minute: </label>
-                                                            <input type="text" class="form-control" name="morning_end_minute" value="<?php  echo date("i", strtotime($day->morning_end_time)) ; ?>">
+                                                            <input type="text" class="form-control" name="morning_end_minute">
                                                         </div>
                                                         <div class="form-group col-12">
                                                             <label for="fridayTime"> Total patient:  </label>
@@ -358,11 +358,11 @@
 //                                                            echo str_replace($search, $replace, $subject);
                                                             ?>
                                                             <label for="fridayTime"> Hour: </label>
-                                                            <input type="text" class="form-control" name="evening_start_hour" value="<?php echo date("H", strtotime($day->evening_start_time)); ?>">
+                                                            <input type="text" class="form-control" name="evening_start_hour">
                                                         </div>
                                                         <div class="form-group col-6">
                                                             <label for="fridayTime"> Minute: </label>
-                                                            <input type="text" class="form-control" name="evening_start_minute" value="<?php echo date("i", strtotime($day->evening_start_time)); ?>">
+                                                            <input type="text" class="form-control" name="evening_start_minute">
                                                         </div>
                                                         <div class="form-group col-12">
                                                             <h6>End time</h6>
@@ -370,11 +370,11 @@
 
                                                         <div class="form-group col-6">
                                                             <label for="fridayTime"> Hour: </label>
-                                                            <input type="text" class="form-control" name="evening_end_hour" value="<?php echo date("H", strtotime($day->evening_end_time)); ?>">
+                                                            <input type="text" class="form-control" name="evening_end_hour">
                                                         </div>
                                                         <div class="form-group col-6">
                                                             <label for="fridayTime"> Minute: </label>
-                                                            <input type="text" class="form-control" name="evening_end_minute" value="<?php echo date("i", strtotime($day->evening_end_time)); ?>">
+                                                            <input type="text" class="form-control" name="evening_end_minute">
                                                         </div>
 
                                                         <div class="form-group col-12">

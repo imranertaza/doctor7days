@@ -79,7 +79,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="email"> Email: <span class="text-danger">*</span></label>
-                                    <input type="email" id="email" name="email" class="form-control" placeholder="Email" maxlength="30" required>
+                                    <input type="text" id="email" name="email" class="form-control" placeholder="Email" maxlength="30" required>
                                 </div>
                             </div>
 
