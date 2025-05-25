@@ -173,7 +173,7 @@
                             <div class="form-group text-center">
                                 <div class="btn-group">
                                     <button type="submit" class="btn btn-success" id="add-form-btn" onclick="update()" >Update</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                    <a href="<?php echo base_url('Super_admin/Product/')?>" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
                                 </div>
                             </div>
                         </form>
