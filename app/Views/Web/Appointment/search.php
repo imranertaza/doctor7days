@@ -50,7 +50,7 @@
                                         <label for="zila" class="lab-t"> Zila </label>
                                         <select class="form-control in-c" name="zila"
                                                 onchange="viewupazila(this.value)"
-                                                id="district" required>
+                                                id="district" >
                                             <option value="">Please Select</option>
                                             <?php echo districtselect(); ?>
                                         </select>
@@ -58,7 +58,7 @@
                                     <div class="form-group">
                                         <label for="upazila" class="lab-t"> Upazila: </label>
                                         <select class="form-control in-c" name="upazila" id="subdistrict"
-                                                onchange="checkCity(this.value)" required>
+                                                onchange="checkCity(this.value)" >
                                             <option value="">Please Select</option>
                                             <?php echo upazilaselect(); ?>
                                         </select>
