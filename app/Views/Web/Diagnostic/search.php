@@ -25,14 +25,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="zila" class="lab-t"> Zila </label>
-                                    <select class="form-control in-c" name="zila" onchange="viewupazila(this.value)" id="district" required>
+                                    <select class="form-control in-c" name="zila" onchange="viewupazila(this.value)" id="district" >
                                         <option value="">Please Select</option>
                                         <?php echo districtselect(); ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="upazila" class="lab-t"> Upazila: </label>
-                                    <select class="form-control in-c" name="upazila" id="subdistrict" required>
+                                    <select class="form-control in-c" name="upazila" id="subdistrict" >
                                         <option value="">Please Select</option>
                                         <?php echo upazilaselect(); ?>
                                     </select>
