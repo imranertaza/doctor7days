@@ -23,11 +23,15 @@
             <div class="row mt-4">
                 <div class="col-3"></div>
                 <div class="col-6">
-                    <table class="" style="width: 100%;">
+                    <table class="table table-striped" style="width: 100%;">
                         <?php foreach($specialties as $sp ){
                             $title = get_data_by_id('specialist_type_name','specialist','specialist_id ',$sp->specialist_id) ;
                             ?>
                             <tr>
+                                <td>
+                                    <?php $img = no_image_view('/assets/upload/doctor/'.$sp->doc_id.'/'.$sp->pic,'/assets/upload/doctor/no_image.jpg',$sp->pic); ?>
+                                    <img class="" src="<?php echo $img; ?>" style="width: 100px; border-radius: 50px;" >
+                                </td>
                                 <td >
                                     <small class="dr-n"><?php echo $sp->name;?></small><br>
                                     <small class="dr-t"><?php echo $title;?></small>

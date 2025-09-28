@@ -92,23 +92,13 @@ class Appionment extends BaseController
 
     private function diagonstic_center_with_location()
     {
-        $division = $this->request->getPost('division');
-        $zila = $this->request->getPost('zila');
-        $upazila = $this->request->getPost('upazila');
+        $division = empty($this->request->getPost('division')) ? '1=1' : array('global_address.division' => $this->request->getPost('division'));
+        $district = empty($this->request->getPost('zila')) ? '1=1' : array('global_address.zila' => $this->request->getPost('zila'));
+        $upazila = empty($this->request->getPost('upazila')) ? '1=1' : array('global_address.upazila' => $this->request->getPost('upazila'));
 
-        $where = ['division' => $division, 'zila' => $zila, 'upazila' => $upazila,];
 
-        $gloadd = $this->globaladdressModel->where($where);
+        $hospital = $this->globaladdressModel->join('hospital', 'hospital.global_address_id = global_address.global_address_id')->where('hospital.hospital_cat_id !=',2)->where('hospital.status','1')->where($division)->where($district)->where($upazila)->get()->getResult();
 
-        if ($gloadd->countAllResults() != 0) {
-            $gloaddre = $this->globaladdressModel->where($where);
-            $add = $gloaddre->first()->global_address_id;
-
-            $hospital = $this->hospitalModel->where('hospital_cat_id !=',2)->where('status','1')->where('global_address_id', $add)->findAll();
-
-        } else {
-            $hospital = array();
-        }
         $data['hospitalData'] = $hospital;
 
         echo view('Mobile_app/Appionment/diagnostic_center_list', $data);

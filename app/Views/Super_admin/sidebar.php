@@ -111,6 +111,13 @@
             </li>
 
             <li class="nav-item">
+                <a href="<?php echo base_url('Super_admin/appointment')?>" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>Appointment</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="<?php echo base_url('Super_admin/license')?>" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
                     <p>License</p>
